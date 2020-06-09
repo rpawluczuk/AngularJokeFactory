@@ -1,0 +1,58 @@
+<app-header>
+  <p levels>jokes</p>
+  <div content>
+    <p>List of Jokes</p>
+  </div>
+</app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table *ngIf="jokes && jokes.length > 0; else noJokes" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let joke of jokes; let i = index" class="row-joke" (click)="goToJokeDetails(joke)">
+                        <td> {{ joke?.title }} </td>
+                        <td> {{ joke?.content }} </td>
+                    </tr>
+                </tbody>
+            </table>
+          <ng-template #noJokes>
+            <div class="no-jokes">
+              <p>Currently no jokes in database</p>
+            </div>
+          </ng-template>
+        </div>
+    </div>
+</div>
+
+<p class="data-header">Add a new joke</p>
+<div class="data-container">
+  <form [formGroup]="jokeForm">
+    <div class="row form-group">
+      <label>Title</label>
+      <input formControlName="title" type="text" class="form-control" placeholder="title">
+      <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is required!</p>
+    </div>
+    <div class="row form-group">
+      <label>Content</label>
+      <input formControlName="content" type="text" class="form-control" placeholder="content">
+      <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
+        This field must contain more than 3 characters!</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">Add Joke</button>
+        <button (click)="jokeForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
+      </div>
+    </div>
+  </form>
+
+  <pre> {{ jokeForm.value | json }} </pre>
+  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>
+  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>
+</div>

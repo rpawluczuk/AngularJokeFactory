@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+.no-jokes{
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: blue;
+  padding: 20px;
+  background: white;
+}
+
+body {
+  background: cornflowerblue;
+}
+
+.data-header {
+  color: black;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 15px;
+}
+
+.data-container {
+  padding: 15px;
+  background: white;
+  margin: 15px;
+}
+
+.error{
+  background: red;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+}

@@ -3,16 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { JokesModule } from './jokes/jokes.module';
+import {JokesService} from './jokes/jokes.service';
+import {HttpClientModule} from '@angular/common/http';
+import {CoreModule} from './core-module/core.module';
+import {JokesRoutingModule} from './jokes/jokes-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JokesRoutingModule,
+    JokesModule,
+    HttpClientModule,
+    CoreModule
   ],
-  providers: [],
+  providers: [JokesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
