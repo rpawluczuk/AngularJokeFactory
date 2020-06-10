@@ -33,6 +33,10 @@ export class JokesService {
   updateJoke(id: number, data): Observable<Joke> {
     return this.http.put<Joke>(`${this.apiUrl}/${id}`, data);
   }
+
+  removeJoke(id: number): Observable<Joke> {
+    return this.http.delete<Joke>(`${this.apiUrl}/${id}`);
+  }
 }
 
 interface GetResponse {

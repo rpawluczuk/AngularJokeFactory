@@ -12,12 +12,15 @@
                     <tr>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Creation Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let joke of jokes; let i = index" class="row-joke" (click)="goToJokeDetails(joke)">
                         <td> {{ joke?.title }} </td>
                         <td> {{ joke?.content }} </td>
+                        <td>{{ joke?.dateCreated | date:'short'}} </td>
+                        <td (click)="removeJoke(joke, $event)"> ( X ) </td>
                     </tr>
                 </tbody>
             </table>
@@ -52,7 +55,7 @@
     </div>
   </form>
 
-  <pre> {{ jokeForm.value | json }} </pre>
-  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>
-  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>
+<!--  <pre> {{ jokeForm.value | json }} </pre>-->
+<!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+<!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
 </div>

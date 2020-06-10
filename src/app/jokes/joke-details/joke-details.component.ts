@@ -31,7 +31,8 @@ export class JokeDetailsComponent implements OnInit {
   buildJokeForm(){
     return this.formBuilder.group({
       title: [this.joke.title, Validators.required],
-      content: [this.joke.content, Validators.minLength(3)]
+      content: [this.joke.content, Validators.minLength(3)],
+      dateCreated: [this.joke.dateCreated]
     });
   }
 

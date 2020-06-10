@@ -40,6 +40,13 @@ export class JokesListComponent implements OnInit {
     });
   }
 
+  removeJoke(joke: Joke, event){
+    event.stopPropagation();
+    this.jokesService.removeJoke(joke.id).subscribe(() => {
+      this.loadJokes();
+    });
+  }
+
   goToJokeDetails(joke: Joke){
     this.router.navigate(['/jokes', joke.id]);
   }

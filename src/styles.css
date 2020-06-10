@@ -32,3 +32,12 @@ body {
   font-size: 11px;
   padding: 4px 8px;
 }
+
+.cs-table{
+  background: white;
+}
+
+th {
+  font-weight: 700;
+  text-transform: uppercase;
+}
