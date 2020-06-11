@@ -8,6 +8,9 @@ import {JokesService} from './jokes/jokes.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './core-module/core.module';
 import {JokesRoutingModule} from './jokes/jokes-routing.module';
+import {StructuresService} from './structures/structures.service';
+import {StructuresModule} from './structures/structures.module';
+import {StructuresRoutingModule} from './structures/structures-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +19,16 @@ import {JokesRoutingModule} from './jokes/jokes-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    CoreModule,
     JokesRoutingModule,
     JokesModule,
-    HttpClientModule,
-    CoreModule
+    StructuresModule,
+    StructuresRoutingModule
   ],
-  providers: [JokesService],
+  providers: [
+    JokesService,
+    StructuresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
