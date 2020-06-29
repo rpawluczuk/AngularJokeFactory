@@ -4,4 +4,5 @@ export interface Joke {
     content: string;
     lastUpdated: string;
     dateCreated: string;
+    structure: string;
 }

@@ -13,6 +13,7 @@
                         <th>Title</th>
                         <th>Content</th>
                         <th>Creation Date</th>
+                        <th>Structure</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                         <td> {{ joke?.title }} </td>
                         <td> {{ joke?.content }} </td>
                         <td>{{ joke?.dateCreated | date:'short'}} </td>
+                        <td> {{ joke?.structure?.name }} </td>
                         <td (click)="removeJoke(joke, $event)"> ( X ) </td>
                     </tr>
                 </tbody>
@@ -46,6 +48,16 @@
       <input formControlName="content" type="text" class="form-control" placeholder="content">
       <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
         This field must contain more than 3 characters!</p>
+    </div>
+    <div class="row form-group">
+      <label>Structure</label>
+      <select class="form-control" formControlName="structure" data-toggle="tooltip"
+              data-placement="right" title="Select Structure Branch">
+        <option value="null">--Select Structure--</option>
+        <option *ngFor="let structure of structures" [value]="structure.id">
+          {{structure.name}}
+        </option>
+      </select>
     </div>
     <div class="row">
       <div class="col-sm-12">
