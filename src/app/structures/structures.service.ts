@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {Structure} from './models/Structure';
 
 @Injectable({
@@ -14,9 +13,7 @@ export class StructuresService {
   constructor(private http: HttpClient) { }
 
   getStructures(): Observable<Structure[]> {
-    return this.http.get<GetResponse>(this.apiUrl).pipe(
-      map(response => response._embedded.structures)
-    );
+    return this.http.get<Structure[]>(this.apiUrl);
   }
 
   getStructure(id: number): Observable<Structure> {
@@ -34,10 +31,4 @@ export class StructuresService {
   removeStructure(id: number): Observable<Structure> {
     return this.http.delete<Structure>(`${this.apiUrl}/${id}`);
   }
-}
-
-interface GetResponse {
-  _embedded: {
-    structures: Structure[];
-  };
 }

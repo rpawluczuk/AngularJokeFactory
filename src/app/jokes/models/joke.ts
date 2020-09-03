@@ -1,8 +1,10 @@
+import {Structure} from '../../structures/models/Structure';
+
 export interface Joke {
-    id: number;
-    title: string;
-    content: string;
-    lastUpdated: string;
-    dateCreated: string;
-    structure: string;
+  id: number;
+  structure: Structure;
+  title: string;
+  content: string;
+  lastUpdated: string;
+  dateCreated: string;
 }

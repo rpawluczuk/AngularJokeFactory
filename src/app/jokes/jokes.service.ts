@@ -3,8 +3,6 @@ import 'rxjs';
 import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +15,7 @@ export class JokesService {
   }
 
   getJokes(): Observable<Joke[]> {
-    return this.http.get<GetResponse>(this.apiUrl).pipe(
-      map(response => response._embedded.jokes)
-    );
+    return this.http.get<Joke[]>(this.apiUrl);
   }
 
   getJoke(id: number): Observable<Joke> {
@@ -30,7 +26,7 @@ export class JokesService {
     return this.http.post<Joke>(this.apiUrl, data);
   }
 
-  updateJoke(id: number, data): Observable<Joke> {
+  updateJoke(id: number, data: any): Observable<Joke> {
     return this.http.put<Joke>(`${this.apiUrl}/${id}`, data);
   }
 

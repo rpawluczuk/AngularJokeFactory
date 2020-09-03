@@ -19,6 +19,16 @@
       <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
+    <div class="row form-group">
+      <label>Structure</label>
+      <select class="form-control" formControlName="structure" data-toggle="tooltip"
+              data-placement="right" title="Select Structure Branch">
+        <option [ngValue]="joke.structure" > {{joke.structure.name}} </option>
+        <option *ngFor="let structure of structures" [ngValue]="structure">
+          {{structure.name}}
+        </option>
+      </select>
+    </div>
     <div class="row">
       <div class="col-sm-12">
         <button [disabled]="jokeForm.invalid" (click)="updateJoke()" type="submit" class="btn btn-primary float-right">Update Joke</button>

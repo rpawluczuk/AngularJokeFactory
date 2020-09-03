@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Joke } from '../models/joke';
+import {Component, OnInit} from '@angular/core';
+import {Joke} from '../models/joke';
 import {JokesService} from '../jokes.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../../structures/structures.service';
 import {Structure} from '../../structures/models/Structure';
 import {forkJoin} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-jokes-list',
@@ -17,64 +16,49 @@ export class JokesListComponent implements OnInit {
   jokes: Joke[];
   structures: Structure[];
   jokeForm: FormGroup;
+
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private http: HttpClient
-              ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.loadJokes();
     this.loadStructures();
+    this.loadJokes();
     this.jokeForm = this.buildJokeForm();
   }
 
-  buildJokeForm(){
+  buildJokeForm() {
     return this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.minLength(3)]
+      content: ['', Validators.minLength(3)],
+      structure: [null]
     });
   }
 
-  loadJokes(): void{
-    this.jokesService.getJokes().subscribe((jokes: any) => {
-      const structures = jokes.map(joke => {
-        return joke._links.structure.href;
-      });
-
-      forkJoin([
-        ...structures.map(link => {
-          return this.http.get(link);
-        })
-      ]).subscribe(strs => {
-        console.log('strs', strs);
-        let count = 0;
-        this.jokes = jokes.map(joke => {
-          return { ...joke, structure: strs[count++]};
-        });
-        console.log('jokes', this.jokes);
-      });
-
-      console.log(structures);
+  loadJokes(): void {
+    this.jokesService.getJokes().subscribe((jokes) => {
       this.jokes = jokes;
-      });
+    });
   }
 
-  addJoke(){
+  addJoke() {
+    let joke = this.jokeForm.value;
+    console.log(joke);
     this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
       this.loadJokes();
     });
   }
 
-  removeJoke(joke: Joke, event){
+  removeJoke(joke: Joke, event) {
     event.stopPropagation();
     this.jokesService.removeJoke(joke.id).subscribe(() => {
       this.loadJokes();
     });
   }
 
-  goToJokeDetails(joke: Joke){
+  goToJokeDetails(joke: Joke) {
     this.router.navigate(['/jokes', joke.id]);
   }
 
@@ -82,5 +66,13 @@ export class JokesListComponent implements OnInit {
     this.structuresService.getStructures().subscribe((structures) => {
       this.structures = structures;
     });
+  }
+
+  getStructureName(joke: Joke): string {
+    if (joke.structure === undefined || joke.structure === null) {
+      return 'any structure';
+    } else {
+      return this.structures.find(x => x.id === joke.structure.id).name;
+    }
   }
 }
