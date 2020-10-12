@@ -24,8 +24,9 @@ export class StructuresService {
     return this.http.post<Structure>(this.apiUrl, data);
   }
 
-  updateStructure(id: number, data): Observable<Structure> {
-    return this.http.put<Structure>(`${this.apiUrl}/${id}`, data);
+  updateStructure(structure: Structure): Observable<Structure> {
+    console.log(structure);
+    return this.http.put<Structure>(this.apiUrl, structure);
   }
 
   removeStructure(id: number): Observable<Structure> {

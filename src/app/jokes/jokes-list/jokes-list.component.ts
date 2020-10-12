@@ -5,7 +5,8 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../../structures/structures.service';
 import {Structure} from '../../structures/models/Structure';
-import {forkJoin} from 'rxjs';
+import {AuthorsService} from '../../authors/authors.service';
+import {Author} from '../../authors/models/author';
 
 @Component({
   selector: 'app-jokes-list',
@@ -14,17 +15,20 @@ import {forkJoin} from 'rxjs';
 })
 export class JokesListComponent implements OnInit {
   jokes: Joke[];
+  authors: Author[];
   structures: Structure[];
   jokeForm: FormGroup;
 
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
+              private authorsService: AuthorsService,
               private formBuilder: FormBuilder,
               private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.loadStructures();
+    this.loadAuthores();
     this.loadJokes();
     this.jokeForm = this.buildJokeForm();
   }
@@ -33,7 +37,8 @@ export class JokesListComponent implements OnInit {
     return this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.minLength(3)],
-      structure: [null]
+      structure: [null],
+      author: [null]
     });
   }
 
@@ -68,11 +73,26 @@ export class JokesListComponent implements OnInit {
     });
   }
 
+  loadAuthores(): void {
+    this.authorsService.getAuthors().subscribe((authors) => {
+      this.authors = authors;
+    });
+  }
+
   getStructureName(joke: Joke): string {
     if (joke.structure === undefined || joke.structure === null) {
       return 'any structure';
     } else {
       return this.structures.find(x => x.id === joke.structure.id).name;
+    }
+  }
+
+  getAuthorNameAndSurname(joke: Joke): string {
+    if (joke.author === undefined || joke.author === null) {
+      return 'any author';
+    } else {
+      let author = this.authors.find(x => x.id === joke.author.id);
+      return author.name + ' ' + author.surname;
     }
   }
 }

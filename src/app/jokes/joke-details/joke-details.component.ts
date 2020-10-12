@@ -5,6 +5,8 @@ import {Joke} from '../models/joke';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Structure} from '../../structures/models/Structure';
 import {StructuresService} from '../../structures/structures.service';
+import {Author} from '../../authors/models/author';
+import {AuthorsService} from '../../authors/authors.service';
 
 @Component({
   selector: 'app-joke-details',
@@ -15,10 +17,12 @@ export class JokeDetailsComponent implements OnInit {
   joke: Joke;
   jokeForm: FormGroup;
   structures: Structure[];
+  authors: Author[];
 
   constructor(private jokesService: JokesService,
               private formBuilder: FormBuilder,
               private structuresService: StructuresService,
+              private authorsService: AuthorsService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -26,6 +30,7 @@ export class JokeDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.loadJoke();
     this.loadStructures();
+    this.loadAuthors();
     this.jokeForm = this.buildJokeForm();
   }
 
@@ -38,6 +43,7 @@ export class JokeDetailsComponent implements OnInit {
       title: [this.joke.title, Validators.required],
       content: [this.joke.content, Validators.minLength(3)],
       structure: [this.joke.structure],
+      author: [this.joke.author],
       dateCreated: [this.joke.dateCreated]
     });
   }
@@ -52,6 +58,12 @@ export class JokeDetailsComponent implements OnInit {
   loadStructures(): void {
     this.structuresService.getStructures().subscribe((structures) => {
       this.structures = structures;
+    });
+  }
+
+  loadAuthors(): void {
+    this.authorsService.getAuthors().subscribe((authors) => {
+      this.authors = authors;
     });
   }
 }

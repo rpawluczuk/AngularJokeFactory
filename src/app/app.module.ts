@@ -11,6 +11,9 @@ import {JokesRoutingModule} from './jokes/jokes-routing.module';
 import {StructuresService} from './structures/structures.service';
 import {StructuresModule} from './structures/structures.module';
 import {StructuresRoutingModule} from './structures/structures-routing.module';
+import {AuthorsModule} from './authors/authors.module';
+import {AuthorsRoutingModule} from './authors/authors-routing.module';
+import {AuthorsService} from './authors/authors.service';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import {StructuresRoutingModule} from './structures/structures-routing.module';
     JokesRoutingModule,
     JokesModule,
     StructuresModule,
-    StructuresRoutingModule
+    StructuresRoutingModule,
+    AuthorsModule,
+    AuthorsRoutingModule
   ],
   providers: [
     JokesService,
-    StructuresService],
+    StructuresService,
+    AuthorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

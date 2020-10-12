@@ -38,7 +38,9 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   updateStructure(){
-    this.structuresService.updateStructure(this.structure.id, this.structureForm.value).subscribe(() => {
+    this.structure.name = this.structureForm.controls['name'].value;
+    this.structure.description = this.structureForm.controls['description'].value;
+    this.structuresService.updateStructure(this.structure).subscribe(() => {
       this.router.navigate(['/structures']);
     });
   }

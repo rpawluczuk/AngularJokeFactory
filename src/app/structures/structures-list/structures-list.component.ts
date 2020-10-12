@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Joke} from '../../jokes/models/joke';
 import {Structure} from '../models/Structure';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {JokesService} from '../../jokes/jokes.service';
 import {Router} from '@angular/router';
 import {StructuresService} from '../structures.service';
 

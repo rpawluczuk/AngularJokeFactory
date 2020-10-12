@@ -23,9 +23,21 @@
       <label>Structure</label>
       <select class="form-control" formControlName="structure" data-toggle="tooltip"
               data-placement="right" title="Select Structure Branch">
-        <option [ngValue]="joke.structure" > {{joke.structure.name}} </option>
+        <option *ngIf="joke.structure!==null" [ngValue]="joke.structure" > {{joke.structure.name}} </option>
+        <option *ngIf="joke.structure===null" [ngValue]="joke.structure" >--Select Structure--</option>
         <option *ngFor="let structure of structures" [ngValue]="structure">
           {{structure.name}}
+        </option>
+      </select>
+    </div>
+    <div class="row form-group">
+      <label>Author</label>
+      <select class="form-control" formControlName="author" data-toggle="tooltip"
+              data-placement="right" title="Select Author Branch">
+        <option *ngIf="joke.author!==null" [ngValue]="joke.author"> {{joke.author.name + ' ' + joke.author.surname}} </option>
+        <option *ngIf="joke.author===null" [ngValue]="joke.author">--Select Author--</option>
+        <option *ngFor="let author of authors" [ngValue]="author">
+          {{author.name + ' ' + author.surname}}
         </option>
       </select>
     </div>
