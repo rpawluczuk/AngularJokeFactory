@@ -5,7 +5,8 @@ import {SharedModule} from '../shared-module/shared.module';
 import { JokeDetailsComponent } from './joke-details/joke-details.component';
 import {RouterModule} from '@angular/router';
 import {JokeResolveService} from './joke-resolve.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 
 
@@ -15,7 +16,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     JokesListComponent

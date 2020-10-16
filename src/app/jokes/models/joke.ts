@@ -3,7 +3,7 @@ import {Author} from '../../authors/models/author';
 
 export interface Joke {
   id: number;
-  structure: Structure;
+  structures: Structure[];
   author: Author;
   title: string;
   content: string;

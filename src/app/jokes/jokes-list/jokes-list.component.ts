@@ -16,8 +16,12 @@ import {Author} from '../../authors/models/author';
 export class JokesListComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
-  structures: Structure[];
+  allStructures: Structure[];
   jokeForm: FormGroup;
+
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
@@ -31,13 +35,40 @@ export class JokesListComponent implements OnInit {
     this.loadAuthores();
     this.loadJokes();
     this.jokeForm = this.buildJokeForm();
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Mumbai' },
+      { item_id: 2, item_text: 'Bangaluru' },
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' },
+      { item_id: 5, item_text: 'New Delhi' }
+    ];
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
 
   buildJokeForm() {
     return this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.minLength(3)],
-      structure: [null],
+      structures: [null],
       author: [null]
     });
   }
@@ -68,8 +99,8 @@ export class JokesListComponent implements OnInit {
   }
 
   loadStructures(): void {
-    this.structuresService.getStructures().subscribe((structures) => {
-      this.structures = structures;
+    this.structuresService.getStructures().subscribe((allStructures) => {
+      this.allStructures = allStructures;
     });
   }
 
@@ -79,11 +110,13 @@ export class JokesListComponent implements OnInit {
     });
   }
 
-  getStructureName(joke: Joke): string {
-    if (joke.structure === undefined || joke.structure === null) {
+  getStructuresNames(joke: Joke): string {
+    if (joke.structures === undefined || joke.structures === null) {
       return 'any structure';
     } else {
-      return this.structures.find(x => x.id === joke.structure.id).name;
+      let structuresNames = '';
+      joke.structures.forEach(structure => structuresNames += structure.name + ', ');
+      return structuresNames;
     }
   }
 
@@ -91,8 +124,7 @@ export class JokesListComponent implements OnInit {
     if (joke.author === undefined || joke.author === null) {
       return 'any author';
     } else {
-      let author = this.authors.find(x => x.id === joke.author.id);
-      return author.name + ' ' + author.surname;
+      return joke.author.name + ' ' + joke.author.surname;
     }
   }
 }

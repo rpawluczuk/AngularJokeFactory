@@ -42,7 +42,7 @@ export class JokeDetailsComponent implements OnInit {
     return this.formBuilder.group({
       title: [this.joke.title, Validators.required],
       content: [this.joke.content, Validators.minLength(3)],
-      structure: [this.joke.structure],
+      structure: [this.joke.structures],
       author: [this.joke.author],
       dateCreated: [this.joke.dateCreated]
     });

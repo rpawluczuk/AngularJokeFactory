@@ -6,35 +6,35 @@
 </app-header>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <table *ngIf="jokes && jokes.length > 0; else noJokes" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Structure</th>
-                        <th>Creation Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let joke of jokes; let i = index" class="row-joke" (click)="goToJokeDetails(joke)">
-                        <td> {{ joke?.title }} </td>
-                        <td> {{ joke?.content }} </td>
-                        <td>{{ getStructureName(joke) }} </td>
-                        <td>{{ getAuthorNameAndSurname(joke) }} </td>
-                        <td>{{ joke?.dateCreated | date:'short'}} </td>
-                        <td (click)="removeJoke(joke, $event)"> ( X ) </td>
-                    </tr>
-                </tbody>
-            </table>
-          <ng-template #noJokes>
-            <div class="no-jokes">
-              <p>Currently no jokes in database</p>
-            </div>
-          </ng-template>
+  <div class="row">
+    <div class="col-sm-12">
+      <table *ngIf="jokes && jokes.length > 0; else noJokes" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Structures</th>
+          <th>Creation Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let joke of jokes; let i = index" class="row-joke" (click)="goToJokeDetails(joke)">
+          <td> {{ joke?.title }} </td>
+          <td> {{ joke?.content }} </td>
+          <td>{{ getStructuresNames(joke) }} </td>
+          <td>{{ getAuthorNameAndSurname(joke) }} </td>
+          <td>{{ joke?.dateCreated | date:'short'}} </td>
+          <td (click)="removeJoke(joke, $event)"> ( X )</td>
+        </tr>
+        </tbody>
+      </table>
+      <ng-template #noJokes>
+        <div class="no-jokes">
+          <p>Currently no jokes in database</p>
         </div>
+      </ng-template>
     </div>
+  </div>
 </div>
 
 <p class="data-header">Add a new joke</p>
@@ -51,16 +51,23 @@
       <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
-    <div class="row form-group">
+    <div>
       <label>Structure</label>
-      <select class="form-control" formControlName="structure" data-toggle="tooltip"
-              data-placement="right" title="Select Structure Branch">
-        <option value="null">--Select Structure--</option>
-        <option *ngFor="let structure of structures" [ngValue]="structure">
-          {{structure.name}}
-        </option>
-      </select>
+      <ng-multiselect-dropdown
+        [placeholder]="'custom placeholder'"
+        [settings]="dropdownSettings"
+        [data]="dropdownList"
+        [(ngModel)]="selectedItems"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)">
+      </ng-multiselect-dropdown>
     </div>
+    <!--      <select class="mul-select" multiple>-->
+    <!--        <option value="null">&#45;&#45;Select Structure&#45;&#45;</option>-->
+    <!--        <option *ngFor="let structure of allStructures">-->
+    <!--          {{structure.name}}-->
+    <!--        </option>-->
+    <!--      </select>-->
     <div class="row form-group">
       <label>Author</label>
       <select class="form-control" formControlName="author" data-toggle="tooltip"
@@ -73,13 +80,15 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">Add Joke</button>
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">Add
+          Joke
+        </button>
         <button (click)="jokeForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
       </div>
     </div>
   </form>
 
-<!--  <pre> {{ jokeForm.value | json }} </pre>-->
-<!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
-<!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
+  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
+  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
 </div>
