@@ -19,8 +19,8 @@ export class JokesListComponent implements OnInit {
   allStructures: Structure[];
   jokeForm: FormGroup;
 
-  dropdownList = [];
-  selectedItems = [];
+  selectedStructuresByDefault = [];
+  selectedStructuresByUser: Structure[];
   dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
@@ -35,33 +35,33 @@ export class JokesListComponent implements OnInit {
     this.loadAuthores();
     this.loadJokes();
     this.jokeForm = this.buildJokeForm();
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 5, item_text: 'New Delhi' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' }
-    ];
+    this.selectedStructuresByDefault = [];
+    this.selectedStructuresByUser = [];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
       textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
+      itemsShowLimit: 10,
+      allowSearchFilter: true,
+      enableCheckAll: false
     };
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  onStructureSelect(item: any) {
+    console.log(item.item_id);
+    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.item_id));
+    console.log(this.selectedStructuresByUser);
   }
-  onSelectAll(items: any) {
-    console.log(items);
+
+  onStructureDeselect(item: any) {
+    console.log(item.item_id);
+    let deselectedStructure: Structure;
+    deselectedStructure = this.allStructures.find(s => s.id === item.item_id);
+    console.log(deselectedStructure);
+    const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
+    console.log(index);
+    this.selectedStructuresByUser.splice(index, 1);
+    console.log(this.selectedStructuresByUser);
   }
 
   buildJokeForm() {
@@ -80,7 +80,9 @@ export class JokesListComponent implements OnInit {
   }
 
   addJoke() {
-    let joke = this.jokeForm.value;
+    let joke: Joke;
+    joke = this.jokeForm.value;
+    joke.structures = this.selectedStructuresByUser;
     console.log(joke);
     this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
       this.loadJokes();
@@ -108,6 +110,14 @@ export class JokesListComponent implements OnInit {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
     });
+  }
+
+  getDropdownList(allStructures: Structure[]): Array<any>{
+    const dropdownList = [];
+    for (const structure of allStructures){
+      dropdownList.push({ item_id: structure.id, item_text: structure.name });
+    }
+    return dropdownList;
   }
 
   getStructuresNames(joke: Joke): string {

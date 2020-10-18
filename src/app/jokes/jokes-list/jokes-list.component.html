@@ -56,18 +56,12 @@
       <ng-multiselect-dropdown
         [placeholder]="'custom placeholder'"
         [settings]="dropdownSettings"
-        [data]="dropdownList"
-        [(ngModel)]="selectedItems"
-        (onSelect)="onItemSelect($event)"
-        (onSelectAll)="onSelectAll($event)">
+        [data]="getDropdownList(allStructures)"
+        [(ngModel)]="selectedStructuresByDefault"
+        (onSelect)="onStructureSelect($event)"
+        (onDeSelect)="onStructureDeselect($event)">
       </ng-multiselect-dropdown>
     </div>
-    <!--      <select class="mul-select" multiple>-->
-    <!--        <option value="null">&#45;&#45;Select Structure&#45;&#45;</option>-->
-    <!--        <option *ngFor="let structure of allStructures">-->
-    <!--          {{structure.name}}-->
-    <!--        </option>-->
-    <!--      </select>-->
     <div class="row form-group">
       <label>Author</label>
       <select class="form-control" formControlName="author" data-toggle="tooltip"
