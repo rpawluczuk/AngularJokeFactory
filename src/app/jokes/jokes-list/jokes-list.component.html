@@ -57,7 +57,6 @@
         [placeholder]="'custom placeholder'"
         [settings]="dropdownSettings"
         [data]="getDropdownList(allStructures)"
-        [(ngModel)]="selectedStructuresByDefault"
         (onSelect)="onStructureSelect($event)"
         (onDeSelect)="onStructureDeselect($event)">
       </ng-multiselect-dropdown>

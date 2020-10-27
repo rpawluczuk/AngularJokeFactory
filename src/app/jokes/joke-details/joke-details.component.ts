@@ -53,15 +53,15 @@ export class JokeDetailsComponent implements OnInit, AfterViewInit {
   }
 
   onStructureSelect(item: any) {
-    console.log(item.item_id);
-    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.item_id));
+    console.log(item.id);
+    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
     console.log(this.selectedStructuresByUser);
   }
 
   onStructureDeselect(item: any) {
-    console.log(item.item_id);
+    console.log(item.id);
     let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === item.item_id);
+    deselectedStructure = this.allStructures.find(s => s.id === item.id);
     console.log(deselectedStructure);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
     console.log(index);

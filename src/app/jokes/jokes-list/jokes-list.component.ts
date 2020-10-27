@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Joke} from '../models/joke';
 import {JokesService} from '../jokes.service';
 import {Router} from '@angular/router';
@@ -16,7 +16,7 @@ import {Author} from '../../authors/models/author';
 export class JokesListComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
-  allStructures: Structure[];
+  allStructures: Structure[] = [];
   jokeForm: FormGroup;
 
   selectedStructuresByDefault = [];
@@ -48,15 +48,15 @@ export class JokesListComponent implements OnInit {
   }
 
   onStructureSelect(item: any) {
-    console.log(item.item_id);
-    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.item_id));
+    console.log(item.id);
+    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
     console.log(this.selectedStructuresByUser);
   }
 
   onStructureDeselect(item: any) {
-    console.log(item.item_id);
+    console.log(item.id);
     let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === item.item_id);
+    deselectedStructure = this.allStructures.find(s => s.id === item.id);
     console.log(deselectedStructure);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
     console.log(index);
@@ -100,9 +100,9 @@ export class JokesListComponent implements OnInit {
     this.router.navigate(['/jokes', joke.id]);
   }
 
-  loadStructures(): void {
-    this.structuresService.getStructures().subscribe((allStructures) => {
-      this.allStructures = allStructures;
+  loadStructures(): void{
+    this.structuresService.getStructures().subscribe((structures) => {
+      this.allStructures = structures;
     });
   }
 
