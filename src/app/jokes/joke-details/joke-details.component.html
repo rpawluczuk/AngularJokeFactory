@@ -19,16 +19,16 @@
       <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
-    <div class="row form-group">
+    <div>
       <label>Structure</label>
-<!--      <select class="form-control" formControlName="structure" data-toggle="tooltip"-->
-<!--              data-placement="right" title="Select Structure Branch">-->
-<!--        <option *ngIf="joke.structure!==null" [ngValue]="joke.structure" > {{joke.structure.name}} </option>-->
-<!--        <option *ngIf="joke.structure===null" [ngValue]="joke.structure" >&#45;&#45;Select Structure&#45;&#45;</option>-->
-<!--        <option *ngFor="let structure of structures" [ngValue]="structure">-->
-<!--          {{structure.name}}-->
-<!--        </option>-->
-<!--      </select>-->
+      <ng-multiselect-dropdown
+        [placeholder]="'custom placeholder'"
+        [settings]="dropdownSettings"
+        [data]="getDropdownList(allStructures)"
+        formControlName="structures"
+        (onSelect)="onStructureSelect($event)"
+        (onDeSelect)="onStructureDeselect($event)">
+      </ng-multiselect-dropdown>
     </div>
     <div class="row form-group">
       <label>Author</label>

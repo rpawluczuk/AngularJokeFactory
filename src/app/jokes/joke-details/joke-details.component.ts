@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {JokesService} from '../jokes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Joke} from '../models/joke';
@@ -13,11 +13,14 @@ import {AuthorsService} from '../../authors/authors.service';
   templateUrl: './joke-details.component.html',
   styleUrls: ['./joke-details.component.css']
 })
-export class JokeDetailsComponent implements OnInit {
+export class JokeDetailsComponent implements OnInit, AfterViewInit {
   joke: Joke;
   jokeForm: FormGroup;
-  structures: Structure[];
+  allStructures: Structure[] = [];
   authors: Author[];
+
+  selectedStructuresByUser: Structure[];
+  dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
               private formBuilder: FormBuilder,
@@ -32,6 +35,38 @@ export class JokeDetailsComponent implements OnInit {
     this.loadStructures();
     this.loadAuthors();
     this.jokeForm = this.buildJokeForm();
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'text',
+      itemsShowLimit: 10,
+      allowSearchFilter: true,
+      enableCheckAll: false
+    };
+  }
+
+  ngAfterViewInit(): void {
+    this.selectedStructuresByUser = this.joke.structures;
+    this.jokeForm.patchValue({
+      structures: this.loadSelectedStructuresByDefault()
+    });
+  }
+
+  onStructureSelect(item: any) {
+    console.log(item.item_id);
+    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.item_id));
+    console.log(this.selectedStructuresByUser);
+  }
+
+  onStructureDeselect(item: any) {
+    console.log(item.item_id);
+    let deselectedStructure: Structure;
+    deselectedStructure = this.allStructures.find(s => s.id === item.item_id);
+    console.log(deselectedStructure);
+    const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
+    console.log(index);
+    this.selectedStructuresByUser.splice(index, 1);
+    console.log(this.selectedStructuresByUser);
   }
 
   loadJoke() {
@@ -42,7 +77,7 @@ export class JokeDetailsComponent implements OnInit {
     return this.formBuilder.group({
       title: [this.joke.title, Validators.required],
       content: [this.joke.content, Validators.minLength(3)],
-      structure: [this.joke.structures],
+      structures: [],
       author: [this.joke.author],
       dateCreated: [this.joke.dateCreated]
     });
@@ -57,7 +92,7 @@ export class JokeDetailsComponent implements OnInit {
 
   loadStructures(): void {
     this.structuresService.getStructures().subscribe((structures) => {
-      this.structures = structures;
+      this.allStructures = structures;
     });
   }
 
@@ -65,5 +100,21 @@ export class JokeDetailsComponent implements OnInit {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
     });
+  }
+
+  loadSelectedStructuresByDefault(): Array<any>{
+    const selectedStructuresByDefault = [];
+    for (const structure of this.joke.structures){
+      selectedStructuresByDefault.push({ id: structure.id, text: structure.name });
+    }
+    return selectedStructuresByDefault;
+  }
+
+  getDropdownList(allStructures: Structure[]): Array<any>{
+    const dropdownList = [];
+    for (const structure of allStructures){
+      dropdownList.push({ id: structure.id, text: structure.name });
+    }
+    return dropdownList;
   }
 }

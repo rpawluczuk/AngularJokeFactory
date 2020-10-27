@@ -39,8 +39,8 @@ export class JokesListComponent implements OnInit {
     this.selectedStructuresByUser = [];
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
+      idField: 'id',
+      textField: 'text',
       itemsShowLimit: 10,
       allowSearchFilter: true,
       enableCheckAll: false
@@ -115,7 +115,7 @@ export class JokesListComponent implements OnInit {
   getDropdownList(allStructures: Structure[]): Array<any>{
     const dropdownList = [];
     for (const structure of allStructures){
-      dropdownList.push({ item_id: structure.id, item_text: structure.name });
+      dropdownList.push({ id: structure.id, text: structure.name });
     }
     return dropdownList;
   }
