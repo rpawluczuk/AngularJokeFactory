@@ -8,10 +8,6 @@
   background: white;
 }
 
-body {
-  background: cornflowerblue;
-}
-
 .data-header {
   color: black;
   font-size: 22px;
@@ -35,9 +31,4 @@ body {
 
 .cs-table{
   background: white;
-}
-
-th {
-  font-weight: 700;
-  text-transform: uppercase;
 }

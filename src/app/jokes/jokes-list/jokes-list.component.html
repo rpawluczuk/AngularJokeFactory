@@ -12,10 +12,8 @@
         <h2> {{ joke?.title }} </h2>
         <blockquote class="blockquote"> {{ joke?.content }} </blockquote>
         <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
-        <ul class="list-inline">
-          <li class="list-inline-item"> Structures:</li>
-          <li class="list-inline-item" *ngFor="let structure of joke.structures"> {{ structure?.name }} |</li>
-        </ul>
+        <span class="d-inline-block pr-1"> Structures:</span>
+        <span class="d-inline-block pr-1" *ngFor="let structure of joke.structures"> {{ structure?.name }} |</span>
         <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
         <button class="btn-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
       </div>
