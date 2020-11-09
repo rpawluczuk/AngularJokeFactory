@@ -1,5 +1,6 @@
 .sidebar {
-  width: 180px;
+  width: 8.5%;
+  min-width: 120px;
   background: cornflowerblue;
   bottom: 0;
 }

@@ -5,18 +5,19 @@
 <!--  </div>-->
 <!--</app-header>-->
 <div class="container">
-  <br><h1 class="text-center display-2 text-dark font-weight-bolder">List of Jokes</h1><br>
+  <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Jokes</h1>
   <div *ngIf="jokes && jokes.length > 0; else noJokes">
-    <div *ngFor="let joke of jokes; let i = index">
-      <div class="row-joke p-3 mb-4">
-        <h2> {{ joke?.title }} </h2>
+    <div class="card p-3 mb-4" style="background: azure" *ngFor="let joke of jokes; let i = index">
+      <div class="card-body">
+        <h2 class="card-title"> {{ joke?.title }} </h2>
         <blockquote class="blockquote"> {{ joke?.content }} </blockquote>
         <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
         <span class="d-inline-block mr-1"> Structures:</span>
-        <span class="d-inline-block mr-1 badge badge-primary badge-pill" *ngFor="let structure of joke.structures"> {{ structure?.name }} </span>
+        <span class="d-inline-block mr-1 badge badge-primary badge-pill"
+              *ngFor="let structure of joke.structures"> {{ structure?.name }} </span>
         <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
-        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeDetails(joke)"> Edit </button>
-        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete </button>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeDetails(joke)"> Edit</button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
       </div>
     </div>
   </div>
@@ -63,7 +64,8 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">Add
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">
+          Add
           Joke
         </button>
         <button (click)="jokeForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
