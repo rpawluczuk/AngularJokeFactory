@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import {JokesListComponent} from './jokes/jokes-list/jokes-list.component';
 import {StructuresListComponent} from './structures/structures-list/structures-list.component';
 import {AuthorsListComponent} from './authors/authors-list/authors-list.component';
+import {JokeCreationComponent} from './jokes/joke-creation/joke-creation.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'jokes' },
   { path: 'jokes', component: JokesListComponent },
+  { path: 'joke-creation', component: JokeCreationComponent },
   { path: 'structures', component: StructuresListComponent },
   { path: 'authors', component: AuthorsListComponent }
 ];

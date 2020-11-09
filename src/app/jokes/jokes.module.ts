@@ -7,11 +7,13 @@ import {RouterModule} from '@angular/router';
 import {JokeResolveService} from './joke-resolve.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {JokeCreationComponent} from './joke-creation/joke-creation.component';
 
 
 
 @NgModule({
-  declarations: [JokesListComponent, JokeDetailsComponent],
+  declarations: [JokesListComponent, JokeCreationComponent,
+    JokeDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,6 +23,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
+    JokeCreationComponent,
     JokesListComponent
   ],
   providers: [

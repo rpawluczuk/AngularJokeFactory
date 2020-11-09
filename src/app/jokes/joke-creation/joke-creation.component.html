@@ -1,0 +1,49 @@
+<p class="data-header">Add a new joke</p>
+<div class="data-container">
+  <form [formGroup]="jokeForm">
+    <div class="row form-group">
+      <label>Title</label>
+      <input formControlName="title" type="text" class="form-control" placeholder="title">
+      <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is required!</p>
+    </div>
+    <div class="row form-group">
+      <label>Content</label>
+      <input formControlName="content" type="text" class="form-control" placeholder="content">
+      <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
+        This field must contain more than 3 characters!</p>
+    </div>
+    <div>
+      <label>Structure</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'custom placeholder'"
+        [settings]="dropdownSettings"
+        [data]="getDropdownList(allStructures)"
+        (onSelect)="onStructureSelect($event)"
+        (onDeSelect)="onStructureDeselect($event)">
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="row form-group">
+      <label>Author</label>
+      <select class="form-control" formControlName="author" data-toggle="tooltip"
+              data-placement="right" title="Select Author Branch">
+        <option value="null">--Select Author--</option>
+        <option *ngFor="let author of authors" [ngValue]="author">
+          {{author.name + ' ' + author.surname}}
+        </option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">
+          Add
+          Joke
+        </button>
+        <button (click)="jokeForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
+      </div>
+    </div>
+  </form>
+
+  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
+  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
+</div>

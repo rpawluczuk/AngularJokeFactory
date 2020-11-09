@@ -17,16 +17,10 @@ export class JokesListComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
   allStructures: Structure[] = [];
-  jokeForm: FormGroup;
-
-  selectedStructuresByDefault = [];
-  selectedStructuresByUser: Structure[];
-  dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private formBuilder: FormBuilder,
               private router: Router,
   ) {}
 
@@ -34,58 +28,11 @@ export class JokesListComponent implements OnInit {
     this.loadStructures();
     this.loadAuthores();
     this.loadJokes();
-    this.jokeForm = this.buildJokeForm();
-    this.selectedStructuresByDefault = [];
-    this.selectedStructuresByUser = [];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'text',
-      itemsShowLimit: 10,
-      allowSearchFilter: true,
-      enableCheckAll: false
-    };
-  }
-
-  onStructureSelect(item: any) {
-    console.log(item.id);
-    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
-    console.log(this.selectedStructuresByUser);
-  }
-
-  onStructureDeselect(item: any) {
-    console.log(item.id);
-    let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === item.id);
-    console.log(deselectedStructure);
-    const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
-    console.log(index);
-    this.selectedStructuresByUser.splice(index, 1);
-    console.log(this.selectedStructuresByUser);
-  }
-
-  buildJokeForm() {
-    return this.formBuilder.group({
-      title: ['', Validators.required],
-      content: ['', Validators.minLength(3)],
-      structures: [null],
-      author: [null]
-    });
   }
 
   loadJokes(): void {
     this.jokesService.getJokes().subscribe((jokes) => {
       this.jokes = jokes;
-    });
-  }
-
-  addJoke() {
-    let joke: Joke;
-    joke = this.jokeForm.value;
-    joke.structures = this.selectedStructuresByUser;
-    console.log(joke);
-    this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
-      this.loadJokes();
     });
   }
 
@@ -110,24 +57,6 @@ export class JokesListComponent implements OnInit {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
     });
-  }
-
-  getDropdownList(allStructures: Structure[]): Array<any>{
-    const dropdownList = [];
-    for (const structure of allStructures){
-      dropdownList.push({ id: structure.id, text: structure.name });
-    }
-    return dropdownList;
-  }
-
-  getStructuresNames(joke: Joke): string {
-    if (joke.structures === undefined || joke.structures === null) {
-      return 'any structure';
-    } else {
-      let structuresNames = '';
-      joke.structures.forEach(structure => structuresNames += structure.name + ', ');
-      return structuresNames;
-    }
   }
 
   getAuthorNameAndSurname(joke: Joke): string {
