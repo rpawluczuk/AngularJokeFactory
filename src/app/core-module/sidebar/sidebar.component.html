@@ -1,10 +1,28 @@
 <div class="sidebar fixed-top">
   <img src="assets/logo.png" class="logo">
   <nav>
-    <ul>
-      <li [routerLink]="['/jokes']" [routerLinkActive]="'active'">Jokes</li>
-      <li [routerLink]="['/structures']" [routerLinkActive]="'active'">Structures</li>
-      <li [routerLink]="['/authors']" [routerLinkActive]="'active'">Authors</li>
-    </ul>
+    <button class="navbar-toggler big_button" type="button" data-toggle="collapse" data-target="#sidebarJokes">
+      Jokes
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarJokes">
+      <button class="small_button" [routerLink]="['/jokes']" [routerLinkActive]="'active'">List</button>
+      <button class="small_button" [routerLink]="['/jokes']" [routerLinkActive]="'active'">Create</button>
+    </div>
+
+    <button class="navbar-toggler big_button" type="button" data-toggle="collapse" data-target="#sidebarStructures">
+      Structures
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarStructures">
+      <button class="small_button" [routerLink]="['/structures']" [routerLinkActive]="'active'">List</button>
+      <button class="small_button" [routerLink]="['/structures']" [routerLinkActive]="'active'">Create</button>
+    </div>
+
+    <button class="navbar-toggler big_button" type="button" data-toggle="collapse" data-target="#sidebarAuthors">
+      Authors
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarAuthors">
+      <button class="small_button" [routerLink]="['/authors']" [routerLinkActive]="'active'">List</button>
+      <button class="small_button" [routerLink]="['/authors']" [routerLinkActive]="'active'">Create</button>
+    </div>
   </nav>
 </div>
