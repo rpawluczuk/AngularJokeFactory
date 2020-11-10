@@ -11,32 +11,17 @@ import {StructuresService} from '../structures.service';
 })
 export class StructuresListComponent implements OnInit {
   structures: Structure[];
-  structureForm: FormGroup;
+
   constructor(private structuresService: StructuresService,
-              private formBuilder: FormBuilder,
               private router: Router) { }
 
   ngOnInit(): void {
     this.loadStructures();
-    this.structureForm = this.buildStructureForm();
-  }
-
-  buildStructureForm(){
-    return this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.minLength(3)]
-    });
   }
 
   loadStructures(): void{
     this.structuresService.getStructures().subscribe((structures) => {
       this.structures = structures;
-    });
-  }
-
-  addStructure(){
-    this.structuresService.addStructure(this.structureForm.value).subscribe(() => {
-      this.loadStructures();
     });
   }
 
