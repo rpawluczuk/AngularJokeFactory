@@ -6,11 +6,13 @@ import {SharedModule} from '../shared-module/shared.module';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthorResolveService} from './author-resolve.service';
+import { AuthorCreationComponent } from './author-creation/author-creation.component';
 
 
 
 @NgModule({
-  declarations: [AuthorDetailsComponent, AuthorsListComponent],
+  declarations: [AuthorDetailsComponent, AuthorsListComponent,
+    AuthorCreationComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -18,6 +20,7 @@ import {AuthorResolveService} from './author-resolve.service';
     ReactiveFormsModule
   ],
   exports: [
+    AuthorCreationComponent,
     AuthorsListComponent
   ],
   providers: [

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Author} from '../models/author';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthorsService} from '../authors.service';
 import {Router} from '@angular/router';
 
@@ -11,34 +10,17 @@ import {Router} from '@angular/router';
 })
 export class AuthorsListComponent implements OnInit {
   authors: Author[];
-  authorForm: FormGroup;
+
   constructor(private authorsService: AuthorsService,
-              private formBuilder: FormBuilder,
               private router: Router) { }
 
   ngOnInit(): void {
     this.loadAuthors();
-    this.authorForm = this.buildAuthorForm();
-  }
-
-  private buildAuthorForm() {
-    return this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      description: ['']
-    });
   }
 
   private loadAuthors() {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
-    });
-  }
-
-  addAuthor(){
-    console.log(this.authorForm.value);
-    this.authorsService.addAuthor(this.authorForm.value).subscribe(() => {
-      this.loadAuthors();
     });
   }
 

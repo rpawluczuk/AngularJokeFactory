@@ -34,35 +34,3 @@
     </div>
   </div>
 </div>
-
-<p class="data-header">Add a new author</p>
-<div class="data-container">
-  <form [formGroup]="authorForm">
-    <div class="row form-group">
-      <label>Name</label>
-      <input formControlName="name" type="text" class="form-control" placeholder="name">
-      <p *ngIf="!authorForm.get('name').valid && authorForm.get('name').dirty" class="error">This field is required!</p>
-    </div>
-    <div class="row form-group">
-      <label>Surname</label>
-      <input formControlName="surname" type="text" class="form-control" placeholder="surname">
-      <p *ngIf="!authorForm.get('surname').valid && authorForm.get('surname').dirty" class="error">This field is required!</p>
-    </div>
-    <div class="row form-group">
-      <label>Description</label>
-      <input formControlName="description" type="text" class="form-control" placeholder="description">
-      <p *ngIf="!authorForm.get('description').valid && authorForm.get('description').dirty" class="error">
-        This field must contain more than 3 characters!</p>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button [disabled]="authorForm.invalid" (click)="addAuthor()" type="submit" class="btn btn-primary float-right">Add Author</button>
-        <button (click)="authorForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
-      </div>
-    </div>
-  </form>
-
-  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
-  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
-  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
-</div>
