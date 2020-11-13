@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {JokeDetailsComponent} from './joke-details/joke-details.component';
+import {JokeEditionComponent} from './joke-edition/joke-edition.component';
 import {JokeResolveService} from './joke-resolve.service';
 
 const jokesRoutes: Routes = [
   {
     path: 'jokes/:id',
-    component: JokeDetailsComponent,
+    component: JokeEditionComponent,
     resolve: { joke: JokeResolveService }
   }
 ];

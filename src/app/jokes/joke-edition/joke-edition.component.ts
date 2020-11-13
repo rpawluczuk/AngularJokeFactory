@@ -10,10 +10,10 @@ import {AuthorsService} from '../../authors/authors.service';
 
 @Component({
   selector: 'app-joke-details',
-  templateUrl: './joke-details.component.html',
-  styleUrls: ['./joke-details.component.css']
+  templateUrl: './joke-edition.component.html',
+  styleUrls: ['./joke-edition.component.css']
 })
-export class JokeDetailsComponent implements OnInit, AfterViewInit {
+export class JokeEditionComponent implements OnInit, AfterViewInit {
   joke: Joke;
   jokeForm: FormGroup;
   allStructures: Structure[] = [];
