@@ -3,6 +3,7 @@ import 'rxjs';
 import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {JokePaginationResponse} from './models/jokePaginationResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class JokesService {
   constructor(private http: HttpClient) {
   }
 
-  getJokes(): Observable<Joke[]> {
-    return this.http.get<Joke[]>(this.apiUrl);
+  getJokes(currentPage: number, pageSize: number): Observable<JokePaginationResponse> {
+    return this.http.get<JokePaginationResponse>(`${this.apiUrl}`
+      + `?page=${currentPage}&size=${pageSize}`);
   }
 
   getJoke(id: number): Observable<Joke> {

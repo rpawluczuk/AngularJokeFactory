@@ -14,6 +14,8 @@ import {StructuresRoutingModule} from './structures/structures-routing.module';
 import {AuthorsModule} from './authors/authors.module';
 import {AuthorsRoutingModule} from './authors/authors-routing.module';
 import {AuthorsService} from './authors/authors.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {AuthorsService} from './authors/authors.service';
     StructuresModule,
     StructuresRoutingModule,
     AuthorsModule,
-    AuthorsRoutingModule
+    AuthorsRoutingModule,
+    NgbModule
   ],
   providers: [
     JokesService,

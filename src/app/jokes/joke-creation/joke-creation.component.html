@@ -3,7 +3,7 @@
   <form [formGroup]="jokeForm">
     <div class="row form-group">
       <label>Title</label>
-      <input formControlName="title" type="text" class="form-control" placeholder="title">
+      <input  formControlName="title" type="text" class="form-control" placeholder="title">
       <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is required!</p>
     </div>
     <div class="row form-group">

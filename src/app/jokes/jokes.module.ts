@@ -8,6 +8,7 @@ import {JokeResolveService} from './joke-resolve.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JokeCreationComponent} from './joke-creation/joke-creation.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -20,7 +21,8 @@ import {JokeCreationComponent} from './joke-creation/joke-creation.component';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgbModule
   ],
   exports: [
     JokeCreationComponent,

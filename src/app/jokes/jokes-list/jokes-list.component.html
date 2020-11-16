@@ -20,10 +20,19 @@
         <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
       </div>
     </div>
+    <ngb-pagination
+    [(page)]="currentPage"
+    [pageSize]="pageSize"
+    [collectionSize]="totalItems"
+    (pageChange)="loadPage($event)">
+    </ngb-pagination>
   </div>
+
   <ng-template #noJokes>
     <div class="no-jokes">
       <p>Currently no jokes in database</p>
     </div>
   </ng-template>
+
+
 </div>
