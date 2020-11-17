@@ -9,8 +9,8 @@
   <div *ngIf="jokes && jokes.length > 0; else noJokes">
     <div class="card p-3 mb-4" style="background: azure" *ngFor="let joke of jokes; let i = index">
       <div class="card-body">
-        <h2 class="card-title"> {{ joke?.title }} </h2>
-        <blockquote class="blockquote"> {{ joke?.content }} </blockquote>
+        <h2 class="card-title mb-4"> {{ joke?.title }} </h2>
+        <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ joke?.content }}</pre>
         <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
         <span class="d-inline-block mr-1"> Structures:</span>
         <span class="d-inline-block mr-1 badge badge-primary badge-pill"

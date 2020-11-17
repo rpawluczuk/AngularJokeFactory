@@ -15,7 +15,7 @@
     </div>
     <div class="row form-group">
       <label>Description</label>
-      <input formControlName="description" type="text" class="form-control" placeholder="description">
+      <textarea formControlName="description" type="text" placeholder="description" class="form-control"></textarea>
       <p *ngIf="!structureForm.get('description').valid && structureForm.get('description').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
