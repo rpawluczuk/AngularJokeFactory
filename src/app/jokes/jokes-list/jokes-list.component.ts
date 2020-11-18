@@ -84,4 +84,8 @@ export class JokesListComponent implements OnInit {
       return joke.author.name + ' ' + joke.author.surname;
     }
   }
+
+  updatePageSize(pageSize: number) {
+    this.loadPaginationResponse(0, pageSize);
+  }
 }
