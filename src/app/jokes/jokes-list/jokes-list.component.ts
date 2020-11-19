@@ -23,6 +23,8 @@ export class JokesListComponent implements OnInit {
   authors: Author[];
   allStructures: Structure[] = [];
 
+  authorFilter = -1;
+
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
@@ -32,18 +34,20 @@ export class JokesListComponent implements OnInit {
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthores();
-    this.loadPaginationResponse(this.currentPage, this.pageSize);
+    this.loadPaginationResponse(this.currentPage, this.pageSize, this.authorFilter);
   }
 
   loadPage(page: number) {
     if (page !== this.previousPage) {
       this.previousPage = this.currentPage;
-      this.loadPaginationResponse(page - 1, this.pageSize);
+      this.loadPaginationResponse(page - 1, this.pageSize, this.authorFilter);
     }
   }
 
-  loadPaginationResponse(currentPage: number, pageSize: number): void {
-    this.jokesService.getJokes(currentPage, pageSize)
+  loadPaginationResponse(currentPage: number, pageSize: number, authorFilter: number): void {
+    console.log('loadPagination');
+    console.log(authorFilter);
+    this.jokesService.getJokes(currentPage, pageSize, authorFilter)
       .subscribe((jokePaginationResponse) => {
       this.totalPages = jokePaginationResponse.totalPages;
       this.currentPage = jokePaginationResponse.currentPage + 1;
@@ -56,7 +60,7 @@ export class JokesListComponent implements OnInit {
   removeJoke(joke: Joke, event) {
     event.stopPropagation();
     this.jokesService.removeJoke(joke.id).subscribe(() => {
-      this.loadPaginationResponse(0, 5);
+      this.loadPaginationResponse(0, 5, this.authorFilter);
       this.previousPage = undefined;
     });
   }
@@ -86,6 +90,14 @@ export class JokesListComponent implements OnInit {
   }
 
   updatePageSize(pageSize: number) {
-    this.loadPaginationResponse(0, pageSize);
+    this.pageSize = pageSize;
+    this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
+  }
+
+  filterJokesByAuthor(authorId: number) {
+    console.log(authorId);
+    this.authorFilter = authorId;
+    console.log(this.authorFilter);
+    this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
   }
 }

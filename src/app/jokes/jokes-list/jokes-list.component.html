@@ -6,6 +6,12 @@
 <!--</app-header>-->
 <div class="container">
   <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Jokes</h1>
+  <select [ngModel]="authorFilter" (ngModelChange)="filterJokesByAuthor($event)" name="authorFilter">
+    <option value="-1">All</option>
+    <option *ngFor="let author of authors" [ngValue]="author.id">
+      {{author.name + ' ' + author.surname}}
+    </option>
+  </select>
   <div *ngIf="jokes && jokes.length > 0; else noJokes">
     <div class="card p-3 mb-4" style="background: azure" *ngFor="let joke of jokes; let i = index">
       <div class="card-body">
