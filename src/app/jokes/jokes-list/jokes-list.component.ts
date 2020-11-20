@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Joke} from '../models/joke';
 import {JokesService} from '../jokes.service';
 import {Router} from '@angular/router';
@@ -6,7 +6,6 @@ import {StructuresService} from '../../structures/structures.service';
 import {Structure} from '../../structures/models/Structure';
 import {AuthorsService} from '../../authors/authors.service';
 import {Author} from '../../authors/models/author';
-import {JokePaginationResponse} from '../models/jokePaginationResponse';
 
 @Component({
   selector: 'app-jokes-list',
@@ -28,7 +27,7 @@ export class JokesListComponent implements OnInit {
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private router: Router,
+              private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +40,7 @@ export class JokesListComponent implements OnInit {
     if (page !== this.previousPage) {
       this.previousPage = this.currentPage;
       this.loadPaginationResponse(page - 1, this.pageSize, this.authorFilter);
+      window.location.reload();
     }
   }
 

@@ -19,8 +19,11 @@
         <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ joke?.content }}</pre>
         <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
         <span class="d-inline-block mr-1"> Structures:</span>
-        <span class="d-inline-block mr-1 badge badge-primary badge-pill"
-              *ngFor="let structure of joke.structures"> {{ structure?.name }} </span>
+        <span class="d-inline-block mr-1 badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top"
+              title="{{structure?.description}}"
+              *ngFor="let structure of joke.structures">
+          {{ structure?.name }}
+        </span>
         <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
         <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeDetails(joke)"> Edit</button>
         <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
@@ -55,6 +58,4 @@
       <p>Currently no jokes in database</p>
     </div>
   </ng-template>
-
-
 </div>
