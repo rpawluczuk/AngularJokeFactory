@@ -40,7 +40,6 @@ export class JokesListComponent implements OnInit {
     if (page !== this.previousPage) {
       this.previousPage = this.currentPage;
       this.loadPaginationResponse(page - 1, this.pageSize, this.authorFilter);
-      window.location.reload();
     }
   }
 
