@@ -1,34 +1,21 @@
-<app-header>
-  <p levels>structures</p>
-  <div content>
-    <p>List of Structures</p>
-  </div>
-</app-header>
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <table *ngIf="structures && structures.length > 0; else noStructures" class="table table-striped">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Creation Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let structure of structures; let i = index" class="row-structure" (click)="goToStructureDetails(structure)">
-          <td> {{ structure?.name }} </td>
-          <td> {{ structure?.description }} </td>
-          <td>{{ structure?.dateCreated | date:'short'}} </td>
-          <td (click)="removeStructure(structure, $event)"> ( X ) </td>
-        </tr>
-        </tbody>
-      </table>
-      <ng-template #noStructures>
-        <div class="no-Structures">
-          <p>Currently no structures in database</p>
-        </div>
-      </ng-template>
+  <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Structures</h1>
+
+  <div *ngIf="structures && structures.length > 0; else noStructures">
+    <div class="card p-3 mb-4" style="background: lightblue" *ngFor="let structure of structures; let i = index">
+      <div class="card-body">
+        <h2 class="card-title mb-4"> {{ structure?.name }} </h2>
+        <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structure?.description }}</pre>
+        <div class="text-muted"> Creation Date:: {{ structure?.dateCreated | date:'short' }} </div>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureDetails(structure)"> Edit </button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete </button>
+      </div>
     </div>
   </div>
+
+  <ng-template #noStructures>
+    <div class="no-Structures">
+      <p>Currently no structures in database</p>
+    </div>
+  </ng-template>
 </div>

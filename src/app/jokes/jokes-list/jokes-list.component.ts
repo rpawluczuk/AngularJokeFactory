@@ -64,7 +64,7 @@ export class JokesListComponent implements OnInit {
     });
   }
 
-  goToJokeDetails(joke: Joke) {
+  goToJokeEdition(joke: Joke) {
     this.router.navigate(['/jokes', joke.id]);
   }
 

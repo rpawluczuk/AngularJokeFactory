@@ -43,8 +43,8 @@
           {{ structure?.name }}
         </span>
         <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
-        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeDetails(joke)"> Edit</button>
-        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition(joke)"> Edit </button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete </button>
       </div>
     </div>
   </div>
