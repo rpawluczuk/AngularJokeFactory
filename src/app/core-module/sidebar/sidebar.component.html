@@ -24,5 +24,13 @@
       <button class="small_button" [routerLink]="['/authors']" [routerLinkActive]="'active'">List</button>
       <button class="small_button" [routerLink]="['/author-creation']" [routerLinkActive]="'active'">Create</button>
     </div>
+
+    <button class="navbar-toggler big_button" type="button" data-toggle="collapse" data-target="#sidebarOrigins">
+      Origins
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarOrigins">
+      <button class="small_button" [routerLink]="['/origins']" [routerLinkActive]="'active'">List</button>
+      <button class="small_button" [routerLink]="['/origin-creation']" [routerLinkActive]="'active'">Create</button>
+    </div>
   </nav>
 </div>

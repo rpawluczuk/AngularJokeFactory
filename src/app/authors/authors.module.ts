@@ -11,8 +11,11 @@ import { AuthorCreationComponent } from './author-creation/author-creation.compo
 
 
 @NgModule({
-  declarations: [AuthorDetailsComponent, AuthorsListComponent,
-    AuthorCreationComponent],
+  declarations: [
+    AuthorDetailsComponent,
+    AuthorsListComponent,
+    AuthorCreationComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

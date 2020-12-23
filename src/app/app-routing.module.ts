@@ -6,6 +6,8 @@ import {AuthorsListComponent} from './authors/authors-list/authors-list.componen
 import {JokeCreationComponent} from './jokes/joke-creation/joke-creation.component';
 import {StructureCreationComponent} from './structures/structure-creation/structure-creation.component';
 import {AuthorCreationComponent} from './authors/author-creation/author-creation.component';
+import {OriginListComponent} from './origins/origin-list/origin-list.component';
+import {OriginCreationComponent} from './origins/origin-creation/origin-creation.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'jokes' },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'structures', component: StructuresListComponent },
   { path: 'structure-creation', component: StructureCreationComponent },
   { path: 'authors', component: AuthorsListComponent },
-  { path: 'author-creation', component: AuthorCreationComponent }
+  { path: 'author-creation', component: AuthorCreationComponent },
+  { path: 'origins', component: OriginListComponent },
+  { path: 'origin-creation', component: OriginCreationComponent }
 ];
 
 @NgModule({

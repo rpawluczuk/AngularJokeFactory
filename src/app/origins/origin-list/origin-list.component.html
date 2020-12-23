@@ -1,0 +1,32 @@
+<app-header>
+  <p levels>Origins</p>
+  <div content>
+    <p>List of Origins</p>
+  </div>
+</app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <table *ngIf="origins && origins.length > 0; else noOrigins" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Creation Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let origin of origins; let i = index" class="row-structure" (click)="goToOriginDetails(origin)">
+          <td> {{ origin?.name }} </td>
+          <td>{{ origin?.dateCreated | date:'short'}} </td>
+          <td (click)="removeOrigin(origin, $event)"> ( X ) </td>
+        </tr>
+        </tbody>
+      </table>
+      <ng-template #noOrigins>
+        <div class="no-Origins">
+          <p>Currently no origins in database</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

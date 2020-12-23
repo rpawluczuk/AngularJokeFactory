@@ -15,6 +15,9 @@ import {AuthorsModule} from './authors/authors.module';
 import {AuthorsRoutingModule} from './authors/authors-routing.module';
 import {AuthorsService} from './authors/authors.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {OriginModule} from './origins/origin.module';
+import {OriginRoutingModule} from './origins/origin-routing.module';
+import {OriginService} from './origins/origin.service';
 
 
 @NgModule({
@@ -32,12 +35,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StructuresRoutingModule,
     AuthorsModule,
     AuthorsRoutingModule,
+    OriginModule,
+    OriginRoutingModule,
     NgbModule
   ],
   providers: [
     JokesService,
     StructuresService,
-    AuthorsService],
+    AuthorsService,
+    OriginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
