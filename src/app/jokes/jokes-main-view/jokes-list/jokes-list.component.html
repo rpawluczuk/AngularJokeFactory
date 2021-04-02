@@ -1,0 +1,32 @@
+<div *ngIf="jokes && jokes.length > 0; else noJokes">
+  <div class="card p-3 mb-4" style="background: azure" *ngFor="let joke of jokes; let i = index">
+    <div class="card-body">
+      <h2 class="card-title mb-4"> {{ joke?.title }} </h2>
+      <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ joke?.content }}</pre>
+      <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
+      <div>
+        <span class="d-inline-block mr-1"> Structures:</span>
+        <span class="d-inline-block mr-1 badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top"
+              title="{{structure?.description}}"
+              *ngFor="let structure of joke.structures">
+          {{ structure?.name }}
+          </span>
+      </div>
+      <div>
+        <span class="d-inline-block mr-1"> Origin:</span>
+        <span class="d-inline-block mr-1 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
+          {{ joke?.origin?.name }}
+          </span>
+      </div>
+      <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
+      <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition(joke)"> Edit</button>
+      <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noJokes>
+  <div class="no-jokes">
+    <p>Currently no jokes in database</p>
+  </div>
+</ng-template>

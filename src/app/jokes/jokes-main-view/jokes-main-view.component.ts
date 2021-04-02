@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {Joke} from '../models/joke';
-import {JokesService} from '../jokes.service';
-import {Router} from '@angular/router';
-import {StructuresService} from '../../structures/structures.service';
-import {Structure} from '../../structures/models/Structure';
-import {AuthorsService} from '../../authors/authors.service';
 import {Author} from '../../authors/models/author';
 import {Origin} from '../../origins/models/origin';
+import {Structure} from '../../structures/models/Structure';
+import {JokesService} from '../jokes.service';
+import {StructuresService} from '../../structures/structures.service';
+import {AuthorsService} from '../../authors/authors.service';
 import {OriginService} from '../../origins/origin.service';
 
 @Component({
-  selector: 'app-jokes-list',
-  templateUrl: './jokes-list.component.html',
-  styleUrls: ['./jokes-list.component.css']
+  selector: 'app-jokes-main-view',
+  templateUrl: './jokes-main-view.component.html',
+  styleUrls: ['./jokes-main-view.component.css']
 })
-export class JokesListComponent implements OnInit {
+export class JokesMainViewComponent implements OnInit {
   totalPages: number;
   totalItems: number;
   currentPage = 0;
@@ -30,8 +29,7 @@ export class JokesListComponent implements OnInit {
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private originService: OriginService,
-              private router: Router
+              private originService: OriginService
   ) {}
 
   ngOnInit(): void {
@@ -53,24 +51,12 @@ export class JokesListComponent implements OnInit {
     console.log(authorFilter);
     this.jokesService.getJokes(currentPage, pageSize, authorFilter)
       .subscribe((jokePaginationResponse) => {
-      this.totalPages = jokePaginationResponse.totalPages;
-      this.currentPage = jokePaginationResponse.currentPage + 1;
-      this.pageSize =  jokePaginationResponse.pageSize;
-      this.totalItems =  jokePaginationResponse.totalItems;
-      this.jokes = jokePaginationResponse.jokes;
-    });
-  }
-
-  removeJoke(joke: Joke, event) {
-    event.stopPropagation();
-    this.jokesService.removeJoke(joke.id).subscribe(() => {
-      this.loadPaginationResponse(0, 5, this.authorFilter);
-      this.previousPage = undefined;
-    });
-  }
-
-  goToJokeEdition(joke: Joke) {
-    this.router.navigate(['/jokes', joke.id]);
+        this.totalPages = jokePaginationResponse.totalPages;
+        this.currentPage = jokePaginationResponse.currentPage + 1;
+        this.pageSize =  jokePaginationResponse.pageSize;
+        this.totalItems =  jokePaginationResponse.totalItems;
+        this.jokes = jokePaginationResponse.jokes;
+      });
   }
 
   loadStructures(): void{
@@ -91,14 +77,6 @@ export class JokesListComponent implements OnInit {
     });
   }
 
-  getAuthorNameAndSurname(joke: Joke): string {
-    if (joke.author === undefined || joke.author === null) {
-      return 'any author';
-    } else {
-      return joke.author.name + ' ' + joke.author.surname;
-    }
-  }
-
   updatePageSize(pageSize: number) {
     this.pageSize = pageSize;
     this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
@@ -109,5 +87,12 @@ export class JokesListComponent implements OnInit {
     this.authorFilter = authorId;
     console.log(this.authorFilter);
     this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
+  }
+
+  onRemovedJoke(jokeId: number) {
+    this.jokesService.removeJoke(jokeId).subscribe(() => {
+      this.loadPaginationResponse(0, 5, this.authorFilter);
+      this.previousPage = undefined;
+    });
   }
 }
