@@ -7,6 +7,7 @@ import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
 import {OriginService} from '../../origins/origin.service';
+import {Pagination} from '../../utils/pagination';
 
 @Component({
   selector: 'app-jokes-main-view',
@@ -14,11 +15,10 @@ import {OriginService} from '../../origins/origin.service';
   styleUrls: ['./jokes-main-view.component.css']
 })
 export class JokesMainViewComponent implements OnInit {
-  totalPages: number;
-  totalItems: number;
-  currentPage = 0;
-  pageSize = 5;
+
+  pagination: Pagination = new Pagination();
   previousPage: any;
+
   jokes: Joke[];
   authors: Author[];
   origins: Origin[];
@@ -30,36 +30,36 @@ export class JokesMainViewComponent implements OnInit {
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
               private originService: OriginService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthores();
     this.loadOrigins();
-    this.loadPaginationResponse(this.currentPage, this.pageSize, this.authorFilter);
+    this.loadPaginationResponse(this.pagination, this.authorFilter);
   }
 
   loadPage(page: number) {
     if (page !== this.previousPage) {
-      this.previousPage = this.currentPage;
-      this.loadPaginationResponse(page - 1, this.pageSize, this.authorFilter);
+      this.previousPage = this.pagination.currentPage;
+      this.pagination.currentPage -= 1;   // difference between backend and fronted
+      this.loadPaginationResponse(this.pagination, this.authorFilter);
     }
   }
 
-  loadPaginationResponse(currentPage: number, pageSize: number, authorFilter: number): void {
+  loadPaginationResponse(pagination: Pagination, authorFilter: number): void {
     console.log('loadPagination');
     console.log(authorFilter);
-    this.jokesService.getJokes(currentPage, pageSize, authorFilter)
+    this.jokesService.getJokes(pagination.currentPage, pagination.pageSize, authorFilter)
       .subscribe((jokePaginationResponse) => {
-        this.totalPages = jokePaginationResponse.totalPages;
-        this.currentPage = jokePaginationResponse.currentPage + 1;
-        this.pageSize =  jokePaginationResponse.pageSize;
-        this.totalItems =  jokePaginationResponse.totalItems;
+        this.pagination = jokePaginationResponse.pagination;
+        this.pagination.currentPage += 1;   // difference between backend and fronted
         this.jokes = jokePaginationResponse.jokes;
       });
   }
 
-  loadStructures(): void{
+  loadStructures(): void {
     this.structuresService.getStructures().subscribe((structures) => {
       this.allStructures = structures;
     });
@@ -78,20 +78,23 @@ export class JokesMainViewComponent implements OnInit {
   }
 
   updatePageSize(pageSize: number) {
-    this.pageSize = pageSize;
-    this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
+    this.pagination.pageSize = pageSize;
+    this.pagination.currentPage = 0;
+    this.loadPaginationResponse(this.pagination, this.authorFilter);
   }
 
   filterJokesByAuthor(authorId: number) {
     console.log(authorId);
     this.authorFilter = authorId;
     console.log(this.authorFilter);
-    this.loadPaginationResponse(0, this.pageSize, this.authorFilter);
+    this.pagination.currentPage = 0;
+    this.loadPaginationResponse(this.pagination, this.authorFilter);
   }
 
   onRemovedJoke(jokeId: number) {
     this.jokesService.removeJoke(jokeId).subscribe(() => {
-      this.loadPaginationResponse(0, 5, this.authorFilter);
+      this.pagination.currentPage = 0;
+      this.loadPaginationResponse(this.pagination, this.authorFilter);
       this.previousPage = undefined;
     });
   }

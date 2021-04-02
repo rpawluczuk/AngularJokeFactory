@@ -1,9 +1,7 @@
 import {Joke} from './joke';
+import {Pagination} from '../../utils/pagination';
 
 export interface JokePaginationResponse {
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
-  pageSize: number;
   jokes: Joke[];
+  pagination: Pagination;
 }

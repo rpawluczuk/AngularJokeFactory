@@ -34,9 +34,9 @@
 
   <div class="d-flex justify-content-center">
     <ngb-pagination
-      [(page)]="currentPage"
-      [pageSize]="pageSize"
-      [collectionSize]="totalItems"
+      [(page)]="pagination.currentPage"
+      [pageSize]="pagination.pageSize"
+      [collectionSize]="pagination.totalItems"
       [maxSize]="5"
       [boundaryLinks]="true"
       (pageChange)="loadPage($event)"
