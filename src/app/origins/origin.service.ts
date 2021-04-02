@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Author} from '../authors/models/author';
+import {Origin} from './models/origin';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +13,24 @@ export class OriginService {
 
   constructor(private  http: HttpClient) { }
 
-  getOrigins(): Observable<Author[]> {
-    return this.http.get<Author[]>(this.apiUrl);
+  getOrigins(): Observable<Origin[]> {
+    return this.http.get<Origin[]>(this.apiUrl);
   }
 
-  getOrigin(id: number): Observable<Author> {
-    return this.http.get<Author>(`${this.apiUrl}/${id}` );
+  getOrigin(id: number): Observable<Origin> {
+    return this.http.get<Origin>(`${this.apiUrl}/${id}` );
   }
 
-  addOrigin(data): Observable<Author>{
-    return this.http.post<Author>(this.apiUrl, data);
+  addOrigin(data): Observable<Origin>{
+    return this.http.post<Origin>(this.apiUrl, data);
   }
 
-  updateOrigin(author: Author): Observable<Author> {
-    console.log(author);
-    return this.http.put<Author>(this.apiUrl, author);
+  updateOrigin(origin: Origin): Observable<Origin> {
+    console.log(origin);
+    return this.http.put<Origin>(this.apiUrl, origin);
   }
 
-  removeOrigin(id: number): Observable<Author> {
-    return this.http.delete<Author>(`${this.apiUrl}/${id}`);
+  removeOrigin(id: number): Observable<Origin> {
+    return this.http.delete<Origin>(`${this.apiUrl}/${id}`);
   }
 }

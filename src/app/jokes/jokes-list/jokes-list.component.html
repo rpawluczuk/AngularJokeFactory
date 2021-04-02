@@ -16,16 +16,16 @@
     </div>
     <div class="collapse" id="collapseFilters">
       <div class="card card-body mt-3">
-          <div class="row form-group justify-content-center">
-            <label class="col-md-2 col-form-label">Filter By Author:</label>
-            <select [ngModel]="authorFilter" (ngModelChange)="filterJokesByAuthor($event)"
-                    class="col-md-10" name="authorFilter">
-              <option value="-1">All</option>
-              <option *ngFor="let author of authors" [ngValue]="author.id">
-                {{author.name + ' ' + author.surname}}
-              </option>
-            </select>
-          </div>
+        <div class="row form-group justify-content-center">
+          <label class="col-md-2 col-form-label">Filter By Author:</label>
+          <select [ngModel]="authorFilter" (ngModelChange)="filterJokesByAuthor($event)"
+                  class="col-md-10" name="authorFilter">
+            <option value="-1">All</option>
+            <option *ngFor="let author of authors" [ngValue]="author.id">
+              {{author.name + ' ' + author.surname}}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -36,28 +36,36 @@
         <h2 class="card-title mb-4"> {{ joke?.title }} </h2>
         <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ joke?.content }}</pre>
         <div> Author: {{ getAuthorNameAndSurname(joke) }} </div>
-        <span class="d-inline-block mr-1"> Structures:</span>
-        <span class="d-inline-block mr-1 badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top"
-              title="{{structure?.description}}"
-              *ngFor="let structure of joke.structures">
+        <div>
+          <span class="d-inline-block mr-1"> Structures:</span>
+          <span class="d-inline-block mr-1 badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top"
+                title="{{structure?.description}}"
+                *ngFor="let structure of joke.structures">
           {{ structure?.name }}
-        </span>
+          </span>
+        </div>
+        <div>
+          <span class="d-inline-block mr-1"> Origin:</span>
+          <span class="d-inline-block mr-1 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
+          {{ joke?.origin?.name }}
+          </span>
+        </div>
         <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
-        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition(joke)"> Edit </button>
-        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete </button>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition(joke)"> Edit</button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeJoke(joke, $event)"> Delete</button>
       </div>
     </div>
   </div>
   <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [(page)]="currentPage"
-        [pageSize]="pageSize"
-        [collectionSize]="totalItems"
-        [maxSize]="5"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-        class="mr-4">
-      </ngb-pagination>
+    <ngb-pagination
+      [(page)]="currentPage"
+      [pageSize]="pageSize"
+      [collectionSize]="totalItems"
+      [maxSize]="5"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage($event)"
+      class="mr-4">
+    </ngb-pagination>
     <div class="form-group row">
       <span class="ml-4 col col-form-label">Page Size</span>
       <div class="col">

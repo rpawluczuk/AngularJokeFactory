@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { JokesListComponent } from './jokes-list/jokes-list.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {JokesListComponent} from './jokes-list/jokes-list.component';
 import {SharedModule} from '../shared-module/shared.module';
-import { JokeEditionComponent } from './joke-edition/joke-edition.component';
+import {JokeEditionComponent} from './joke-edition/joke-edition.component';
 import {RouterModule} from '@angular/router';
 import {JokeResolveService} from './joke-resolve.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -11,9 +11,10 @@ import {JokeCreationComponent} from './joke-creation/joke-creation.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
-
 @NgModule({
-  declarations: [JokesListComponent, JokeCreationComponent,
+  declarations: [
+    JokesListComponent,
+    JokeCreationComponent,
     JokeEditionComponent],
   imports: [
     CommonModule,
@@ -32,4 +33,5 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     JokeResolveService
   ]
 })
-export class JokesModule { }
+export class JokesModule {
+}

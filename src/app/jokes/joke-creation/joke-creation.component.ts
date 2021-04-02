@@ -7,6 +7,8 @@ import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
+import {Origin} from '../../origins/models/origin';
+import {OriginService} from '../../origins/origin.service';
 
 @Component({
   selector: 'app-joke-creation',
@@ -16,6 +18,7 @@ import {Router} from '@angular/router';
 export class JokeCreationComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
+  origins: Origin[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
 
@@ -26,6 +29,7 @@ export class JokeCreationComponent implements OnInit {
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
+              private originService: OriginService,
               private formBuilder: FormBuilder,
               private router: Router,
   ) {}
@@ -33,6 +37,7 @@ export class JokeCreationComponent implements OnInit {
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthores();
+    this.loadOrigins();
     this.jokeForm = this.buildJokeForm();
     this.selectedStructuresByDefault = [];
     this.selectedStructuresByUser = [];
@@ -58,6 +63,12 @@ export class JokeCreationComponent implements OnInit {
     });
   }
 
+  loadOrigins(): void {
+    this.originService.getOrigins().subscribe((origins) => {
+      this.origins = origins;
+    });
+  }
+
   onStructureSelect(item: any) {
     console.log(item.id);
     this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
@@ -80,7 +91,8 @@ export class JokeCreationComponent implements OnInit {
       title: ['', Validators.required],
       content: ['', Validators.minLength(3)],
       structures: [null],
-      author: [null]
+      author: [null],
+      origin: [null]
     });
   }
 

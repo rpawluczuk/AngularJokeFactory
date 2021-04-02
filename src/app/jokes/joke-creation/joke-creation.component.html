@@ -32,6 +32,16 @@
         </option>
       </select>
     </div>
+    <div class="row form-group">
+      <label>Origin</label>
+      <select class="form-control" formControlName="origin" data-toggle="tooltip"
+              data-placement="right" title="Select Origin Branch">
+        <option value="null">--Select Origin--</option>
+        <option *ngFor="let origin of origins" [ngValue]="origin">
+          {{ origin.name }}
+        </option>
+      </select>
+    </div>
     <div class="row">
       <div class="col-sm-12">
         <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-primary float-right">

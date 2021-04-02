@@ -7,6 +7,8 @@ import {Structure} from '../../structures/models/Structure';
 import {StructuresService} from '../../structures/structures.service';
 import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';
+import {Origin} from '../../origins/models/origin';
+import {OriginService} from '../../origins/origin.service';
 
 @Component({
   selector: 'app-joke-details',
@@ -18,6 +20,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   jokeForm: FormGroup;
   allStructures: Structure[] = [];
   authors: Author[];
+  origins: Origin[];
 
   selectedStructuresByUser: Structure[];
   dropdownSettings = {};
@@ -26,6 +29,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
               private formBuilder: FormBuilder,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
+              private originService: OriginService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -34,6 +38,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     this.loadJoke();
     this.loadStructures();
     this.loadAuthors();
+    this.loadOrigins();
     this.jokeForm = this.buildJokeForm();
     this.dropdownSettings = {
       singleSelection: false,
@@ -79,6 +84,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
       content: [this.joke.content, Validators.minLength(3)],
       structures: [],
       author: [this.joke.author],
+      origin: [this.joke.origin],
       dateCreated: [this.joke.dateCreated]
     });
   }
@@ -99,6 +105,12 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   loadAuthors(): void {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
+    });
+  }
+
+  loadOrigins(): void {
+    this.originService.getOrigins().subscribe((origins) => {
+      this.origins = origins;
     });
   }
 

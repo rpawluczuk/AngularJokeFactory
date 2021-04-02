@@ -6,6 +6,8 @@ import {StructuresService} from '../../structures/structures.service';
 import {Structure} from '../../structures/models/Structure';
 import {AuthorsService} from '../../authors/authors.service';
 import {Author} from '../../authors/models/author';
+import {Origin} from '../../origins/models/origin';
+import {OriginService} from '../../origins/origin.service';
 
 @Component({
   selector: 'app-jokes-list',
@@ -20,6 +22,7 @@ export class JokesListComponent implements OnInit {
   previousPage: any;
   jokes: Joke[];
   authors: Author[];
+  origins: Origin[];
   allStructures: Structure[] = [];
 
   authorFilter = -1;
@@ -27,12 +30,14 @@ export class JokesListComponent implements OnInit {
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
+              private originService: OriginService,
               private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthores();
+    this.loadOrigins();
     this.loadPaginationResponse(this.currentPage, this.pageSize, this.authorFilter);
   }
 
@@ -77,6 +82,12 @@ export class JokesListComponent implements OnInit {
   loadAuthores(): void {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
+    });
+  }
+
+  loadOrigins(): void {
+    this.originService.getOrigins().subscribe((origins) => {
+      this.origins = origins;
     });
   }
 
