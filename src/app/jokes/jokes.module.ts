@@ -10,6 +10,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JokeCreationComponent} from './joke-creation/joke-creation.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { JokesMainViewComponent } from './jokes-main-view/jokes-main-view.component';
+import { JokesPaginationComponent } from './jokes-main-view/jokes-pagination/jokes-pagination.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { JokesMainViewComponent } from './jokes-main-view/jokes-main-view.compon
     JokesListComponent,
     JokeCreationComponent,
     JokeEditionComponent,
-    JokesMainViewComponent],
+    JokesMainViewComponent,
+    JokesPaginationComponent],
   imports: [
     CommonModule,
     SharedModule,

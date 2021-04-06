@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Joke} from '../../models/joke';
 import {JokesService} from '../../jokes.service';
-import {OriginService} from '../../../origins/origin.service';
 import {Router} from '@angular/router';
 
 @Component({

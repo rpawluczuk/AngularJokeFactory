@@ -17,7 +17,6 @@ import {Pagination} from '../../utils/pagination';
 export class JokesMainViewComponent implements OnInit {
 
   pagination: Pagination = new Pagination();
-  previousPage: any;
 
   jokes: Joke[];
   authors: Author[];
@@ -38,14 +37,6 @@ export class JokesMainViewComponent implements OnInit {
     this.loadAuthores();
     this.loadOrigins();
     this.loadPaginationResponse(this.pagination, this.authorFilter);
-  }
-
-  loadPage(page: number) {
-    if (page !== this.previousPage) {
-      this.previousPage = this.pagination.currentPage;
-      this.pagination.currentPage -= 1;   // difference between backend and fronted
-      this.loadPaginationResponse(this.pagination, this.authorFilter);
-    }
   }
 
   loadPaginationResponse(pagination: Pagination, authorFilter: number): void {
@@ -77,12 +68,6 @@ export class JokesMainViewComponent implements OnInit {
     });
   }
 
-  updatePageSize(pageSize: number) {
-    this.pagination.pageSize = pageSize;
-    this.pagination.currentPage = 0;
-    this.loadPaginationResponse(this.pagination, this.authorFilter);
-  }
-
   filterJokesByAuthor(authorId: number) {
     console.log(authorId);
     this.authorFilter = authorId;
@@ -95,7 +80,6 @@ export class JokesMainViewComponent implements OnInit {
     this.jokesService.removeJoke(jokeId).subscribe(() => {
       this.pagination.currentPage = 0;
       this.loadPaginationResponse(this.pagination, this.authorFilter);
-      this.previousPage = undefined;
     });
   }
 }

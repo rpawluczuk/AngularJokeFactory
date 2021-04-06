@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center">
+  <ngb-pagination
+    [(page)]="pagination.currentPage"
+    [pageSize]="pagination.pageSize"
+    [collectionSize]="pagination.totalItems"
+    [maxSize]="5"
+    [boundaryLinks]="true"
+    (pageChange)="loadPage($event)"
+    class="mr-4">
+  </ngb-pagination>
+  <div class="form-group row">
+    <span class="ml-4 col col-form-label">Page Size</span>
+    <div class="col">
+      <select (change)="updatePageSize($event.target.value)" class="form-control">
+        <option selected="true">5</option>
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+    </div>
+  </div>
+</div>
