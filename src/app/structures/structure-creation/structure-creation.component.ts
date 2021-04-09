@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
+import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-structure-creation',
@@ -9,7 +10,10 @@ import {Router} from '@angular/router';
     styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
-
+    faArrowUp = faArrowUp;
+    faArrowRight = faArrowRight;
+    faArrowDown = faArrowDown;
+    faArrowLeft = faArrowLeft;
     structureForm: FormGroup;
     blocks: string[][];
 

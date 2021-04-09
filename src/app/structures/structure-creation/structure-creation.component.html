@@ -20,21 +20,29 @@
                     <div class="bg-info">
                         <div class="d-flex flex-column justify-content-end">
                             <div class="d-flex justify-content-center">
-                                <button (click)="up(block, i, j)" class="blockButton">Up</button>
+                                <fa-icon [icon]="faArrowUp" size="2x" (click)="up(block, i, j)"
+                                         class="arrow">
+                                </fa-icon>
                             </div>
                             <div class="d-flex flex-row justify-content-around">
                                 <div class="d-flex flex-column justify-content-center">
-                                    <button (click)="left(block, i, j)" class="blockButton">Left</button>
+                                    <fa-icon [icon]="faArrowLeft" size="2x" (click)="left(block, i, j)"
+                                             class="arrow">
+                                    </fa-icon>
                                 </div>
                                 <div class="standardBlock">
                                     <h5>{{block}}</h5>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <button (click)="right(block, i, j)" class="blockButton">Right</button>
+                                    <fa-icon [icon]="faArrowRight" size="2x" (click)="right(block, i, j)"
+                                             class="arrow">
+                                    </fa-icon>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button (click)="down(block, i, j)" class="blockButton">Down</button>
+                                <fa-icon [icon]="faArrowDown" size="2x" (click)="down(block, i, j)"
+                                         class="arrow">
+                                </fa-icon>
                             </div>
                         </div>
                     </div>

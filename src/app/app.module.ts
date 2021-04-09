@@ -18,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {OriginModule} from './origins/origin.module';
 import {OriginRoutingModule} from './origins/origin-routing.module';
 import {OriginService} from './origins/origin.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {OriginService} from './origins/origin.service';
     AuthorsRoutingModule,
     OriginModule,
     OriginRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [
     JokesService,

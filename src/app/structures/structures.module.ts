@@ -7,17 +7,19 @@ import {StructuresListComponent} from './structures-list/structures-list.compone
 import {StructureDetailsComponent} from './structure-details/structure-details.component';
 import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [StructuresListComponent, StructureDetailsComponent,
     StructureCreationComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FontAwesomeModule
+    ],
   exports: [
     StructureCreationComponent,
     StructuresListComponent
