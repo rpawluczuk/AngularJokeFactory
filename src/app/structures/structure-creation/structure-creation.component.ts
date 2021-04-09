@@ -43,19 +43,43 @@ export class StructureCreationComponent implements OnInit {
     }
 
 
-    up(block: string, i: number, j: number) {
-        this.blocks.splice(i, 0, ['Up block']);
+    up(block: string, y: number, x: number) {
+        if (this.blocks[y - 1]) {
+            this.blocks[y - 1][x] = 'Up block';
+        } else {
+            const newRow: string[] = [];
+            this.blocks[y].forEach(() => newRow.push('Empty Block'));
+            newRow.splice(x, 1, 'Up block');
+            this.blocks.splice(y - 1, 0, newRow);
+        }
     }
 
-    down(block: string, i: number, j: number) {
-        this.blocks.splice(i + 1, 0, ['Down block']);
+    down(block: string, y: number, x: number) {
+        if (this.blocks[y + 1]) {
+            this.blocks[y + 1][x] = 'Down block';
+        } else {
+            const newRow: string[] = [];
+            this.blocks[y].forEach(() => newRow.push('Empty Block'));
+            newRow.splice(x, 1, 'Down block');
+            this.blocks.splice(y + 1, 0, newRow);
+        }
     }
 
-    left(block: string, i: number, j: number) {
-        this.blocks[i].splice(j, 0, 'Left block');
+    left(block: string, y: number, x: number) {
+        if (x > 0) {
+            this.blocks[y][x - 1] = 'Left block';
+        } else {
+            this.blocks.forEach(row => row.splice(0, 0, 'Empty Block'));
+            this.blocks[y].splice(0, 1, 'Left block');
+        }
     }
 
-    right(block: string, i: number, j: number) {
-        this.blocks[i].splice(j + 1, 0, 'Right block');
+    right(block: string, y: number, x: number) {
+        if (x + 1 !== this.blocks[y].length) {
+            this.blocks[y][x + 1] = 'Right block';
+        } else {
+            this.blocks.forEach(row => row.push('Empty Block'));
+            this.blocks[y].splice(x + 1, 1, 'Right block');
+        }
     }
 }
