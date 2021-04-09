@@ -1,0 +1,16 @@
+.blockButton {
+    width: 70px;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+}
+
+.standardBlock{
+    width: 200px;
+    height: 200px;
+    background: lightblue;
+}

@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {JokesListComponent} from './jokes/jokes-main-view/jokes-list/jokes-list.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {StructuresListComponent} from './structures/structures-list/structures-list.component';
 import {AuthorsListComponent} from './authors/authors-list/authors-list.component';
 import {JokeCreationComponent} from './jokes/joke-creation/joke-creation.component';

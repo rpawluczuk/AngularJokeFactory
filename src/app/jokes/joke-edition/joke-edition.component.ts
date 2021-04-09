@@ -3,7 +3,7 @@ import {JokesService} from '../jokes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Joke} from '../models/joke';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Structure} from '../../structures/models/Structure';
+import {Structure} from '../../structures/models/structure';
 import {StructuresService} from '../../structures/structures.service';
 import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';

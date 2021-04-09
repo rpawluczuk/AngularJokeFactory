@@ -1,4 +1,4 @@
-import {Structure} from '../../structures/models/Structure';
+import {Structure} from '../../structures/models/structure';
 import {Author} from '../../authors/models/author';
 import {Origin} from '../../origins/models/origin';
 

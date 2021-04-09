@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
 import {Author} from '../../authors/models/author';
-import {Structure} from '../../structures/models/Structure';
+import {Structure} from '../../structures/models/structure';
 import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';

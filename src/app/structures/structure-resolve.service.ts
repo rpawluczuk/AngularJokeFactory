@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {Structure} from './models/Structure';
+import {Structure} from './models/structure';
 import {StructuresService} from './structures.service';
 
 @Injectable()

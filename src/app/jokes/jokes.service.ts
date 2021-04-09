@@ -4,7 +4,6 @@ import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokePaginationResponse} from './models/jokePaginationResponse';
-import {Author} from '../authors/models/author';
 
 @Injectable({
   providedIn: 'root'

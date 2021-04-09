@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Structure} from '../models/Structure';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Structure} from '../models/structure';
 import {Router} from '@angular/router';
 import {StructuresService} from '../structures.service';
+import {Block} from '../models/block';
 
 @Component({
   selector: 'app-structures-list',
