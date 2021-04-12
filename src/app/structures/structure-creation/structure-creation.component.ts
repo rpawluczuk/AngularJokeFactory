@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import {Block} from '../models/block';
+import {BlockType} from '../models/blockType';
 
 @Component({
     selector: 'app-structure-creation',
@@ -14,8 +16,10 @@ export class StructureCreationComponent implements OnInit {
     faArrowRight = faArrowRight;
     faArrowDown = faArrowDown;
     faArrowLeft = faArrowLeft;
+    blockType = BlockType;
+
     structureForm: FormGroup;
-    blocks: string[][];
+    blocks: Block[][];
 
     constructor(private structuresService: StructuresService,
                 private formBuilder: FormBuilder,
@@ -25,7 +29,7 @@ export class StructureCreationComponent implements OnInit {
     ngOnInit(): void {
         this.structureForm = this.buildStructureForm();
         this.blocks = [
-            ['Start block']
+            [new Block('Start Block', BlockType.STANDARD)]
         ];
     }
 
@@ -43,43 +47,43 @@ export class StructureCreationComponent implements OnInit {
     }
 
 
-    up(block: string, y: number, x: number) {
+    up(y: number, x: number) {
         if (this.blocks[y - 1]) {
-            this.blocks[y - 1][x] = 'Up block';
+            this.blocks[y - 1][x] = new Block('Up Block', BlockType.STANDARD);
         } else {
-            const newRow: string[] = [];
-            this.blocks[y].forEach(() => newRow.push('Empty Block'));
-            newRow.splice(x, 1, 'Up block');
-            this.blocks.splice(y - 1, 0, newRow);
+            const newRow: Block[] = [];
+            this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
+            newRow.splice(x, 1, new Block('Up Block', BlockType.STANDARD));
+            this.blocks.splice(0, 0, newRow);
         }
     }
 
-    down(block: string, y: number, x: number) {
+    down(y: number, x: number) {
         if (this.blocks[y + 1]) {
-            this.blocks[y + 1][x] = 'Down block';
+            this.blocks[y + 1][x] = new Block('Down Block', BlockType.STANDARD);
         } else {
-            const newRow: string[] = [];
-            this.blocks[y].forEach(() => newRow.push('Empty Block'));
-            newRow.splice(x, 1, 'Down block');
+            const newRow: Block[] = [];
+            this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
+            newRow.splice(x, 1, new Block('Down Block', BlockType.STANDARD));
             this.blocks.splice(y + 1, 0, newRow);
         }
     }
 
-    left(block: string, y: number, x: number) {
+    left(y: number, x: number) {
         if (x > 0) {
-            this.blocks[y][x - 1] = 'Left block';
+            this.blocks[y][x - 1] = new Block('Left Block', BlockType.STANDARD);
         } else {
-            this.blocks.forEach(row => row.splice(0, 0, 'Empty Block'));
-            this.blocks[y].splice(0, 1, 'Left block');
+            this.blocks.forEach(row => row.splice(0, 0, new Block('Blank Block', BlockType.BLANK)));
+            this.blocks[y].splice(0, 1, new Block('Left Block', BlockType.STANDARD));
         }
     }
 
-    right(block: string, y: number, x: number) {
+    right(y: number, x: number) {
         if (x + 1 !== this.blocks[y].length) {
-            this.blocks[y][x + 1] = 'Right block';
+            this.blocks[y][x + 1] = new Block('Right Block', BlockType.STANDARD);
         } else {
-            this.blocks.forEach(row => row.push('Empty Block'));
-            this.blocks[y].splice(x + 1, 1, 'Right block');
+            this.blocks.forEach(row => row.push(new Block('Blank Block', BlockType.BLANK)));
+            this.blocks[y].splice(x + 1, 1, new Block('Right Block', BlockType.STANDARD));
         }
     }
 }

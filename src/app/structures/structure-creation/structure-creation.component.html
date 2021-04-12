@@ -17,30 +17,30 @@
         <div class="container">
             <div class="d-flex justify-content-center" *ngFor="let rows of blocks; let y = index">
                 <div *ngFor="let block of rows; let x = index">
-                    <div class="bg-info">
-                        <div class="d-flex flex-column justify-content-end">
+                    <div *ngIf="block.type === blockType.STANDARD; else blankBlock">
+                        <div class="d-flex flex-column justify-content-around block">
                             <div class="d-flex justify-content-center">
-                                <fa-icon [icon]="faArrowUp" size="2x" (click)="up(block, y, x)"
+                                <fa-icon [icon]="faArrowUp" size="2x" (click)="up(y, x)"
                                          class="arrow">
                                 </fa-icon>
                             </div>
                             <div class="d-flex flex-row justify-content-around">
                                 <div class="d-flex flex-column justify-content-center">
-                                    <fa-icon [icon]="faArrowLeft" size="2x" (click)="left(block, y, x)"
+                                    <fa-icon [icon]="faArrowLeft" size="2x" (click)="left(y, x)"
                                              class="arrow">
                                     </fa-icon>
                                 </div>
-                                <div class="standardBlock">
-                                    <h5>{{block}}</h5>
+                                <div class="contentOfBlock">
+                                    <h5>{{block.text}}</h5>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <fa-icon [icon]="faArrowRight" size="2x" (click)="right(block, y, x)"
+                                    <fa-icon [icon]="faArrowRight" size="2x" (click)="right(y, x)"
                                              class="arrow">
                                     </fa-icon>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <fa-icon [icon]="faArrowDown" size="2x" (click)="down(block, y, x)"
+                                <fa-icon [icon]="faArrowDown" size="2x" (click)="down(y, x)"
                                          class="arrow">
                                 </fa-icon>
                             </div>
@@ -61,7 +61,9 @@
     </form>
 
 
-    <!--  <pre> {{ jokeForm.value | json }} </pre>-->
-    <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
-    <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
+    <ng-template #blankBlock>
+        <div class="blankBlock">
+            <h5>Empty</h5>
+        </div>
+    </ng-template>
 </div>
