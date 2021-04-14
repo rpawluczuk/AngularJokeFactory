@@ -21,7 +21,7 @@
                         <div *ngSwitchCase="blockType.STANDARD">
                             <div class="d-flex flex-column justify-content-around blockSize blockWithContent">
                                 <div class="d-flex justify-content-center">
-                                    <fa-icon [icon]="faArrowUp" size="2x" (click)="up(y, x)"
+                                    <fa-icon [icon]="faArrowUp" size="2x" (click)="upRequest(y, x)"
                                              class="arrow">
                                     </fa-icon>
                                 </div>
@@ -54,9 +54,30 @@
                             </div>
                         </div>
 
+                        <div *ngSwitchCase="blockType.ARRROW_UP">
+                            <div class="blockSize d-flex flex-column justify-content-center">
+                                <fa-icon [icon]="faLongArrowAltUp" size="10x" class="d-flex justify-content-center">
+                                </fa-icon>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="blockType.ARRROW_RIGHT">
+                            <div class="blockSize d-flex flex-column justify-content-center">
+                                <fa-icon [icon]="faLongArrowAltRight" size="10x" class="d-flex justify-content-center">
+                                </fa-icon>
+                            </div>
+                        </div>
+
                         <div *ngSwitchCase="blockType.ARRROW_DOWN">
                             <div class="blockSize d-flex flex-column justify-content-center">
                                 <fa-icon [icon]="faLongArrowAltDown" size="10x" class="d-flex justify-content-center">
+                                </fa-icon>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="blockType.ARRROW_LEFT">
+                            <div class="blockSize d-flex flex-column justify-content-center">
+                                <fa-icon [icon]="faLongArrowAltLeft" size="10x" class="d-flex justify-content-center">
                                 </fa-icon>
                             </div>
                         </div>

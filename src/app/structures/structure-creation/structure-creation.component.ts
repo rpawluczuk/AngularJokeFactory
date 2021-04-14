@@ -2,7 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
-import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
+import {
+    faArrowDown,
+    faArrowLeft,
+    faArrowRight,
+    faArrowUp,
+    faLongArrowAltDown, faLongArrowAltLeft,
+    faLongArrowAltRight,
+    faLongArrowAltUp
+} from '@fortawesome/free-solid-svg-icons';
 import {Block} from '../models/block';
 import {BlockType} from '../models/blockType';
 
@@ -16,7 +24,10 @@ export class StructureCreationComponent implements OnInit {
     faArrowRight = faArrowRight;
     faArrowDown = faArrowDown;
     faArrowLeft = faArrowLeft;
+    faLongArrowAltUp = faLongArrowAltUp;
+    faLongArrowAltRight = faLongArrowAltRight;
     faLongArrowAltDown = faLongArrowAltDown;
+    faLongArrowAltLeft = faLongArrowAltLeft;
     blockType = BlockType;
 
     structureForm: FormGroup;
@@ -47,14 +58,26 @@ export class StructureCreationComponent implements OnInit {
         });
     }
 
+    upRequest(y: number, x: number) {
+        console.log(y);
+        if (y === 0){
+            this.up(y, x, BlockType.ARRROW_UP);
+            console.log(y);
+            this.up(y, x, BlockType.STANDARD);
+        } else {
+            this.up(y, x, BlockType.ARRROW_UP);
+            console.log(y);
+            this.up(y - 1, x, BlockType.STANDARD);
+        }
+    }
 
-    up(y: number, x: number) {
+    up(y: number, x: number, blockType: BlockType) {
         if (this.blocks[y - 1]) {
-            this.blocks[y - 1][x] = new Block('Up Block', BlockType.STANDARD);
+            this.blocks[y - 1][x] = new Block('Up Block', blockType);
         } else {
             const newRow: Block[] = [];
             this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
-            newRow.splice(x, 1, new Block('Up Block', BlockType.STANDARD));
+            newRow.splice(x, 1, new Block('Up Block', blockType));
             this.blocks.splice(0, 0, newRow);
         }
     }
