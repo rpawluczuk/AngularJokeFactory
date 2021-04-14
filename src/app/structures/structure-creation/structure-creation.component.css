@@ -4,20 +4,21 @@
     padding: 10px;
 }
 
+.blockWithContent{
+    background: lightblue;
+}
+
 .contentOfBlock{
     width: 200px;
     height: 200px;
     background: aliceblue;
 }
 
-.block{
+.blockSize{
     width: 340px;
     height: 340px;
-    background: lightblue;
 }
 
 .blankBlock{
-    width: 340px;
-    height: 340px;
     background: none;
 }

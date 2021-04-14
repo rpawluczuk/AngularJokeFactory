@@ -17,31 +17,46 @@
         <div class="container">
             <div class="d-flex justify-content-center" *ngFor="let rows of blocks; let y = index">
                 <div *ngFor="let block of rows; let x = index">
-                    <div *ngIf="block.type === blockType.STANDARD; else blankBlock">
-                        <div class="d-flex flex-column justify-content-around block">
-                            <div class="d-flex justify-content-center">
-                                <fa-icon [icon]="faArrowUp" size="2x" (click)="up(y, x)"
-                                         class="arrow">
-                                </fa-icon>
-                            </div>
-                            <div class="d-flex flex-row justify-content-around">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <fa-icon [icon]="faArrowLeft" size="2x" (click)="left(y, x)"
+                    <div [ngSwitch]="block.type">
+                        <div *ngSwitchCase="blockType.STANDARD">
+                            <div class="d-flex flex-column justify-content-around blockSize blockWithContent">
+                                <div class="d-flex justify-content-center">
+                                    <fa-icon [icon]="faArrowUp" size="2x" (click)="up(y, x)"
                                              class="arrow">
                                     </fa-icon>
                                 </div>
-                                <div class="contentOfBlock">
-                                    <h5>{{block.text}}</h5>
+                                <div class="d-flex flex-row justify-content-around">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <fa-icon [icon]="faArrowLeft" size="2x" (click)="left(y, x)"
+                                                 class="arrow">
+                                        </fa-icon>
+                                    </div>
+                                    <div class="contentOfBlock">
+                                        <h5>{{block.text}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <fa-icon [icon]="faArrowRight" size="2x" (click)="right(y, x)"
+                                                 class="arrow">
+                                        </fa-icon>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <fa-icon [icon]="faArrowRight" size="2x" (click)="right(y, x)"
+                                <div class="d-flex justify-content-center">
+                                    <fa-icon [icon]="faArrowDown" size="2x" (click)="downRequest(y, x)"
                                              class="arrow">
                                     </fa-icon>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <fa-icon [icon]="faArrowDown" size="2x" (click)="down(y, x)"
-                                         class="arrow">
+                        </div>
+
+                        <div *ngSwitchCase="blockType.BLANK">
+                            <div class="blockSize blankBlock">
+                                <h5>Empty</h5>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="blockType.ARRROW_DOWN">
+                            <div class="blockSize d-flex flex-column justify-content-center">
+                                <fa-icon [icon]="faLongArrowAltDown" size="10x" class="d-flex justify-content-center">
                                 </fa-icon>
                             </div>
                         </div>
@@ -62,8 +77,6 @@
 
 
     <ng-template #blankBlock>
-        <div class="blankBlock">
-            <h5>Empty</h5>
-        </div>
+
     </ng-template>
 </div>

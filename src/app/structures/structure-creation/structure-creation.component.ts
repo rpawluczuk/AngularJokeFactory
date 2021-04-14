@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
-import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import {faArrowDown, faArrowLeft, faArrowRight, faArrowUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 import {Block} from '../models/block';
 import {BlockType} from '../models/blockType';
 
@@ -16,6 +16,7 @@ export class StructureCreationComponent implements OnInit {
     faArrowRight = faArrowRight;
     faArrowDown = faArrowDown;
     faArrowLeft = faArrowLeft;
+    faLongArrowAltDown = faLongArrowAltDown;
     blockType = BlockType;
 
     structureForm: FormGroup;
@@ -58,13 +59,18 @@ export class StructureCreationComponent implements OnInit {
         }
     }
 
-    down(y: number, x: number) {
+    downRequest(y: number, x: number) {
+        this.down(y, x, BlockType.ARRROW_DOWN);
+        this.down(y + 1, x, BlockType.STANDARD);
+    }
+
+    down(y: number, x: number, blockType: BlockType) {
         if (this.blocks[y + 1]) {
-            this.blocks[y + 1][x] = new Block('Down Block', BlockType.STANDARD);
+            this.blocks[y + 1][x] = new Block('Down Block', blockType);
         } else {
             const newRow: Block[] = [];
             this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
-            newRow.splice(x, 1, new Block('Down Block', BlockType.STANDARD));
+            newRow.splice(x, 1, new Block('Down Block', blockType));
             this.blocks.splice(y + 1, 0, newRow);
         }
     }
