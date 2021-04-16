@@ -59,14 +59,11 @@ export class StructureCreationComponent implements OnInit {
     }
 
     upRequest(y: number, x: number) {
-        console.log(y);
-        if (y === 0){
+        if (y === 0) {
             this.up(y, x, BlockType.ARRROW_UP);
-            console.log(y);
             this.up(y, x, BlockType.STANDARD);
         } else {
             this.up(y, x, BlockType.ARRROW_UP);
-            console.log(y);
             this.up(y - 1, x, BlockType.STANDARD);
         }
     }
@@ -98,21 +95,31 @@ export class StructureCreationComponent implements OnInit {
         }
     }
 
-    left(y: number, x: number) {
+    leftRequest(y: number, x: number) {
+        this.left(y, x, BlockType.ARRROW_LEFT);
+        this.left(y, x - 1, BlockType.STANDARD);
+    }
+
+    left(y: number, x: number, blockType: BlockType) {
         if (x > 0) {
-            this.blocks[y][x - 1] = new Block('Left Block', BlockType.STANDARD);
+            this.blocks[y][x - 1] = new Block('Left Block', blockType);
         } else {
             this.blocks.forEach(row => row.splice(0, 0, new Block('Blank Block', BlockType.BLANK)));
-            this.blocks[y].splice(0, 1, new Block('Left Block', BlockType.STANDARD));
+            this.blocks[y].splice(0, 1, new Block('Left Block', blockType));
         }
     }
 
-    right(y: number, x: number) {
+    rightRequest(y: number, x: number) {
+        this.right(y, x, BlockType.ARRROW_RIGHT);
+        this.right(y, x + 1, BlockType.STANDARD);
+    }
+
+    right(y: number, x: number, blockType: BlockType) {
         if (x + 1 !== this.blocks[y].length) {
-            this.blocks[y][x + 1] = new Block('Right Block', BlockType.STANDARD);
+            this.blocks[y][x + 1] = new Block('Right Block', blockType);
         } else {
             this.blocks.forEach(row => row.push(new Block('Blank Block', BlockType.BLANK)));
-            this.blocks[y].splice(x + 1, 1, new Block('Right Block', BlockType.STANDARD));
+            this.blocks[y].splice(x + 1, 1, new Block('Right Block', blockType));
         }
     }
 }

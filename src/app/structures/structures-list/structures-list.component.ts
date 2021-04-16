@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Structure} from '../models/structure';
 import {Router} from '@angular/router';
 import {StructuresService} from '../structures.service';
-import {Block} from '../models/block';
 
 @Component({
   selector: 'app-structures-list',
@@ -26,7 +25,7 @@ export class StructuresListComponent implements OnInit {
   }
 
   removeStructure(structure: Structure, event){
-    event.stopPropagation();
+    event.stopPropagation(); // jesli dwie akcje dotycza tego amego elementu i tak jakby nachodzą na siebie to tego uzywamy
     this.structuresService.removeStructure(structure.id).subscribe(() => {
       this.loadStructures();
     });
