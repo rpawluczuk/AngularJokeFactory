@@ -3,11 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {
-    faArrowDown,
-    faArrowLeft,
-    faArrowRight,
-    faArrowUp,
-    faLongArrowAltDown, faLongArrowAltLeft,
+    faLongArrowAltDown,
+    faLongArrowAltLeft,
     faLongArrowAltRight,
     faLongArrowAltUp
 } from '@fortawesome/free-solid-svg-icons';
@@ -20,16 +17,11 @@ import {BlockType} from '../models/blockType';
     styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
-    faArrowUp = faArrowUp;
-    faArrowRight = faArrowRight;
-    faArrowDown = faArrowDown;
-    faArrowLeft = faArrowLeft;
     faLongArrowAltUp = faLongArrowAltUp;
     faLongArrowAltRight = faLongArrowAltRight;
     faLongArrowAltDown = faLongArrowAltDown;
     faLongArrowAltLeft = faLongArrowAltLeft;
     blockType = BlockType;
-
     structureForm: FormGroup;
     blocks: Block[][];
 
@@ -58,68 +50,7 @@ export class StructureCreationComponent implements OnInit {
         });
     }
 
-    upRequest(y: number, x: number) {
-        if (y === 0) {
-            this.up(y, x, BlockType.ARRROW_UP);
-            this.up(y, x, BlockType.STANDARD);
-        } else {
-            this.up(y, x, BlockType.ARRROW_UP);
-            this.up(y - 1, x, BlockType.STANDARD);
-        }
-    }
-
-    up(y: number, x: number, blockType: BlockType) {
-        if (this.blocks[y - 1]) {
-            this.blocks[y - 1][x] = new Block('Up Block', blockType);
-        } else {
-            const newRow: Block[] = [];
-            this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
-            newRow.splice(x, 1, new Block('Up Block', blockType));
-            this.blocks.splice(0, 0, newRow);
-        }
-    }
-
-    downRequest(y: number, x: number) {
-        this.down(y, x, BlockType.ARRROW_DOWN);
-        this.down(y + 1, x, BlockType.STANDARD);
-    }
-
-    down(y: number, x: number, blockType: BlockType) {
-        if (this.blocks[y + 1]) {
-            this.blocks[y + 1][x] = new Block('Down Block', blockType);
-        } else {
-            const newRow: Block[] = [];
-            this.blocks[y].forEach(() => newRow.push(new Block('Blank Block', BlockType.BLANK)));
-            newRow.splice(x, 1, new Block('Down Block', blockType));
-            this.blocks.splice(y + 1, 0, newRow);
-        }
-    }
-
-    leftRequest(y: number, x: number) {
-        this.left(y, x, BlockType.ARRROW_LEFT);
-        this.left(y, x - 1, BlockType.STANDARD);
-    }
-
-    left(y: number, x: number, blockType: BlockType) {
-        if (x > 0) {
-            this.blocks[y][x - 1] = new Block('Left Block', blockType);
-        } else {
-            this.blocks.forEach(row => row.splice(0, 0, new Block('Blank Block', BlockType.BLANK)));
-            this.blocks[y].splice(0, 1, new Block('Left Block', blockType));
-        }
-    }
-
-    rightRequest(y: number, x: number) {
-        this.right(y, x, BlockType.ARRROW_RIGHT);
-        this.right(y, x + 1, BlockType.STANDARD);
-    }
-
-    right(y: number, x: number, blockType: BlockType) {
-        if (x + 1 !== this.blocks[y].length) {
-            this.blocks[y][x + 1] = new Block('Right Block', blockType);
-        } else {
-            this.blocks.forEach(row => row.push(new Block('Blank Block', BlockType.BLANK)));
-            this.blocks[y].splice(x + 1, 1, new Block('Right Block', blockType));
-        }
+    onChangedBlocks(changedBlocks: Block[][]) {
+        this.blocks = changedBlocks;
     }
 }

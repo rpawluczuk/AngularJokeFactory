@@ -19,33 +19,13 @@
                 <div *ngFor="let block of rows; let x = index">
                     <div [ngSwitch]="block.type">
                         <div *ngSwitchCase="blockType.STANDARD">
-                            <div class="d-flex flex-column justify-content-around blockSize blockWithContent">
-                                <div class="d-flex justify-content-center">
-                                    <fa-icon [icon]="faArrowUp" size="2x" (click)="upRequest(y, x)"
-                                             class="arrow">
-                                    </fa-icon>
-                                </div>
-                                <div class="d-flex flex-row justify-content-around">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <fa-icon [icon]="faArrowLeft" size="2x" (click)="leftRequest(y, x)"
-                                                 class="arrow">
-                                        </fa-icon>
-                                    </div>
-                                    <div class="contentOfBlock">
-                                        <h5>{{block.text}}</h5>
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <fa-icon [icon]="faArrowRight" size="2x" (click)="rightRequest(y, x)"
-                                                 class="arrow">
-                                        </fa-icon>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <fa-icon [icon]="faArrowDown" size="2x" (click)="downRequest(y, x)"
-                                             class="arrow">
-                                    </fa-icon>
-                                </div>
-                            </div>
+                            <app-standard-block
+                                    [inputBlocks]="blocks"
+                                    [block]="block"
+                                    [y]="y"
+                                    [x]="x"
+                                    (outputBlocks)="onChangedBlocks($event)">
+                            </app-standard-block>
                         </div>
 
                         <div *ngSwitchCase="blockType.BLANK">

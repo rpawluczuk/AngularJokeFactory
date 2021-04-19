@@ -1,0 +1,14 @@
+.blockWithContent{
+    background: lightblue;
+}
+
+.contentOfBlock{
+    width: 200px;
+    height: 200px;
+    background: aliceblue;
+}
+
+.blockSize{
+    width: 340px;
+    height: 340px;
+}

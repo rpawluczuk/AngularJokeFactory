@@ -8,11 +8,16 @@ import {StructureDetailsComponent} from './structure-details/structure-details.c
 import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {StandardBlockComponent} from './structure-creation/standard-block/standard-block.component';
 
 
 @NgModule({
-  declarations: [StructuresListComponent, StructureDetailsComponent,
-    StructureCreationComponent],
+    declarations: [
+        StructuresListComponent,
+        StructureDetailsComponent,
+        StructureCreationComponent,
+        StandardBlockComponent
+    ],
     imports: [
         CommonModule,
         SharedModule,
@@ -20,13 +25,13 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         ReactiveFormsModule,
         FontAwesomeModule
     ],
-  exports: [
-    StructureCreationComponent,
-    StructuresListComponent
-  ],
-  providers: [
-    StructureResolveService
-  ]
+    exports: [
+        StructureCreationComponent,
+        StructuresListComponent
+    ],
+    providers: [
+        StructureResolveService
+    ]
 })
-export class StructuresModule {
+export class StructuresModule{
 }
