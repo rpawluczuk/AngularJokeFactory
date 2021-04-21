@@ -9,6 +9,7 @@ import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {StandardBlockComponent} from './structure-creation/standard-block/standard-block.component';
+import { ArrowBlockComponent } from './structure-creation/arrow-block/arrow-block.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {StandardBlockComponent} from './structure-creation/standard-block/standa
         StructuresListComponent,
         StructureDetailsComponent,
         StructureCreationComponent,
-        StandardBlockComponent
+        StandardBlockComponent,
+        ArrowBlockComponent
     ],
     imports: [
         CommonModule,

@@ -17,49 +17,27 @@
         <div class="container">
             <div class="d-flex justify-content-center" *ngFor="let rows of blocks; let y = index">
                 <div *ngFor="let block of rows; let x = index">
-                    <div [ngSwitch]="block.type">
-                        <div *ngSwitchCase="blockType.STANDARD">
+                    <div [ngSwitch]="block.constructor.name">
+                        <div *ngSwitchCase="blockType.STANDARD_BLOCK">
                             <app-standard-block
                                     [inputBlocks]="blocks"
-                                    [block]="block"
+                                    [standardBlock]="castToStandardBlock(block)"
                                     [y]="y"
                                     [x]="x"
                                     (outputBlocks)="onChangedBlocks($event)">
                             </app-standard-block>
                         </div>
 
-                        <div *ngSwitchCase="blockType.BLANK">
+                        <div *ngSwitchCase="blockType.BLANK_BLOCK">
                             <div class="blockSize blankBlock">
                                 <h5>Empty</h5>
                             </div>
                         </div>
 
-                        <div *ngSwitchCase="blockType.ARRROW_UP">
-                            <div class="blockSize d-flex flex-column justify-content-center">
-                                <fa-icon [icon]="faLongArrowAltUp" size="10x" class="d-flex justify-content-center">
-                                </fa-icon>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="blockType.ARRROW_RIGHT">
-                            <div class="blockSize d-flex flex-column justify-content-center">
-                                <fa-icon [icon]="faLongArrowAltRight" size="10x" class="d-flex justify-content-center">
-                                </fa-icon>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="blockType.ARRROW_DOWN">
-                            <div class="blockSize d-flex flex-column justify-content-center">
-                                <fa-icon [icon]="faLongArrowAltDown" size="10x" class="d-flex justify-content-center">
-                                </fa-icon>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="blockType.ARRROW_LEFT">
-                            <div class="blockSize d-flex flex-column justify-content-center">
-                                <fa-icon [icon]="faLongArrowAltLeft" size="10x" class="d-flex justify-content-center">
-                                </fa-icon>
-                            </div>
+                        <div *ngSwitchCase="blockType.ARROW_BLOCK">
+                            <app-arrow-block
+                                    [arrowBlock]="castToArrowBlock(block)">
+                            </app-arrow-block>
                         </div>
                     </div>
                 </div>

@@ -2,14 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
-import {
-    faLongArrowAltDown,
-    faLongArrowAltLeft,
-    faLongArrowAltRight,
-    faLongArrowAltUp
-} from '@fortawesome/free-solid-svg-icons';
 import {Block} from '../models/block';
-import {BlockType} from '../models/blockType';
+import {StandardBlock} from '../models/standard-block';
+import {BlockType} from './block-type';
+import {ArrowBlock} from '../models/arrow-block';
 
 @Component({
     selector: 'app-structure-creation',
@@ -17,13 +13,9 @@ import {BlockType} from '../models/blockType';
     styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
-    faLongArrowAltUp = faLongArrowAltUp;
-    faLongArrowAltRight = faLongArrowAltRight;
-    faLongArrowAltDown = faLongArrowAltDown;
-    faLongArrowAltLeft = faLongArrowAltLeft;
-    blockType = BlockType;
     structureForm: FormGroup;
     blocks: Block[][];
+    blockType = BlockType;
 
     constructor(private structuresService: StructuresService,
                 private formBuilder: FormBuilder,
@@ -33,7 +25,7 @@ export class StructureCreationComponent implements OnInit {
     ngOnInit(): void {
         this.structureForm = this.buildStructureForm();
         this.blocks = [
-            [new Block('Start Block', BlockType.STANDARD)]
+            [new StandardBlock('Start Block')]
         ];
     }
 
@@ -52,5 +44,13 @@ export class StructureCreationComponent implements OnInit {
 
     onChangedBlocks(changedBlocks: Block[][]) {
         this.blocks = changedBlocks;
+    }
+
+    castToStandardBlock(block: Block): StandardBlock {
+        return block as StandardBlock;
+    }
+
+    castToArrowBlock(block: Block): ArrowBlock {
+        return block as ArrowBlock;
     }
 }

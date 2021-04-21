@@ -1,0 +1,29 @@
+<div [ngSwitch]="arrowBlock.direction">
+    <div *ngSwitchCase="directionType.UP">
+        <div class="blockSize d-flex flex-column justify-content-center">
+            <fa-icon [icon]="faLongArrowAltUp" size="10x" class="d-flex justify-content-center">
+            </fa-icon>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="directionType.RIGHT">
+        <div class="blockSize d-flex flex-column justify-content-center">
+            <fa-icon [icon]="faLongArrowAltRight" size="10x" class="d-flex justify-content-center">
+            </fa-icon>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="directionType.DOWN">
+        <div class="blockSize d-flex flex-column justify-content-center">
+            <fa-icon [icon]="faLongArrowAltDown" size="10x" class="d-flex justify-content-center">
+            </fa-icon>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="directionType.LEFT">
+        <div class="blockSize d-flex flex-column justify-content-center">
+            <fa-icon [icon]="faLongArrowAltLeft" size="10x" class="d-flex justify-content-center">
+            </fa-icon>
+        </div>
+    </div>
+</div>
