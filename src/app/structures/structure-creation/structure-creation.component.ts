@@ -4,8 +4,10 @@ import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {Block} from '../models/block';
 import {StandardBlock} from '../models/standard-block';
-import {BlockType} from './block-type';
+import {BlockType} from '../models/block-type';
 import {ArrowBlock} from '../models/arrow-block';
+import {BlankBlock} from '../models/blank-block';
+import {DirectionType} from '../models/direction-type';
 
 @Component({
     selector: 'app-structure-creation',
@@ -25,7 +27,9 @@ export class StructureCreationComponent implements OnInit {
     ngOnInit(): void {
         this.structureForm = this.buildStructureForm();
         this.blocks = [
-            [new StandardBlock('Start Block')]
+            [new BlankBlock(), new BlankBlock(DirectionType.UP), new BlankBlock()],
+            [new BlankBlock(DirectionType.LEFT), new StandardBlock('Start Block'), new BlankBlock(DirectionType.RIGHT)],
+            [new BlankBlock(), new BlankBlock(DirectionType.DOWN), new BlankBlock()]
         ];
     }
 
@@ -52,5 +56,9 @@ export class StructureCreationComponent implements OnInit {
 
     castToArrowBlock(block: Block): ArrowBlock {
         return block as ArrowBlock;
+    }
+
+    castToBlankBlock(block: Block): BlankBlock {
+        return block as BlankBlock;
     }
 }

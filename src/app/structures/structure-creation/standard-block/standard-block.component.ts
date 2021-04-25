@@ -84,7 +84,7 @@ export class StandardBlockComponent implements OnInit {
     }
 
     rightRequest(y: number, x: number) {
-        this.right(y, x, new ArrowBlock(DirectionType.LEFT));
+        this.right(y, x, new ArrowBlock(DirectionType.RIGHT));
         this.right(y, x + 1, new StandardBlock('Standard Block'));
         this.outputBlocks.emit(this.inputBlocks);
     }

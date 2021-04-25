@@ -29,9 +29,9 @@
                         </div>
 
                         <div *ngSwitchCase="blockType.BLANK_BLOCK">
-                            <div class="blockSize blankBlock">
-                                <h5>Empty</h5>
-                            </div>
+                            <app-blank-block
+                                    [blankBlock]="castToBlankBlock(block)">
+                            </app-blank-block>
                         </div>
 
                         <div *ngSwitchCase="blockType.ARROW_BLOCK">
