@@ -20,11 +20,7 @@
                     <div [ngSwitch]="block.constructor.name">
                         <div *ngSwitchCase="blockType.STANDARD_BLOCK">
                             <app-standard-block
-                                    [inputBlocks]="blocks"
-                                    [standardBlock]="castToStandardBlock(block)"
-                                    [y]="y"
-                                    [x]="x"
-                                    (outputBlocks)="onChangedBlocks($event)">
+                                    [standardBlock]="castToStandardBlock(block)">
                             </app-standard-block>
                         </div>
 
