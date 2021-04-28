@@ -1,28 +1,32 @@
 <div [ngSwitch]="blankBlock.direction">
     <div *ngSwitchCase="directionType.UP">
         <div class="blockSize d-flex flex-column justify-content-center">
-            <fa-icon [icon]="faArrowUp" size="10x" class="d-flex justify-content-center">
+            <fa-icon [icon]="faArrowUp" size="10x" class="d-flex justify-content-center"
+                     (click)="upRequest(y, x)">
             </fa-icon>
         </div>
     </div>
 
     <div *ngSwitchCase="directionType.RIGHT">
         <div class="blockSize d-flex flex-column justify-content-center">
-            <fa-icon [icon]="faArrowRight" size="10x" class="d-flex justify-content-center">
+            <fa-icon [icon]="faArrowRight" size="10x" class="d-flex justify-content-center"
+                     (click)="rightRequest(y, x)">
             </fa-icon>
         </div>
     </div>
 
     <div *ngSwitchCase="directionType.DOWN">
         <div class="blockSize d-flex flex-column justify-content-center">
-            <fa-icon [icon]="faArrowDown" size="10x" class="d-flex justify-content-center">
+            <fa-icon [icon]="faArrowDown" size="10x" class="d-flex justify-content-center"
+                     (click)="downRequest(y, x)">
             </fa-icon>
         </div>
     </div>
 
     <div *ngSwitchCase="directionType.LEFT">
         <div class="blockSize d-flex flex-column justify-content-center">
-            <fa-icon [icon]="faArrowLeft" size="10x" class="d-flex justify-content-center">
+            <fa-icon [icon]="faArrowLeft" size="10x" class="d-flex justify-content-center"
+                     (click)="leftRequest(y, x)">
             </fa-icon>
         </div>
     </div>

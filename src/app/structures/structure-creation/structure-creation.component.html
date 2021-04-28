@@ -30,7 +30,11 @@
 
                         <div *ngSwitchCase="blockType.BLANK_BLOCK">
                             <app-blank-block
-                                    [blankBlock]="castToBlankBlock(block)">
+                                    [inputBlocks]="blocks"
+                                    [blankBlock]="castToBlankBlock(block)"
+                                    [y]="y"
+                                    [x]="x"
+                                    (outputBlocks)="onChangedBlocks($event)">
                             </app-blank-block>
                         </div>
 
