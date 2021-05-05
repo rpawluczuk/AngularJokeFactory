@@ -19,8 +19,8 @@
                 <div *ngFor="let block of rows; let x = index">
                     <div [ngSwitch]="block.constructor.name">
                         <div *ngSwitchCase="blockType.STANDARD_BLOCK">
-                            <app-standard-block
-                                    [standardBlock]="castToStandardBlock(block)">
+                            <app-standard-block #standardBlockRef
+                                    [standardBlock]="castToStandardBlock(block, x, y)">
                             </app-standard-block>
                         </div>
 

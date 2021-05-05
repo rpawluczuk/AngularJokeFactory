@@ -1,7 +1,9 @@
 <div class="d-flex flex-column justify-content-around blockSize blockWithContent">
     <div class="d-flex flex-row justify-content-around">
         <div class="contentOfBlock">
-            <h5>{{standardBlock.text}}</h5>
+            <form [formGroup]="standardBlockForm">
+                <input formControlName="name" type="text" class="form-control" placeholder="name">
+            </form>
         </div>
     </div>
 </div>

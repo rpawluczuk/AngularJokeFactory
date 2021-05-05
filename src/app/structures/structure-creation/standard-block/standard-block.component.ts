@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {StandardBlock} from '../../models/standard-block';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-standard-block',
@@ -9,9 +10,23 @@ import {StandardBlock} from '../../models/standard-block';
 export class StandardBlockComponent implements OnInit {
     @Input() standardBlock: StandardBlock;
 
-    constructor() {
+    standardBlockForm: FormGroup;
+
+    constructor(private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
+        this.standardBlockForm = this.buildStandardBlockForm();
+    }
+
+    private buildStandardBlockForm() {
+        return this.formBuilder.group({
+            name: ['', Validators.required]
+        });
+    }
+
+    saveStandardBlockValue(): StandardBlock {
+        this.standardBlock.name = this.standardBlockForm.value.name;
+        return this.standardBlock;
     }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
@@ -8,6 +8,8 @@ import {BlockType} from '../models/block-type';
 import {ArrowBlock} from '../models/arrow-block';
 import {BlankBlock} from '../models/blank-block';
 import {DirectionType} from '../models/direction-type';
+import {StandardBlockComponent} from './standard-block/standard-block.component';
+import {Structure} from '../models/structure';
 
 @Component({
     selector: 'app-structure-creation',
@@ -15,6 +17,7 @@ import {DirectionType} from '../models/direction-type';
     styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
+    @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockComponent>;
     structureForm: FormGroup;
     blocks: Block[][];
     blockType = BlockType;
@@ -41,7 +44,16 @@ export class StructureCreationComponent implements OnInit {
     }
 
     addStructure() {
-        this.structuresService.addStructure(this.structureForm.value).subscribe(() => {
+        this.standardBlockComponents.forEach((child) => {
+            const standardBlock = child.saveStandardBlockValue();
+            console.log(this.blocks);
+            console.log(standardBlock.getXPosition());
+            this.blocks[standardBlock.getXPosition()][standardBlock.getYPosition()] = standardBlock;
+        });
+        const newStructure: Structure = this.structureForm.value;
+        newStructure.blockScheme = this.blocks;
+        console.log(newStructure);
+        this.structuresService.addStructure(newStructure).subscribe(() => {
             this.router.navigate(['/structures']);
         });
     }
@@ -50,8 +62,11 @@ export class StructureCreationComponent implements OnInit {
         this.blocks = changedBlocks;
     }
 
-    castToStandardBlock(block: Block): StandardBlock {
-        return block as StandardBlock;
+    castToStandardBlock(block: Block, x: number, y: number): StandardBlock {
+        const standardBlock = block as StandardBlock;
+        standardBlock.setXPosition(x);
+        standardBlock.setYPosition(y);
+        return standardBlock;
     }
 
     castToArrowBlock(block: Block): ArrowBlock {
