@@ -10,7 +10,7 @@ import {StructureCreationComponent} from './structure-creation/structure-creatio
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {StandardBlockComponent} from './structure-creation/standard-block/standard-block.component';
 import {ArrowBlockComponent} from './structure-creation/arrow-block/arrow-block.component';
-import {BlankBlockComponent} from './structure-creation/blank-block/blank-block.component';
+import {ActionBlockComponent} from './structure-creation/action-block/action-block.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import {BlankBlockComponent} from './structure-creation/blank-block/blank-block.
         StructureCreationComponent,
         StandardBlockComponent,
         ArrowBlockComponent,
-        BlankBlockComponent
+        ActionBlockComponent
     ],
     imports: [
         CommonModule,

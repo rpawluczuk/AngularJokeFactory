@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArrowBlock} from '../../models/arrow-block';
-import {faLongArrowAltDown, faLongArrowAltLeft, faLongArrowAltRight, faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
-import {DirectionType} from '../../models/direction-type';
+import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-arrow-block',
@@ -10,11 +9,7 @@ import {DirectionType} from '../../models/direction-type';
 })
 export class ArrowBlockComponent implements OnInit {
     @Input() arrowBlock: ArrowBlock;
-    faLongArrowAltUp = faLongArrowAltUp;
-    faLongArrowAltRight = faLongArrowAltRight;
     faLongArrowAltDown = faLongArrowAltDown;
-    faLongArrowAltLeft = faLongArrowAltLeft;
-    directionType = DirectionType;
 
     constructor() {
     }

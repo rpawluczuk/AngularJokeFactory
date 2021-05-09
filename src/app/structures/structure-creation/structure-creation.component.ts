@@ -1,15 +1,12 @@
-import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {Block} from '../models/block';
-import {StandardBlock} from '../models/standard-block';
 import {BlockType} from '../models/block-type';
-import {ArrowBlock} from '../models/arrow-block';
-import {BlankBlock} from '../models/blank-block';
-import {DirectionType} from '../models/direction-type';
 import {StandardBlockComponent} from './standard-block/standard-block.component';
 import {Structure} from '../models/structure';
+import {BlockFactory} from '../models/block-factory';
 
 @Component({
     selector: 'app-structure-creation',
@@ -19,8 +16,9 @@ import {Structure} from '../models/structure';
 export class StructureCreationComponent implements OnInit {
     @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockComponent>;
     structureForm: FormGroup;
-    blocks: Block[][];
+    blocks: Block[];
     blockType = BlockType;
+    private blockFactory = new BlockFactory();
 
     constructor(private structuresService: StructuresService,
                 private formBuilder: FormBuilder,
@@ -30,9 +28,8 @@ export class StructureCreationComponent implements OnInit {
     ngOnInit(): void {
         this.structureForm = this.buildStructureForm();
         this.blocks = [
-            [new BlankBlock(), new BlankBlock(DirectionType.UP), new BlankBlock()],
-            [new BlankBlock(DirectionType.LEFT), new StandardBlock('Start Block'), new BlankBlock(DirectionType.RIGHT)],
-            [new BlankBlock(), new BlankBlock(DirectionType.DOWN), new BlankBlock()]
+            this.blockFactory.createStandardBlock(0),
+            this.blockFactory.createActionBlock(1)
         ];
     }
 
@@ -47,8 +44,8 @@ export class StructureCreationComponent implements OnInit {
         this.standardBlockComponents.forEach((child) => {
             const standardBlock = child.saveStandardBlockValue();
             console.log(this.blocks);
-            console.log(standardBlock.getXPosition());
-            this.blocks[standardBlock.getXPosition()][standardBlock.getYPosition()] = standardBlock;
+            console.log(standardBlock.getPosition());
+            this.blocks[standardBlock.getPosition()] = standardBlock;
         });
         const newStructure: Structure = this.structureForm.value;
         newStructure.blockScheme = this.blocks;
@@ -58,22 +55,7 @@ export class StructureCreationComponent implements OnInit {
         });
     }
 
-    onChangedBlocks(changedBlocks: Block[][]) {
+    onChangedBlocks(changedBlocks: Block[]) {
         this.blocks = changedBlocks;
-    }
-
-    castToStandardBlock(block: Block, x: number, y: number): StandardBlock {
-        const standardBlock = block as StandardBlock;
-        standardBlock.setXPosition(x);
-        standardBlock.setYPosition(y);
-        return standardBlock;
-    }
-
-    castToArrowBlock(block: Block): ArrowBlock {
-        return block as ArrowBlock;
-    }
-
-    castToBlankBlock(block: Block): BlankBlock {
-        return block as BlankBlock;
     }
 }

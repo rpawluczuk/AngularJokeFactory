@@ -4,7 +4,7 @@ export interface Structure {
   id: number;
   name: string;
   description: string;
-  blockScheme: Block[][];
+  blockScheme: Block[];
   lastUpdated: string;
   dateCreated: string;
 }

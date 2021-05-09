@@ -1,29 +1,11 @@
 import {Block} from './block';
+import {BlockType} from './block-type';
 
-export class StandardBlock extends Block {
-    name: string;
-    private xPosition: number;
-    private yPosition: number;
+export class StandardBlock extends Block{
 
-    constructor(text: string) {
-        super();
-        this.name = text;
-    }
-
-
-    getXPosition(): number {
-        return this.xPosition;
-    }
-
-    setXPosition(value: number) {
-        this.xPosition = value;
-    }
-
-    getYPosition(): number {
-        return this.yPosition;
-    }
-
-    setYPosition(value: number) {
-        this.yPosition = value;
+    constructor(position: number, title?: string) {
+        super(position);
+        super.blockType = BlockType.STANDARD_BLOCK;
+        title ? this.setTitle(title) : this.setTitle('');
     }
 }

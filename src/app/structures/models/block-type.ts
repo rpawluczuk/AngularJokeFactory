@@ -1,5 +1,5 @@
 export enum BlockType {
     STANDARD_BLOCK = 'StandardBlock',
-    BLANK_BLOCK = 'BlankBlock',
+    ACTION_BLOCK = 'ActionBlock',
     ARROW_BLOCK = 'ArrowBlock'
 }

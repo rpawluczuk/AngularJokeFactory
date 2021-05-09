@@ -26,7 +26,7 @@ export class StandardBlockComponent implements OnInit {
     }
 
     saveStandardBlockValue(): StandardBlock {
-        this.standardBlock.name = this.standardBlockForm.value.name;
+        this.standardBlock.setTitle(this.standardBlockForm.value.name);
         return this.standardBlock;
     }
 }
