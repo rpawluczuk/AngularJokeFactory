@@ -1,0 +1,11 @@
+<div class="card p-3 mb-4" style="background: lightblue">
+    <div class="card-body">
+        <h2 class="card-title mb-4"> {{ structure?.name }} </h2>
+        <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structure?.description }}</pre>
+        <div class="text-muted"> Creation Date:: {{ structure?.dateCreated | date:'short' }} </div>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureDetails(structure)"> Edit
+        </button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete
+        </button>
+    </div>
+</div>

@@ -2,19 +2,13 @@
     <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Structures</h1>
 
     <div *ngIf="structures && structures.length > 0; else noStructures">
-        <div class="card p-3 mb-4" style="background: lightblue" *ngFor="let structure of structures; let i = index">
-            <div class="card-body">
-                <h2 class="card-title mb-4"> {{ structure?.name }} </h2>
-                <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structure?.description }}</pre>
-                <div class="text-muted"> Creation Date:: {{ structure?.dateCreated | date:'short' }} </div>
-                <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureDetails(structure)"> Edit
-                </button>
-                <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete
-                </button>
-            </div>
+        <div *ngFor="let structure of structures; let i = index">
+            <app-single-structure
+                [structure]="structure"
+                (removedStructure)="onRemovedStructure($event)">
+            </app-single-structure>
         </div>
     </div>
-
 
     <ng-template #noStructures>
         <div class="no-Structures">

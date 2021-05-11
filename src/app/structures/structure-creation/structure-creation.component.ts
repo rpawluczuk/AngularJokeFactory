@@ -48,7 +48,7 @@ export class StructureCreationComponent implements OnInit {
             this.blocks[standardBlock.getPosition()] = standardBlock;
         });
         const newStructure: Structure = this.structureForm.value;
-        newStructure.blockScheme = this.blocks;
+        newStructure.blockScheme = this.blocks.filter(block => block.getBlockType() !== BlockType.ACTION_BLOCK);
         console.log(newStructure);
         this.structuresService.addStructure(newStructure).subscribe(() => {
             this.router.navigate(['/structures']);

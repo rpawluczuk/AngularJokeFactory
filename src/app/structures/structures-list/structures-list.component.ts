@@ -24,14 +24,9 @@ export class StructuresListComponent implements OnInit {
     });
   }
 
-  removeStructure(structure: Structure, event){
-    event.stopPropagation(); // jesli dwie akcje dotycza tego amego elementu i tak jakby nachodzą na siebie to tego uzywamy
-    this.structuresService.removeStructure(structure.id).subscribe(() => {
+  onRemovedStructure(structureId: number) {
+    this.structuresService.removeStructure(structureId).subscribe(() => {
       this.loadStructures();
     });
-  }
-
-  goToStructureDetails(structure: Structure){
-    this.router.navigate(['/structures', structure.id]);
   }
 }

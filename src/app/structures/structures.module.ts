@@ -11,6 +11,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {StandardBlockComponent} from './structure-creation/standard-block/standard-block.component';
 import {ArrowBlockComponent} from './structure-creation/arrow-block/arrow-block.component';
 import {ActionBlockComponent} from './structure-creation/action-block/action-block.component';
+import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {ActionBlockComponent} from './structure-creation/action-block/action-blo
         StructureCreationComponent,
         StandardBlockComponent,
         ArrowBlockComponent,
-        ActionBlockComponent
+        ActionBlockComponent,
+        SingleStructureComponent
     ],
     imports: [
         CommonModule,
