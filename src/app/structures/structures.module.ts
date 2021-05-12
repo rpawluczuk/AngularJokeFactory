@@ -4,25 +4,27 @@ import {SharedModule} from '../shared-module/shared.module';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {StructuresListComponent} from './structures-list/structures-list.component';
-import {StructureDetailsComponent} from './structure-details/structure-details.component';
+import {StructureEditionComponent} from './structure-edition/structure-edition.component';
 import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {StandardBlockComponent} from './structure-creation/standard-block/standard-block.component';
-import {ArrowBlockComponent} from './structure-creation/arrow-block/arrow-block.component';
-import {ActionBlockComponent} from './structure-creation/action-block/action-block.component';
+import {StandardBlockCreatorComponent} from './blocks/standard-block-creator/standard-block-creator.component';
+import {ArrowBlockComponent} from './blocks/arrow-block/arrow-block.component';
+import {ActionBlockComponent} from './blocks/action-block/action-block.component';
 import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
+import { StandardBlockComponent } from './blocks/standard-block/standard-block.component';
 
 
 @NgModule({
     declarations: [
         StructuresListComponent,
-        StructureDetailsComponent,
+        StructureEditionComponent,
         StructureCreationComponent,
-        StandardBlockComponent,
+        StandardBlockCreatorComponent,
         ArrowBlockComponent,
         ActionBlockComponent,
-        SingleStructureComponent
+        SingleStructureComponent,
+        StandardBlockComponent
     ],
     imports: [
         CommonModule,

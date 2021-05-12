@@ -3,11 +3,11 @@ import {StandardBlock} from '../../models/standard-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-    selector: 'app-standard-block',
-    templateUrl: './standard-block.component.html',
-    styleUrls: ['./standard-block.component.css']
+    selector: 'app-standard-block-creator',
+    templateUrl: './standard-block-creator.component.html',
+    styleUrls: ['./standard-block-creator.component.css']
 })
-export class StandardBlockComponent implements OnInit {
+export class StandardBlockCreatorComponent implements OnInit {
     @Input() standardBlock: StandardBlock;
 
     standardBlockForm: FormGroup;

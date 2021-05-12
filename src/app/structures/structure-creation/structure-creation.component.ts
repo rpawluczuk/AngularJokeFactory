@@ -4,7 +4,7 @@ import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {Block} from '../models/block';
 import {BlockType} from '../models/block-type';
-import {StandardBlockComponent} from './standard-block/standard-block.component';
+import {StandardBlockCreatorComponent} from '../blocks/standard-block-creator/standard-block-creator.component';
 import {Structure} from '../models/structure';
 import {BlockFactory} from '../models/block-factory';
 
@@ -14,7 +14,7 @@ import {BlockFactory} from '../models/block-factory';
     styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
-    @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockComponent>;
+    @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
     structureForm: FormGroup;
     blocks: Block[];
     blockType = BlockType;

@@ -1,12 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {StructureDetailsComponent} from './structure-details/structure-details.component';
+import {StructureEditionComponent} from './structure-edition/structure-edition.component';
 import {StructureResolveService} from './structure-resolve.service';
 
 const structuresRoutes: Routes = [
   {
     path: 'structures/:id',
-    component: StructureDetailsComponent,
+    component: StructureEditionComponent,
     resolve: { structure: StructureResolveService }
   }
 ];

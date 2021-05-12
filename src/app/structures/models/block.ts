@@ -3,8 +3,8 @@ import {BlockType} from './block-type';
 export class Block {
 
     protected id: number = null;
-    protected blockType: BlockType = null;
-    private title: string = null;
+    blockType: BlockType = null;
+    title: string = null;
     protected description: string = null;
     protected position: number = null;
 
@@ -25,7 +25,7 @@ export class Block {
     }
 
     getBlockType(): string {
-        return this.blockType;
+        return this?.blockType;
     }
 
 

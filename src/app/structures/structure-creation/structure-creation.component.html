@@ -18,9 +18,9 @@
             <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
                 <div [ngSwitch]="block.getBlockType()">
                     <div *ngSwitchCase="blockType.STANDARD_BLOCK">
-                        <app-standard-block #standardBlockRef
+                        <app-standard-block-creator #standardBlockRef
                                             [standardBlock]="block">
-                        </app-standard-block>
+                        </app-standard-block-creator>
                     </div>
 
                     <div *ngSwitchCase="blockType.ACTION_BLOCK">

@@ -3,9 +3,24 @@
         <h2 class="card-title mb-4"> {{ structure?.name }} </h2>
         <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structure?.description }}</pre>
         <div class="text-muted"> Creation Date:: {{ structure?.dateCreated | date:'short' }} </div>
-        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureDetails(structure)"> Edit
-        </button>
-        <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete
-        </button>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureEdition()"> Edit</button>
+        <button class="btn btn-outline-primary mt-3 mr-3" (click)="showStructureDetails()"> Details</button>
+        <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete</button>
+        <div *ngIf="isDetailsButtonClicked">
+            <div class="d-flex justify-content-center" *ngFor="let block of structure?.blockScheme; let x = index">
+                <div [ngSwitch]="block?.blockType">
+                    <div *ngSwitchCase="blockType.STANDARD_BLOCK">
+                        <app-standard-block
+                                [standardBlock]="block">
+                        </app-standard-block>
+                    </div>
+                    <div *ngSwitchCase="blockType.ARROW_BLOCK">
+                        <app-arrow-block
+                                [arrowBlock]="block">
+                        </app-arrow-block>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

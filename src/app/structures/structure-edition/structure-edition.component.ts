@@ -6,10 +6,10 @@ import {StructuresService} from '../structures.service';
 
 @Component({
   selector: 'app-structure-details',
-  templateUrl: './structure-details.component.html',
-  styleUrls: ['./structure-details.component.css']
+  templateUrl: './structure-edition.component.html',
+  styleUrls: ['./structure-edition.component.css']
 })
-export class StructureDetailsComponent implements OnInit {
+export class StructureEditionComponent implements OnInit {
 
   structure: Structure;
   structureForm: FormGroup;
