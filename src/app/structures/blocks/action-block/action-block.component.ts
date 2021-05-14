@@ -30,8 +30,8 @@ export class ActionBlockComponent implements OnInit {
     }
 
     down(block: Block) {
-        if (block.getPosition() === this.inputBlocks.length - 1) {
-            this.inputBlocks[block.getPosition()] = block;
+        if (block.position === this.inputBlocks.length - 1) {
+            this.inputBlocks[block.position] = block;
         } else {
             this.inputBlocks.push(block);
         }

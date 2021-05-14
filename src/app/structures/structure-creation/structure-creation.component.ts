@@ -44,11 +44,11 @@ export class StructureCreationComponent implements OnInit {
         this.standardBlockComponents.forEach((child) => {
             const standardBlock = child.saveStandardBlockValue();
             console.log(this.blocks);
-            console.log(standardBlock.getPosition());
-            this.blocks[standardBlock.getPosition()] = standardBlock;
+            console.log(standardBlock.position);
+            this.blocks[standardBlock.position] = standardBlock;
         });
         const newStructure: Structure = this.structureForm.value;
-        newStructure.blockScheme = this.blocks.filter(block => block.getBlockType() !== BlockType.ACTION_BLOCK);
+        newStructure.blockScheme = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
         console.log(newStructure);
         this.structuresService.addStructure(newStructure).subscribe(() => {
             this.router.navigate(['/structures']);

@@ -21,12 +21,12 @@ export class StandardBlockCreatorComponent implements OnInit {
 
     private buildStandardBlockForm() {
         return this.formBuilder.group({
-            name: ['', Validators.required]
+            name: [this.standardBlock.title, Validators.required]
         });
     }
 
     saveStandardBlockValue(): StandardBlock {
-        this.standardBlock.setTitle(this.standardBlockForm.value.name);
+        this.standardBlock.title = this.standardBlockForm.value.name;
         return this.standardBlock;
     }
 }

@@ -19,6 +19,33 @@
       <p *ngIf="!structureForm.get('description').valid && structureForm.get('description').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
+
+    <div class="container">
+      <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
+        <div [ngSwitch]="block.blockType">
+          <div *ngSwitchCase="blockType.STANDARD_BLOCK">
+            <app-standard-block-creator #standardBlockRef
+                                        [standardBlock]="block">
+            </app-standard-block-creator>
+          </div>
+
+          <div *ngSwitchCase="blockType.ACTION_BLOCK">
+            <app-blank-block
+                    [inputBlocks]="structure.blockScheme"
+                    [actionBlock]="block"
+                    (outputBlocks)="onChangedBlocks($event)">
+            </app-blank-block>
+          </div>
+
+          <div *ngSwitchCase="blockType.ARROW_BLOCK">
+            <app-arrow-block
+                    [arrowBlock]="block">
+            </app-arrow-block>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-sm-12">
         <button [disabled]="structureForm.invalid" (click)="updateStructure()" type="submit" class="btn btn-primary float-right">Update Structure</button>
