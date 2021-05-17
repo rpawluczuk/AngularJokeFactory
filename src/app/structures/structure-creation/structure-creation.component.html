@@ -16,10 +16,13 @@
         </div>
         <div class="container">
             <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
-                <div [ngSwitch]="block.getBlockType()">
+                <div [ngSwitch]="block.blockType">
                     <div *ngSwitchCase="blockType.STANDARD_BLOCK">
-                        <app-standard-block-creator #standardBlockRef
-                                            [standardBlock]="block">
+                        <app-standard-block-creator
+                            #standardBlockRef
+                            [inputBlocks]="blocks"
+                            [standardBlock]="block"
+                            (outputBlocks)="onChangedBlocks($event)">
                         </app-standard-block-creator>
                     </div>
 

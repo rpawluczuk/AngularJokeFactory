@@ -43,8 +43,6 @@ export class StructureCreationComponent implements OnInit {
     addStructure() {
         this.standardBlockComponents.forEach((child) => {
             const standardBlock = child.saveStandardBlockValue();
-            console.log(this.blocks);
-            console.log(standardBlock.position);
             this.blocks[standardBlock.position] = standardBlock;
         });
         const newStructure: Structure = this.structureForm.value;

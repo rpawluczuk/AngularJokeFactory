@@ -1,6 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {StandardBlock} from '../../models/standard-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {faWindowClose} from '@fortawesome/free-solid-svg-icons/faWindowClose';
+import {Block} from '../../models/block';
+import {BlockFactory} from '../../models/block-factory';
 
 @Component({
     selector: 'app-standard-block-creator',
@@ -9,8 +12,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class StandardBlockCreatorComponent implements OnInit {
     @Input() standardBlock: StandardBlock;
+    @Input() inputBlocks: Block[];
+    @Output() outputBlocks: EventEmitter<Block[]> = new EventEmitter<Block[]>();
 
+    faWindowClose = faWindowClose;
     standardBlockForm: FormGroup;
+    private blockFactory = new BlockFactory();
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -21,12 +28,27 @@ export class StandardBlockCreatorComponent implements OnInit {
 
     private buildStandardBlockForm() {
         return this.formBuilder.group({
-            name: [this.standardBlock.title, Validators.required]
+            name: [this.standardBlock.title, Validators.required],
+            description: [this.standardBlock.description, Validators.required]
         });
     }
 
     saveStandardBlockValue(): StandardBlock {
         this.standardBlock.title = this.standardBlockForm.value.name;
+        this.standardBlock.description = this.standardBlockForm.value.description;
         return this.standardBlock;
+    }
+
+    deleteRequest(position: number) {
+        this.inputBlocks = this.inputBlocks
+            .filter(block => block.position !== position - 1)
+            .filter(block => block.position !== position);
+        this.inputBlocks.forEach(block => {
+            if (block. position > position){
+                block.position = block.position - 2;
+            }
+        });
+        console.log(this.inputBlocks);
+        this.outputBlocks.emit(this.inputBlocks);
     }
 }

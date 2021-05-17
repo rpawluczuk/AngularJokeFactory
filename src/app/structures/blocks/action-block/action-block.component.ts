@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 import {Block} from '../../models/block';
-import {BlockType} from '../../models/block-type';
 import {BlockFactory} from '../../models/block-factory';
 
 @Component({

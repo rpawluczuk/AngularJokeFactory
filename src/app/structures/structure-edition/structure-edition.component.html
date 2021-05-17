@@ -31,7 +31,7 @@
 
           <div *ngSwitchCase="blockType.ACTION_BLOCK">
             <app-blank-block
-                    [inputBlocks]="structure.blockScheme"
+                    [inputBlocks]="blocks"
                     [actionBlock]="block"
                     (outputBlocks)="onChangedBlocks($event)">
             </app-blank-block>
