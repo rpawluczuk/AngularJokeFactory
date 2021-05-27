@@ -61,8 +61,6 @@ export class StructureEditionComponent implements OnInit {
   updateStructure(){
     this.standardBlockComponents.forEach((child) => {
       const standardBlock = child.saveStandardBlockValue();
-      console.log(this.blocks);
-      console.log(standardBlock.position);
       this.blocks[standardBlock.position] = standardBlock;
     });
     this.structure.blockScheme = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
@@ -74,6 +72,6 @@ export class StructureEditionComponent implements OnInit {
   }
 
   onChangedBlocks(changedBlocks: Block[]) {
-    this.structure.blockScheme = changedBlocks;
+    this.blocks = changedBlocks;
   }
 }

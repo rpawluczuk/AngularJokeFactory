@@ -15,6 +15,8 @@ export class JokesListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log('jokes-list');
+        console.log(this.jokes);
     }
 
     removeJoke(joke: Joke, event) {

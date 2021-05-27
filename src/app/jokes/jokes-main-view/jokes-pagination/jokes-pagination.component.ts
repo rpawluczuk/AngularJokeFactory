@@ -16,6 +16,8 @@ export class JokesPaginationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('pagination');
+    console.log(this.pagination);
   }
 
   loadPage(page: number) {

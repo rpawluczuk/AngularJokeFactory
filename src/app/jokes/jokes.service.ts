@@ -3,7 +3,6 @@ import 'rxjs';
 import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {JokePaginationResponse} from './models/jokePaginationResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +14,13 @@ export class JokesService {
   constructor(private http: HttpClient) {
   }
 
-  getJokes(currentPage: number, pageSize: number, authorFilter: number): Observable<JokePaginationResponse> {
-    return this.http.get<JokePaginationResponse>(`${this.apiUrl}`
-      + `?page=${currentPage}&size=${pageSize}&authorFilter=${authorFilter}`);
+  getAllJokes(): Observable<Joke[]> {
+    return this.http.get<Joke[]>(`${this.apiUrl}`);
+  }
+
+  getFilteredJokes(authorFilter: number): Observable<Joke[]> {
+    return this.http.get<Joke[]>(`${this.apiUrl}`
+        + `?query&author=${authorFilter}`);
   }
 
   getJoke(id: number): Observable<Joke> {
