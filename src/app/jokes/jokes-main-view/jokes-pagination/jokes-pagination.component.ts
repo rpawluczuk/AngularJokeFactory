@@ -15,14 +15,12 @@ export class JokesPaginationComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
-    console.log('pagination');
-    console.log(this.pagination);
-  }
+  ngOnInit(): void {}
 
   loadPage(page: number) {
     if (page !== this.previousPage) {
       this.previousPage = this.pagination.currentPage;
+      this.pagination.currentPage = page;
       this.pagination.currentPage -= 1;   // difference between backend and fronted
       this.changedPagination.emit(this.pagination);
     }

@@ -18,7 +18,6 @@ import {PaginationService} from '../../utils/pagination.service';
 export class JokesMainViewComponent implements OnInit {
 
     pagination: Pagination = new Pagination();
-    paginationLoaded: Promise<boolean>;
 
     jokes: Joke[];
     authors: Author[];
@@ -37,7 +36,7 @@ export class JokesMainViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadStructures();
-        this.loadAuthores();
+        this.loadAuthors();
         this.loadOrigins();
         this.loadJokes();
     }
@@ -47,12 +46,10 @@ export class JokesMainViewComponent implements OnInit {
             .subscribe(pagination => {
                 this.pagination = pagination;
                 this.pagination.currentPage += 1;   // difference between backend and fronted
-                this.paginationLoaded = Promise.resolve(true);
             });
     }
 
     loadJokes(): void {
-        console.log(this.pagination);
         this.jokesService.getAllJokes()
             .subscribe(jokes => {
                 this.jokes = jokes;
@@ -74,7 +71,7 @@ export class JokesMainViewComponent implements OnInit {
         });
     }
 
-    loadAuthores(): void {
+    loadAuthors(): void {
         this.authorsService.getAuthors().subscribe((authors) => {
             this.authors = authors;
         });
@@ -101,7 +98,6 @@ export class JokesMainViewComponent implements OnInit {
     updatePagination(pagination: Pagination) {
         this.pagination = pagination;
         this.paginationService.updatePagination(this.pagination)
-            .subscribe();
-        this.loadJokes();
+            .subscribe(() => this.loadJokes());
     }
 }

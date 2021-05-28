@@ -5,7 +5,7 @@ export class Pagination {
   pageSize: number;
 
   constructor() {
-    this.currentPage = 0;
+    this.currentPage = 1;
     this.pageSize = 5;
   }
 }
