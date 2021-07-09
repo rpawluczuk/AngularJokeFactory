@@ -20,7 +20,7 @@
                     <label class="col-md-2 col-form-label">Filter By Author:</label>
                     <select [ngModel]="authorFilter" (ngModelChange)="filterJokesByAuthor($event)"
                             class="col-md-10" name="authorFilter">
-                        <option value="-1">All</option>
+                        <option value="All">All</option>
                         <option *ngFor="let author of authors" [ngValue]="author.id">
                             {{author.name + ' ' + author.surname}}
                         </option>
