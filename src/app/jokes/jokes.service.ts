@@ -18,9 +18,9 @@ export class JokesService {
     return this.http.get<Joke[]>(`${this.apiUrl}`);
   }
 
-  getFilteredJokes(authorFilter: number): Observable<Joke[]> {
+  getFilteredJokes(filter: string): Observable<Joke[]> {
     return this.http.get<Joke[]>(`${this.apiUrl}`
-        + `?query&author=${authorFilter}`);
+        + `?query${filter}`);
   }
 
   getJoke(id: number): Observable<Joke> {

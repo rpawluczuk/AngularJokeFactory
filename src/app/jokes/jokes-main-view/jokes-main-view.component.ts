@@ -25,6 +25,9 @@ export class JokesMainViewComponent implements OnInit {
   allStructures: Structure[] = [];
 
   authorFilter;
+  authorQuery: string;
+  structureFilter;
+  structureQuery: string;
 
   constructor(private jokesService: JokesService,
               private structuresService: StructuresService,
@@ -39,6 +42,8 @@ export class JokesMainViewComponent implements OnInit {
     this.loadAuthors();
     this.loadOrigins();
     this.loadJokes();
+    this.authorQuery = '';
+    this.structureQuery = '';
   }
 
   loadPagination(): void {
@@ -60,9 +65,29 @@ export class JokesMainViewComponent implements OnInit {
   filterJokesByAuthor(authorFilter) {
     this.pagination.currentPage = 0;
     if (authorFilter === 'All') {
+      this.authorQuery = '';
+    } else {
+      this.authorQuery = `&author=${authorFilter}`;
+    }
+    this.filterJokesByQuery();
+  }
+
+  filterJokesByStructure(structureFilter) {
+    this.pagination.currentPage = 0;
+    if (structureFilter === 'All') {
+      this.structureQuery = '';
+    } else {
+      this.structureQuery = `&structures=${structureFilter}`;
+    }
+    this.filterJokesByQuery();
+  }
+
+  filterJokesByQuery(){
+    const filter: string = this.authorQuery + this.structureQuery;
+    if (filter !== undefined && filter.length === 0){
       this.loadJokes();
     } else {
-      this.jokesService.getFilteredJokes(authorFilter)
+      this.jokesService.getFilteredJokes(`${filter}`)
         .subscribe(jokes => {
           this.jokes = jokes;
         });
