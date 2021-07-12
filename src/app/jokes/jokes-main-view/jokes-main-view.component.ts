@@ -41,7 +41,7 @@ export class JokesMainViewComponent implements OnInit {
     this.loadStructures();
     this.loadAuthors();
     this.loadOrigins();
-    this.loadJokes();
+    this.loadAllJokes();
     this.authorQuery = '';
     this.structureQuery = '';
   }
@@ -54,7 +54,7 @@ export class JokesMainViewComponent implements OnInit {
       });
   }
 
-  loadJokes(): void {
+  loadAllJokes(): void {
     this.jokesService.getAllJokes()
       .subscribe(jokes => {
         this.jokes = jokes;
@@ -69,7 +69,7 @@ export class JokesMainViewComponent implements OnInit {
     } else {
       this.authorQuery = `&author=${authorFilter}`;
     }
-    this.filterJokesByQuery();
+    this.loadFilteredJokes();
   }
 
   filterJokesByStructure(structureFilter) {
@@ -79,17 +79,18 @@ export class JokesMainViewComponent implements OnInit {
     } else {
       this.structureQuery = `&structures=${structureFilter}`;
     }
-    this.filterJokesByQuery();
+    this.loadFilteredJokes();
   }
 
-  filterJokesByQuery(){
+  loadFilteredJokes(){
     const filter: string = this.authorQuery + this.structureQuery;
     if (filter !== undefined && filter.length === 0){
-      this.loadJokes();
+      this.loadAllJokes();
     } else {
       this.jokesService.getFilteredJokes(`${filter}`)
         .subscribe(jokes => {
           this.jokes = jokes;
+          this.loadPagination();
         });
     }
   }
@@ -115,13 +116,13 @@ export class JokesMainViewComponent implements OnInit {
   onRemovedJoke(jokeId: number) {
     this.jokesService.removeJoke(jokeId).subscribe(() => {
       this.pagination.currentPage = 0;
-      this.loadJokes();
+      this.loadAllJokes();
     });
   }
 
   updatePagination(pagination: Pagination) {
     this.pagination = pagination;
     this.paginationService.updatePagination(this.pagination)
-      .subscribe(() => this.loadJokes());
+      .subscribe(() => this.loadFilteredJokes());
   }
 }
