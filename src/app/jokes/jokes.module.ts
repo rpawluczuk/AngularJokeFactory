@@ -11,6 +11,7 @@ import {JokeCreationComponent} from './joke-creation/joke-creation.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { JokesMainViewComponent } from './jokes-main-view/jokes-main-view.component';
 import { JokesPaginationComponent } from './jokes-main-view/jokes-pagination/jokes-pagination.component';
+import { JokesFilteringComponent } from './jokes-main-view/jokes-filering/jokes-filtering.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { JokesPaginationComponent } from './jokes-main-view/jokes-pagination/jok
     JokeCreationComponent,
     JokeEditionComponent,
     JokesMainViewComponent,
-    JokesPaginationComponent],
+    JokesPaginationComponent,
+    JokesFilteringComponent],
   imports: [
     CommonModule,
     SharedModule,
