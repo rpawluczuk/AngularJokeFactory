@@ -7,6 +7,7 @@ import {Block} from '../models/block';
 import {BlockType} from '../models/block-type';
 import {StandardBlockCreatorComponent} from '../blocks/standard-block-creator/standard-block-creator.component';
 import {BlockFactory} from '../models/block-factory';
+import {BlocksService} from '../blocks/blocks.service';
 
 @Component({
   selector: 'app-structure-details',
@@ -22,6 +23,7 @@ export class StructureEditionComponent implements OnInit {
   private blockFactory = new BlockFactory();
 
   constructor(private structuresService: StructuresService,
+              private blocksService: BlocksService,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router) {
@@ -39,18 +41,17 @@ export class StructureEditionComponent implements OnInit {
 
   loadBlocks() {
     this.blocks = this.structure.blockScheme;
-    if (this.blocks.length === 0){
+    if (this.blocks.length === 0) {
       this.blocks = [
         this.blockFactory.createStandardBlock(0),
         this.blockFactory.createActionBlock(1)
       ];
-      console.log('tutaj');
     } else {
       this.blocks.push(this.blockFactory.createActionBlock(this.blocks.length));
     }
   }
 
-  buildStructureForm(){
+  buildStructureForm() {
     return this.formBuilder.group({
       name: [this.structure.name, Validators.required],
       description: [this.structure.description, Validators.minLength(3)],
@@ -58,16 +59,27 @@ export class StructureEditionComponent implements OnInit {
     });
   }
 
-  updateStructure(){
+  updateStructure() {
+    this.structure.name = this.structureForm.controls.name.value;
+    this.structure.description = this.structureForm.controls.description.value;
+    this.structure.blockScheme = null;
+    this.structuresService.updateStructure(this.structure).subscribe(() => {
+      this.updateBlocks();
+      // this.router.navigate(['/structures']);
+    });
+  }
+
+  updateBlocks() {
     this.standardBlockComponents.forEach((child) => {
       const standardBlock = child.saveStandardBlockValue();
       this.blocks[standardBlock.position] = standardBlock;
     });
-    this.structure.blockScheme = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
-    this.structure.name = this.structureForm.controls['name'].value;
-    this.structure.description = this.structureForm.controls['description'].value;
-    this.structuresService.updateStructure(this.structure).subscribe(() => {
-      this.router.navigate(['/structures']);
+    this.blocks = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
+    this.blocks.forEach(block => block.structure = this.structure);
+    this.blocks.forEach(block => {
+      this.blocksService.updateBlock(block).subscribe(() => {
+        this.router.navigate(['/structures']);
+      });
     });
   }
 

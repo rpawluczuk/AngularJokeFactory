@@ -1,4 +1,5 @@
 import {BlockType} from './block-type';
+import {Structure} from './structure';
 
 export class Block {
 
@@ -7,6 +8,7 @@ export class Block {
     title: string = null;
     description: string = null;
     position: number = null;
+    structure: Structure = null;
 
     constructor(position: number) {
         this.position = position;

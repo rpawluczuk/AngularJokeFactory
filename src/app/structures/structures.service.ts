@@ -20,12 +20,15 @@ export class StructuresService {
     return this.http.get<Structure>(`${this.apiUrl}/${id}` );
   }
 
+  getLastStructure(): Observable<Structure> {
+    return this.http.get<Structure>(`${this.apiUrl}/last` );
+  }
+
   addStructure(data): Observable<Structure>{
     return this.http.post<Structure>(this.apiUrl, data);
   }
 
   updateStructure(structure: Structure): Observable<Structure> {
-    console.log(structure);
     return this.http.put<Structure>(this.apiUrl, structure);
   }
 
