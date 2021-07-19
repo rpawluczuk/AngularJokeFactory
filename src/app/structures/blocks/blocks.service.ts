@@ -13,6 +13,11 @@ export class BlocksService {
   constructor(private http: HttpClient) {
   }
 
+  getBlocksOfTheStructure(structureId: number): Observable<Block[]> {
+    return this.http.get<Block[]>(`${this.apiUrl}`
+      + `/with-structure/${structureId}`);
+  }
+
   addBlock(data): Observable<Block>{
     return this.http.post<Block>(this.apiUrl, data);
   }

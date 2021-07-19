@@ -32,24 +32,26 @@ export class StructureEditionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStructure();
-    this.loadBlocks();
     this.structureForm = this.buildStructureForm();
   }
 
   loadStructure() {
     this.structure = this.route.snapshot.data.structure;
+    this.loadBlocksOfTheStructure();
   }
 
-  loadBlocks() {
-    this.blocksToUpdate = this.structure.blockScheme;
-    if (this.blocksToUpdate.length === 0) {
-      this.blocksToUpdate = [
-        this.blockFactory.createStandardBlock(0),
-        this.blockFactory.createActionBlock(1)
-      ];
-    } else {
-      this.blocksToUpdate.push(this.blockFactory.createActionBlock(this.blocksToUpdate.length));
-    }
+  loadBlocksOfTheStructure() {
+    this.blocksService.getBlocksOfTheStructure(this.structure?.id).subscribe((blocks) => {
+      if (blocks.length === 0) {
+        this.blocksToUpdate = [
+          this.blockFactory.createStandardBlock(0),
+          this.blockFactory.createActionBlock(1)
+        ];
+      } else {
+        this.blocksToUpdate = blocks;
+        this.blocksToUpdate.push(this.blockFactory.createActionBlock(this.blocksToUpdate.length));
+      }
+    });
   }
 
   buildStructureForm() {
@@ -63,7 +65,6 @@ export class StructureEditionComponent implements OnInit {
   updateStructure() {
     this.structure.name = this.structureForm.controls.name.value;
     this.structure.description = this.structureForm.controls.description.value;
-    this.structure.blockScheme = null;
     this.structuresService.updateStructure(this.structure).subscribe(() => {
       this.updateBlocks();
       this.deleteBlocks();

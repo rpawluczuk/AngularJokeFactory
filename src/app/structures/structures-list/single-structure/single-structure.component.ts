@@ -2,36 +2,45 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Structure} from '../../models/structure';
 import {Router} from '@angular/router';
 import {BlockType} from '../../models/block-type';
+import {BlocksService} from "../../blocks/blocks.service";
 
 @Component({
-    selector: 'app-single-structure',
-    templateUrl: './single-structure.component.html',
-    styleUrls: ['./single-structure.component.css']
+  selector: 'app-single-structure',
+  templateUrl: './single-structure.component.html',
+  styleUrls: ['./single-structure.component.css']
 })
 export class SingleStructureComponent implements OnInit {
-    @Input() structure: Structure;
-    @Output() removedStructure: EventEmitter<number> = new EventEmitter<number>();
+  @Input() structure: Structure;
+  @Output() removedStructure: EventEmitter<number> = new EventEmitter<number>();
 
-    isDetailsButtonClicked: boolean;
-    blockType = BlockType;
+  isDetailsButtonClicked: boolean;
+  blockType = BlockType;
 
-    constructor(private router: Router) {
-    }
+  constructor(private router: Router,
+              private blocksService: BlocksService) {
+  }
 
-    ngOnInit(): void {
-        this.isDetailsButtonClicked = false;
-    }
+  ngOnInit(): void {
+    this.loadBlocksOfTheStructure();
+    this.isDetailsButtonClicked = false;
+  }
 
-    removeStructure(structure: Structure, event) {
-        event.stopPropagation();
-        this.removedStructure.emit(structure.id);
-    }
+  loadBlocksOfTheStructure(): void {
+    this.blocksService.getBlocksOfTheStructure(this.structure.id).subscribe((blocks) => {
+      this.structure.blockScheme = blocks;
+    });
+  }
 
-    goToStructureEdition() {
-        this.router.navigate(['/structures', this.structure.id]);
-    }
+  removeStructure(structure: Structure, event) {
+    event.stopPropagation();
+    this.removedStructure.emit(structure.id);
+  }
 
-    showStructureDetails() {
-        this.isDetailsButtonClicked = !this.isDetailsButtonClicked;
-    }
+  goToStructureEdition() {
+    this.router.navigate(['/structures', this.structure.id]);
+  }
+
+  showStructureDetails() {
+    this.isDetailsButtonClicked = !this.isDetailsButtonClicked;
+  }
 }
