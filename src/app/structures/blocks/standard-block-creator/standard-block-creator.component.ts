@@ -6,49 +6,50 @@ import {Block} from '../../models/block';
 import {BlockFactory} from '../../models/block-factory';
 
 @Component({
-    selector: 'app-standard-block-creator',
-    templateUrl: './standard-block-creator.component.html',
-    styleUrls: ['./standard-block-creator.component.css']
+  selector: 'app-standard-block-creator',
+  templateUrl: './standard-block-creator.component.html',
+  styleUrls: ['./standard-block-creator.component.css']
 })
 export class StandardBlockCreatorComponent implements OnInit {
-    @Input() standardBlock: StandardBlock;
-    @Input() inputBlocks: Block[];
-    @Output() outputBlocks: EventEmitter<Block[]> = new EventEmitter<Block[]>();
+  @Input() standardBlock: StandardBlock;
+  // @Input() inputBlocks: Block[];
+  @Output() blockToDelete: EventEmitter<Block> = new EventEmitter<Block>();
 
-    faWindowClose = faWindowClose;
-    standardBlockForm: FormGroup;
-    private blockFactory = new BlockFactory();
+  faWindowClose = faWindowClose;
+  standardBlockForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
-    }
+  constructor(private formBuilder: FormBuilder) {
+  }
 
-    ngOnInit(): void {
-        this.standardBlockForm = this.buildStandardBlockForm();
-    }
+  ngOnInit(): void {
+    this.standardBlockForm = this.buildStandardBlockForm();
+  }
 
-    private buildStandardBlockForm() {
-        return this.formBuilder.group({
-            name: [this.standardBlock.title, Validators.required],
-            description: [this.standardBlock.description, Validators.required]
-        });
-    }
+  private buildStandardBlockForm() {
+    return this.formBuilder.group({
+      name: [this.standardBlock.title, Validators.required],
+      description: [this.standardBlock.description, Validators.required]
+    });
+  }
 
-    saveStandardBlockValue(): StandardBlock {
-        this.standardBlock.title = this.standardBlockForm.value.name;
-        this.standardBlock.description = this.standardBlockForm.value.description;
-        return this.standardBlock;
-    }
+  saveStandardBlockValue(): StandardBlock {
+    this.standardBlock.title = this.standardBlockForm.value.name;
+    this.standardBlock.description = this.standardBlockForm.value.description;
+    return this.standardBlock;
+  }
 
-    deleteRequest(position: number) {
-        this.inputBlocks = this.inputBlocks
-            .filter(block => block.position !== position - 1)
-            .filter(block => block.position !== position);
-        this.inputBlocks.forEach(block => {
-            if (block. position > position){
-                block.position = block.position - 2;
-            }
-        });
-        console.log(this.inputBlocks);
-        this.outputBlocks.emit(this.inputBlocks);
-    }
+  // Myślę, że muszę zmienić logikę tej funkcji tak by emitowała tylko blok któy chcę usunąć
+  deleteRequest() {
+    // console.log(this.inputBlocks[position]);
+    // this.inputBlocks = this.inputBlocks
+    //   .filter(block => block.position !== position - 1)
+    //   .filter(block => block.position !== position);
+    // this.inputBlocks.forEach(block => {
+    //   if (block.position > position) {
+    //     block.position = block.position - 2;
+    //   }
+    // });
+    // console.log(this.inputBlocks);
+    this.blockToDelete.emit(this.standardBlock);
+  }
 }

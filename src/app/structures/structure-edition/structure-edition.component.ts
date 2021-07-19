@@ -18,7 +18,8 @@ export class StructureEditionComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
   structure: Structure;
   structureForm: FormGroup;
-  blocks: Block[];
+  blocksToDelete: Block[] = [];
+  blocksToUpdate: Block[] = [];
   blockType = BlockType;
   private blockFactory = new BlockFactory();
 
@@ -40,14 +41,15 @@ export class StructureEditionComponent implements OnInit {
   }
 
   loadBlocks() {
-    this.blocks = this.structure.blockScheme;
-    if (this.blocks.length === 0) {
-      this.blocks = [
+    this.blocksToUpdate = this.structure.blockScheme;
+    console.log(this.blocksToDelete);
+    if (this.blocksToUpdate.length === 0) {
+      this.blocksToUpdate = [
         this.blockFactory.createStandardBlock(0),
         this.blockFactory.createActionBlock(1)
       ];
     } else {
-      this.blocks.push(this.blockFactory.createActionBlock(this.blocks.length));
+      this.blocksToUpdate.push(this.blockFactory.createActionBlock(this.blocksToUpdate.length));
     }
   }
 
@@ -65,25 +67,41 @@ export class StructureEditionComponent implements OnInit {
     this.structure.blockScheme = null;
     this.structuresService.updateStructure(this.structure).subscribe(() => {
       this.updateBlocks();
-      // this.router.navigate(['/structures']);
+      this.deleteBlocks();
     });
   }
 
   updateBlocks() {
     this.standardBlockComponents.forEach((child) => {
       const standardBlock = child.saveStandardBlockValue();
-      this.blocks[standardBlock.position] = standardBlock;
+      this.blocksToUpdate[standardBlock.position] = standardBlock;
     });
-    this.blocks = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
-    this.blocks.forEach(block => block.structure = this.structure);
-    this.blocks.forEach(block => {
-      this.blocksService.updateBlock(block).subscribe(() => {
+    this.blocksToUpdate = this.blocksToUpdate.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
+    this.blocksToUpdate.forEach(block => block.structure = this.structure);
+    this.blocksToUpdate.forEach(blockToUpdate => {
+      this.blocksService.updateBlock(blockToUpdate).subscribe(() => {
         this.router.navigate(['/structures']);
       });
     });
   }
 
+  deleteBlocks() {
+    this.blocksToDelete.forEach(blockToDelete => {
+      this.blocksService.removeBlock(blockToDelete.id).subscribe();
+    });
+  }
+
+  onBlockDeleteRequest(blockToDelete: Block) {
+    this.blocksToDelete = this.blocksToDelete.concat(
+      this.blocksToUpdate.splice(blockToDelete.position - 1, 2));
+    this.blocksToUpdate.forEach(block => {
+      if (block.position > blockToDelete.position) {
+        block.position = block.position - 2;
+      }
+    });
+  }
+
   onChangedBlocks(changedBlocks: Block[]) {
-    this.blocks = changedBlocks;
+    this.blocksToUpdate = changedBlocks;
   }
 }

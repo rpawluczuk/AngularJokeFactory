@@ -23,20 +23,19 @@
         </div>
 
         <div class="container">
-            <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
+            <div class="d-flex justify-content-center" *ngFor="let block of blocksToUpdate; let x = index">
                 <div [ngSwitch]="block.blockType">
                     <div *ngSwitchCase="blockType.STANDARD_BLOCK">
                         <app-standard-block-creator
                             #standardBlockRef
-                            [inputBlocks]="blocks"
                             [standardBlock]="block"
-                            (outputBlocks)="onChangedBlocks($event)">
+                            (blockToDelete)="onBlockDeleteRequest($event)">
                         </app-standard-block-creator>
                     </div>
 
                     <div *ngSwitchCase="blockType.ACTION_BLOCK">
                         <app-blank-block
-                                [inputBlocks]="blocks"
+                                [inputBlocks]="blocksToUpdate"
                                 [actionBlock]="block"
                                 (outputBlocks)="onChangedBlocks($event)">
                         </app-blank-block>

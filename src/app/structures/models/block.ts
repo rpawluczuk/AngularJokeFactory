@@ -3,7 +3,7 @@ import {Structure} from './structure';
 
 export class Block {
 
-    protected id: number = null;
+    id: number = null;
     blockType: BlockType = null;
     title: string = null;
     description: string = null;

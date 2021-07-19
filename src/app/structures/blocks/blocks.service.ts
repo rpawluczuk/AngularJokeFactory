@@ -20,4 +20,8 @@ export class BlocksService {
   updateBlock(block: Block): Observable<Block> {
     return this.http.put<Block>(this.apiUrl, block);
   }
+
+  removeBlock(id: number): Observable<Block> {
+    return this.http.delete<Block>(`${this.apiUrl}/${id}`);
+  }
 }

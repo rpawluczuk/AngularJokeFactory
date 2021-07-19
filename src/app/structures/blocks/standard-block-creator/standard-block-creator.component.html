@@ -1,7 +1,7 @@
 <div class="d-flex flex-column blockSize blockWithContent">
     <div class="d-flex flex-row justify-content-end">
         <fa-icon *ngIf="standardBlock.position > 1" [icon]="faWindowClose" size="2x"
-                 (click)="deleteRequest(standardBlock?.position)">
+                 (click)="deleteRequest()">
         </fa-icon>
     </div>
     <form [formGroup]="standardBlockForm">
