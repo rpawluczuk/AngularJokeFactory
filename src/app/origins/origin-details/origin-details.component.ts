@@ -27,7 +27,6 @@ export class OriginDetailsComponent implements OnInit {
 
   loadOrigin() {
     this.origin = this.route.snapshot.data.origin;
-    console.log(this.origin);
   }
 
   buildOriginForm(){
@@ -35,6 +34,10 @@ export class OriginDetailsComponent implements OnInit {
       name: [this.origin.name, Validators.required],
       dateCreated: [this.origin.dateCreated]
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['/origins']);
   }
 
   updateOrigin(){

@@ -47,4 +47,8 @@ export class AuthorDetailsComponent implements OnInit {
       this.router.navigate(['/authors']);
     });
   }
+
+  onCancel() {
+    this.router.navigate(['/authors']);
+  }
 }

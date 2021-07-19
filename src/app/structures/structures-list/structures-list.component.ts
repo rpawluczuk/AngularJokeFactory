@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Structure} from '../models/structure';
-import {Router} from '@angular/router';
 import {StructuresService} from '../structures.service';
 
 @Component({
@@ -11,8 +10,7 @@ import {StructuresService} from '../structures.service';
 export class StructuresListComponent implements OnInit {
   structures: Structure[];
 
-  constructor(private structuresService: StructuresService,
-              private router: Router) { }
+  constructor(private structuresService: StructuresService) { }
 
   ngOnInit(): void {
     this.loadStructures();

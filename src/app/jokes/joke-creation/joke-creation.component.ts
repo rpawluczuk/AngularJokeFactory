@@ -106,6 +106,10 @@ export class JokeCreationComponent implements OnInit {
     });
   }
 
+  onCancel() {
+    this.router.navigate(['/jokes']);
+  }
+
   getDropdownList(allStructures: Structure[]): Array<any>{
     const dropdownList = [];
     for (const structure of allStructures){

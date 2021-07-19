@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../origin.service';
 import {Router} from '@angular/router';
@@ -14,7 +14,8 @@ export class OriginCreationComponent implements OnInit {
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.originForm = this.buildOriginForm();
@@ -26,8 +27,11 @@ export class OriginCreationComponent implements OnInit {
     });
   }
 
-  addOrigin(){
-    console.log(this.originForm.value);
+  onCancel() {
+    this.router.navigate(['/origins']);
+  }
+
+  addOrigin() {
     this.originService.addOrigin(this.originForm.value).subscribe(() => {
       this.router.navigate(['/origins']);
     });

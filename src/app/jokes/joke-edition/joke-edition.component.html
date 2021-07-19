@@ -55,8 +55,10 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="jokeForm.invalid" (click)="updateJoke()" type="submit" class="btn btn-primary float-right">Update Joke</button>
-        <button (click)="jokeForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
+        <button [disabled]="jokeForm.invalid" (click)="updateJoke()" type="submit" class="btn btn-success float-right mx-2">
+          Update Joke</button>
+        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+        <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
       </div>
     </div>
   </form>

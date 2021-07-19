@@ -26,8 +26,10 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="authorForm.invalid" (click)="updateAuthor()" type="submit" class="btn btn-primary float-right">Update Author</button>
-        <button (click)="authorForm.reset()" type="submit" class="btn btn-default float-right">Reset</button>
+        <button [disabled]="authorForm.invalid" (click)="updateAuthor()" type="submit" class="btn btn-success float-right mx-2">
+          Update Author</button>
+        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+        <button (click)="authorForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
       </div>
     </div>
   </form>

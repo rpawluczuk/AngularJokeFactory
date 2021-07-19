@@ -64,6 +64,18 @@ export class StructureCreationComponent implements OnInit {
       });
     });
   }
+  onBlockDeleteRequest(blockToDelete: Block){
+    this.blocks.splice(blockToDelete.position - 1, 2);
+    this.blocks.forEach(block => {
+      if (block.position > blockToDelete.position) {
+        block.position = block.position - 2;
+      }
+    });
+  }
+
+  onCancel() {
+    this.router.navigate(['/structures']);
+  }
 
   onChangedBlocks(changedBlocks: Block[]) {
     this.blocks = changedBlocks;

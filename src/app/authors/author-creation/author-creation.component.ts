@@ -29,9 +29,12 @@ export class AuthorCreationComponent implements OnInit {
   }
 
   addAuthor(){
-    console.log(this.authorForm.value);
     this.authorsService.addAuthor(this.authorForm.value).subscribe(() => {
       this.router.navigate(['/authors']);
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['/authors']);
   }
 }

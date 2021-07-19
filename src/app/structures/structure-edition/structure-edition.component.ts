@@ -42,7 +42,6 @@ export class StructureEditionComponent implements OnInit {
 
   loadBlocks() {
     this.blocksToUpdate = this.structure.blockScheme;
-    console.log(this.blocksToDelete);
     if (this.blocksToUpdate.length === 0) {
       this.blocksToUpdate = [
         this.blockFactory.createStandardBlock(0),
@@ -99,6 +98,10 @@ export class StructureEditionComponent implements OnInit {
         block.position = block.position - 2;
       }
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['/structures']);
   }
 
   onChangedBlocks(changedBlocks: Block[]) {

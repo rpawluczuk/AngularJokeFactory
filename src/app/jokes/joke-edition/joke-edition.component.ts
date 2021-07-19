@@ -129,4 +129,8 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     }
     return dropdownList;
   }
+
+  onCancel() {
+    this.router.navigate(['/jokes']);
+  }
 }
