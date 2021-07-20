@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {JokeBlock} from '../models/joke-block';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-joke-block-creator',
@@ -9,10 +10,23 @@ import {JokeBlock} from '../models/joke-block';
 export class JokeBlockCreatorComponent implements OnInit {
   @Input() jokeBlock: JokeBlock;
 
-  constructor() {
+  jokeBlockForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.jokeBlockForm = this.buildJokeBlockForm();
   }
 
+  private buildJokeBlockForm() {
+    return this.formBuilder.group({
+      jokeSnippet: [this.jokeBlock.jokeSnippet, Validators.required],
+    });
+  }
+
+  saveJokeBlockValue(): JokeBlock {
+    this.jokeBlock.jokeSnippet = this.jokeBlockForm.value.jokeSnippet;
+    return this.jokeBlock;
+  }
 }

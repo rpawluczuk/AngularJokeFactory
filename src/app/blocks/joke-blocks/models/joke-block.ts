@@ -4,7 +4,7 @@ import {BlockType} from '../../models/block-type';
 
 export class JokeBlock extends Block {
 
-  content: string = null;
+  jokeSnippet: string = null;
   structureBlock: StructureBlock = null;
 
   constructor(structureBlock: StructureBlock) {

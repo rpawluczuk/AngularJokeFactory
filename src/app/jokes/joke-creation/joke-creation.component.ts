@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
 import {Author} from '../../authors/models/author';
@@ -13,6 +13,7 @@ import {BlockType} from '../../blocks/models/block-type';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 import {Block} from '../../blocks/models/block';
 import {BlockFactory} from '../../blocks/models/block-factory';
+import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 
 @Component({
   selector: 'app-joke-creation',
@@ -20,6 +21,8 @@ import {BlockFactory} from '../../blocks/models/block-factory';
   styleUrls: ['./joke-creation.component.css']
 })
 export class JokeCreationComponent implements OnInit {
+  @ViewChildren('jokeBlockRef') jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;
+
   jokes: Joke[];
   authors: Author[];
   origins: Origin[];
@@ -40,7 +43,8 @@ export class JokeCreationComponent implements OnInit {
               private blocksService: BlocksService,
               private formBuilder: FormBuilder,
               private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadStructures();
@@ -59,7 +63,7 @@ export class JokeCreationComponent implements OnInit {
     };
   }
 
-  loadStructures(): void{
+  loadStructures(): void {
     this.structuresService.getStructures().subscribe((structures) => {
       this.allStructures = structures;
     });
@@ -85,7 +89,6 @@ export class JokeCreationComponent implements OnInit {
       structureBlocks
         .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
         .forEach(structureBlock => this.blocks.push(this.blockFactory.createJokeBlock(structureBlock)));
-      console.log(this.blocks);
     });
   }
 
@@ -107,22 +110,31 @@ export class JokeCreationComponent implements OnInit {
   }
 
   addJoke() {
-    let joke: Joke;
-    joke = this.jokeForm.value;
+    const joke: Joke = this.jokeForm.value;
     joke.structures = this.selectedStructuresByUser;
     this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
-      this.router.navigate(['/jokes']);
+      this.addJokeBlocks();
     });
+  }
+
+  addJokeBlocks(){
+    let i = 0;
+    this.jokeBlockComponents.forEach((child) => {
+      this.blocks[i] = child.saveJokeBlockValue();
+      i++;
+    });
+    console.log(this.blocks);
+    this.router.navigate(['/jokes']);
   }
 
   onCancel() {
     this.router.navigate(['/jokes']);
   }
 
-  getDropdownList(allStructures: Structure[]): Array<any>{
+  getDropdownList(allStructures: Structure[]): Array<any> {
     const dropdownList = [];
-    for (const structure of allStructures){
-      dropdownList.push({ id: structure.id, text: structure.name });
+    for (const structure of allStructures) {
+      dropdownList.push({id: structure.id, text: structure.name});
     }
     return dropdownList;
   }

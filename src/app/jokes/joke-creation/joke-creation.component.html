@@ -48,6 +48,7 @@
         <div [ngSwitch]="block.blockType">
           <div *ngSwitchCase="blockType.JOKE_BLOCK">
             <app-joke-block-creator
+              #jokeBlockRef
               [jokeBlock]="block">
             </app-joke-block-creator>
           </div>
