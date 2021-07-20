@@ -12,7 +12,6 @@ import {BlockFactory} from '../../models/block-factory';
 })
 export class StandardBlockCreatorComponent implements OnInit {
   @Input() standardBlock: StructureStandardBlock;
-  // @Input() inputBlocks: StructureBlock[];
   @Output() blockToDelete: EventEmitter<StructureBlock> = new EventEmitter<StructureBlock>();
 
   faWindowClose = faWindowClose;
@@ -38,18 +37,7 @@ export class StandardBlockCreatorComponent implements OnInit {
     return this.standardBlock;
   }
 
-  // Myślę, że muszę zmienić logikę tej funkcji tak by emitowała tylko blok któy chcę usunąć
   deleteRequest() {
-    // console.log(this.inputBlocks[position]);
-    // this.inputBlocks = this.inputBlocks
-    //   .filter(block => block.position !== position - 1)
-    //   .filter(block => block.position !== position);
-    // this.inputBlocks.forEach(block => {
-    //   if (block.position > position) {
-    //     block.position = block.position - 2;
-    //   }
-    // });
-    // console.log(this.inputBlocks);
     this.blockToDelete.emit(this.standardBlock);
   }
 }

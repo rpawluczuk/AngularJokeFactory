@@ -11,8 +11,8 @@ import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {BlockType} from '../../blocks/models/block-type';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
-import {Block} from "../../blocks/models/block";
-import {BlockFactory} from "../../blocks/models/block-factory";
+import {Block} from '../../blocks/models/block';
+import {BlockFactory} from '../../blocks/models/block-factory';
 
 @Component({
   selector: 'app-joke-creation',
@@ -85,6 +85,7 @@ export class JokeCreationComponent implements OnInit {
       structureBlocks
         .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
         .forEach(structureBlock => this.blocks.push(this.blockFactory.createJokeBlock(structureBlock)));
+      console.log(this.blocks);
     });
   }
 
