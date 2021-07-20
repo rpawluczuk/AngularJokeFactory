@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
-import {Block} from '../../models/block';
-import {BlockFactory} from '../../models/block-factory';
+import {Block} from '../models/block';
+import {BlockFactory} from '../models/block-factory';
 
 @Component({
     selector: 'app-blank-block',

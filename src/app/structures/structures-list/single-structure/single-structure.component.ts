@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Structure} from '../../models/structure';
 import {Router} from '@angular/router';
-import {BlockType} from '../../models/block-type';
-import {BlocksService} from "../../blocks/blocks.service";
+import {BlockType} from '../../../blocks/structure-blocks/models/block-type';
+import {BlocksService} from '../../../blocks/structure-blocks/blocks.service';
 
 @Component({
   selector: 'app-single-structure',

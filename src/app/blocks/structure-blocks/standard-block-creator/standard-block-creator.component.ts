@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {StandardBlock} from '../../models/standard-block';
+import {StandardBlock} from '../models/standard-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faWindowClose} from '@fortawesome/free-solid-svg-icons/faWindowClose';
-import {Block} from '../../models/block';
-import {BlockFactory} from '../../models/block-factory';
+import {Block} from '../models/block';
+import {BlockFactory} from '../models/block-factory';
 
 @Component({
   selector: 'app-standard-block-creator',

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StandardBlock} from '../../models/standard-block';
+import {StandardBlock} from '../models/standard-block';
 
 @Component({
     selector: 'app-standard-block',

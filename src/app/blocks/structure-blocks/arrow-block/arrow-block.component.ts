@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArrowBlock} from '../../models/arrow-block';
+import {ArrowBlock} from '../models/arrow-block';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({

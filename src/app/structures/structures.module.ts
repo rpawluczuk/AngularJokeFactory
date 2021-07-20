@@ -8,11 +8,11 @@ import {StructureEditionComponent} from './structure-edition/structure-edition.c
 import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {StandardBlockCreatorComponent} from './blocks/standard-block-creator/standard-block-creator.component';
-import {ArrowBlockComponent} from './blocks/arrow-block/arrow-block.component';
-import {ActionBlockComponent} from './blocks/action-block/action-block.component';
+import {StandardBlockCreatorComponent} from '../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
+import {ArrowBlockComponent} from '../blocks/structure-blocks/arrow-block/arrow-block.component';
+import {ActionBlockComponent} from '../blocks/structure-blocks/action-block/action-block.component';
 import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
-import { StandardBlockComponent } from './blocks/standard-block/standard-block.component';
+import { StandardBlockComponent } from '../blocks/structure-blocks/standard-block/standard-block.component';
 
 
 @NgModule({
@@ -33,10 +33,12 @@ import { StandardBlockComponent } from './blocks/standard-block/standard-block.c
         ReactiveFormsModule,
         FontAwesomeModule
     ],
-    exports: [
-        StructureCreationComponent,
-        StructuresListComponent
-    ],
+  exports: [
+    StructureCreationComponent,
+    StructuresListComponent,
+    StandardBlockComponent,
+    ArrowBlockComponent
+  ],
     providers: [
         StructureResolveService
     ]

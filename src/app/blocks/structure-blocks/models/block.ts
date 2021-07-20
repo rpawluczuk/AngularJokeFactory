@@ -1,5 +1,5 @@
 import {BlockType} from './block-type';
-import {Structure} from './structure';
+import {Structure} from '../../../structures/models/structure';
 
 export class Block {
 

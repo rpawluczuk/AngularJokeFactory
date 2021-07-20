@@ -8,7 +8,7 @@
     </div>
     <div class="row form-group">
       <label>Content</label>
-      <textarea formControlName="content" type="text" placeholder="content" class="form-control"></textarea>
+      <textarea formControlName="content" type="text" placeholder="content" class="form-control" rows="6"></textarea>
       <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
         This field must contain more than 3 characters!</p>
     </div>
@@ -41,6 +41,23 @@
           {{ origin.name }}
         </option>
       </select>
+    </div>
+    <div>
+      <h2> {{ selectedStructuresByUser[0]?.name }} </h2>
+      <div class="d-flex justify-content-center" *ngFor="let block of selectedStructuresByUser[0]?.blockScheme; let x = index">
+        <div [ngSwitch]="block?.blockType">
+          <div *ngSwitchCase="blockType.STANDARD_BLOCK">
+            <app-standard-block
+              [standardBlock]="block">
+            </app-standard-block>
+          </div>
+          <div *ngSwitchCase="blockType.ARROW_BLOCK">
+            <app-arrow-block
+              [arrowBlock]="block">
+            </app-arrow-block>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-12">

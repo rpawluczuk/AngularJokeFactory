@@ -1,4 +1,4 @@
-import {Block} from './block';
+import {Block} from '../../blocks/structure-blocks/models/block';
 
 export interface Structure {
   id: number;

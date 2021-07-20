@@ -3,11 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
-import {Block} from '../models/block';
-import {BlockType} from '../models/block-type';
-import {StandardBlockCreatorComponent} from '../blocks/standard-block-creator/standard-block-creator.component';
-import {BlockFactory} from '../models/block-factory';
-import {BlocksService} from '../blocks/blocks.service';
+import {Block} from '../../blocks/structure-blocks/models/block';
+import {BlockType} from '../../blocks/structure-blocks/models/block-type';
+import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
+import {BlockFactory} from '../../blocks/structure-blocks/models/block-factory';
+import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 
 @Component({
   selector: 'app-structure-details',

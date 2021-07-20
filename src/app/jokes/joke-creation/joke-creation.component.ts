@@ -9,6 +9,8 @@ import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
+import {BlockType} from '../../blocks/structure-blocks/models/block-type';
+import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 
 @Component({
   selector: 'app-joke-creation',
@@ -21,6 +23,7 @@ export class JokeCreationComponent implements OnInit {
   origins: Origin[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
+  blockType = BlockType;
 
   selectedStructuresByDefault = [];
   selectedStructuresByUser: Structure[];
@@ -30,6 +33,7 @@ export class JokeCreationComponent implements OnInit {
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
               private originService: OriginService,
+              private blocksService: BlocksService,
               private formBuilder: FormBuilder,
               private router: Router,
   ) {}
@@ -70,20 +74,18 @@ export class JokeCreationComponent implements OnInit {
   }
 
   onStructureSelect(item: any) {
-    console.log(item.id);
-    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
-    console.log(this.selectedStructuresByUser);
+    const selectedStructure = this.allStructures.find(s => s.id === item.id);
+    this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(blocks => {
+      selectedStructure.blockScheme = blocks;
+      this.selectedStructuresByUser.push(selectedStructure);
+    });
   }
 
   onStructureDeselect(item: any) {
-    console.log(item.id);
     let deselectedStructure: Structure;
     deselectedStructure = this.allStructures.find(s => s.id === item.id);
-    console.log(deselectedStructure);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
-    console.log(index);
     this.selectedStructuresByUser.splice(index, 1);
-    console.log(this.selectedStructuresByUser);
   }
 
   buildJokeForm() {
@@ -100,7 +102,6 @@ export class JokeCreationComponent implements OnInit {
     let joke: Joke;
     joke = this.jokeForm.value;
     joke.structures = this.selectedStructuresByUser;
-    console.log(joke);
     this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
       this.router.navigate(['/jokes']);
     });

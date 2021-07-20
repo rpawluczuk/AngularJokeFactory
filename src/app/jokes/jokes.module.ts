@@ -12,6 +12,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { JokesMainViewComponent } from './jokes-main-view/jokes-main-view.component';
 import { JokesPaginationComponent } from './jokes-main-view/jokes-pagination/jokes-pagination.component';
 import { JokesFilteringComponent } from './jokes-main-view/jokes-filering/jokes-filtering.component';
+import {StructuresModule} from "../structures/structures.module";
 
 
 @NgModule({
@@ -22,15 +23,16 @@ import { JokesFilteringComponent } from './jokes-main-view/jokes-filering/jokes-
     JokesMainViewComponent,
     JokesPaginationComponent,
     JokesFilteringComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgMultiSelectDropDownModule.forRoot(),
-    NgbModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgMultiSelectDropDownModule.forRoot(),
+        NgbModule,
+        StructuresModule
+    ],
   exports: [
     JokeCreationComponent,
     JokesListComponent,
