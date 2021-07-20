@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
-import {Block} from '../models/block';
-import {BlockFactory} from '../models/block-factory';
+import {StructureBlock} from '../models/structure-block';
+import {BlockFactory} from '../../models/block-factory';
 
 @Component({
     selector: 'app-blank-block',
@@ -9,9 +9,9 @@ import {BlockFactory} from '../models/block-factory';
     styleUrls: ['./action-block.component.css']
 })
 export class ActionBlockComponent implements OnInit {
-    @Input() inputBlocks: Block[];
-    @Input() actionBlock: Block;
-    @Output() outputBlocks: EventEmitter<Block[]> = new EventEmitter<Block[]>();
+    @Input() inputBlocks: StructureBlock[];
+    @Input() actionBlock: StructureBlock;
+    @Output() outputBlocks: EventEmitter<StructureBlock[]> = new EventEmitter<StructureBlock[]>();
     faArrowDown = faArrowDown;
     private blockFactory = new BlockFactory();
 
@@ -28,7 +28,7 @@ export class ActionBlockComponent implements OnInit {
         this.outputBlocks.emit(this.inputBlocks);
     }
 
-    down(block: Block) {
+    down(block: StructureBlock) {
         if (block.position === this.inputBlocks.length - 1) {
             this.inputBlocks[block.position] = block;
         } else {

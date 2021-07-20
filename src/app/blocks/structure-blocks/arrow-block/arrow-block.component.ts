@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArrowBlock} from '../models/arrow-block';
+import {StructureArrowBlock} from '../models/structure-arrow-block';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,7 +8,7 @@ import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
     styleUrls: ['./arrow-block.component.css']
 })
 export class ArrowBlockComponent implements OnInit {
-    @Input() arrowBlock: ArrowBlock;
+    @Input() arrowBlock: StructureArrowBlock;
     faLongArrowAltDown = faLongArrowAltDown;
 
     constructor() {

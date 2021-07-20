@@ -44,17 +44,10 @@
     </div>
     <div>
       <h2> {{ selectedStructuresByUser[0]?.name }} </h2>
-      <div class="d-flex justify-content-center" *ngFor="let block of selectedStructuresByUser[0]?.blockScheme; let x = index">
+      <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
         <div [ngSwitch]="block?.blockType">
-          <div *ngSwitchCase="blockType.STANDARD_BLOCK">
-            <app-standard-block
-              [standardBlock]="block">
-            </app-standard-block>
-          </div>
-          <div *ngSwitchCase="blockType.ARROW_BLOCK">
-            <app-arrow-block
-              [arrowBlock]="block">
-            </app-arrow-block>
+          <div *ngSwitchCase="blockType.JOKE_BLOCK">
+            jokeBlock
           </div>
         </div>
       </div>

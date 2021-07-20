@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Block} from './models/block';
+import {StructureBlock} from './models/structure-block';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +13,20 @@ export class BlocksService {
   constructor(private http: HttpClient) {
   }
 
-  getBlocksOfTheStructure(structureId: number): Observable<Block[]> {
-    return this.http.get<Block[]>(`${this.apiUrl}`
+  getBlocksOfTheStructure(structureId: number): Observable<StructureBlock[]> {
+    return this.http.get<StructureBlock[]>(`${this.apiUrl}`
       + `/with-structure/${structureId}`);
   }
 
-  addBlock(data): Observable<Block>{
-    return this.http.post<Block>(this.apiUrl, data);
+  addBlock(data): Observable<StructureBlock>{
+    return this.http.post<StructureBlock>(this.apiUrl, data);
   }
 
-  updateBlock(block: Block): Observable<Block> {
-    return this.http.put<Block>(this.apiUrl, block);
+  updateBlock(block: StructureBlock): Observable<StructureBlock> {
+    return this.http.put<StructureBlock>(this.apiUrl, block);
   }
 
-  removeBlock(id: number): Observable<Block> {
-    return this.http.delete<Block>(`${this.apiUrl}/${id}`);
+  removeBlock(id: number): Observable<StructureBlock> {
+    return this.http.delete<StructureBlock>(`${this.apiUrl}/${id}`);
   }
 }

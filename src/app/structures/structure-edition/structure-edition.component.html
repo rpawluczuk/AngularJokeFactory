@@ -25,7 +25,7 @@
     <div class="container">
       <div class="d-flex justify-content-center" *ngFor="let block of blocksToUpdate; let x = index">
         <div [ngSwitch]="block.blockType">
-          <div *ngSwitchCase="blockType.STANDARD_BLOCK">
+          <div *ngSwitchCase="blockType.STRUCTURE_STANDARD_BLOCK">
             <app-standard-block-creator
               #standardBlockRef
               [standardBlock]="block"

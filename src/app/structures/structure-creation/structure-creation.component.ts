@@ -2,11 +2,11 @@ import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
-import {Block} from '../../blocks/structure-blocks/models/block';
-import {BlockType} from '../../blocks/structure-blocks/models/block-type';
+import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
+import {BlockType} from '../../blocks/models/block-type';
 import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
 import {Structure} from '../models/structure';
-import {BlockFactory} from '../../blocks/structure-blocks/models/block-factory';
+import {BlockFactory} from '../../blocks/models/block-factory';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 
 @Component({
@@ -17,7 +17,7 @@ import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 export class StructureCreationComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
   structureForm: FormGroup;
-  blocks: Block[];
+  blocks: StructureBlock[];
   blockType = BlockType;
   private blockFactory = new BlockFactory();
 
@@ -64,7 +64,7 @@ export class StructureCreationComponent implements OnInit {
       });
     });
   }
-  onBlockDeleteRequest(blockToDelete: Block){
+  onBlockDeleteRequest(blockToDelete: StructureBlock){
     this.blocks.splice(blockToDelete.position - 1, 2);
     this.blocks.forEach(block => {
       if (block.position > blockToDelete.position) {
@@ -77,7 +77,7 @@ export class StructureCreationComponent implements OnInit {
     this.router.navigate(['/structures']);
   }
 
-  onChangedBlocks(changedBlocks: Block[]) {
+  onChangedBlocks(changedBlocks: StructureBlock[]) {
     this.blocks = changedBlocks;
   }
 }

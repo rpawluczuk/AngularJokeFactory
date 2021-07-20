@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {StandardBlock} from '../models/standard-block';
+import {StructureStandardBlock} from '../models/structure-standard-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faWindowClose} from '@fortawesome/free-solid-svg-icons/faWindowClose';
-import {Block} from '../models/block';
-import {BlockFactory} from '../models/block-factory';
+import {StructureBlock} from '../models/structure-block';
+import {BlockFactory} from '../../models/block-factory';
 
 @Component({
   selector: 'app-standard-block-creator',
@@ -11,9 +11,9 @@ import {BlockFactory} from '../models/block-factory';
   styleUrls: ['./standard-block-creator.component.css']
 })
 export class StandardBlockCreatorComponent implements OnInit {
-  @Input() standardBlock: StandardBlock;
-  // @Input() inputBlocks: Block[];
-  @Output() blockToDelete: EventEmitter<Block> = new EventEmitter<Block>();
+  @Input() standardBlock: StructureStandardBlock;
+  // @Input() inputBlocks: StructureBlock[];
+  @Output() blockToDelete: EventEmitter<StructureBlock> = new EventEmitter<StructureBlock>();
 
   faWindowClose = faWindowClose;
   standardBlockForm: FormGroup;
@@ -32,7 +32,7 @@ export class StandardBlockCreatorComponent implements OnInit {
     });
   }
 
-  saveStandardBlockValue(): StandardBlock {
+  saveStandardBlockValue(): StructureStandardBlock {
     this.standardBlock.title = this.standardBlockForm.value.name;
     this.standardBlock.description = this.standardBlockForm.value.description;
     return this.standardBlock;

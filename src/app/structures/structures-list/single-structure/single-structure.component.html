@@ -9,7 +9,7 @@
         <div *ngIf="isDetailsButtonClicked">
             <div class="d-flex justify-content-center" *ngFor="let block of structure?.blockScheme; let x = index">
                 <div [ngSwitch]="block?.blockType">
-                    <div *ngSwitchCase="blockType.STANDARD_BLOCK">
+                    <div *ngSwitchCase="blockType.STRUCTURE_STANDARD_BLOCK">
                         <app-standard-block
                                 [standardBlock]="block">
                         </app-standard-block>

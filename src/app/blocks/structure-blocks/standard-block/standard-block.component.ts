@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StandardBlock} from '../models/standard-block';
+import {StructureStandardBlock} from '../models/structure-standard-block';
 
 @Component({
     selector: 'app-standard-block',
@@ -7,7 +7,7 @@ import {StandardBlock} from '../models/standard-block';
     styleUrls: ['./standard-block.component.css']
 })
 export class StandardBlockComponent implements OnInit {
-    @Input() standardBlock: StandardBlock;
+    @Input() standardBlock: StructureStandardBlock;
 
     constructor() {
     }

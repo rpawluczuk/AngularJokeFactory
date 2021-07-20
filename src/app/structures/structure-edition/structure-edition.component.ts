@@ -3,10 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
-import {Block} from '../../blocks/structure-blocks/models/block';
-import {BlockType} from '../../blocks/structure-blocks/models/block-type';
+import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
+import {BlockType} from '../../blocks/models/block-type';
 import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
-import {BlockFactory} from '../../blocks/structure-blocks/models/block-factory';
+import {BlockFactory} from '../../blocks/models/block-factory';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class StructureEditionComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
   structure: Structure;
   structureForm: FormGroup;
-  blocksToDelete: Block[] = [];
-  blocksToUpdate: Block[] = [];
+  blocksToDelete: StructureBlock[] = [];
+  blocksToUpdate: StructureBlock[] = [];
   blockType = BlockType;
   private blockFactory = new BlockFactory();
 
@@ -91,7 +91,7 @@ export class StructureEditionComponent implements OnInit {
     });
   }
 
-  onBlockDeleteRequest(blockToDelete: Block) {
+  onBlockDeleteRequest(blockToDelete: StructureBlock) {
     this.blocksToDelete = this.blocksToDelete.concat(
       this.blocksToUpdate.splice(blockToDelete.position - 1, 2));
     this.blocksToUpdate.forEach(block => {
@@ -105,7 +105,7 @@ export class StructureEditionComponent implements OnInit {
     this.router.navigate(['/structures']);
   }
 
-  onChangedBlocks(changedBlocks: Block[]) {
+  onChangedBlocks(changedBlocks: StructureBlock[]) {
     this.blocksToUpdate = changedBlocks;
   }
 }
