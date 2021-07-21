@@ -11,9 +11,10 @@ import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {BlockType} from '../../blocks/models/block-type';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
-import {Block} from '../../blocks/models/block';
 import {BlockFactory} from '../../blocks/models/block-factory';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
+import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
+import {JokeBlocksService} from "../../blocks/joke-blocks/joke-blocks.service";
 
 @Component({
   selector: 'app-joke-creation',
@@ -29,7 +30,7 @@ export class JokeCreationComponent implements OnInit {
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
   blockType = BlockType;
-  blocks: Block[] = [];
+  jokeBlocks: JokeBlock[] = [];
   private blockFactory = new BlockFactory();
 
   selectedStructuresByDefault = [];
@@ -37,6 +38,7 @@ export class JokeCreationComponent implements OnInit {
   dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
+              private jokeBlocksService: JokeBlocksService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
               private originService: OriginService,
@@ -83,12 +85,12 @@ export class JokeCreationComponent implements OnInit {
 
   onStructureSelect(item: any) {
     const selectedStructure = this.allStructures.find(s => s.id === item.id);
-    this.blocks = [];
+    this.jokeBlocks = [];
     this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
       structureBlocks
         .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
-        .forEach(structureBlock => this.blocks.push(this.blockFactory.createJokeBlock(structureBlock)));
+        .forEach(structureBlock => this.jokeBlocks.push(this.blockFactory.createJokeBlock(structureBlock)));
     });
   }
 
@@ -118,13 +120,19 @@ export class JokeCreationComponent implements OnInit {
   }
 
   addJokeBlocks(){
-    let i = 0;
-    this.jokeBlockComponents.forEach((child) => {
-      this.blocks[i] = child.saveJokeBlockValue();
-      i++;
+    this.jokesService.getLastJoke().subscribe(joke => {
+      let i = 0;
+      this.jokeBlockComponents.forEach((child) => {
+        this.jokeBlocks[i] = child.saveJokeBlockValue();
+        i++;
+      });
+      this.jokeBlocks.forEach(jokeBlock => jokeBlock.joke = joke);
+      this.jokeBlocks.forEach(jokeBlock => {
+        this.jokeBlocksService.addJokeBlock(jokeBlock).subscribe(() => {
+          this.router.navigate(['/jokes']);
+        });
+      });
     });
-    console.log(this.blocks);
-    this.router.navigate(['/jokes']);
   }
 
   onCancel() {

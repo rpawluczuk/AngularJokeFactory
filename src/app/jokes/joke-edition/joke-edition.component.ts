@@ -58,20 +58,14 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   }
 
   onStructureSelect(item: any) {
-    console.log(item.id);
     this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
-    console.log(this.selectedStructuresByUser);
   }
 
   onStructureDeselect(item: any) {
-    console.log(item.id);
     let deselectedStructure: Structure;
     deselectedStructure = this.allStructures.find(s => s.id === item.id);
-    console.log(deselectedStructure);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
-    console.log(index);
     this.selectedStructuresByUser.splice(index, 1);
-    console.log(this.selectedStructuresByUser);
   }
 
   loadJoke() {
@@ -90,8 +84,9 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   }
 
   updateJoke(){
-    console.log(this.joke.id);
-    this.jokesService.updateJoke(this.joke.id, this.jokeForm.value).subscribe(() => {
+    const newJoke = this.jokeForm.value;
+    newJoke.id = this.joke.id;
+    this.jokesService.updateJoke(newJoke).subscribe(() => {
       this.router.navigate(['/jokes']);
     });
   }

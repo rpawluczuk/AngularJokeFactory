@@ -44,7 +44,7 @@
     </div>
     <div>
       <h2> {{ selectedStructuresByUser[0]?.name }} </h2>
-      <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
+      <div class="d-flex justify-content-center" *ngFor="let block of jokeBlocks; let x = index">
         <div [ngSwitch]="block.blockType">
           <div *ngSwitchCase="blockType.JOKE_BLOCK">
             <app-joke-block-creator

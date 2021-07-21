@@ -27,12 +27,16 @@ export class JokesService {
     return this.http.get<Joke>(`${this.apiUrl}/${id}` );
   }
 
+  getLastJoke(): Observable<Joke> {
+    return this.http.get<Joke>(`${this.apiUrl}/last` );
+  }
+
   addJoke(data): Observable<Joke>{
     return this.http.post<Joke>(this.apiUrl, data);
   }
 
-  updateJoke(id: number, data: any): Observable<Joke> {
-    return this.http.put<Joke>(`${this.apiUrl}/${id}`, data);
+  updateJoke(data: any): Observable<Joke> {
+    return this.http.put<Joke>(`${this.apiUrl}`, data);
   }
 
   removeJoke(id: number): Observable<Joke> {
