@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {JokesService} from '../jokes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Joke} from '../models/joke';
@@ -9,6 +9,12 @@ import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
+import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
+import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
+import {BlockType} from '../../blocks/models/block-type';
+import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {BlockFactory} from '../../blocks/models/block-factory';
+import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 
 @Component({
   selector: 'app-joke-details',
@@ -16,18 +22,24 @@ import {OriginService} from '../../origins/origin.service';
   styleUrls: ['./joke-edition.component.css']
 })
 export class JokeEditionComponent implements OnInit, AfterViewInit {
+  @ViewChildren('jokeBlockRef') jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;
+
   joke: Joke;
+  jokeBlocks: JokeBlock[];
   jokeForm: FormGroup;
   allStructures: Structure[] = [];
   authors: Author[];
   origins: Origin[];
+  private blockFactory = new BlockFactory();
 
   selectedStructuresByUser: Structure[];
   dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
+              private jokeBlocksService: JokeBlocksService,
               private formBuilder: FormBuilder,
               private structuresService: StructuresService,
+              private blocksService: BlocksService,
               private authorsService: AuthorsService,
               private originService: OriginService,
               private route: ActivatedRoute,
@@ -52,16 +64,27 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.selectedStructuresByUser = this.joke.structures;
+    console.log('na after wiev init');
+    console.log(this.jokeBlocks);
     this.jokeForm.patchValue({
       structures: this.loadSelectedStructuresByDefault()
     });
   }
 
   onStructureSelect(item: any) {
-    this.selectedStructuresByUser.push(this.allStructures.find(s => s.id === item.id));
+    const selectedStructure = this.allStructures.find(s => s.id === item.id);
+    this.jokeBlocks = [];
+    this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
+      this.selectedStructuresByUser.push(selectedStructure);
+      structureBlocks
+        .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
+        .forEach(structureBlock => this.jokeBlocks.push(this.blockFactory.createJokeBlock(structureBlock)));
+    });
+    this.selectedStructuresByUser.push();
   }
 
   onStructureDeselect(item: any) {
+    this.jokeBlocks = [];
     let deselectedStructure: Structure;
     deselectedStructure = this.allStructures.find(s => s.id === item.id);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
@@ -70,9 +93,18 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   loadJoke() {
     this.joke = this.route.snapshot.data.joke;
+    this.loadJokeBlocks();
   }
 
-  buildJokeForm(){
+  loadJokeBlocks() {
+    console.log(this.joke);
+    this.jokeBlocksService.getBlocksOfTheJoke(this.joke?.id).subscribe(jokeBlocks => {
+      console.log(jokeBlocks);
+      this.jokeBlocks = jokeBlocks;
+    });
+  }
+
+  buildJokeForm() {
     return this.formBuilder.group({
       title: [this.joke.title, Validators.required],
       content: [this.joke.content, Validators.minLength(3)],
@@ -83,11 +115,25 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateJoke(){
+  updateJoke() {
     const newJoke = this.jokeForm.value;
     newJoke.id = this.joke.id;
     this.jokesService.updateJoke(newJoke).subscribe(() => {
-      this.router.navigate(['/jokes']);
+      this.updateJokeBlocks();
+    });
+  }
+
+  updateJokeBlocks(){
+    let i = 0;
+    this.jokeBlockComponents.forEach((child) => {
+      this.jokeBlocks[i] = child.saveJokeBlockValue();
+      i++;
+    });
+    console.log(this.jokeBlocks);
+    this.jokeBlocks.forEach(jokeBlock => {
+      this.jokeBlocksService.updateJokeBlock(jokeBlock).subscribe(() => {
+        this.router.navigate(['/jokes']);
+      });
     });
   }
 
@@ -109,18 +155,18 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     });
   }
 
-  loadSelectedStructuresByDefault(): Array<any>{
+  loadSelectedStructuresByDefault(): Array<any> {
     const selectedStructuresByDefault = [];
-    for (const structure of this.joke.structures){
-      selectedStructuresByDefault.push({ id: structure.id, text: structure.name });
+    for (const structure of this.joke.structures) {
+      selectedStructuresByDefault.push({id: structure.id, text: structure.name});
     }
     return selectedStructuresByDefault;
   }
 
-  getDropdownList(allStructures: Structure[]): Array<any>{
+  getDropdownList(allStructures: Structure[]): Array<any> {
     const dropdownList = [];
-    for (const structure of allStructures){
-      dropdownList.push({ id: structure.id, text: structure.name });
+    for (const structure of allStructures) {
+      dropdownList.push({id: structure.id, text: structure.name});
     }
     return dropdownList;
   }

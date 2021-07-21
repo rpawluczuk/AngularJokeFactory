@@ -14,7 +14,7 @@ import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 import {BlockFactory} from '../../blocks/models/block-factory';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
-import {JokeBlocksService} from "../../blocks/joke-blocks/joke-blocks.service";
+import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 
 @Component({
   selector: 'app-joke-creation',
@@ -95,6 +95,7 @@ export class JokeCreationComponent implements OnInit {
   }
 
   onStructureDeselect(item: any) {
+    this.jokeBlocks = [];
     let deselectedStructure: Structure;
     deselectedStructure = this.allStructures.find(s => s.id === item.id);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
