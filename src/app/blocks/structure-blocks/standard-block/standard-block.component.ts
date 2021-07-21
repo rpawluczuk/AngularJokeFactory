@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StructureStandardBlock} from '../models/structure-standard-block';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
+import {StructureBlock} from '../models/structure-block';
 
 @Component({
   selector: 'app-standard-block',
@@ -8,16 +8,12 @@ import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./standard-block.component.css']
 })
 export class StandardBlockComponent implements OnInit {
-  @Input() standardBlock: StructureStandardBlock;
+  @Input() structureBlock: StructureBlock;
   faLongArrowAltDown = faLongArrowAltDown;
-
-  isFirst: boolean;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.isFirst = this.standardBlock.position === 0;
   }
-
 }

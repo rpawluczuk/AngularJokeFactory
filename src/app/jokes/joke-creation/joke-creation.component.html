@@ -3,7 +3,7 @@
   <form [formGroup]="jokeForm">
     <div class="row form-group">
       <label>Title</label>
-      <input  formControlName="title" type="text" class="form-control" placeholder="title">
+      <input formControlName="title" type="text" class="form-control" placeholder="title">
       <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is required!</p>
     </div>
     <div class="row form-group">
@@ -15,11 +15,11 @@
     <div>
       <label class="row">Structure</label>
       <ng-multiselect-dropdown class="row mb-2"
-        [placeholder]="'custom placeholder'"
-        [settings]="dropdownSettings"
-        [data]="getDropdownList(allStructures)"
-        (onSelect)="onStructureSelect($event)"
-        (onDeSelect)="onStructureDeselect($event)">
+                               [placeholder]="'custom placeholder'"
+                               [settings]="dropdownSettings"
+                               [data]="getDropdownList(allStructures)"
+                               (onSelect)="onStructureSelect($event)"
+                               (onDeSelect)="onStructureDeselect($event)">
       </ng-multiselect-dropdown>
     </div>
     <div class="row form-group">
@@ -45,20 +45,18 @@
     <div>
       <h2> {{ selectedStructuresByUser[0]?.name }} </h2>
       <div class="d-flex justify-content-center" *ngFor="let block of jokeBlocks; let x = index">
-        <div [ngSwitch]="block.blockType">
-          <div *ngSwitchCase="blockType.JOKE_BLOCK">
-            <app-joke-block-creator
-              #jokeBlockRef
-              [jokeBlock]="block">
-            </app-joke-block-creator>
-          </div>
-        </div>
+        <app-joke-block-creator
+          #jokeBlockRef
+          [jokeBlock]="block">
+        </app-joke-block-creator>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit" class="btn btn-success float-right mx-2">
-          Add Joke</button>
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"
+                class="btn btn-success float-right mx-2">
+          Add Joke
+        </button>
         <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
         <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
       </div>

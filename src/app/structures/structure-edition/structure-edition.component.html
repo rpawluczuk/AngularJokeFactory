@@ -24,29 +24,17 @@
 
     <div class="container">
       <div class="d-flex justify-content-center" *ngFor="let block of blocksToUpdate; let x = index">
-        <div [ngSwitch]="block.blockType">
-          <div *ngSwitchCase="blockType.STRUCTURE_STANDARD_BLOCK">
             <app-standard-block-creator
               #standardBlockRef
-              [standardBlock]="block"
+              [structureBlock]="block"
               (blockToDelete)="onBlockDeleteRequest($event)">
             </app-standard-block-creator>
-          </div>
+      </div>
 
-          <div *ngSwitchCase="blockType.ACTION_BLOCK">
-            <app-blank-block
-              [inputBlocks]="blocksToUpdate"
-              [actionBlock]="block"
-              (outputBlocks)="onChangedBlocks($event)">
-            </app-blank-block>
-          </div>
-
-          <div *ngSwitchCase="blockType.ARROW_BLOCK">
-            <app-arrow-block
-              [arrowBlock]="block">
-            </app-arrow-block>
-          </div>
-        </div>
+      <div class="d-flex flex-column justify-content-center">
+        <fa-icon [icon]="faArrowDown" size="7x" class="d-flex justify-content-center"
+                 (click)="addStructureBlockComponent()">
+        </fa-icon>
       </div>
     </div>
 

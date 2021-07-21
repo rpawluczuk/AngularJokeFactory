@@ -9,9 +9,7 @@ import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
-import {BlockType} from '../../blocks/models/block-type';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
-import {BlockFactory} from '../../blocks/models/block-factory';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
@@ -29,9 +27,7 @@ export class JokeCreationComponent implements OnInit {
   origins: Origin[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
-  blockType = BlockType;
   jokeBlocks: JokeBlock[] = [];
-  private blockFactory = new BlockFactory();
 
   selectedStructuresByDefault = [];
   selectedStructuresByUser: Structure[];
@@ -89,8 +85,7 @@ export class JokeCreationComponent implements OnInit {
     this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
       structureBlocks
-        .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
-        .forEach(structureBlock => this.jokeBlocks.push(this.blockFactory.createJokeBlock(structureBlock)));
+        .forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
     });
   }
 

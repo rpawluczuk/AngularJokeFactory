@@ -3,11 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
-import {BlockType} from '../../blocks/models/block-type';
 import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
 import {Structure} from '../models/structure';
-import {BlockFactory} from '../../blocks/models/block-factory';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-structure-creation',
@@ -17,9 +16,8 @@ import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
 export class StructureCreationComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
   structureForm: FormGroup;
-  blocks: StructureBlock[];
-  blockType = BlockType;
-  private blockFactory = new BlockFactory();
+  structureBlocks: StructureBlock[];
+  faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
               private blocksService: BlocksService,
@@ -29,9 +27,8 @@ export class StructureCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.structureForm = this.buildStructureForm();
-    this.blocks = [
-      this.blockFactory.createStandardBlock(0),
-      this.blockFactory.createActionBlock(1)
+    this.structureBlocks = [
+      new StructureBlock(0)
     ];
   }
 
@@ -53,11 +50,10 @@ export class StructureCreationComponent implements OnInit {
     this.structuresService.getLastStructure().subscribe(structure => {
       this.standardBlockComponents.forEach((child) => {
           const standardBlock = child.saveStandardBlockValue();
-          this.blocks[standardBlock.position] = standardBlock;
+          this.structureBlocks[standardBlock.position] = standardBlock;
       });
-      this.blocks = this.blocks.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
-      this.blocks.forEach(block => block.structure = structure);
-      this.blocks.forEach(block => {
+      this.structureBlocks.forEach(block => block.structure = structure);
+      this.structureBlocks.forEach(block => {
         this.blocksService.addBlock(block).subscribe(() => {
           this.router.navigate(['/structures']);
         });
@@ -65,8 +61,8 @@ export class StructureCreationComponent implements OnInit {
     });
   }
   onBlockDeleteRequest(blockToDelete: StructureBlock){
-    this.blocks.splice(blockToDelete.position - 1, 2);
-    this.blocks.forEach(block => {
+    this.structureBlocks.splice(blockToDelete.position - 1, 2);
+    this.structureBlocks.forEach(block => {
       if (block.position > blockToDelete.position) {
         block.position = block.position - 2;
       }
@@ -77,7 +73,7 @@ export class StructureCreationComponent implements OnInit {
     this.router.navigate(['/structures']);
   }
 
-  onChangedBlocks(changedBlocks: StructureBlock[]) {
-    this.blocks = changedBlocks;
+  addStructureBlockComponent(){
+    this.structureBlocks.push(new StructureBlock(this.structureBlocks.length));
   }
 }

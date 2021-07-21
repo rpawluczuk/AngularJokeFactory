@@ -15,30 +15,18 @@
         This field must contain more than 3 characters!</p>
     </div>
     <div class="container">
-      <div class="d-flex justify-content-center" *ngFor="let block of blocks; let x = index">
-        <div [ngSwitch]="block.blockType">
-          <div *ngSwitchCase="blockType.STRUCTURE_STANDARD_BLOCK">
+      <div class="d-flex justify-content-center" *ngFor="let block of structureBlocks; let x = index">
             <app-standard-block-creator
               #standardBlockRef
-              [standardBlock]="block"
+              [structureBlock]="block"
               (blockToDelete)="onBlockDeleteRequest($event)">
             </app-standard-block-creator>
-          </div>
+      </div>
 
-          <div *ngSwitchCase="blockType.ACTION_BLOCK">
-            <app-blank-block
-              [inputBlocks]="blocks"
-              [actionBlock]="block"
-              (outputBlocks)="onChangedBlocks($event)">
-            </app-blank-block>
-          </div>
-
-          <div *ngSwitchCase="blockType.ARROW_BLOCK">
-            <app-arrow-block
-              [arrowBlock]="block">
-            </app-arrow-block>
-          </div>
-        </div>
+      <div class="d-flex flex-column justify-content-center">
+        <fa-icon [icon]="faArrowDown" size="7x" class="d-flex justify-content-center"
+                 (click)="addStructureBlockComponent()">
+        </fa-icon>
       </div>
     </div>
     <div class="row">

@@ -4,10 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
-import {BlockType} from '../../blocks/models/block-type';
 import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
-import {BlockFactory} from '../../blocks/models/block-factory';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-structure-details',
@@ -20,8 +19,7 @@ export class StructureEditionComponent implements OnInit {
   structureForm: FormGroup;
   blocksToDelete: StructureBlock[] = [];
   blocksToUpdate: StructureBlock[] = [];
-  blockType = BlockType;
-  private blockFactory = new BlockFactory();
+  faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
               private blocksService: BlocksService,
@@ -44,12 +42,10 @@ export class StructureEditionComponent implements OnInit {
     this.blocksService.getBlocksOfTheStructure(this.structure?.id).subscribe((blocks) => {
       if (blocks.length === 0) {
         this.blocksToUpdate = [
-          this.blockFactory.createStandardBlock(0),
-          this.blockFactory.createActionBlock(1)
+          new StructureBlock(0)
         ];
       } else {
         this.blocksToUpdate = blocks;
-        this.blocksToUpdate.push(this.blockFactory.createActionBlock(this.blocksToUpdate.length));
       }
     });
   }
@@ -76,7 +72,6 @@ export class StructureEditionComponent implements OnInit {
       const standardBlock = child.saveStandardBlockValue();
       this.blocksToUpdate[standardBlock.position] = standardBlock;
     });
-    this.blocksToUpdate = this.blocksToUpdate.filter(block => block.blockType !== BlockType.ACTION_BLOCK);
     this.blocksToUpdate.forEach(block => block.structure = this.structure);
     this.blocksToUpdate.forEach(blockToUpdate => {
       this.blocksService.updateBlock(blockToUpdate).subscribe(() => {
@@ -105,7 +100,9 @@ export class StructureEditionComponent implements OnInit {
     this.router.navigate(['/structures']);
   }
 
-  onChangedBlocks(changedBlocks: StructureBlock[]) {
-    this.blocksToUpdate = changedBlocks;
+  addStructureBlockComponent(){
+    this.blocksToUpdate.push(
+      new StructureBlock(this.blocksToUpdate.length)
+    );
   }
 }

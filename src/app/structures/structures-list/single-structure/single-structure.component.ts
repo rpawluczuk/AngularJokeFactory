@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Structure} from '../../models/structure';
 import {Router} from '@angular/router';
-import {BlockType} from '../../../blocks/models/block-type';
 import {BlocksService} from '../../../blocks/structure-blocks/blocks.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class SingleStructureComponent implements OnInit {
   @Output() removedStructure: EventEmitter<number> = new EventEmitter<number>();
 
   isDetailsButtonClicked: boolean;
-  blockType = BlockType;
 
   constructor(private router: Router,
               private blocksService: BlocksService) {

@@ -1,15 +1,14 @@
 import {Structure} from '../../../structures/models/structure';
-import {Block} from '../../models/block';
 
-export class StructureBlock extends Block {
+export class StructureBlock {
 
+  id: number = null;
   title: string = null;
   description: string = null;
   position: number = null;
   structure: Structure = null;
 
   constructor(position: number) {
-    super();
     this.position = position;
   }
 }

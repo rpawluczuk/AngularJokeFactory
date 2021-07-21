@@ -1,16 +1,24 @@
-<div class="d-flex flex-column blockSize blockWithContent">
-    <div class="d-flex flex-row justify-content-end">
-        <fa-icon *ngIf="standardBlock.position > 1" [icon]="faWindowClose" size="2x"
-                 (click)="deleteRequest()">
-        </fa-icon>
-    </div>
-    <form [formGroup]="standardBlockForm">
-        <label>Name</label>
-        <input formControlName="name" type="text" class="form-control" placeholder="name">
+<div>
+  <div *ngIf="structureBlock.position !== 0" class="d-flex flex-column justify-content-center">
+    <fa-icon [icon]="faLongArrowAltDown" size="5x" class="d-flex justify-content-center"></fa-icon>
+  </div>
 
-        <label>Description</label>
-        <textarea formControlName="description" type="text" class="form-control" placeholder="description" rows="6">
+  <div class="d-flex flex-column blockSize blockWithContent">
+    <div class="d-flex flex-row justify-content-end">
+      <fa-icon *ngIf="structureBlock.position > 0" [icon]="faWindowClose" size="2x"
+               (click)="deleteRequest()">
+      </fa-icon>
+    </div>
+
+    <form [formGroup]="standardBlockForm">
+      <label>Name</label>
+      <input formControlName="name" type="text" class="form-control" placeholder="name">
+
+      <label>Description</label>
+      <textarea formControlName="description" type="text" class="form-control" placeholder="description" rows="6">
         </textarea>
     </form>
+  </div>
 </div>
+
 

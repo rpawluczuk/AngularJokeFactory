@@ -11,9 +11,7 @@ import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
-import {BlockType} from '../../blocks/models/block-type';
 import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
-import {BlockFactory} from '../../blocks/models/block-factory';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 
 @Component({
@@ -30,7 +28,6 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   allStructures: Structure[] = [];
   authors: Author[];
   origins: Origin[];
-  private blockFactory = new BlockFactory();
 
   selectedStructuresByUser: Structure[];
   dropdownSettings = {};
@@ -77,8 +74,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
       structureBlocks
-        .filter(block => block.blockType !== BlockType.ARROW_BLOCK)
-        .forEach(structureBlock => this.jokeBlocks.push(this.blockFactory.createJokeBlock(structureBlock)));
+        .forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
     });
     this.selectedStructuresByUser.push();
   }
