@@ -28,8 +28,10 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   allStructures: Structure[] = [];
   authors: Author[];
   origins: Origin[];
+  currentStructureIndex = 1;
+  currentStructure: Structure;
 
-  selectedStructuresByUser: Structure[];
+  selectedStructuresByUser: Structure[] = [];
   dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
@@ -61,28 +63,29 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.selectedStructuresByUser = this.joke.structures;
-    console.log('na after wiev init');
-    console.log(this.jokeBlocks);
+    if (this.selectedStructuresByUser.length > 0){
+      this.currentStructure = this.selectedStructuresByUser[1];
+    }
     this.jokeForm.patchValue({
       structures: this.loadSelectedStructuresByDefault()
     });
   }
 
-  onStructureSelect(item: any) {
-    const selectedStructure = this.allStructures.find(s => s.id === item.id);
-    this.jokeBlocks = [];
+  onStructureSelect(selectedField: any) {
+    const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
     this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
-      structureBlocks
-        .forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
+      structureBlocks.forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
+      if (this.selectedStructuresByUser.length === 1){
+        this.currentStructure = selectedStructure;
+      }
     });
-    this.selectedStructuresByUser.push();
   }
 
-  onStructureDeselect(item: any) {
+  onStructureDeselect(selectedField: any) {
     this.jokeBlocks = [];
     let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === item.id);
+    deselectedStructure = this.allStructures.find(s => s.id === selectedField.id);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
     this.selectedStructuresByUser.splice(index, 1);
   }
@@ -169,5 +172,10 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   onCancel() {
     this.router.navigate(['/jokes']);
+  }
+
+  changeCurrentStructure(index: number){
+    this.currentStructureIndex = index;
+    this.currentStructure = this.selectedStructuresByUser[index - 1];
   }
 }

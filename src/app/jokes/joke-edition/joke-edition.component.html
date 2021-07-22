@@ -8,70 +8,93 @@
 <p class="data-header">Edit {{ joke.title }}</p>
 <div class="data-container">
   <form [formGroup]="jokeForm">
-    <div class="row form-group">
-      <label>Title</label>
-      <input formControlName="title" type="text" class="form-control" placeholder="title">
-      <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is required!</p>
-    </div>
-    <div class="row form-group">
-      <label>Content</label>
-      <textarea formControlName="content" type="text" placeholder="content" class="form-control" rows="6"></textarea>
-      <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
-        This field must contain more than 3 characters!</p>
-    </div>
-    <div>
-      <label class="row">Structure</label>
-      <ng-multiselect-dropdown
-        class="row mb-2"
-        [placeholder]="'custom placeholder'"
-        [settings]="dropdownSettings"
-        [data]="getDropdownList(allStructures)"
-        formControlName="structures"
-        (onSelect)="onStructureSelect($event)"
-        (onDeSelect)="onStructureDeselect($event)">
-      </ng-multiselect-dropdown>
-    </div>
-    <div class="row form-group">
-      <label>Author</label>
-      <select class="form-control" formControlName="author" data-toggle="tooltip"
-              data-placement="right" title="Select Author Branch">
-        <option *ngIf="joke.author!==null" [ngValue]="joke.author"> {{joke.author.name + ' ' + joke.author.surname}} </option>
-        <option *ngIf="joke.author===null" [ngValue]="joke.author">--Select Author--</option>
-        <option *ngFor="let author of authors" [ngValue]="author">
-          {{author.name + ' ' + author.surname}}
-        </option>
-      </select>
-    </div>
-    <div class="row form-group">
-      <label>Origin</label>
-      <select class="form-control" formControlName="origin" data-toggle="tooltip"
-              data-placement="right" title="Select Origin Branch">
-        <option *ngIf="joke.origin!==null" [ngValue]="joke.origin"> {{ joke.origin.name }} </option>
-        <option *ngIf="joke.origin===null" [ngValue]="joke.origin">--Select Origin--</option>
-        <option *ngFor="let origin of origins" [ngValue]="origin">
-          {{ origin.name }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <div class="d-flex justify-content-center" *ngFor="let jokeBlock of jokeBlocks; let x = index">
-        <app-joke-block-creator
-          #jokeBlockRef
-          [jokeBlock]="jokeBlock">
-        </app-joke-block-creator>
+    <div class="d-flex flex-row">
+      <!--    Left column-->
+      <div class="d-flex flex-column col-6 p-4">
+        <div class="row form-group">
+          <label>Title</label>
+          <input formControlName="title" type="text" class="form-control" placeholder="title">
+          <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is
+            required!</p>
+        </div>
+        <div class="row form-group">
+          <label>Content</label>
+          <textarea formControlName="content" type="text" placeholder="content" class="form-control"
+                    rows="6"></textarea>
+          <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
+            This field must contain more than 3 characters!</p>
+        </div>
+        <div>
+          <label class="row">Structure</label>
+          <ng-multiselect-dropdown
+            class="row mb-2"
+            [placeholder]="'custom placeholder'"
+            [settings]="dropdownSettings"
+            [data]="getDropdownList(allStructures)"
+            formControlName="structures"
+            (onSelect)="onStructureSelect($event)"
+            (onDeSelect)="onStructureDeselect($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="row form-group">
+          <label>Author</label>
+          <select class="form-control" formControlName="author" data-toggle="tooltip"
+                  data-placement="right" title="Select Author Branch">
+            <option *ngIf="joke.author!==null"
+                    [ngValue]="joke.author"> {{joke.author.name + ' ' + joke.author.surname}} </option>
+            <option *ngIf="joke.author===null" [ngValue]="joke.author">--Select Author--</option>
+            <option *ngFor="let author of authors" [ngValue]="author">
+              {{author.name + ' ' + author.surname}}
+            </option>
+          </select>
+        </div>
+        <div class="row form-group">
+          <label>Origin</label>
+          <select class="form-control" formControlName="origin" data-toggle="tooltip"
+                  data-placement="right" title="Select Origin Branch">
+            <option *ngIf="joke.origin!==null" [ngValue]="joke.origin"> {{ joke.origin.name }} </option>
+            <option *ngIf="joke.origin===null" [ngValue]="joke.origin">--Select Origin--</option>
+            <option *ngFor="let origin of origins" [ngValue]="origin">
+              {{ origin.name }}
+            </option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button [disabled]="jokeForm.invalid" (click)="updateJoke()" type="submit"
+                    class="btn btn-success float-right mx-2">
+              Update Joke
+            </button>
+            <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+            <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button [disabled]="jokeForm.invalid" (click)="updateJoke()" type="submit" class="btn btn-success float-right mx-2">
-          Update Joke</button>
-        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
-        <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+      <!--    Right column-->
+      <div class="d-flex flex-column align-items-center col-6 p-4">
+        <ngb-pagination
+          [(page)]="currentStructureIndex"
+          [pageSize]="1"
+          [collectionSize]="selectedStructuresByUser?.length"
+          [maxSize]="5"
+          [boundaryLinks]="true"
+          (pageChange)="changeCurrentStructure($event)"
+          class="justify-content-center mr-4">
+        </ngb-pagination>
+        <h2> {{ selectedStructuresByUser[currentStructureIndex - 1]?.name }} </h2>
+        <div *ngFor="let jokeBlock of jokeBlocks; let x = index">
+          <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
+            <app-joke-block-creator
+              #jokeBlockRef
+              [jokeBlock]="jokeBlock">
+            </app-joke-block-creator>
+          </div>
+        </div>
       </div>
     </div>
   </form>
 
-<!--  <pre> {{ jokeForm.value | json }} </pre>-->
-<!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
-<!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
+  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
+  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
 </div>

@@ -120,10 +120,13 @@ export class JokeCreationComponent implements OnInit {
 
   addJokeBlocks(){
     this.jokesService.getLastJoke().subscribe(joke => {
-      let i = 0;
       this.jokeBlockComponents.forEach((child) => {
-        this.jokeBlocks[i] = child.saveJokeBlockValue();
-        i++;
+        const jokeBlockFromForm = child.saveJokeBlockValue();
+        this.jokeBlocks.forEach((jokeBlock, index) => {
+          if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
+            this.jokeBlocks[index] = jokeBlockFromForm;
+          }
+        });
       });
       this.jokeBlocks.forEach(jokeBlock => jokeBlock.joke = joke);
       this.jokeBlocks.forEach(jokeBlock => {
@@ -146,8 +149,16 @@ export class JokeCreationComponent implements OnInit {
     return dropdownList;
   }
 
-  changeCurrentStructure(index: number){
-    this.currentStructureIndex = index;
-    this.currentStructure = this.selectedStructuresByUser[index - 1];
+  changeCurrentStructure(SelectedStructureIndex: number){
+    this.currentStructureIndex = SelectedStructureIndex;
+    this.currentStructure = this.selectedStructuresByUser[SelectedStructureIndex - 1];
+    this.jokeBlockComponents.forEach((child) => {
+      const jokeBlockFromForm = child.saveJokeBlockValue();
+      this.jokeBlocks.forEach((jokeBlock, jokeBlockIndex) => {
+        if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
+          this.jokeBlocks[jokeBlockIndex] = jokeBlockFromForm;
+        }
+      });
+    });
   }
 }
