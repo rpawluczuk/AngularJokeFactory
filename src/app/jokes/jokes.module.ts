@@ -14,7 +14,10 @@ import { JokesPaginationComponent } from './jokes-main-view/jokes-pagination/jok
 import { JokesFilteringComponent } from './jokes-main-view/jokes-filering/jokes-filtering.component';
 import {StructuresModule} from '../structures/structures.module';
 import {JokeBlockCreatorComponent} from '../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { SingleJokeComponent } from './jokes-main-view/jokes-list/single-joke/single-joke.component';
+import {JokeBlockComponent} from "../blocks/joke-blocks/joke-block/joke-block.component";
+
 
 
 
@@ -26,19 +29,21 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     JokesMainViewComponent,
     JokesPaginationComponent,
     JokesFilteringComponent,
-    JokeBlockCreatorComponent
+    JokeBlockCreatorComponent,
+    SingleJokeComponent,
+    JokeBlockComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule,
-        ReactiveFormsModule,
-        FormsModule,
-        NgMultiSelectDropDownModule.forRoot(),
-        NgbModule,
-        StructuresModule,
-        FontAwesomeModule,
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    NgbModule,
+    StructuresModule,
+    FontAwesomeModule,
+  ],
   exports: [
     JokeCreationComponent,
     JokesListComponent,

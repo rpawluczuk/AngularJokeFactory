@@ -1,38 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Joke} from '../../models/joke';
-import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-jokes-list',
-    templateUrl: './jokes-list.component.html',
-    styleUrls: ['./jokes-list.component.css']
+  selector: 'app-jokes-list',
+  templateUrl: './jokes-list.component.html',
+  styleUrls: ['./jokes-list.component.css']
 })
 export class JokesListComponent implements OnInit {
-    @Input() jokes: Joke[];
-    @Output() removedJoke: EventEmitter<number> = new EventEmitter<number>();
+  @Input() jokes: Joke[];
+  @Output() removeJokeRequest: EventEmitter<number> = new EventEmitter<number>();
 
-    constructor(private router: Router) {
-    }
+  constructor() {
+  }
 
-    ngOnInit(): void {
-        console.log('jokes-list');
-        console.log(this.jokes);
-    }
+  ngOnInit(): void {
+  }
 
-    removeJoke(joke: Joke, event) {
-        event.stopPropagation();
-        this.removedJoke.emit(joke.id);
-    }
-
-    goToJokeEdition(joke: Joke) {
-        this.router.navigate(['/jokes', joke.id]);
-    }
-
-    getAuthorNameAndSurname(joke: Joke): string {
-        if (joke.author === undefined || joke.author === null) {
-            return 'any author';
-        } else {
-            return joke.author.name + ' ' + joke.author.surname;
-        }
-    }
+  passRemoveJokeRequest(jokeIDToRemove) {
+    this.removeJokeRequest.emit(jokeIDToRemove);
+  }
 }

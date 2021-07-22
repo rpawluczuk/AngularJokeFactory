@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokeBlock} from './models/joke-block';
-import {StructureBlock} from "../structure-blocks/models/structure-block";
 
 @Injectable({
   providedIn: 'root'
