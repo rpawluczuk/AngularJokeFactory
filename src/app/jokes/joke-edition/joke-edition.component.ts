@@ -64,7 +64,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.selectedStructuresByUser = this.joke.structures;
     if (this.selectedStructuresByUser.length > 0){
-      this.currentStructure = this.selectedStructuresByUser[1];
+      this.currentStructure = this.selectedStructuresByUser[0];
     }
     this.jokeForm.patchValue({
       structures: this.loadSelectedStructuresByDefault()
@@ -123,12 +123,14 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   }
 
   updateJokeBlocks(){
-    let i = 0;
     this.jokeBlockComponents.forEach((child) => {
-      this.jokeBlocks[i] = child.saveJokeBlockValue();
-      i++;
+      const jokeBlockFromForm = child.saveJokeBlockValue();
+      this.jokeBlocks.forEach((jokeBlock, index) => {
+        if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
+          this.jokeBlocks[index] = jokeBlockFromForm;
+        }
+      });
     });
-    console.log(this.jokeBlocks);
     this.jokeBlocks.forEach(jokeBlock => {
       this.jokeBlocksService.updateJokeBlock(jokeBlock).subscribe(() => {
         this.router.navigate(['/jokes']);
@@ -174,8 +176,16 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/jokes']);
   }
 
-  changeCurrentStructure(index: number){
-    this.currentStructureIndex = index;
-    this.currentStructure = this.selectedStructuresByUser[index - 1];
+  changeCurrentStructure(SelectedStructureIndex: number){
+    this.currentStructureIndex = SelectedStructureIndex;
+    this.currentStructure = this.selectedStructuresByUser[SelectedStructureIndex - 1];
+    this.jokeBlockComponents.forEach((child) => {
+      const jokeBlockFromForm = child.saveJokeBlockValue();
+      this.jokeBlocks.forEach((jokeBlock, jokeBlockIndex) => {
+        if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
+          this.jokeBlocks[jokeBlockIndex] = jokeBlockFromForm;
+        }
+      });
+    });
   }
 }
