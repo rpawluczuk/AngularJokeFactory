@@ -28,6 +28,8 @@ export class JokeCreationComponent implements OnInit {
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
   jokeBlocks: JokeBlock[] = [];
+  currentStructureIndex = 0;
+  currentStructure: Structure;
 
   selectedStructuresByDefault = [];
   selectedStructuresByUser: Structure[];
@@ -79,20 +81,21 @@ export class JokeCreationComponent implements OnInit {
     });
   }
 
-  onStructureSelect(item: any) {
-    const selectedStructure = this.allStructures.find(s => s.id === item.id);
-    this.jokeBlocks = [];
+  onStructureSelect(selectedField: any) {
+    const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
     this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
-      structureBlocks
-        .forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
+      structureBlocks.forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
+      if (this.selectedStructuresByUser.length === 1){
+        this.currentStructure = selectedStructure;
+      }
     });
   }
 
-  onStructureDeselect(item: any) {
-    this.jokeBlocks = [];
+  onStructureDeselect(selectedField: any) {
+    this.jokeBlocks = this.jokeBlocks.filter(jokeBlock => jokeBlock.structureBlock.structure.id !== selectedField.id);
     let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === item.id);
+    deselectedStructure = this.allStructures.find(s => s.id === selectedField.id);
     const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
     this.selectedStructuresByUser.splice(index, 1);
   }
@@ -141,5 +144,10 @@ export class JokeCreationComponent implements OnInit {
       dropdownList.push({id: structure.id, text: structure.name});
     }
     return dropdownList;
+  }
+
+  changeCurrentStructure(index: number){
+    this.currentStructureIndex = index;
+    this.currentStructure = this.selectedStructuresByUser[index - 1];
   }
 }

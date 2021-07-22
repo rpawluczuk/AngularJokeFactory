@@ -42,21 +42,32 @@
         </option>
       </select>
     </div>
+<!--    Tutaj jest block joke-->
     <div>
-      <h2> {{ selectedStructuresByUser[0]?.name }} </h2>
-      <div class="d-flex justify-content-center" *ngFor="let block of jokeBlocks; let x = index">
-        <app-joke-block-creator
-          #jokeBlockRef
-          [jokeBlock]="block">
-        </app-joke-block-creator>
+      <ngb-pagination
+        [(page)]="currentStructureIndex"
+        [pageSize]="1"
+        [collectionSize]="selectedStructuresByUser?.length"
+        [maxSize]="5"
+        [boundaryLinks]="true"
+        (pageChange)="changeCurrentStructure($event)"
+        class="mr-4">
+      </ngb-pagination>
+      <h2> {{ selectedStructuresByUser[currentStructureIndex - 1]?.name }} </h2>
+      <div class="d-flex justify-content-center" *ngFor="let jokeBlock of jokeBlocks; let x = index">
+        <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
+          <app-joke-block-creator
+            #jokeBlockRef
+            [jokeBlock]="jokeBlock">
+          </app-joke-block-creator>
+        </div>
       </div>
     </div>
+<!--    Tutaj są przyciski-->
     <div class="row">
       <div class="col-sm-12">
         <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"
-                class="btn btn-success float-right mx-2">
-          Add Joke
-        </button>
+                class="btn btn-success float-right mx-2">Add Joke</button>
         <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
         <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
       </div>

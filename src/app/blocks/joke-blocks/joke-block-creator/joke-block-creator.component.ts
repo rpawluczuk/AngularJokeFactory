@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {JokeBlock} from '../models/joke-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-joke-block-creator',
@@ -10,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class JokeBlockCreatorComponent implements OnInit {
   @Input() jokeBlock: JokeBlock;
 
+  faLongArrowAltDown = faLongArrowAltDown;
   jokeBlockForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
