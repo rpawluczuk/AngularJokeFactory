@@ -17,8 +17,9 @@ export class SingleJokeComponent implements OnInit {
 
   structuresOfTheJoke: Structure[];
   currentStructure: Structure;
-  jokeBlocks: JokeBlock[];
+  jokeBlocks: JokeBlock[] = [];
   isDetailsButtonClicked: boolean;
+  currentStructureIndex = 1;
 
   constructor(private router: Router,
               private jokeBlocksService: JokeBlocksService,
@@ -68,5 +69,10 @@ export class SingleJokeComponent implements OnInit {
     } else {
       return joke.author.name + ' ' + joke.author.surname;
     }
+  }
+
+  changeCurrentStructure(SelectedStructureIndex: number){
+    this.currentStructureIndex = SelectedStructureIndex;
+    this.currentStructure = this.structuresOfTheJoke[SelectedStructureIndex - 1];
   }
 }
