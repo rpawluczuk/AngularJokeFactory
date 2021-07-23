@@ -138,6 +138,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
         }
       });
     });
+    this.jokeBlocks.forEach(jokeBlock => jokeBlock.joke = this.joke);
     this.jokeBlocks.forEach(jokeBlock => {
       this.jokeBlocksService.updateJokeBlock(jokeBlock).subscribe(() => {
         this.router.navigate(['/jokes']);
