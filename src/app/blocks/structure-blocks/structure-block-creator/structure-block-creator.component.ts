@@ -5,10 +5,10 @@ import {StructureBlock} from '../models/structure-block';
 
 @Component({
   selector: 'app-standard-block-creator',
-  templateUrl: './standard-block-creator.component.html',
-  styleUrls: ['./standard-block-creator.component.css']
+  templateUrl: './structure-block-creator.component.html',
+  styleUrls: ['./structure-block-creator.component.css']
 })
-export class StandardBlockCreatorComponent implements OnInit {
+export class StructureBlockCreatorComponent implements OnInit {
   @Input() structureBlock: StructureBlock;
   @Output() blockToDelete: EventEmitter<StructureBlock> = new EventEmitter<StructureBlock>();
 

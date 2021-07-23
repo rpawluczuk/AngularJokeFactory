@@ -4,10 +4,10 @@ import {StructureBlock} from '../models/structure-block';
 
 @Component({
   selector: 'app-standard-block',
-  templateUrl: './standard-block.component.html',
-  styleUrls: ['./standard-block.component.css']
+  templateUrl: './structure-block.component.html',
+  styleUrls: ['./structure-block.component.css']
 })
-export class StandardBlockComponent implements OnInit {
+export class StructureBlockComponent implements OnInit {
   @Input() structureBlock: StructureBlock;
   faLongArrowAltDown = faLongArrowAltDown;
 

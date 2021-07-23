@@ -11,7 +11,7 @@ import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
-import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 
 @Component({
@@ -38,7 +38,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
               private jokeBlocksService: JokeBlocksService,
               private formBuilder: FormBuilder,
               private structuresService: StructuresService,
-              private blocksService: BlocksService,
+              private structureBlocksService: StructureBlocksService,
               private authorsService: AuthorsService,
               private originService: OriginService,
               private route: ActivatedRoute,
@@ -73,7 +73,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   onStructureSelect(selectedField: any) {
     const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
-    this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
+    this.structureBlocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
       this.selectedStructuresByUser.push(selectedStructure);
       structureBlocks.forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
       if (this.selectedStructuresByUser.length === 1){
@@ -96,9 +96,16 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
   }
 
   loadJokeBlocks() {
-    console.log(this.joke);
     this.jokeBlocksService.getBlocksOfTheJoke(this.joke?.id).subscribe(jokeBlocks => {
-      console.log(jokeBlocks);
+      if (jokeBlocks.length === 0 && this.joke.structures.length > 0){
+        this.joke.structures.forEach(structure => {
+          this.structureBlocksService.getBlocksOfTheStructure(structure.id).subscribe(structureBlocks => {
+            structureBlocks.forEach(structureBlock => {
+              this.jokeBlocks.push(new JokeBlock(structureBlock));
+            });
+          });
+        });
+      }
       this.jokeBlocks = jokeBlocks;
     });
   }

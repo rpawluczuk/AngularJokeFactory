@@ -9,7 +9,7 @@ import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
-import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
@@ -40,7 +40,7 @@ export class JokeCreationComponent implements OnInit {
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
               private originService: OriginService,
-              private blocksService: BlocksService,
+              private blocksService: StructureBlocksService,
               private formBuilder: FormBuilder,
               private router: Router,
   ) {

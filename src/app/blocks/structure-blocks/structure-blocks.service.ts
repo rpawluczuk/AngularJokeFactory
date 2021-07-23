@@ -6,7 +6,7 @@ import {StructureBlock} from './models/structure-block';
 @Injectable({
   providedIn: 'root'
 })
-export class BlocksService {
+export class StructureBlocksService {
 
   private apiUrl = 'http://localhost:8080/api/blocks';
 

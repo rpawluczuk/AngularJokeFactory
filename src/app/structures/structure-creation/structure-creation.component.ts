@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
-import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
+import {StructureBlockCreatorComponent} from '../../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
 import {Structure} from '../models/structure';
-import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,13 +14,13 @@ import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./structure-creation.component.css']
 })
 export class StructureCreationComponent implements OnInit {
-  @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
+  @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
   structureForm: FormGroup;
   structureBlocks: StructureBlock[];
   faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
-              private blocksService: BlocksService,
+              private blocksService: StructureBlocksService,
               private formBuilder: FormBuilder,
               private router: Router) {
   }

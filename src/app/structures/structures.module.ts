@@ -8,9 +8,9 @@ import {StructureEditionComponent} from './structure-edition/structure-edition.c
 import {StructureResolveService} from './structure-resolve.service';
 import {StructureCreationComponent} from './structure-creation/structure-creation.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {StandardBlockCreatorComponent} from '../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
+import {StructureBlockCreatorComponent} from '../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
 import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
-import { StandardBlockComponent } from '../blocks/structure-blocks/standard-block/standard-block.component';
+import { StructureBlockComponent } from '../blocks/structure-blocks/structure-block/structure-block.component';
 
 
 @NgModule({
@@ -18,9 +18,9 @@ import { StandardBlockComponent } from '../blocks/structure-blocks/standard-bloc
         StructuresListComponent,
         StructureEditionComponent,
         StructureCreationComponent,
-        StandardBlockCreatorComponent,
+        StructureBlockCreatorComponent,
         SingleStructureComponent,
-        StandardBlockComponent
+        StructureBlockComponent
     ],
     imports: [
         CommonModule,
@@ -32,7 +32,7 @@ import { StandardBlockComponent } from '../blocks/structure-blocks/standard-bloc
   exports: [
     StructureCreationComponent,
     StructuresListComponent,
-    StandardBlockComponent
+    StructureBlockComponent
   ],
     providers: [
         StructureResolveService

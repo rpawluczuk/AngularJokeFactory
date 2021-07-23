@@ -4,8 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
-import {StandardBlockCreatorComponent} from '../../blocks/structure-blocks/standard-block-creator/standard-block-creator.component';
-import {BlocksService} from '../../blocks/structure-blocks/blocks.service';
+import {StructureBlockCreatorComponent} from '../../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
+import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,7 +14,7 @@ import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./structure-edition.component.css']
 })
 export class StructureEditionComponent implements OnInit {
-  @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StandardBlockCreatorComponent>;
+  @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
   structure: Structure;
   structureForm: FormGroup;
   blocksToDelete: StructureBlock[] = [];
@@ -22,7 +22,7 @@ export class StructureEditionComponent implements OnInit {
   faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
-              private blocksService: BlocksService,
+              private blocksService: StructureBlocksService,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router) {

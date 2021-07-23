@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Structure} from '../../models/structure';
 import {Router} from '@angular/router';
-import {BlocksService} from '../../../blocks/structure-blocks/blocks.service';
+import {StructureBlocksService} from '../../../blocks/structure-blocks/structure-blocks.service';
 
 @Component({
   selector: 'app-single-structure',
@@ -15,7 +15,7 @@ export class SingleStructureComponent implements OnInit {
   isDetailsButtonClicked: boolean;
 
   constructor(private router: Router,
-              private blocksService: BlocksService) {
+              private blocksService: StructureBlocksService) {
   }
 
   ngOnInit(): void {
