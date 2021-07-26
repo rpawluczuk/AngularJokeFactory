@@ -7,6 +7,7 @@ import {OriginDetailsComponent} from './origin-details/origin-details.component'
 import {OriginListComponent} from './origin-list/origin-list.component';
 import {OriginCreationComponent} from './origin-creation/origin-creation.component';
 import {OriginResolveService} from './origin-resolve.service';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 
@@ -16,12 +17,13 @@ import {OriginResolveService} from './origin-resolve.service';
     OriginListComponent,
     OriginCreationComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FontAwesomeModule
+    ],
   exports: [
     OriginCreationComponent,
     OriginListComponent

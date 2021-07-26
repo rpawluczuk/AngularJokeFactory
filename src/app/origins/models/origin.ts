@@ -1,4 +1,4 @@
-export interface Origin {
+export class Origin {
   id: number;
   name: string;
   lastUpdated: string;

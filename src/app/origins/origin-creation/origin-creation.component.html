@@ -1,4 +1,4 @@
-<p class="data-header">Add a new origin</p>
+<p class="data-header" xmlns="http://www.w3.org/1999/html">Add a new origin</p>
 <div class="data-container">
   <form [formGroup]="originForm">
     <div class="row form-group">
@@ -6,12 +6,23 @@
       <input formControlName="name" type="text" class="form-control" placeholder="name">
       <p *ngIf="!originForm.get('name').valid && originForm.get('name').dirty" class="error">This field is required!</p>
     </div>
-    <div class="row form-group">
-      <label>Connected origins</label>
+    <div>
+      <label class="row">Connected origins</label>
+      <div *ngFor="let subOrigin of subOrigins; let i = index" class="d-flex flex-row py-2">
+        <div *ngIf="i !== subOrigins.length - 1; else subOriginEmptyForm">
+          <fa-icon [icon]="faMinusCircle" (click)="removeSubOrigin(i)" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+        </div>
+        <input type="text" name="origin" list="origins" class="d-flex justify-content-center">
+        <datalist id="origins">
+          <option *ngFor="let origin of origins" [ngValue]="origin">
+            {{ origin.name }}
+          </option>
+        </datalist>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button [disabled]="originForm.invalid" (click)="addOrigin()" type="submit" class="btn btn-success float-right mx-2">
+        <button [disabled]="originForm.invalid" (click)="saveOrigin()" type="submit" class="btn btn-success float-right mx-2">
           Add Origin</button>
         <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
         <button (click)="originForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
@@ -23,3 +34,7 @@
   <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
   <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
 </div>
+
+<ng-template #subOriginEmptyForm>
+  <fa-icon [icon]="faPlusCircle" (click)="addSubOrigin()" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+</ng-template>
