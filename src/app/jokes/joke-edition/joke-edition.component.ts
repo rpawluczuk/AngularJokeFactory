@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {JokesService} from '../jokes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Joke} from '../models/joke';
@@ -19,7 +19,7 @@ import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-cre
   templateUrl: './joke-edition.component.html',
   styleUrls: ['./joke-edition.component.css']
 })
-export class JokeEditionComponent implements OnInit, AfterViewInit {
+export class JokeEditionComponent implements OnInit, AfterContentInit {
   @ViewChildren('jokeBlockRef') jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;
 
   joke: Joke;
@@ -61,7 +61,7 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
     };
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     this.selectedStructuresByUser = this.joke.structures;
     if (this.selectedStructuresByUser.length > 0){
       this.currentStructure = this.selectedStructuresByUser[0];
@@ -97,15 +97,6 @@ export class JokeEditionComponent implements OnInit, AfterViewInit {
 
   loadJokeBlocks() {
     this.jokeBlocksService.getBlocksOfTheJoke(this.joke?.id).subscribe(jokeBlocks => {
-      if (jokeBlocks.length === 0 && this.joke.structures.length > 0){
-        this.joke.structures.forEach(structure => {
-          this.structureBlocksService.getBlocksOfTheStructure(structure.id).subscribe(structureBlocks => {
-            structureBlocks.forEach(structureBlock => {
-              this.jokeBlocks.push(new JokeBlock(structureBlock));
-            });
-          });
-        });
-      }
       this.jokeBlocks = jokeBlocks;
     });
   }

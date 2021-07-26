@@ -15,7 +15,7 @@ export class SingleJokeComponent implements OnInit {
   @Input() joke: Joke;
   @Output() removeJokeRequest: EventEmitter<number> = new EventEmitter<number>();
 
-  structuresOfTheJoke: Structure[];
+  structuresOfTheJoke: Structure[] = [];
   currentStructure: Structure;
   jokeBlocks: JokeBlock[] = [];
   isDetailsButtonClicked: boolean;
@@ -40,7 +40,6 @@ export class SingleJokeComponent implements OnInit {
     this.structuresService.getStructuresByJokeID(this.joke.id).subscribe((structures) => {
       this.structuresOfTheJoke = structures;
       if (structures.length > 0){
-        console.log(structures);
         this.currentStructure = structures[0];
       }
     });
