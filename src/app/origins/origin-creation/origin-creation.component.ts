@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
 import {OriginService} from '../origin.service';
 import {Router} from '@angular/router';
 import {Origin} from '../models/origin';
@@ -15,8 +15,9 @@ export class OriginCreationComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faMinusCircle = faMinusCircle;
   origins: Origin[] = [];
-  subOrigins: Origin[] = [];
+
   originForm: FormGroup;
+  connectedOrigins: FormArray;
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder,
@@ -24,14 +25,20 @@ export class OriginCreationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subOrigins.push(new Origin());
     this.loadOrigins();
     this.originForm = this.buildOriginForm();
   }
 
   private buildOriginForm() {
     return this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      connectedOrigins: this.formBuilder.array([this.createConnectedOrigin()])
+    });
+  }
+
+  createConnectedOrigin(): FormGroup {
+    return this.formBuilder.group({
+      name: ''
     });
   }
 
@@ -49,11 +56,12 @@ export class OriginCreationComponent implements OnInit {
     });
   }
 
-  addSubOrigin(){
-    this.subOrigins.push(new Origin());
+  addConnectedOrigin() {
+    this.connectedOrigins = this.originForm.get('connectedOrigins') as FormArray;
+    this.connectedOrigins.push(this.createConnectedOrigin());
   }
 
-  removeSubOrigin(index: number){
-    this.subOrigins.splice(index, 1);
+  removeConnectedOrigin(index: number) {
+    this.connectedOrigins.removeAt(index);
   }
 }

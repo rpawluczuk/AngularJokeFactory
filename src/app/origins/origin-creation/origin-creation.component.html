@@ -8,11 +8,13 @@
     </div>
     <div>
       <label class="row">Connected origins</label>
-      <div *ngFor="let subOrigin of subOrigins; let i = index" class="d-flex flex-row py-2">
-        <div *ngIf="i !== subOrigins.length - 1; else subOriginEmptyForm">
-          <fa-icon [icon]="faMinusCircle" (click)="removeSubOrigin(i)" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+      <div formArrayName="connectedOrigins" *ngFor="let connectedOrigin of originForm.get('connectedOrigins')['controls']; let i = index" class="d-flex flex-row py-2">
+        <div *ngIf="i < connectedOrigins?.length - 1; else addConnectedOriginForm">
+          <fa-icon [icon]="faMinusCircle" (click)="removeConnectedOrigin(i)" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
         </div>
-        <input type="text" name="origin" list="origins" class="d-flex justify-content-center">
+        <div [formGroupName]="i">
+          <input formControlName="name" placeholder="connected origin name" type="text" list="origins" class="d-flex justify-content-center">
+        </div>
         <datalist id="origins">
           <option *ngFor="let origin of origins" [ngValue]="origin">
             {{ origin.name }}
@@ -35,6 +37,6 @@
   <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
 </div>
 
-<ng-template #subOriginEmptyForm>
-  <fa-icon [icon]="faPlusCircle" (click)="addSubOrigin()" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+<ng-template #addConnectedOriginForm>
+  <fa-icon [icon]="faPlusCircle" (click)="addConnectedOrigin()" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
 </ng-template>
