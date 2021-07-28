@@ -1,32 +1,35 @@
-<app-header>
-  <p levels>Origins</p>
-  <div content>
-    <p>List of Origins</p>
-  </div>
-</app-header>
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <table *ngIf="origins && origins.length > 0; else noOrigins" class="table table-striped">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Creation Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let origin of origins; let i = index" class="row-structure" (click)="goToOriginDetails(origin)">
-          <td> {{ origin?.name }} </td>
-          <td>{{ origin?.dateCreated | date:'short'}} </td>
-          <td (click)="removeOrigin(origin, $event)"> ( X ) </td>
-        </tr>
-        </tbody>
-      </table>
-      <ng-template #noOrigins>
-        <div class="no-Origins">
-          <p>Currently no origins in database</p>
+  <div *ngIf="origins && origins.length > 0; else noOrigins" class="mt-5">
+    <div *ngFor="let origin of origins; let i = index" class="card">
+      <div class="card-body">
+        <div class="d-flex flex-row">
+          <div class="col-10">
+            <div class="card-title mb-2">
+              <div class="d-flex flex-row">
+                <h5 class="mr-4"> {{ origin?.name }} </h5>
+                <div class="text-muted"> {{ origin?.dateCreated | date:'short'}} </div>
+              </div>
+            </div>
+            <div>
+              <span class="d-inline-block mr-1"> Connected Origins:</span>
+              <span class="d-inline-block mr-1 badge badge-primary"
+                    title="{{connectedOrigin?.name}}"
+                    *ngFor="let connectedOrigin of origin.children">
+                    {{ connectedOrigin?.name }}
+              </span>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-outline-primary mr-3" (click)="goToOriginEdition(origin)">Edit</button>
+            <button class="btn btn-outline-danger" (click)="removeOrigin(origin, $event)">Delete</button>
+          </div>
         </div>
-      </ng-template>
+      </div>
     </div>
   </div>
+  <ng-template #noOrigins>-->
+    <div class="no-Origins">
+      <p>Currently no origins in database</p>
+    </div>
+  </ng-template>
 </div>

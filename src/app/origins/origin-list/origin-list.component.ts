@@ -32,7 +32,7 @@ export class OriginListComponent implements OnInit {
     });
   }
 
-  goToOriginDetails(origin: Origin) {
+  goToOriginEdition(origin: Origin) {
     this.router.navigate(['/origins', origin.id]);
   }
 }
