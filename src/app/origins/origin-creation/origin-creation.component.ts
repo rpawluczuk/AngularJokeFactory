@@ -17,7 +17,7 @@ export class OriginCreationComponent implements OnInit {
   origins: Origin[] = [];
 
   originForm: FormGroup;
-  connectedOrigins: FormArray;
+  children: FormArray;
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder,
@@ -32,11 +32,11 @@ export class OriginCreationComponent implements OnInit {
   private buildOriginForm() {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      connectedOrigins: this.formBuilder.array([this.createConnectedOrigin()])
+      children: this.formBuilder.array([this.createChild()])
     });
   }
 
-  createConnectedOrigin(): FormGroup {
+  createChild(): FormGroup {
     return this.formBuilder.group({
       name: ''
     });
@@ -51,17 +51,18 @@ export class OriginCreationComponent implements OnInit {
   }
 
   saveOrigin() {
+    console.log(this.originForm.value);
     this.originService.addOrigin(this.originForm.value).subscribe(() => {
       this.router.navigate(['/origins']);
     });
   }
 
-  addConnectedOrigin() {
-    this.connectedOrigins = this.originForm.get('connectedOrigins') as FormArray;
-    this.connectedOrigins.push(this.createConnectedOrigin());
+  addChild() {
+    this.children = this.originForm.get('children') as FormArray;
+    this.children.push(this.createChild());
   }
 
-  removeConnectedOrigin(index: number) {
-    this.connectedOrigins.removeAt(index);
+  removeChild(index: number) {
+    this.children.removeAt(index);
   }
 }
