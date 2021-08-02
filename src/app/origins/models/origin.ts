@@ -3,5 +3,5 @@ export class Origin {
   name: string;
   lastUpdated: string;
   dateCreated: string;
-  children: Origin[];
+  children: number[];
 }

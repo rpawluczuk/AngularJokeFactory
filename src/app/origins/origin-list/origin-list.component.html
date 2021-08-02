@@ -14,7 +14,7 @@
               <span class="d-inline-block mr-1"> Connected Origins:</span>
               <span class="d-inline-block mr-1 badge badge-primary"
                     title="{{connectedOrigin?.name}}"
-                    *ngFor="let connectedOrigin of origin.children">
+                    *ngFor="let connectedOrigin of origin?.children">
                     {{ connectedOrigin?.name }}
               </span>
             </div>
