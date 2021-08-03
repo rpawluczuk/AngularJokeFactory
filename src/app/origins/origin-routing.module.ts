@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {OriginDetailsComponent} from './origin-details/origin-details.component';
+import {OriginEditionComponent} from './origin-edition/origin-edition.component';
 import {OriginResolveService} from './origin-resolve.service';
 
 const originRoutes: Routes = [
   {
     path: 'origins/:id',
-    component: OriginDetailsComponent,
+    component: OriginEditionComponent,
     resolve: { origin: OriginResolveService }
   }
 ];

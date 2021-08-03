@@ -6,10 +6,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-origin-details',
-  templateUrl: './origin-details.component.html',
-  styleUrls: ['./origin-details.component.css']
+  templateUrl: './origin-edition.component.html',
+  styleUrls: ['./origin-edition.component.css']
 })
-export class OriginDetailsComponent implements OnInit {
+export class OriginEditionComponent implements OnInit {
 
   origin: Origin;
   originForm: FormGroup;
@@ -27,6 +27,7 @@ export class OriginDetailsComponent implements OnInit {
 
   loadOrigin() {
     this.origin = this.route.snapshot.data.origin;
+    console.log(this.origin);
   }
 
   buildOriginForm(){

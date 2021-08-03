@@ -1,0 +1,19 @@
+<p class="data-header">Edit {{ origin.name }}</p>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex flex-column align-items-center">
+      <!--    main-->
+      <app-origin-block
+        [origin]="origin">
+      </app-origin-block>
+      <!--      children-->
+      <div class="d-flex flex-row">
+        <div *ngFor="let child of origin.children; let x = index">
+          <app-origin-block
+            [origin]="child">
+          </app-origin-block>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
