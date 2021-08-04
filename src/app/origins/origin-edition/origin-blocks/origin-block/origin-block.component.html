@@ -1,5 +1,9 @@
-<div class="d-flex flex-column originBlock">
-  <div class="d-flex justify-content-center">
+<div class="originBlock d-flex flex-column justify-content-between m-3">
+  <div class="d-flex flex-row justify-content-center mt-3">
     <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{origin?.name}}</pre>
+  </div>
+
+  <div class="d-flex flex-row justify-content-center mb-4">
+    <button (click)="onEdit()" class="btn-sm btn-primary">Edit</button>
   </div>
 </div>

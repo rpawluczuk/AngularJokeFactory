@@ -3,14 +3,18 @@
   <div class="d-flex justify-content-center">
     <div class="d-flex flex-column align-items-center">
       <!--    main-->
-      <app-origin-block
-        [origin]="origin">
-      </app-origin-block>
+      <div *ngIf="!isOriginEditionDemanded">
+        <app-origin-block
+          [origin]="origin"
+          (isOriginEditionDemanded)="onOriginEditionRequest($event)">
+        </app-origin-block>
+      </div>
       <!--      children-->
       <div class="d-flex flex-row">
         <div *ngFor="let child of origin.children; let x = index">
           <app-origin-block
-            [origin]="child">
+            [origin]="child"
+            (isOriginEditionDemanded)="onOriginEditionRequest($event)">
           </app-origin-block>
         </div>
       </div>

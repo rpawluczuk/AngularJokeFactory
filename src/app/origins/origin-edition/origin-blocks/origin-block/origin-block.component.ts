@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Origin} from '../../../models/origin';
+
 
 @Component({
   selector: 'app-origin-block',
@@ -8,9 +9,14 @@ import {Origin} from '../../../models/origin';
 })
 export class OriginBlockComponent implements OnInit {
   @Input() origin: Origin;
+  @Output() isOriginEditionDemanded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onEdit() {
+    this.isOriginEditionDemanded.emit(true);
   }
 }

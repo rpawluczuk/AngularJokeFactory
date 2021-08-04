@@ -13,6 +13,7 @@ export class OriginEditionComponent implements OnInit {
 
   origin: Origin;
   originForm: FormGroup;
+  isOriginEditionDemanded = false;
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder,
@@ -46,6 +47,10 @@ export class OriginEditionComponent implements OnInit {
     this.originService.updateOrigin(this.origin).subscribe(() => {
       this.router.navigate(['/origins']);
     });
+  }
+
+  onOriginEditionRequest(isOriginEditionDemanded: boolean) {
+    this.isOriginEditionDemanded = isOriginEditionDemanded;
   }
 }
 

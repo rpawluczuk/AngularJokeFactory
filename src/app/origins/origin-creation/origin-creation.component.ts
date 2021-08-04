@@ -51,7 +51,6 @@ export class OriginCreationComponent implements OnInit {
   }
 
   saveOrigin() {
-    console.log(this.originForm.value);
     this.originService.addOrigin(this.originForm.value).subscribe(() => {
       this.router.navigate(['/origins']);
     });
