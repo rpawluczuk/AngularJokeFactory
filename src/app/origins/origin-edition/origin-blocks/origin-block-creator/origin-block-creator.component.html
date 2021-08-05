@@ -1,0 +1,13 @@
+<div class="originBlock d-flex flex-column justify-content-between m-3">
+  <form [formGroup]="originForm">
+    <label>Name</label>
+    <textarea formControlName="name" type="text" class="form-control" placeholder="name" rows="3">
+        </textarea>
+  </form>
+
+  <div class="d-flex flex-row justify-content-center mb-4">
+    <button (click)="onSave()" class="btn-sm btn-outline-success">
+      <fa-icon [icon]="faCheck"></fa-icon>
+    </button>
+  </div>
+</div>
