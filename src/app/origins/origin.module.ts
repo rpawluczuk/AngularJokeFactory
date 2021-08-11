@@ -10,6 +10,7 @@ import {OriginResolveService} from './origin-resolve.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { OriginBlockComponent } from './origin-edition/origin-blocks/origin-block/origin-block.component';
 import { OriginBlockCreatorComponent } from './origin-edition/origin-blocks/origin-block-creator/origin-block-creator.component';
+import { ConnectedOriginBlockComponent } from './origin-edition/origin-blocks/connected-origin-block/connected-origin-block.component';
 
 
 
@@ -20,6 +21,7 @@ import { OriginBlockCreatorComponent } from './origin-edition/origin-blocks/orig
     OriginCreationComponent,
     OriginBlockComponent,
     OriginBlockCreatorComponent,
+    ConnectedOriginBlockComponent,
   ],
     imports: [
         CommonModule,

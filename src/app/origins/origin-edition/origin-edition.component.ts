@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Origin} from '../models/origin';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../origin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -27,12 +26,24 @@ export class OriginEditionComponent implements OnInit {
     this.origin = this.route.snapshot.data.origin;
   }
 
+  reloadOrigin() {
+    this.originService.getOrigin(this.origin.id).subscribe(origin => {
+      this.origin = origin;
+    });
+  }
+
   onCancel() {
     this.router.navigate(['/origins']);
   }
 
   onOriginEditionRequest(isOriginEditionDemanded: boolean) {
     this.isOriginEditionDemanded = isOriginEditionDemanded;
+  }
+
+  onRemoveOriginRelationRequest(childOriginId: number) {
+    this.originService.removeOriginRelation(this.origin.id, childOriginId).subscribe(() => {
+      this.reloadOrigin();
+    });
   }
 }
 

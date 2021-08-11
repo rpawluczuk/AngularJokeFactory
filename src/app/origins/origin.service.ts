@@ -33,4 +33,8 @@ export class OriginService {
   removeOrigin(id: number): Observable<Origin> {
     return this.http.delete<Origin>(`${this.apiUrl}/${id}`);
   }
+
+  removeOriginRelation(originParentId: number, originChildId: number): Observable<Origin> {
+    return this.http.delete<Origin>(`${this.apiUrl}/remove-relation?origin-parent-id=${originParentId}&origin-child-id=${originChildId}`);
+  }
 }
