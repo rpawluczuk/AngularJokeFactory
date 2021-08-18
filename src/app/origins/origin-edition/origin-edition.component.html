@@ -18,6 +18,10 @@
             (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)">
           </app-connected-origin-block>
         </div>
+        <div *ngIf="!isChildOriginCreationDemanded; else childOriginBlockCreator"
+             class="originBlock m-3 d-flex flex-column align-items-center justify-content-center">
+          <fa-icon [icon]="faPlus" size="4x" (click)="onAddChildOriginDemand()" ></fa-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -27,5 +31,12 @@
       [origin]="origin"
       (isOriginEditionDemanded)="onOriginEditionRequest($event)">
     </app-origin-block-creator>
+  </ng-template>
+
+  <ng-template #childOriginBlockCreator>
+    <app-child-origin-block-creator
+      [origin]="origin"
+      (isChildOriginCreationDemanded)="onChildOriginCreationRequest($event)">
+    </app-child-origin-block-creator>
   </ng-template>
 </div>
