@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Origin} from '../../../models/origin';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../../../origin.service';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-child-origin-block-creator',
@@ -17,6 +17,7 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
   origins: Origin[] = [];
   originChildForm: FormGroup;
   faCheck = faCheck;
+  faTimes = faTimes;
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder) {
@@ -43,5 +44,9 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
     this.originService.addOrigin(this.originChild).subscribe(() => {
       this.isChildOriginCreationDemanded.emit(false);
     });
+  }
+
+  onCancel() {
+    this.isChildOriginCreationDemanded.emit(false);
   }
 }

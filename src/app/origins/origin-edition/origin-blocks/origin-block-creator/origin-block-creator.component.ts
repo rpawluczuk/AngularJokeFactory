@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Origin} from '../../../models/origin';
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../../../origin.service';
 
@@ -15,6 +15,7 @@ export class OriginBlockCreatorComponent implements OnInit {
 
   originForm: FormGroup;
   faCheck = faCheck;
+  faTimes = faTimes;
 
   constructor(private originService: OriginService,
               private formBuilder: FormBuilder) {
@@ -35,5 +36,9 @@ export class OriginBlockCreatorComponent implements OnInit {
     this.originService.updateOrigin(this.origin).subscribe(() => {
       this.isOriginEditionDemanded.emit(false);
     });
+  }
+
+  onCancel() {
+    this.isOriginEditionDemanded.emit(false);
   }
 }
