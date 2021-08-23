@@ -17,6 +17,10 @@ export class OriginService {
     return this.http.get<Origin[]>(this.apiUrl);
   }
 
+  getConnectedOrigins(originName: string): Observable<Origin[]> {
+    return this.http.get<Origin[]>(`${this.apiUrl}/get-connected-origins?origin-name=${originName}`);
+  }
+
   getOrigin(id: number): Observable<Origin> {
     return this.http.get<Origin>(`${this.apiUrl}/${id}` );
   }

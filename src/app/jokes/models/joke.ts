@@ -7,6 +7,8 @@ export interface Joke {
   structures: Structure[];
   author: Author;
   origin: Origin;
+  comedyOrigin: Origin;
+  ostensibleOrigin: Origin;
   title: string;
   content: string;
   lastUpdated: string;

@@ -40,11 +40,32 @@
         </div>
         <div class="row form-group">
           <label>Origin</label>
-          <select class="form-control" formControlName="origin" data-toggle="tooltip"
+          <select #item (change)="setSelectedOriginName(item.value)"
+                  class=" form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
             <option value="null">--Select Origin--</option>
-            <option *ngFor="let origin of origins" [ngValue]="origin">
+            <option *ngFor="let origin of origins" [value]="origin.name">
               {{ origin.name }}
+            </option>
+          </select>
+        </div>
+        <div class="row form-group">
+          <label>Ostensible Origin</label>
+          <select class="form-control" formControlName="ostensibleOrigin" data-toggle="tooltip"
+                  data-placement="right" title="Select Ostensible Origin Branch">
+            <option value="null">--Select Ostensible Origin--</option>
+            <option *ngFor="let ostensibleOrigin of connectedOrigins" [value]="ostensibleOrigin.name">
+              {{ ostensibleOrigin.name }}
+            </option>
+          </select>
+        </div>
+        <div class="row form-group">
+          <label>Origin</label>
+          <select class="form-control" formControlName="comedyOrigin" data-toggle="tooltip"
+                  data-placement="right" title="Select Comedy Origin Branch">
+            <option value="null">--Select Comedy Origin--</option>
+            <option *ngFor="let comedyOrigin of connectedOrigins" [ngValue]="comedyOrigin.name">
+              {{ comedyOrigin.name }}
             </option>
           </select>
         </div>
@@ -62,25 +83,25 @@
 
       <!--    Right column-->
       <div class="d-flex flex-column align-items-center col-6 p-4">
-          <ngb-pagination
-            [(page)]="currentStructureIndex"
-            [pageSize]="1"
-            [collectionSize]="selectedStructuresByUser?.length"
-            [maxSize]="5"
-            [boundaryLinks]="true"
-            (pageChange)="changeCurrentStructure($event)"
-            class="justify-content-center mr-4">
-          </ngb-pagination>
-          <h2> {{ selectedStructuresByUser[currentStructureIndex - 1]?.name }} </h2>
-          <div *ngFor="let jokeBlock of jokeBlocks; let x = index">
-            <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
-              <app-joke-block-creator
-                #jokeBlockRef
-                [jokeBlock]="jokeBlock">
-              </app-joke-block-creator>
-            </div>
+        <ngb-pagination
+          [(page)]="currentStructureIndex"
+          [pageSize]="1"
+          [collectionSize]="selectedStructuresByUser?.length"
+          [maxSize]="5"
+          [boundaryLinks]="true"
+          (pageChange)="changeCurrentStructure($event)"
+          class="justify-content-center mr-4">
+        </ngb-pagination>
+        <h2> {{ selectedStructuresByUser[currentStructureIndex - 1]?.name }} </h2>
+        <div *ngFor="let jokeBlock of jokeBlocks; let x = index">
+          <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
+            <app-joke-block-creator
+              #jokeBlockRef
+              [jokeBlock]="jokeBlock">
+            </app-joke-block-creator>
           </div>
         </div>
+      </div>
     </div>
   </form>
 

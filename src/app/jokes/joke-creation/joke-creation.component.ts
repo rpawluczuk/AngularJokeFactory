@@ -25,11 +25,13 @@ export class JokeCreationComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
   origins: Origin[];
+  connectedOrigins: Origin[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
   jokeBlocks: JokeBlock[] = [];
   currentStructureIndex = 0;
   currentStructure: Structure;
+  selectedOriginName: string;
 
   selectedStructuresByDefault = [];
   selectedStructuresByUser: Structure[];
@@ -106,15 +108,22 @@ export class JokeCreationComponent implements OnInit {
       content: ['', Validators.minLength(3)],
       structures: [null],
       author: [null],
-      origin: [null]
+      origin: [null],
+      ostensibleOrigin: [null],
+      comedyOrigin: [null]
     });
   }
 
   addJoke() {
+    console.log(this.jokeForm.value);
     const joke: Joke = this.jokeForm.value;
     joke.structures = this.selectedStructuresByUser;
-    this.jokesService.addJoke(this.jokeForm.value).subscribe(() => {
-      this.addJokeBlocks();
+    this.jokesService.addJoke(joke).subscribe(() => {
+      if (joke.structures.length > 0) {
+        this.addJokeBlocks();
+      } else {
+        this.router.navigate(['/jokes']);
+      }
     });
   }
 
@@ -160,5 +169,15 @@ export class JokeCreationComponent implements OnInit {
         }
       });
     });
+  }
+
+  setSelectedOriginName(selectedOriginName: string) {
+    console.log(selectedOriginName);
+    if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
+      this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
+        console.log(connectedOrigins);
+        this.connectedOrigins = connectedOrigins;
+      });
+    }
   }
 }
