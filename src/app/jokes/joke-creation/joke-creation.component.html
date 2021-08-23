@@ -60,11 +60,11 @@
           </select>
         </div>
         <div class="row form-group">
-          <label>Origin</label>
+          <label>Comedy Origin</label>
           <select class="form-control" formControlName="comedyOrigin" data-toggle="tooltip"
                   data-placement="right" title="Select Comedy Origin Branch">
             <option value="null">--Select Comedy Origin--</option>
-            <option *ngFor="let comedyOrigin of connectedOrigins" [ngValue]="comedyOrigin.name">
+            <option *ngFor="let comedyOrigin of connectedOrigins" [value]="comedyOrigin.name">
               {{ comedyOrigin.name }}
             </option>
           </select>

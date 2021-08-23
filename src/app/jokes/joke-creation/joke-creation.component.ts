@@ -172,10 +172,8 @@ export class JokeCreationComponent implements OnInit {
   }
 
   setSelectedOriginName(selectedOriginName: string) {
-    console.log(selectedOriginName);
     if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
       this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
-        console.log(connectedOrigins);
         this.connectedOrigins = connectedOrigins;
       });
     }

@@ -12,9 +12,14 @@
   </div>
   <div>
     <span class="d-inline-block mr-1"> Origin:</span>
-    <span class="d-inline-block mr-1 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
-          {{ joke?.origin?.name }}
-          </span>
+    <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
+          {{ joke?.origin?.name }} </span>
+    <span class="d-inline-block mr-1"> Comedy Origin:</span>
+    <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
+          {{ joke?.comedyOrigin?.name }} </span>
+    <span class="d-inline-block mr-1"> Ostensible Origin:</span>
+    <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
+          {{ joke?.ostensibleOrigin?.name }} </span>
   </div>
   <div class="text-muted"> Creation Date:: {{ joke?.dateCreated | date:'short' }} </div>
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition()"> Edit</button>

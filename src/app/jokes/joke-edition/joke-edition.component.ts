@@ -28,6 +28,7 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
   allStructures: Structure[] = [];
   authors: Author[];
   origins: Origin[];
+  connectedOrigins: Origin[];
   currentStructureIndex = 1;
   currentStructure: Structure;
 
@@ -92,6 +93,7 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
 
   loadJoke() {
     this.joke = this.route.snapshot.data.joke;
+    console.log(this.joke);
     this.loadJokeBlocks();
   }
 
@@ -107,7 +109,9 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
       content: [this.joke.content, Validators.minLength(3)],
       structures: [],
       author: [this.joke.author],
-      origin: [this.joke.origin],
+      origin: [this.joke.origin.name],
+      ostensibleOrigin: [this.joke.ostensibleOrigin.name],
+      comedyOrigin: [this.joke.comedyOrigin.name],
       dateCreated: [this.joke.dateCreated]
     });
   }
@@ -116,7 +120,11 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
     const newJoke = this.jokeForm.value;
     newJoke.id = this.joke.id;
     this.jokesService.updateJoke(newJoke).subscribe(() => {
-      this.updateJokeBlocks();
+      if (newJoke.structures.length > 0) {
+        this.updateJokeBlocks();
+      } else {
+        this.router.navigate(['/jokes']);
+      }
     });
   }
 
@@ -153,6 +161,9 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
     this.originService.getOrigins().subscribe((origins) => {
       this.origins = origins;
     });
+    this.originService.getConnectedOrigins(this.joke.origin.name).subscribe(connectedOrigins => {
+      this.connectedOrigins = connectedOrigins;
+    });
   }
 
   loadSelectedStructuresByDefault(): Array<any> {
@@ -186,5 +197,13 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
         }
       });
     });
+  }
+
+  setSelectedOriginName(selectedOriginName: string) {
+    if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
+      this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
+        this.connectedOrigins = connectedOrigins;
+      });
+    }
   }
 }
