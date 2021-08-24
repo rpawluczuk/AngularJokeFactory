@@ -93,7 +93,6 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
 
   loadJoke() {
     this.joke = this.route.snapshot.data.joke;
-    console.log(this.joke);
     this.loadJokeBlocks();
   }
 
@@ -161,9 +160,16 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
     this.originService.getOrigins().subscribe((origins) => {
       this.origins = origins;
     });
-    this.originService.getConnectedOrigins(this.joke.origin.name).subscribe(connectedOrigins => {
-      this.connectedOrigins = connectedOrigins;
-    });
+    if (this.joke.origin !== null) {
+      this.originService.getConnectedOrigins(this.joke.origin.name).subscribe(connectedOrigins => {
+        this.connectedOrigins = connectedOrigins;
+      });
+    } else {
+      this.joke.origin = new Origin();
+      this.joke.comedyOrigin = new Origin();
+      this.joke.ostensibleOrigin = new Origin();
+      console.log(this.joke.origin.name);
+    }
   }
 
   loadSelectedStructuresByDefault(): Array<any> {

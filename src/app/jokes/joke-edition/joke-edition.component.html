@@ -46,8 +46,8 @@
           <select #item (change)="setSelectedOriginName(item.value)"
                   class="form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
-            <option *ngIf="joke.origin!==null" [value]="joke.origin"> {{ joke.origin.name }} </option>
-            <option *ngIf="joke.origin===null" [value]="joke.origin">--Select Origin--</option>
+            <option *ngIf="joke.origin.name!==null" [value]="joke.origin"> {{ joke.origin.name }} </option>
+            <option *ngIf="joke.origin.name===null" [value]="joke.origin">--Select Origin--</option>
             <option *ngFor="let origin of origins" [value]="origin.name">
               {{ origin.name }}
             </option>
