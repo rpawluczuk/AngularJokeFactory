@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {JokeBlock} from '../models/joke-block';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
+import {JokeBlockDto} from '../models/joke-block-dto';
 
 @Component({
   selector: 'app-joke-block-creator',
@@ -9,7 +9,8 @@ import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./joke-block-creator.component.css']
 })
 export class JokeBlockCreatorComponent implements OnInit {
-  @Input() jokeBlock: JokeBlock;
+  @Input()
+  jokeBlockDto: JokeBlockDto;
 
   faLongArrowAltDown = faLongArrowAltDown;
   jokeBlockForm: FormGroup;
@@ -23,12 +24,17 @@ export class JokeBlockCreatorComponent implements OnInit {
 
   private buildJokeBlockForm() {
     return this.formBuilder.group({
-      jokeSnippet: [this.jokeBlock.jokeSnippet, Validators.required],
+      jokeSnippet: [this.jokeBlockDto.jokeSnippet, Validators.required],
     });
   }
 
-  saveJokeBlockValue(): JokeBlock {
-    this.jokeBlock.jokeSnippet = this.jokeBlockForm.value.jokeSnippet;
-    return this.jokeBlock;
+  showme(): void {
+    console.log('hej');
+  }
+
+  saveJokeBlockValue(): JokeBlockDto {
+    console.log('ohh yeah');
+    this.jokeBlockDto.jokeSnippet = this.jokeBlockForm.value.jokeSnippet;
+    return this.jokeBlockDto;
   }
 }

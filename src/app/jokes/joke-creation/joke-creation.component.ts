@@ -1,4 +1,4 @@
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, ContentChildren, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
 import {Author} from '../../authors/models/author';
@@ -13,6 +13,8 @@ import {StructureBlocksService} from '../../blocks/structure-blocks/structure-bl
 import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
+import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
+import {StructurePanelComponent} from './structure-panel/structure-panel.component';
 
 @Component({
   selector: 'app-joke-creation',
@@ -20,7 +22,8 @@ import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
   styleUrls: ['./joke-creation.component.css']
 })
 export class JokeCreationComponent implements OnInit {
-  @ViewChildren('jokeBlockRef') jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;
+  @ViewChild('structurePanelRef')
+  structurePanelComponent: StructurePanelComponent;
 
   jokes: Joke[];
   authors: Author[];
@@ -28,13 +31,9 @@ export class JokeCreationComponent implements OnInit {
   connectedOrigins: Origin[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
-  jokeBlocks: JokeBlock[] = [];
-  currentStructureIndex = 0;
-  currentStructure: Structure;
+  jokeBlocksWithStructureDto: JokeBlocksWithStructureDto;
   selectedOriginName: string;
 
-  selectedStructuresByDefault = [];
-  selectedStructuresByUser: Structure[];
   dropdownSettings = {};
 
   constructor(private jokesService: JokesService,
@@ -53,8 +52,6 @@ export class JokeCreationComponent implements OnInit {
     this.loadAuthores();
     this.loadOrigins();
     this.jokeForm = this.buildJokeForm();
-    this.selectedStructuresByDefault = [];
-    this.selectedStructuresByUser = [];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -83,23 +80,11 @@ export class JokeCreationComponent implements OnInit {
     });
   }
 
-  onStructureSelect(selectedField: any) {
+  onStructureSelectOrDeselect(selectedField: any) {
     const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
-    this.blocksService.getBlocksOfTheStructure(selectedStructure.id).subscribe(structureBlocks => {
-      this.selectedStructuresByUser.push(selectedStructure);
-      structureBlocks.forEach(structureBlock => this.jokeBlocks.push(new JokeBlock(structureBlock)));
-      if (this.selectedStructuresByUser.length === 1){
-        this.currentStructure = selectedStructure;
-      }
+    this.jokeBlocksService.getJokeBlocksOfTheStructure(selectedStructure.id).subscribe(jokeBlocksWithStructureDto => {
+      this.jokeBlocksWithStructureDto = jokeBlocksWithStructureDto;
     });
-  }
-
-  onStructureDeselect(selectedField: any) {
-    this.jokeBlocks = this.jokeBlocks.filter(jokeBlock => jokeBlock.structureBlock.structure.id !== selectedField.id);
-    let deselectedStructure: Structure;
-    deselectedStructure = this.allStructures.find(s => s.id === selectedField.id);
-    const index = this.selectedStructuresByUser.indexOf(deselectedStructure);
-    this.selectedStructuresByUser.splice(index, 1);
   }
 
   buildJokeForm() {
@@ -115,34 +100,11 @@ export class JokeCreationComponent implements OnInit {
   }
 
   addJoke() {
-    console.log(this.jokeForm.value);
+    const jokeBlockDtoList = this.structurePanelComponent.getJokeBlocksWithStructureDtoList();
     const joke: Joke = this.jokeForm.value;
-    joke.structures = this.selectedStructuresByUser;
+    joke.jokeBlocks = jokeBlockDtoList;
     this.jokesService.addJoke(joke).subscribe(() => {
-      if (joke.structures.length > 0) {
-        this.addJokeBlocks();
-      } else {
         this.router.navigate(['/jokes']);
-      }
-    });
-  }
-
-  addJokeBlocks(){
-    this.jokesService.getLastJoke().subscribe(joke => {
-      this.jokeBlockComponents.forEach((child) => {
-        const jokeBlockFromForm = child.saveJokeBlockValue();
-        this.jokeBlocks.forEach((jokeBlock, index) => {
-          if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
-            this.jokeBlocks[index] = jokeBlockFromForm;
-          }
-        });
-      });
-      this.jokeBlocks.forEach(jokeBlock => jokeBlock.joke = joke);
-      this.jokeBlocks.forEach(jokeBlock => {
-        this.jokeBlocksService.addJokeBlock(jokeBlock).subscribe(() => {
-          this.router.navigate(['/jokes']);
-        });
-      });
     });
   }
 
@@ -156,19 +118,6 @@ export class JokeCreationComponent implements OnInit {
       dropdownList.push({id: structure.id, text: structure.name});
     }
     return dropdownList;
-  }
-
-  changeCurrentStructure(SelectedStructureIndex: number){
-    this.currentStructureIndex = SelectedStructureIndex;
-    this.currentStructure = this.selectedStructuresByUser[SelectedStructureIndex - 1];
-    this.jokeBlockComponents.forEach((child) => {
-      const jokeBlockFromForm = child.saveJokeBlockValue();
-      this.jokeBlocks.forEach((jokeBlock, jokeBlockIndex) => {
-        if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id){
-          this.jokeBlocks[jokeBlockIndex] = jokeBlockFromForm;
-        }
-      });
-    });
   }
 
   setSelectedOriginName(selectedOriginName: string) {

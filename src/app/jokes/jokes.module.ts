@@ -17,6 +17,8 @@ import {JokeBlockCreatorComponent} from '../blocks/joke-blocks/joke-block-creato
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { SingleJokeComponent } from './jokes-main-view/jokes-list/single-joke/single-joke.component';
 import {JokeBlockComponent} from "../blocks/joke-blocks/joke-block/joke-block.component";
+import { StructurePanelComponent } from './joke-creation/structure-panel/structure-panel.component';
+import { JokeBlocksEditionPanelComponent } from './joke-edition/joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 
 
 
@@ -31,7 +33,9 @@ import {JokeBlockComponent} from "../blocks/joke-blocks/joke-block/joke-block.co
     JokesFilteringComponent,
     JokeBlockCreatorComponent,
     SingleJokeComponent,
-    JokeBlockComponent
+    JokeBlockComponent,
+    StructurePanelComponent,
+    JokeBlocksEditionPanelComponent
   ],
   imports: [
     CommonModule,

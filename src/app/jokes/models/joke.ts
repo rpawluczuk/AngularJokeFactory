@@ -1,10 +1,12 @@
 import {Structure} from '../../structures/models/structure';
 import {Author} from '../../authors/models/author';
 import {Origin} from '../../origins/models/origin';
+import {JokeBlockDto} from '../../blocks/joke-blocks/models/joke-block-dto';
 
 export interface Joke {
   id: number;
   structures: Structure[];
+  jokeBlocks: JokeBlockDto[];
   author: Author;
   origin: Origin;
   comedyOrigin: Origin;

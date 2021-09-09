@@ -24,8 +24,8 @@
                                    [placeholder]="'custom placeholder'"
                                    [settings]="dropdownSettings"
                                    [data]="getDropdownList(allStructures)"
-                                   (onSelect)="onStructureSelect($event)"
-                                   (onDeSelect)="onStructureDeselect($event)">
+                                   (onSelect)="onStructureSelectOrDeselect($event)"
+                                   (onDeSelect)="onStructureSelectOrDeselect($event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="row form-group">
@@ -79,29 +79,14 @@
           </div>
         </div>
       </div>
-
-
       <!--    Right column-->
-      <div class="d-flex flex-column align-items-center col-6 p-4">
-        <ngb-pagination
-          [(page)]="currentStructureIndex"
-          [pageSize]="1"
-          [collectionSize]="selectedStructuresByUser?.length"
-          [maxSize]="5"
-          [boundaryLinks]="true"
-          (pageChange)="changeCurrentStructure($event)"
-          class="justify-content-center mr-4">
-        </ngb-pagination>
-        <h2> {{ selectedStructuresByUser[currentStructureIndex - 1]?.name }} </h2>
-        <div *ngFor="let jokeBlock of jokeBlocks; let x = index">
-          <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
-            <app-joke-block-creator
-              #jokeBlockRef
-              [jokeBlock]="jokeBlock">
-            </app-joke-block-creator>
-          </div>
-        </div>
+      <div class="col-6 p-4">
+        <app-structure-panel
+          #structurePanelRef
+          [jokeBlocksWithStructureDto]="jokeBlocksWithStructureDto">
+        </app-structure-panel>
       </div>
+
     </div>
   </form>
 
