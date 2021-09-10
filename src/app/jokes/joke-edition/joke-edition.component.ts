@@ -14,6 +14,7 @@ import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksEditionPanelComponent} from './joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
+import {JokeCreator} from "../models/jokeCreator";
 
 @Component({
   selector: 'app-joke-details',
@@ -63,15 +64,12 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    // this.selectedStructuresByUser = this.joke.structures;
-    // if (this.selectedStructuresByUser.length > 0) {
-    //   this.currentStructure = this.selectedStructuresByUser[0];
-    // }
-    // this.jokeForm.patchValue({
-    //   structures: this.loadSelectedStructuresByDefault()
-    // });
+    this.selectedStructuresByUser = this.joke.structures;
+    this.jokeForm.patchValue({
+      structures: this.loadSelectedStructuresByDefault()
+    });
   }
-  //
+
   onStructureSelectOrDeselect(selectedField: any) {
     const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
     this.jokeBlocksService.getJokeBlocksOfTheStructure(selectedStructure.id).subscribe(jokeBlocksWithStructureDto => {
@@ -97,31 +95,14 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
   }
 
   updateJoke() {
-    const jokeBlockDtoList = this.jokeBlocksEditionPanelComponent.getJokeBlocksWithStructureDtoList();
-    const newJoke: Joke = this.jokeForm.value;
+    const jokeBlockWithStructureDtoList = this.jokeBlocksEditionPanelComponent.getJokeBlocksWithStructureDtoList();
+    const newJoke: JokeCreator = this.jokeForm.value;
     newJoke.id = this.joke.id;
-    newJoke.jokeBlocks = jokeBlockDtoList;
+    newJoke.jokeBlocksWithStructureDtoList = jokeBlockWithStructureDtoList;
     this.jokesService.updateJoke(newJoke).subscribe(() => {
         this.router.navigate(['/jokes']);
     });
   }
-
-  // updateJokeBlocks() {
-  //   this.jokeBlockComponents.forEach((child) => {
-  //     const jokeBlockFromForm = child.saveJokeBlockValue();
-  //     this.jokeBlocks.forEach((jokeBlock, index) => {
-  //       if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id) {
-  //         this.jokeBlocks[index] = jokeBlockFromForm;
-  //       }
-  //     });
-  //   });
-  //   this.jokeBlocks.forEach(jokeBlock => jokeBlock.joke = this.joke);
-  //   this.jokeBlocks.forEach(jokeBlock => {
-  //     this.jokeBlocksService.updateJokeBlock(jokeBlock).subscribe(() => {
-  //       this.router.navigate(['/jokes']);
-  //     });
-  //   });
-  // }
 
   loadStructures(): void {
     this.structuresService.getStructures().subscribe((structures) => {

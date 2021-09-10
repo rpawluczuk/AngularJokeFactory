@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import {JokeBlocksWithStructureDto} from '../../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
 import {JokeBlockCreatorComponent} from '../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
-import {JokeBlockDto} from '../../../blocks/joke-blocks/models/joke-block-dto';
 import {Joke} from '../../models/joke';
 import {JokeBlocksService} from '../../../blocks/joke-blocks/joke-blocks.service';
 
@@ -28,9 +27,8 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
 
   @ViewChildren('jokeBlocksEditionRef')
   jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;
+  jokeBlocksWithStructureDtoList: JokeBlocksWithStructureDto[] = [];
 
-  jokeBlockDtoList: JokeBlockDto[] = [];
-  selectedStructures: string[] = [];
   currentStructureIndex = 0;
   nameOfCurrentStructure: string;
 
@@ -44,12 +42,11 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
   loadJokeBlocks() {
     this.jokeBlocksService.getExisitngJokeBlocksOfTheStructure(this.joke?.id).subscribe(jokeBlocksWithStructureDtoList => {
       jokeBlocksWithStructureDtoList.forEach(jokeBlocksWithStructureDto => {
-        const countOfSelectedStructures = this.selectedStructures.length;
+        const countOfSelectedStructures = this.jokeBlocksWithStructureDtoList.length;
         if (countOfSelectedStructures === 0) {
           this.nameOfCurrentStructure = jokeBlocksWithStructureDto?.structureName;
         }
-        this.selectedStructures.push(jokeBlocksWithStructureDto?.structureName);
-        this.jokeBlockDtoList = this.jokeBlockDtoList.concat(jokeBlocksWithStructureDto?.jokeBlocksDto);
+        this.jokeBlocksWithStructureDtoList.push(jokeBlocksWithStructureDto);
       });
     });
   }
@@ -57,18 +54,16 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.jokeBlocksWithStructureDto.currentValue) {
       this.jokeBlocksWithStructureDto = changes.jokeBlocksWithStructureDto.currentValue;
-      const countOfSelectedStructures = this.selectedStructures.length;
+      const countOfSelectedStructures = this.jokeBlocksWithStructureDtoList.length;
       if (countOfSelectedStructures === 0) {
         this.nameOfCurrentStructure = this.jokeBlocksWithStructureDto?.structureName;
       }
-      if (this.selectedStructures.includes(this.jokeBlocksWithStructureDto.structureName)) {
-        this.selectedStructures = this.selectedStructures
-          .filter(structureName => structureName !== this.jokeBlocksWithStructureDto.structureName);
-        this.jokeBlockDtoList = this.jokeBlockDtoList
-          .filter(jokeBlock => jokeBlock.structureName !== this.jokeBlocksWithStructureDto.structureName);
+      const selectedStructures = this.jokeBlocksWithStructureDtoList.map(jbs => jbs.structureName);
+      if (selectedStructures.includes(this.jokeBlocksWithStructureDto.structureName)) {
+        this.jokeBlocksWithStructureDtoList = this.jokeBlocksWithStructureDtoList
+          .filter(jbs => jbs.structureName !== this.jokeBlocksWithStructureDto.structureName);
       } else {
-        this.selectedStructures.push(this.jokeBlocksWithStructureDto.structureName);
-        this.jokeBlockDtoList = this.jokeBlockDtoList.concat(this.jokeBlocksWithStructureDto.jokeBlocksDto);
+        this.jokeBlocksWithStructureDtoList.push(this.jokeBlocksWithStructureDto);
       }
     }
   }
@@ -76,21 +71,27 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
   changeCurrentStructure(SelectedStructureIndex: number) {
     this.updateJokeBlockDtoListByFormValues();
     this.currentStructureIndex = SelectedStructureIndex;
-    this.nameOfCurrentStructure = this.selectedStructures[SelectedStructureIndex - 1];
+    this.nameOfCurrentStructure = this.jokeBlocksWithStructureDtoList[SelectedStructureIndex - 1]?.structureName;
   }
 
-  getJokeBlocksWithStructureDtoList(): JokeBlockDto[] {
+  getJokeBlocksWithStructureDtoList(): JokeBlocksWithStructureDto[] {
     this.updateJokeBlockDtoListByFormValues();
-    return this.jokeBlockDtoList;
+    return this.jokeBlocksWithStructureDtoList;
   }
 
   private updateJokeBlockDtoListByFormValues(): void {
     this.jokeBlockComponents.forEach(child => {
       const jokeBlockFromForm = child.saveJokeBlockValue();
-      const index = this.jokeBlockDtoList
-        .map(jokeBlockDto => jokeBlockDto.structureBlockId)
+
+      const indexOfJBSDtoList = this.jokeBlocksWithStructureDtoList
+        .map(jbs => jbs.structureName)
+        .indexOf(jokeBlockFromForm.structureName);
+
+      const indexOfJBList = this.jokeBlocksWithStructureDtoList[indexOfJBSDtoList].jokeBlocksDto
+        .map(jb => jb.structureBlockId)
         .indexOf(jokeBlockFromForm.structureBlockId);
-      this.jokeBlockDtoList[index] = jokeBlockFromForm;
+
+      this.jokeBlocksWithStructureDtoList[indexOfJBSDtoList].jokeBlocksDto[indexOfJBList] = jokeBlockFromForm;
     });
   }
 }

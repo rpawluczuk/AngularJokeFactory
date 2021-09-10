@@ -2,19 +2,21 @@
   <ngb-pagination
     [(page)]="currentStructureIndex"
     [pageSize]="1"
-    [collectionSize]="selectedStructures.length"
+    [collectionSize]="jokeBlocksWithStructureDtoList?.length"
     [maxSize]="5"
     [boundaryLinks]="true"
     (pageChange)="changeCurrentStructure($event)"
     class="justify-content-center mr-4">
   </ngb-pagination>
-  <h2> {{ selectedStructures[currentStructureIndex - 1] }} </h2>
-  <div *ngFor="let jokeBlockDto of jokeBlockDtoList">
-    <div *ngIf="jokeBlockDto?.structureName === nameOfCurrentStructure">
-      <app-joke-block-creator
-        #jokeBlockRef
-        [jokeBlockDto]="jokeBlockDto">
-      </app-joke-block-creator>
+  <h2> {{ jokeBlocksWithStructureDtoList[currentStructureIndex - 1]?.structureName }} </h2>
+  <div *ngFor="let jokeBlocksWithStructureDto of jokeBlocksWithStructureDtoList">
+    <div *ngIf="jokeBlocksWithStructureDto?.structureName === nameOfCurrentStructure">
+      <div *ngFor="let jokeBlockDto of jokeBlocksWithStructureDto?.jokeBlocksDto">
+        <app-joke-block-creator
+          #jokeBlockRef
+          [jokeBlockDto]="jokeBlockDto">
+        </app-joke-block-creator>
+      </div>
     </div>
   </div>
 </div>
