@@ -22,8 +22,8 @@ export class StructureBlocksService {
     return this.http.post<StructureBlock>(this.apiUrl, data);
   }
 
-  updateBlock(block: StructureBlock): Observable<StructureBlock> {
-    return this.http.put<StructureBlock>(this.apiUrl, block);
+  updateBlock(structureBlockList: StructureBlock[]): Observable<StructureBlock> {
+    return this.http.put<StructureBlock>(this.apiUrl, structureBlockList);
   }
 
   removeBlock(id: number): Observable<StructureBlock> {

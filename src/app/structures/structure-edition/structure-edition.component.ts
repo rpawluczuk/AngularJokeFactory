@@ -17,7 +17,6 @@ export class StructureEditionComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
   structure: Structure;
   structureForm: FormGroup;
-  blocksToDelete: StructureBlock[] = [];
   blocksToUpdate: StructureBlock[] = [];
   faArrowDown = faArrowDown;
 
@@ -63,7 +62,6 @@ export class StructureEditionComponent implements OnInit {
     this.structure.description = this.structureForm.controls.description.value;
     this.structuresService.updateStructure(this.structure).subscribe(() => {
       this.updateBlocks();
-      this.deleteBlocks();
     });
   }
 
@@ -73,34 +71,30 @@ export class StructureEditionComponent implements OnInit {
       this.blocksToUpdate[standardBlock.position] = standardBlock;
     });
     this.blocksToUpdate.forEach(block => block.structure = this.structure);
-    this.blocksToUpdate.forEach(blockToUpdate => {
-      this.blocksService.updateBlock(blockToUpdate).subscribe(() => {
-        this.router.navigate(['/structures']);
-      });
-    });
-  }
-
-  deleteBlocks() {
-    this.blocksToDelete.forEach(blockToDelete => {
-      this.blocksService.removeBlock(blockToDelete.id).subscribe();
+    this.blocksService.updateBlock(this.blocksToUpdate).subscribe(() => {
+      this.router.navigate(['/structures']);
     });
   }
 
   onBlockDeleteRequest(blockToDelete: StructureBlock) {
-    this.blocksToDelete = this.blocksToDelete.concat(
-      this.blocksToUpdate.splice(blockToDelete.position - 1, 2));
+    console.log(blockToDelete);
+    console.log(this.blocksToUpdate);
+    this.blocksToUpdate.splice(blockToDelete.position, 1);
+    console.log(this.blocksToUpdate);
     this.blocksToUpdate.forEach(block => {
+      console.log(block);
       if (block.position > blockToDelete.position) {
-        block.position = block.position - 2;
+        block.position = block.position - 1;
       }
     });
+    console.log(this.blocksToUpdate);
   }
 
   onCancel() {
     this.router.navigate(['/structures']);
   }
 
-  addStructureBlockComponent(){
+  addStructureBlockComponent() {
     this.blocksToUpdate.push(
       new StructureBlock(this.blocksToUpdate.length)
     );
