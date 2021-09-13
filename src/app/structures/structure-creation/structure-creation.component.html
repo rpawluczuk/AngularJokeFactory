@@ -1,40 +1,47 @@
 <p class="data-header">Add a new structure</p>
 <div class="data-container">
   <form [formGroup]="structureForm">
-    <div class="row form-group">
-      <label>Name</label>
-      <input formControlName="name" type="text" class="form-control" placeholder="name">
-      <p *ngIf="!structureForm.get('name').valid && structureForm.get('name').dirty" class="error">This field is
-        required!</p>
-    </div>
-    <div class="row form-group">
-      <label>Description</label>
-      <textarea formControlName="description" type="text" placeholder="description"
-                class="form-control" rows="6"></textarea>
-      <p *ngIf="!structureForm.get('description').valid && structureForm.get('description').dirty" class="error">
-        This field must contain more than 3 characters!</p>
-    </div>
-    <div class="container">
-      <div class="d-flex justify-content-center" *ngFor="let block of structureBlocks; let x = index">
+    <div class="d-flex flex-row">
+      <!--    Left column-->
+      <div class="d-flex flex-column col-6 p-4">
+        <div class="row form-group">
+          <label>Name</label>
+          <input formControlName="name" type="text" class="form-control" placeholder="name">
+          <p *ngIf="!structureForm.get('name').valid && structureForm.get('name').dirty" class="error">This field is
+            required!</p>
+        </div>
+        <div class="row form-group">
+          <label>Description</label>
+          <textarea formControlName="description" type="text" placeholder="description"
+                    class="form-control" rows="6"></textarea>
+          <p *ngIf="!structureForm.get('description').valid && structureForm.get('description').dirty" class="error">
+            This field must contain more than 3 characters!</p>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button [disabled]="structureForm.invalid" (click)="addStructure()" type="submit"
+                    class="btn btn-success float-right mx-2">Add Structure</button>
+            <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+            <button (click)="structureForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+          </div>
+        </div>
+      </div>
+      <!--    Right column-->
+      <div class="col-6 p-4">
+        <div class="container">
+          <div class="d-flex justify-content-center" *ngFor="let block of structureBlocks; let x = index">
             <app-standard-block-creator
               #standardBlockRef
               [structureBlock]="block"
               (blockToDelete)="onBlockDeleteRequest($event)">
             </app-standard-block-creator>
-      </div>
-
-      <div class="d-flex flex-column justify-content-center">
-        <fa-icon [icon]="faArrowDown" size="7x" class="d-flex justify-content-center"
-                 (click)="addStructureBlockComponent()">
-        </fa-icon>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button [disabled]="structureForm.invalid" (click)="addStructure()" type="submit"
-                class="btn btn-success float-right mx-2">Add Structure</button>
-        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
-        <button (click)="structureForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <fa-icon [icon]="faArrowDown" size="7x" class="d-flex justify-content-center"
+                     (click)="addStructureBlockComponent()">
+            </fa-icon>
+          </div>
+        </div>
       </div>
     </div>
   </form>
