@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Author} from '../authors/models/author';
 import {Origin} from './models/origin';
+import {OriginCreatorDto} from "./models/originCreatorDto";
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,11 @@ export class OriginService {
     return this.http.get<Origin>(`${this.apiUrl}/${id}` );
   }
 
-  addOrigin(data): Observable<Origin>{
-    return this.http.post<Origin>(this.apiUrl, data);
+  addOrigin(data): Observable<OriginCreatorDto>{
+    return this.http.post<OriginCreatorDto>(this.apiUrl, data);
   }
 
   updateOrigin(origin: Origin): Observable<Origin> {
-    console.log(origin);
     return this.http.put<Origin>(this.apiUrl, origin);
   }
 

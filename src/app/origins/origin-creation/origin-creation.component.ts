@@ -4,6 +4,7 @@ import {OriginService} from '../origin.service';
 import {Router} from '@angular/router';
 import {Origin} from '../models/origin';
 import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
+import {OriginCreatorDto} from '../models/originCreatorDto';
 
 @Component({
   selector: 'app-origin-creation',
@@ -51,7 +52,10 @@ export class OriginCreationComponent implements OnInit {
   }
 
   saveOrigin() {
-    this.originService.addOrigin(this.originForm.value).subscribe(() => {
+    const originCreator = new OriginCreatorDto();
+    originCreator.name = this.originForm.value.name;
+    originCreator.children = this.originForm.value.children.map(x => x.name);
+    this.originService.addOrigin(originCreator).subscribe(() => {
       this.router.navigate(['/origins']);
     });
   }
