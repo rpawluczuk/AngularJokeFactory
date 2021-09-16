@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Origin} from '../models/origin';
 import {OriginService} from '../origin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {OriginCreatorDto} from '../models/originCreatorDto';
+import {OriginCreatorChildDto} from "../models/originCreatorChildDto";
 
 @Component({
   selector: 'app-origin-details',
@@ -11,7 +12,7 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 })
 export class OriginEditionComponent implements OnInit {
 
-  origin: Origin;
+  originCreator: OriginCreatorDto;
   isOriginEditionDemanded = false;
   isChildOriginCreationDemanded = false;
   faPlus = faPlus;
@@ -22,16 +23,12 @@ export class OriginEditionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadOrigin();
+    this.loadOrigin(this.route.snapshot.data.origin.name);
   }
 
-  loadOrigin() {
-    this.origin = this.route.snapshot.data.origin;
-  }
-
-  reloadOrigin() {
-    this.originService.getOrigin(this.origin.id).subscribe(origin => {
-      this.origin = origin;
+  loadOrigin(originName: string) {
+    this.originService.getOriginCreator(originName).subscribe(originCreator => {
+      this.originCreator = originCreator;
     });
   }
 
@@ -45,12 +42,12 @@ export class OriginEditionComponent implements OnInit {
 
   onChildOriginCreationRequest(isChildOriginCreationDemanded: boolean) {
     this.isChildOriginCreationDemanded = isChildOriginCreationDemanded;
-    this.reloadOrigin();
+    this.loadOrigin(this.originCreator.name);
   }
 
-  onRemoveOriginRelationRequest(childOriginId: number) {
-    this.originService.removeOriginRelation(this.origin.id, childOriginId).subscribe(() => {
-      this.reloadOrigin();
+  onRemoveOriginRelationRequest(originCreatorChild: OriginCreatorChildDto) {
+    this.originService.removeOriginRelation(originCreatorChild.parentId, originCreatorChild?.id).subscribe(() => {
+      this.loadOrigin(this.originCreator.name);
     });
   }
 

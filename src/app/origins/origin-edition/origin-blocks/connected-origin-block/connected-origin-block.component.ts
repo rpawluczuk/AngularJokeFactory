@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Origin} from '../../../models/origin';
 import {faWindowClose, faCrosshairs} from '@fortawesome/free-solid-svg-icons';
+import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
 
 
 @Component({
@@ -9,8 +10,8 @@ import {faWindowClose, faCrosshairs} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./connected-origin-block.component.css']
 })
 export class ConnectedOriginBlockComponent implements OnInit {
-  @Input() connectedOrigin: Origin;
-  @Output() removeOriginRelationRequest: EventEmitter<number> = new EventEmitter<number>();
+  @Input() originCreatorChild: OriginCreatorChildDto;
+  @Output() removeOriginRelationRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
 
   faWindowClose = faWindowClose;
   faCrosshairs = faCrosshairs;
@@ -22,6 +23,6 @@ export class ConnectedOriginBlockComponent implements OnInit {
   }
 
   deleteConnectionRequest() {
-    this.removeOriginRelationRequest.emit(this.connectedOrigin.id);
+    this.removeOriginRelationRequest.emit(this.originCreatorChild);
   }
 }

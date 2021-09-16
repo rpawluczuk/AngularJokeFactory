@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Author} from '../authors/models/author';
 import {Origin} from './models/origin';
-import {OriginCreatorDto} from "./models/originCreatorDto";
+import {OriginCreatorDto} from './models/originCreatorDto';
+import {OriginCreatorChildDto} from "./models/originCreatorChildDto";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class OriginService {
 
   private apiUrl = 'http://localhost:8080/api/origins';
 
-  constructor(private  http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getOrigins(): Observable<Origin[]> {
     return this.http.get<Origin[]>(this.apiUrl);
@@ -23,11 +24,19 @@ export class OriginService {
   }
 
   getOrigin(id: number): Observable<Origin> {
-    return this.http.get<Origin>(`${this.apiUrl}/${id}` );
+    return this.http.get<Origin>(`${this.apiUrl}/${id}`);
   }
 
-  addOrigin(data): Observable<OriginCreatorDto>{
+  getOriginCreator(originName: string): Observable<OriginCreatorDto> {
+    return this.http.get<OriginCreatorDto>(`${this.apiUrl}?originCreatorName=${originName}`);
+  }
+
+  addOrigin(data): Observable<OriginCreatorDto> {
     return this.http.post<OriginCreatorDto>(this.apiUrl, data);
+  }
+
+  addOriginChild(data): Observable<OriginCreatorChildDto> {
+    return this.http.post<OriginCreatorChildDto>(`${this.apiUrl}/add-origin-child`, data);
   }
 
   updateOrigin(origin: Origin): Observable<Origin> {

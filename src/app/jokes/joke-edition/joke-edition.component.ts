@@ -9,12 +9,11 @@ import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
-import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksEditionPanelComponent} from './joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
-import {JokeCreator} from "../models/jokeCreator";
+import {JokeCreator} from '../models/jokeCreator';
 
 @Component({
   selector: 'app-joke-details',

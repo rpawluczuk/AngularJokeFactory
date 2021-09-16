@@ -1,20 +1,20 @@
-<p class="data-header">Edit {{ origin.name }}</p>
+<p class="data-header">Edit {{ originCreator?.name }}</p>
 <div class="container">
   <div class="d-flex justify-content-center">
     <div class="d-flex flex-column align-items-center">
       <!--    main-->
       <div *ngIf="!isOriginEditionDemanded; else originBlockCreator">
         <app-origin-block
-          [origin]="origin"
+          [originCreator] ="originCreator"
           (isOriginEditionDemanded)="onOriginEditionRequest($event)">
         </app-origin-block>
 
       </div>
       <!--      children-->
       <div class="d-flex flex-row">
-        <div *ngFor="let child of origin.children; let x = index">
+        <div *ngFor="let originCreatorChild of originCreator?.children; let x = index">
           <app-connected-origin-block
-            [connectedOrigin]="child"
+            [originCreatorChild]="originCreatorChild"
             (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)">
           </app-connected-origin-block>
         </div>
@@ -28,14 +28,14 @@
 
   <ng-template #originBlockCreator>
     <app-origin-block-creator
-      [origin]="origin"
+      [originCreator]="originCreator"
       (isOriginEditionDemanded)="onOriginEditionRequest($event)">
     </app-origin-block-creator>
   </ng-template>
 
   <ng-template #childOriginBlockCreator>
     <app-child-origin-block-creator
-      [origin]="origin"
+      [parentId]="originCreator?.id"
       (isChildOriginCreationDemanded)="onChildOriginCreationRequest($event)">
     </app-child-origin-block-creator>
   </ng-template>

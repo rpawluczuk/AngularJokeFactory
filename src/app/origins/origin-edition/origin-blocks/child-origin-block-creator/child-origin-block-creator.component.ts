@@ -3,6 +3,7 @@ import {Origin} from '../../../models/origin';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../../../origin.service';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
 
 @Component({
   selector: 'app-child-origin-block-creator',
@@ -11,9 +12,9 @@ import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 })
 export class ChildOriginBlockCreatorComponent implements OnInit {
   @Output() isChildOriginCreationDemanded: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() origin: Origin;
+  @Input() parentId: number;
 
-  originChild: Origin = new Origin();
+  originCreatorChild: OriginCreatorChildDto;
   origins: Origin[] = [];
   originChildForm: FormGroup;
   faCheck = faCheck;
@@ -24,13 +25,14 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.originCreatorChild = new OriginCreatorChildDto(this.parentId);
     this.loadOrigins();
     this.originChildForm = this.buildOriginForm();
   }
 
   buildOriginForm(){
     return this.formBuilder.group({
-      name: [this.originChild.name, Validators.required]
+      name: [this.originCreatorChild.name, Validators.required]
     });
   }
 
@@ -39,9 +41,8 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
   }
 
   onSave() {
-    this.originChild.name = this.originChildForm.controls['name'].value;
-    this.originChild.parents.push(this.origin);
-    this.originService.addOrigin(this.originChild).subscribe(() => {
+    this.originCreatorChild.name = this.originChildForm.controls['name'].value;
+    this.originService.addOriginChild(this.originCreatorChild).subscribe(() => {
       this.isChildOriginCreationDemanded.emit(false);
     });
   }

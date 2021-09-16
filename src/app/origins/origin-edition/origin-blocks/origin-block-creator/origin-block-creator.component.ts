@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Origin} from '../../../models/origin';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../../../origin.service';
+import {OriginCreatorDto} from '../../../models/originCreatorDto';
 
 @Component({
   selector: 'app-origin-block-creator',
@@ -10,7 +10,7 @@ import {OriginService} from '../../../origin.service';
   styleUrls: ['./origin-block-creator.component.css']
 })
 export class OriginBlockCreatorComponent implements OnInit {
-  @Input() origin: Origin;
+  @Input() originCreator: OriginCreatorDto;
   @Output() isOriginEditionDemanded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   originForm: FormGroup;
@@ -27,13 +27,13 @@ export class OriginBlockCreatorComponent implements OnInit {
 
   buildOriginForm(){
     return this.formBuilder.group({
-      name: [this.origin.name, Validators.required]
+      name: [this.originCreator.name, Validators.required]
     });
   }
 
   onSave() {
-    this.origin.name = this.originForm.controls['name'].value;
-    this.originService.updateOrigin(this.origin).subscribe(() => {
+    this.originCreator.name = this.originForm.controls['name'].value;
+    this.originService.updateOrigin(this.originCreator).subscribe(() => {
       this.isOriginEditionDemanded.emit(false);
     });
   }

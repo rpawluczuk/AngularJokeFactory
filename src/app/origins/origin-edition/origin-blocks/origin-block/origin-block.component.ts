@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Origin} from '../../../models/origin';
+import {OriginCreatorDto} from '../../../models/originCreatorDto';
 
 
 @Component({
@@ -8,7 +8,7 @@ import {Origin} from '../../../models/origin';
   styleUrls: ['./origin-block.component.css']
 })
 export class OriginBlockComponent implements OnInit {
-  @Input() origin: Origin;
+  @Input() originCreator: OriginCreatorDto;
   @Output() isOriginEditionDemanded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
