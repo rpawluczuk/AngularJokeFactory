@@ -3,7 +3,7 @@ import {OriginService} from '../origin.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {OriginCreatorDto} from '../models/originCreatorDto';
-import {OriginCreatorChildDto} from "../models/originCreatorChildDto";
+import {OriginCreatorChildDto} from '../models/originCreatorChildDto';
 
 @Component({
   selector: 'app-origin-details',

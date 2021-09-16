@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Origin} from '../models/origin';
 import {OriginService} from '../origin.service';
 import {Router} from '@angular/router';
+import {OriginPresenterDto} from '../models/originPresenterDto';
 
 @Component({
   selector: 'app-origin-list',
@@ -10,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class OriginListComponent implements OnInit {
 
-  origins: Origin[];
+  originPresenterList: OriginPresenterDto[];
 
   constructor(private originService: OriginService,
               private  router: Router) { }
@@ -20,19 +21,19 @@ export class OriginListComponent implements OnInit {
   }
 
   private loadOrigins() {
-    this.originService.getOrigins().subscribe(origins => {
-      this.origins = origins;
+    this.originService.getOrigins().subscribe(originPresenterList => {
+      this.originPresenterList = originPresenterList;
     });
   }
 
-  removeOrigin(origin: Origin, event){
+  removeOrigin(originPresenter: OriginPresenterDto, event){
     event.stopPropagation();
-    this.originService.removeOrigin(origin.id).subscribe(() => {
+    this.originService.removeOrigin(originPresenter.id).subscribe(() => {
       this.loadOrigins();
     });
   }
 
-  goToOriginEdition(origin: Origin) {
-    this.router.navigate(['/origins', origin.id]);
+  goToOriginEdition(originPresenter: OriginPresenterDto) {
+    this.router.navigate(['/origins', originPresenter.id]);
   }
 }

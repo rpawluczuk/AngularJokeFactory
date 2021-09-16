@@ -3,7 +3,8 @@ import {Origin} from '../../../models/origin';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OriginService} from '../../../origin.service';
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
+import {OriginCreatorChildDto} from '../../../models/originCreatorChildDto';
+import {OriginItemDto} from '../../../models/originItemDto';
 
 @Component({
   selector: 'app-child-origin-block-creator',
@@ -15,7 +16,7 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
   @Input() parentId: number;
 
   originCreatorChild: OriginCreatorChildDto;
-  origins: Origin[] = [];
+  originItemList: OriginItemDto[] = [];
   originChildForm: FormGroup;
   faCheck = faCheck;
   faTimes = faTimes;
@@ -37,7 +38,7 @@ export class ChildOriginBlockCreatorComponent implements OnInit {
   }
 
   loadOrigins(): void {
-    this.originService.getOrigins().subscribe(origins => this.origins = origins);
+    this.originService.getOriginItemList().subscribe(originItem => this.originItemList = originItem);
   }
 
   onSave() {

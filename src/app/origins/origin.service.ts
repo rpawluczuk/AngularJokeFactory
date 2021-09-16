@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {Origin} from './models/origin';
 import {OriginCreatorDto} from './models/originCreatorDto';
 import {OriginCreatorChildDto} from "./models/originCreatorChildDto";
+import {OriginPresenterDto} from "./models/originPresenterDto";
+import {OriginItemDto} from "./models/originItemDto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,12 @@ export class OriginService {
   constructor(private http: HttpClient) {
   }
 
-  getOrigins(): Observable<Origin[]> {
-    return this.http.get<Origin[]>(this.apiUrl);
+  getOrigins(): Observable<OriginPresenterDto[]> {
+    return this.http.get<OriginPresenterDto[]>(this.apiUrl);
+  }
+
+  getOriginItemList(): Observable<OriginItemDto[]> {
+    return this.http.get<OriginItemDto[]>(`${this.apiUrl}/list-items`);
   }
 
   getConnectedOrigins(originName: string): Observable<Origin[]> {

@@ -1,27 +1,27 @@
 <div class="container">
-  <div *ngIf="origins && origins.length > 0; else noOrigins" class="mt-5">
-    <div *ngFor="let origin of origins; let i = index" class="card">
+  <div *ngIf="originPresenterList && originPresenterList.length > 0; else noOrigins" class="mt-5">
+    <div *ngFor="let originPresenter of originPresenterList; let i = index" class="card">
       <div class="card-body">
         <div class="d-flex flex-row">
           <div class="col-10">
             <div class="card-title mb-2">
               <div class="d-flex flex-row">
-                <h5 class="mr-4"> {{ origin?.name }} </h5>
-                <div class="text-muted"> {{ origin?.dateCreated | date:'short'}} </div>
+                <h5 class="mr-4"> {{ originPresenter?.name }} </h5>
+                <div class="text-muted"> {{ originPresenter?.dateCreated | date:'short'}} </div>
               </div>
             </div>
             <div>
               <span class="d-inline-block mr-1"> Connected Origins:</span>
               <span class="d-inline-block mr-1 badge badge-primary"
-                    title="{{connectedOrigin?.name}}"
-                    *ngFor="let connectedOrigin of origin?.children">
-                    {{ connectedOrigin?.name }}
+                    title="{{connectedOriginName}}"
+                    *ngFor="let connectedOriginName of originPresenter?.children">
+                    {{ connectedOriginName }}
               </span>
             </div>
           </div>
           <div>
-            <button class="btn btn-outline-primary mr-3" (click)="goToOriginEdition(origin)">Edit</button>
-            <button class="btn btn-outline-danger" (click)="removeOrigin(origin, $event)">Delete</button>
+            <button class="btn btn-outline-primary mr-3" (click)="goToOriginEdition(originPresenter)">Edit</button>
+            <button class="btn btn-outline-danger" (click)="removeOrigin(originPresenter, $event)">Delete</button>
           </div>
         </div>
       </div>

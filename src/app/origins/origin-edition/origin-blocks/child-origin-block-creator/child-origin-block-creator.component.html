@@ -3,8 +3,8 @@
     <label>Name</label>
     <input list="origins" formControlName="name" type="text" class="form-control" placeholder="origin child name">
     <datalist id="origins">
-      <option *ngFor="let origin of origins" [ngValue]="origin">
-        {{ origin.name }}
+      <option *ngFor="let originItem of originItemList" [ngValue]="originItem">
+        {{ originItem.name }}
       </option>
     </datalist>
   </form>
