@@ -54,6 +54,10 @@ export class OriginEditionComponent implements OnInit {
   onAddChildOriginDemand() {
     this.isChildOriginCreationDemanded = true;
   }
+
+  onSetAsMainRequest(originCreatorChild: OriginCreatorChildDto) {
+    this.loadOrigin(originCreatorChild?.name);
+  }
 }
 
 

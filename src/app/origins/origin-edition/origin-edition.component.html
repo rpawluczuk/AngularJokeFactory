@@ -15,7 +15,8 @@
         <div *ngFor="let originCreatorChild of originCreator?.children; let x = index">
           <app-connected-origin-block
             [originCreatorChild]="originCreatorChild"
-            (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)">
+            (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)"
+            (setAsMainRequest)="onSetAsMainRequest($event)">
           </app-connected-origin-block>
         </div>
         <div *ngIf="!isChildOriginCreationDemanded; else childOriginBlockCreator"

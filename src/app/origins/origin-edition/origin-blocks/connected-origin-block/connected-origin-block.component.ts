@@ -12,6 +12,7 @@ import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
 export class ConnectedOriginBlockComponent implements OnInit {
   @Input() originCreatorChild: OriginCreatorChildDto;
   @Output() removeOriginRelationRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
+  @Output() setAsMainRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
 
   faWindowClose = faWindowClose;
   faCrosshairs = faCrosshairs;
@@ -24,5 +25,9 @@ export class ConnectedOriginBlockComponent implements OnInit {
 
   deleteConnectionRequest() {
     this.removeOriginRelationRequest.emit(this.originCreatorChild);
+  }
+
+  onSetAsMainRequest() {
+    this.setAsMainRequest.emit(this.originCreatorChild);
   }
 }
