@@ -1,5 +1,5 @@
 <p class="data-header">Edit {{ originCreator?.name }}</p>
-<div class="container">
+<div class="container-fluid" style="width: 80%">
   <div class="d-flex justify-content-center">
     <div class="d-flex flex-column align-items-center">
       <!--    main-->
@@ -8,16 +8,15 @@
           [originCreator] ="originCreator"
           (isOriginEditionDemanded)="onOriginEditionRequest($event)">
         </app-origin-block>
-
       </div>
       <!--      children-->
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row flex-wrap">
         <div *ngFor="let originCreatorChild of originCreator?.children; let x = index">
-          <app-connected-origin-block
-            [originCreatorChild]="originCreatorChild"
-            (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)"
-            (setAsMainRequest)="onSetAsMainRequest($event)">
-          </app-connected-origin-block>
+            <app-connected-origin-block
+              [originCreatorChild]="originCreatorChild"
+              (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)"
+              (setAsMainRequest)="onSetAsMainRequest($event)">
+            </app-connected-origin-block>
         </div>
         <div *ngIf="!isChildOriginCreationDemanded; else childOriginBlockCreator"
              class="originBlock m-3 d-flex flex-column align-items-center justify-content-center">

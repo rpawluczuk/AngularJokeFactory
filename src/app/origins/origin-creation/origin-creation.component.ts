@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
 import {OriginService} from '../origin.service';
 import {Router} from '@angular/router';
-import {Origin} from '../models/origin';
 import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import {OriginCreatorDto} from '../models/originCreatorDto';
+import {OriginItemDto} from '../models/originItemDto';
 
 @Component({
   selector: 'app-origin-creation',
@@ -15,7 +15,7 @@ export class OriginCreationComponent implements OnInit {
 
   faPlusCircle = faPlusCircle;
   faMinusCircle = faMinusCircle;
-  origins: Origin[] = [];
+  originItemList: OriginItemDto[] = [];
 
   originForm: FormGroup;
   children: FormArray;
@@ -44,7 +44,7 @@ export class OriginCreationComponent implements OnInit {
   }
 
   loadOrigins(): void {
-    this.originService.getOrigins().subscribe(origins => this.origins = origins);
+    this.originService.getOrigins().subscribe(origins => this.originItemList = origins);
   }
 
   onCancel() {
@@ -54,7 +54,7 @@ export class OriginCreationComponent implements OnInit {
   saveOrigin() {
     const originCreator = new OriginCreatorDto();
     originCreator.name = this.originForm.value.name;
-    originCreator.children = this.originForm.value.children.map(x => x.name);
+    originCreator.children = this.originForm.value.children;
     this.originService.addOrigin(originCreator).subscribe(() => {
       this.router.navigate(['/origins']);
     });
