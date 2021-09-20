@@ -12,6 +12,7 @@ import { OriginBlockComponent } from './origin-edition/origin-blocks/origin-bloc
 import { OriginBlockCreatorComponent } from './origin-edition/origin-blocks/origin-block-creator/origin-block-creator.component';
 import { ConnectedOriginBlockComponent } from './origin-edition/origin-blocks/connected-origin-block/connected-origin-block.component';
 import { ChildOriginBlockCreatorComponent } from './origin-edition/origin-blocks/child-origin-block-creator/child-origin-block-creator.component';
+import { OriginChildCreatorBranchComponent } from './origin-edition/origin-child-creator-branch/origin-child-creator-branch.component';
 
 
 
@@ -24,6 +25,7 @@ import { ChildOriginBlockCreatorComponent } from './origin-edition/origin-blocks
     OriginBlockCreatorComponent,
     ConnectedOriginBlockComponent,
     ChildOriginBlockCreatorComponent,
+    OriginChildCreatorBranchComponent,
   ],
     imports: [
         CommonModule,

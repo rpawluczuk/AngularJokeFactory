@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {OriginService} from '../origin.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {OriginCreatorDto} from '../models/originCreatorDto';
 import {OriginCreatorChildDto} from '../models/originCreatorChildDto';
+import {OriginCreatorChildrenWithParentId} from '../models/OriginCreatorChildrenWithParentId';
 
 @Component({
   selector: 'app-origin-details',
@@ -13,9 +13,8 @@ import {OriginCreatorChildDto} from '../models/originCreatorChildDto';
 export class OriginEditionComponent implements OnInit {
 
   originCreator: OriginCreatorDto;
+  originCreatorFamily: OriginCreatorChildrenWithParentId[] = [];
   isOriginEditionDemanded = false;
-  isChildOriginCreationDemanded = false;
-  faPlus = faPlus;
 
   constructor(private originService: OriginService,
               private route: ActivatedRoute,
@@ -29,6 +28,7 @@ export class OriginEditionComponent implements OnInit {
   loadOrigin(originName: string) {
     this.originService.getOriginCreator(originName).subscribe(originCreator => {
       this.originCreator = originCreator;
+      this.originCreatorFamily.push(new OriginCreatorChildrenWithParentId(originCreator.children, originCreator.id));
     });
   }
 
@@ -40,23 +40,14 @@ export class OriginEditionComponent implements OnInit {
     this.isOriginEditionDemanded = isOriginEditionDemanded;
   }
 
-  onChildOriginCreationRequest(isChildOriginCreationDemanded: boolean) {
-    this.isChildOriginCreationDemanded = isChildOriginCreationDemanded;
-    this.loadOrigin(this.originCreator.name);
-  }
-
-  onRemoveOriginRelationRequest(originCreatorChild: OriginCreatorChildDto) {
-    this.originService.removeOriginRelation(originCreatorChild.parentId, originCreatorChild?.id).subscribe(() => {
-      this.loadOrigin(this.originCreator.name);
-    });
-  }
-
-  onAddChildOriginDemand() {
-    this.isChildOriginCreationDemanded = true;
-  }
-
   onSetAsMainRequest(originCreatorChild: OriginCreatorChildDto) {
     this.loadOrigin(originCreatorChild?.name);
+  }
+
+  onshowChildrenOfChildRequest(originCreatorChild: OriginCreatorChildDto) {
+    this.originService.getOriginCreatorChildList(originCreatorChild.id).subscribe(originCreatorChildren => {
+      this.originCreatorFamily.push(new OriginCreatorChildrenWithParentId(originCreatorChildren, originCreatorChild.id));
+    });
   }
 }
 

@@ -1,0 +1,22 @@
+<div class="d-flex flex-row flex-wrap">
+  <div *ngFor="let originCreatorChild of originCreatorChildrenWithParent?.originCreatorChildren">
+    <app-connected-origin-block
+      [originCreatorChild]="originCreatorChild"
+      [chosenOriginCreatorChildId]="chosenOriginCreatorChildId"
+      (removeOriginRelationRequest)="onRemoveOriginRelationRequest($event)"
+      (setAsMainRequest)="onSetAsMainRequest($event)"
+      (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)">
+    </app-connected-origin-block>
+  </div>
+  <div *ngIf="!isChildOriginCreationDemanded; else childOriginBlockCreator"
+       class="originBlock m-3 d-flex flex-column align-items-center justify-content-center">
+    <fa-icon [icon]="faPlus" size="4x" (click)="onAddChildOriginDemand()"></fa-icon>
+  </div>
+</div>
+
+<ng-template #childOriginBlockCreator>
+  <app-child-origin-block-creator
+    [parentId]="originCreatorChildrenWithParent.parentId"
+    (isChildOriginCreationDemanded)="onChildOriginCreationRequest($event)">
+  </app-child-origin-block-creator>
+</ng-template>

@@ -4,3 +4,8 @@
   background: blanchedalmond;
   border-style: solid;
 }
+
+.selected{
+  border-color: red;
+  background: burlywood;
+}

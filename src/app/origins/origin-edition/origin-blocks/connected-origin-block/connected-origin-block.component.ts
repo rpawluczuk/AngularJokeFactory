@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Origin} from '../../../models/origin';
-import {faWindowClose, faCrosshairs} from '@fortawesome/free-solid-svg-icons';
-import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
+import {faWindowClose, faCrosshairs, faAngleDoubleDown, faGripHorizontal} from '@fortawesome/free-solid-svg-icons';
+import {OriginCreatorChildDto} from '../../../models/originCreatorChildDto';
 
 
 @Component({
@@ -11,11 +10,14 @@ import {OriginCreatorChildDto} from "../../../models/originCreatorChildDto";
 })
 export class ConnectedOriginBlockComponent implements OnInit {
   @Input() originCreatorChild: OriginCreatorChildDto;
+  @Input() chosenOriginCreatorChildId: number;
   @Output() removeOriginRelationRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
   @Output() setAsMainRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
+  @Output() showChildrenOfChildRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
 
   faWindowClose = faWindowClose;
   faCrosshairs = faCrosshairs;
+  faGripHorizontal = faGripHorizontal;
 
   constructor() {
   }
@@ -29,5 +31,9 @@ export class ConnectedOriginBlockComponent implements OnInit {
 
   onSetAsMainRequest() {
     this.setAsMainRequest.emit(this.originCreatorChild);
+  }
+
+  onShowChildrenOfChildRequest() {
+    this.showChildrenOfChildRequest.emit(this.originCreatorChild);
   }
 }
