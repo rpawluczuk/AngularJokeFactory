@@ -41,6 +41,7 @@ export class OriginEditionComponent implements OnInit {
   }
 
   onSetAsMainRequest(originCreatorChild: OriginCreatorChildDto) {
+    this.originCreatorFamily = [];
     this.loadOrigin(originCreatorChild?.name);
   }
 
@@ -48,6 +49,15 @@ export class OriginEditionComponent implements OnInit {
     this.originService.getOriginCreatorChildList(originCreatorChild.id).subscribe(originCreatorChildren => {
       this.originCreatorFamily.push(new OriginCreatorChildrenWithParentId(originCreatorChildren, originCreatorChild.id));
     });
+  }
+
+  onHandleBranchIndexRequest(branchIndex: number) {
+    if (branchIndex + 1 < this.originCreatorFamily.length) {
+      console.log(branchIndex);
+      console.log(this.originCreatorFamily.length);
+      this.originCreatorFamily.splice(branchIndex + 1);
+    }
+    console.log(this.originCreatorFamily);
   }
 }
 

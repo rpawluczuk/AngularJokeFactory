@@ -3,6 +3,7 @@ import 'rxjs';
 import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {JokePresenterDto} from './models/jokePresenterDto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class JokesService {
   constructor(private http: HttpClient) {
   }
 
-  getAllJokes(): Observable<Joke[]> {
-    return this.http.get<Joke[]>(`${this.apiUrl}`);
+  getAllJokes(): Observable<JokePresenterDto[]> {
+    return this.http.get<JokePresenterDto[]>(`${this.apiUrl}`);
   }
 
-  getFilteredJokes(filter: string): Observable<Joke[]> {
-    return this.http.get<Joke[]>(`${this.apiUrl}`
+  getFilteredJokes(filter: string): Observable<JokePresenterDto[]> {
+    return this.http.get<JokePresenterDto[]>(`${this.apiUrl}`
         + `?query${filter}`);
   }
 

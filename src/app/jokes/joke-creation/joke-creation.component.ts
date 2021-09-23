@@ -1,4 +1,4 @@
-import {Component, ContentChildren, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
 import {Author} from '../../authors/models/author';
@@ -10,12 +10,11 @@ import {Router} from '@angular/router';
 import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
-import {JokeBlockCreatorComponent} from '../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
-import {JokeBlock} from '../../blocks/joke-blocks/models/joke-block';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
 import {StructurePanelComponent} from './structure-panel/structure-panel.component';
-import {JokeCreator} from "../models/jokeCreator";
+import {JokeCreator} from '../models/jokeCreator';
+import {OriginItemDto} from '../../origins/models/originItemDto';
 
 @Component({
   selector: 'app-joke-creation',
@@ -28,8 +27,7 @@ export class JokeCreationComponent implements OnInit {
 
   jokes: Joke[];
   authors: Author[];
-  origins: Origin[];
-  connectedOrigins: Origin[];
+  origins: OriginItemDto[];
   allStructures: Structure[] = [];
   jokeForm: FormGroup;
   jokeBlocksWithStructureDto: JokeBlocksWithStructureDto;
@@ -121,11 +119,11 @@ export class JokeCreationComponent implements OnInit {
     return dropdownList;
   }
 
-  setSelectedOriginName(selectedOriginName: string) {
-    if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
-      this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
-        this.connectedOrigins = connectedOrigins;
-      });
-    }
-  }
+  // setSelectedOriginName(selectedOriginName: string) {
+  //   if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
+  //     this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
+  //       this.connectedOrigins = connectedOrigins;
+  //     });
+  //   }
+  // }
 }

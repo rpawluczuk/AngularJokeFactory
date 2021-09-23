@@ -40,8 +40,7 @@
         </div>
         <div class="row form-group">
           <label>Origin</label>
-          <select #item (change)="setSelectedOriginName(item.value)"
-                  class=" form-control" formControlName="origin" data-toggle="tooltip"
+          <select class=" form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
             <option value="null">--Select Origin--</option>
             <option *ngFor="let origin of origins" [value]="origin.name">
@@ -54,7 +53,7 @@
           <select class="form-control" formControlName="ostensibleOrigin" data-toggle="tooltip"
                   data-placement="right" title="Select Ostensible Origin Branch">
             <option value="null">--Select Ostensible Origin--</option>
-            <option *ngFor="let ostensibleOrigin of connectedOrigins" [value]="ostensibleOrigin.name">
+            <option *ngFor="let ostensibleOrigin of origins" [value]="ostensibleOrigin.name">
               {{ ostensibleOrigin.name }}
             </option>
           </select>
@@ -64,7 +63,7 @@
           <select class="form-control" formControlName="comedyOrigin" data-toggle="tooltip"
                   data-placement="right" title="Select Comedy Origin Branch">
             <option value="null">--Select Comedy Origin--</option>
-            <option *ngFor="let comedyOrigin of connectedOrigins" [value]="comedyOrigin.name">
+            <option *ngFor="let comedyOrigin of origins" [value]="comedyOrigin.name">
               {{ comedyOrigin.name }}
             </option>
           </select>

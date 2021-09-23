@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Joke} from '../../models/joke';
+
+import {JokePresenterDto} from '../../models/jokePresenterDto';
 
 @Component({
   selector: 'app-jokes-list',
@@ -7,7 +8,7 @@ import {Joke} from '../../models/joke';
   styleUrls: ['./jokes-list.component.css']
 })
 export class JokesListComponent implements OnInit {
-  @Input() jokes: Joke[];
+  @Input() jokePresenterList: JokePresenterDto[];
   @Output() removeJokeRequest: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() {

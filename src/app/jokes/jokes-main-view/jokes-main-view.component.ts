@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Joke} from '../models/joke';
 import {JokesService} from '../jokes.service';
 import {Pagination} from '../../utils/pagination';
 import {PaginationService} from '../../utils/pagination.service';
+import {JokePresenterDto} from '../models/jokePresenterDto';
 
 @Component({
   selector: 'app-jokes-main-view',
@@ -14,7 +14,7 @@ export class JokesMainViewComponent implements OnInit {
   pagination: Pagination = new Pagination();
   query: string;
 
-  jokes: Joke[];
+  jokePresenterList: JokePresenterDto[];
 
   constructor(private jokesService: JokesService,
               private paginationService: PaginationService) {
@@ -35,8 +35,8 @@ export class JokesMainViewComponent implements OnInit {
 
   loadAllJokes(): void {
     this.jokesService.getAllJokes()
-      .subscribe(jokes => {
-        this.jokes = jokes;
+      .subscribe(jokePresenterList => {
+        this.jokePresenterList = jokePresenterList;
         this.loadPagination();
       });
   }
@@ -46,8 +46,8 @@ export class JokesMainViewComponent implements OnInit {
       this.loadAllJokes();
     } else {
       this.jokesService.getFilteredJokes(`${this.query}`)
-        .subscribe(jokes => {
-          this.jokes = jokes;
+        .subscribe(jokePresenterList => {
+          this.jokePresenterList = jokePresenterList;
           this.loadPagination();
         });
     }

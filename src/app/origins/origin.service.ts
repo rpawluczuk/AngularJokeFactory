@@ -25,10 +25,6 @@ export class OriginService {
     return this.http.get<OriginItemDto[]>(`${this.apiUrl}/list-items`);
   }
 
-  getConnectedOrigins(originName: string): Observable<Origin[]> {
-    return this.http.get<Origin[]>(`${this.apiUrl}/get-connected-origins?origin-name=${originName}`);
-  }
-
   getOriginCreatorChildList(id: number): Observable<OriginCreatorChildDto[]> {
     return this.http.get<OriginCreatorChildDto[]>(`${this.apiUrl}/origin-creator-children?origin-id=${id}`);
   }
@@ -49,8 +45,8 @@ export class OriginService {
     return this.http.post<OriginCreatorChildDto>(`${this.apiUrl}/add-origin-child`, data);
   }
 
-  updateOrigin(origin: Origin): Observable<Origin> {
-    return this.http.put<Origin>(this.apiUrl, origin);
+  updateOrigin(originCreatorDto: OriginCreatorDto): Observable<OriginCreatorDto> {
+    return this.http.put<OriginCreatorDto>(this.apiUrl, originCreatorDto);
   }
 
   removeOrigin(id: number): Observable<Origin> {

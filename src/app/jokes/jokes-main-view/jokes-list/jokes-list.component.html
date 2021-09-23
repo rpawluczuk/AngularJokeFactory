@@ -1,7 +1,7 @@
-<div *ngIf="jokes && jokes.length > 0; else noJokes">
-  <div class="card p-3 mb-4" style="background: azure" *ngFor="let joke of jokes; let i = index">
+<div *ngIf="jokePresenterList && jokePresenterList.length > 0; else noJokes">
+  <div class="card p-3 mb-4" style="background: azure" *ngFor="let jokePresenter of jokePresenterList; let i = index">
     <app-single-joke
-      [joke] = "joke"
+      [jokePresenter] = "jokePresenter"
       (removeJokeRequest)="passRemoveJokeRequest($event)">
     </app-single-joke>
   </div>

@@ -16,7 +16,7 @@
           <input formControlName="name" placeholder="connected origin name" type="text" list="origins" class="d-flex justify-content-center">
         </div>
         <datalist id="origins">
-          <option *ngFor="let origin of origins" [ngValue]="origin">
+          <option *ngFor="let origin of originItemList" [ngValue]="origin">
             {{ origin.name }}
           </option>
         </datalist>

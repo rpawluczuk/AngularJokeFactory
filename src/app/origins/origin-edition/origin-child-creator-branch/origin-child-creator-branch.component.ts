@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OriginCreatorChildDto} from '../../models/originCreatorChildDto';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {OriginCreatorChildrenWithParentId} from '../../models/OriginCreatorChildrenWithParentId';
-import {OriginService} from "../../origin.service";
+import {OriginService} from '../../origin.service';
 
 @Component({
   selector: 'app-origin-child-creator-branch',
@@ -11,8 +11,10 @@ import {OriginService} from "../../origin.service";
 })
 export class OriginChildCreatorBranchComponent implements OnInit {
   @Input() originCreatorChildrenWithParent: OriginCreatorChildrenWithParentId;
+  @Input() index: number;
   @Output() setAsMainRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
   @Output() showChildrenOfChildRequest: EventEmitter<OriginCreatorChildDto> = new EventEmitter<OriginCreatorChildDto>();
+  @Output() handleBranchIndex: EventEmitter<number> = new EventEmitter<number>();
 
   isChildOriginCreationDemanded = false;
   chosenOriginCreatorChildId: number;
@@ -36,6 +38,7 @@ export class OriginChildCreatorBranchComponent implements OnInit {
 
   onshowChildrenOfChildRequest(originCreatorChildDto: OriginCreatorChildDto) {
     this.chosenOriginCreatorChildId = originCreatorChildDto.id;
+    this.handleBranchIndex.emit(this.index);
     this.showChildrenOfChildRequest.emit(originCreatorChildDto);
   }
 

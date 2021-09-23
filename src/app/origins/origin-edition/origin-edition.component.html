@@ -10,12 +10,14 @@
         </app-origin-block>
       </div>
       <!--      children-->
-      <div *ngFor="let originCreatorChildrenWithParent of originCreatorFamily">
+      <div *ngFor="let originCreatorChildrenWithParent of originCreatorFamily; let index = index">
         <hr>
         <app-origin-child-creator-branch
           [originCreatorChildrenWithParent]="originCreatorChildrenWithParent"
+          [index]="index"
           (setAsMainRequest)="onSetAsMainRequest($event)"
-          (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)">
+          (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)"
+          (handleBranchIndex)="onHandleBranchIndexRequest($event)">
         </app-origin-child-creator-branch>
       </div>
     </div>

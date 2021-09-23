@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Joke} from '../../../models/joke';
 import {Router} from '@angular/router';
 import {JokeBlocksService} from '../../../../blocks/joke-blocks/joke-blocks.service';
 import {JokeBlock} from '../../../../blocks/joke-blocks/models/joke-block';
 import {Structure} from '../../../../structures/models/structure';
 import {StructuresService} from '../../../../structures/structures.service';
+import {JokePresenterDto} from '../../../models/jokePresenterDto';
 
 @Component({
   selector: 'app-single-joke',
@@ -12,7 +12,7 @@ import {StructuresService} from '../../../../structures/structures.service';
   styleUrls: ['./single-joke.component.css']
 })
 export class SingleJokeComponent implements OnInit {
-  @Input() joke: Joke;
+  @Input() jokePresenter: JokePresenterDto;
   @Output() removeJokeRequest: EventEmitter<number> = new EventEmitter<number>();
 
   structuresOfTheJoke: Structure[] = [];
@@ -31,13 +31,13 @@ export class SingleJokeComponent implements OnInit {
   }
 
   loadBlocksOfTheJoke(): void {
-    this.jokeBlocksService.getBlocksOfTheJoke(this.joke.id).subscribe((jokeBlocks) => {
+    this.jokeBlocksService.getBlocksOfTheJoke(this.jokePresenter.id).subscribe((jokeBlocks) => {
       this.jokeBlocks = jokeBlocks;
     });
   }
 
   loadStructuresOfTheJoke(){
-    this.structuresService.getStructuresByJokeID(this.joke.id).subscribe((structures) => {
+    this.structuresService.getStructuresByJokeID(this.jokePresenter.id).subscribe((structures) => {
       this.structuresOfTheJoke = structures;
       if (structures.length > 0){
         this.currentStructure = structures[0];
@@ -45,13 +45,13 @@ export class SingleJokeComponent implements OnInit {
     });
   }
 
-  removeJoke(joke: Joke, event) {
+  removeJoke(jokePresenter: JokePresenterDto, event) {
     event.stopPropagation();
-    this.removeJokeRequest.emit(joke.id);
+    this.removeJokeRequest.emit(jokePresenter.id);
   }
 
   goToJokeEdition() {
-    this.router.navigate(['/jokes', this.joke.id]);
+    this.router.navigate(['/jokes', this.jokePresenter.id]);
   }
 
   showJokeDetails() {
@@ -59,14 +59,6 @@ export class SingleJokeComponent implements OnInit {
     if (this.isDetailsButtonClicked){
       this.loadBlocksOfTheJoke();
       this.loadStructuresOfTheJoke();
-    }
-  }
-
-  getAuthorNameAndSurname(joke: Joke): string {
-    if (joke.author === undefined || joke.author === null) {
-      return 'any author';
-    } else {
-      return joke.author.name + ' ' + joke.author.surname;
     }
   }
 

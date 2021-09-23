@@ -5,6 +5,7 @@ import {OriginService} from '../../../origins/origin.service';
 import {Author} from '../../../authors/models/author';
 import {Origin} from '../../../origins/models/origin';
 import {Structure} from '../../../structures/models/structure';
+import {OriginPresenterDto} from "../../../origins/models/originPresenterDto";
 
 @Component({
   selector: 'app-jokes-filtering',
@@ -15,7 +16,7 @@ export class JokesFilteringComponent implements OnInit {
   @Output() finalQuery: EventEmitter<string> = new EventEmitter<string>();
 
   authors: Author[];
-  origins: Origin[];
+  origins: OriginPresenterDto[];
   structures: Structure[] = [];
 
   authorQuery: string;

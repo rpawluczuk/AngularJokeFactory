@@ -43,12 +43,11 @@
         </div>
         <div class="row form-group">
           <label>Origin</label>
-          <select #item (change)="setSelectedOriginName(item.value)"
-                  class="form-control" formControlName="origin" data-toggle="tooltip"
+          <select class="form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
             <option *ngIf="joke.origin.name!==null" [value]="joke.origin"> {{ joke.origin.name }} </option>
             <option *ngIf="joke.origin.name===null" [value]="joke.origin">--Select Origin--</option>
-            <option *ngFor="let origin of origins" [value]="origin.name">
+            <option *ngFor="let origin of originItemList" [value]="origin.name">
               {{ origin.name }}
             </option>
           </select>
@@ -59,7 +58,7 @@
                   data-placement="right" title="Select Ostensible Origin Branch">
             <option *ngIf="joke.ostensibleOrigin!==null" [value]="joke.ostensibleOrigin"> {{ joke.ostensibleOrigin.name }} </option>
             <option *ngIf="joke.ostensibleOrigin===null" [value]="joke.ostensibleOrigin">--Select Ostensible Origin--</option>
-            <option *ngFor="let ostensibleOrigin of connectedOrigins" [value]="ostensibleOrigin.name">
+            <option *ngFor="let ostensibleOrigin of originItemList" [value]="ostensibleOrigin.name">
               {{ ostensibleOrigin.name }}
             </option>
           </select>
@@ -70,7 +69,7 @@
                   data-placement="right" title="Select Comedy Origin Branch">
             <option *ngIf="joke.comedyOrigin!==null" [value]="joke.comedyOrigin"> {{ joke.comedyOrigin.name }} </option>
             <option *ngIf="joke.comedyOrigin===null" [value]="joke.comedyOrigin">--Select Comedy Origin--</option>
-            <option *ngFor="let comedyOrigin of connectedOrigins" [value]="comedyOrigin.name">
+            <option *ngFor="let comedyOrigin of originItemList" [value]="comedyOrigin.name">
               {{ comedyOrigin.name }}
             </option>
           </select>

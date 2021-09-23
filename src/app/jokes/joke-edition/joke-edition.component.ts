@@ -7,13 +7,13 @@ import {Structure} from '../../structures/models/structure';
 import {StructuresService} from '../../structures/structures.service';
 import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';
-import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksEditionPanelComponent} from './joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
 import {JokeCreator} from '../models/jokeCreator';
+import {OriginItemDto} from '../../origins/models/originItemDto';
 
 @Component({
   selector: 'app-joke-details',
@@ -28,8 +28,7 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
   jokeForm: FormGroup;
   allStructures: Structure[] = [];
   authors: Author[];
-  origins: Origin[];
-  connectedOrigins: Origin[];
+  originItemList: OriginItemDto[];
   jokeBlocksWithStructureDto: JokeBlocksWithStructureDto;
 
   selectedStructuresByUser: Structure[] = [];
@@ -116,18 +115,9 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
   }
 
   loadOrigins(): void {
-    this.originService.getOrigins().subscribe((origins) => {
-      this.origins = origins;
+    this.originService.getOriginItemList().subscribe((originItem) => {
+      this.originItemList = originItem;
     });
-    if (this.joke.origin !== null) {
-      this.originService.getConnectedOrigins(this.joke.origin.name).subscribe(connectedOrigins => {
-        this.connectedOrigins = connectedOrigins;
-      });
-    } else {
-      this.joke.origin = new Origin();
-      this.joke.comedyOrigin = new Origin();
-      this.joke.ostensibleOrigin = new Origin();
-    }
   }
 
   loadSelectedStructuresByDefault(): Array<any> {
@@ -148,26 +138,5 @@ export class JokeEditionComponent implements OnInit, AfterContentInit {
 
   onCancel() {
     this.router.navigate(['/jokes']);
-  }
-
-  // changeCurrentStructure(SelectedStructureIndex: number) {
-  //   this.currentStructureIndex = SelectedStructureIndex;
-  //   this.currentStructure = this.selectedStructuresByUser[SelectedStructureIndex - 1];
-  //   this.jokeBlockComponents.forEach((child) => {
-  //     const jokeBlockFromForm = child.saveJokeBlockValue();
-  //     this.jokeBlocks.forEach((jokeBlock, jokeBlockIndex) => {
-  //       if (jokeBlock.structureBlock.id === jokeBlockFromForm.structureBlock.id) {
-  //         this.jokeBlocks[jokeBlockIndex] = jokeBlockFromForm;
-  //       }
-  //     });
-  //   });
-  // }
-
-  setSelectedOriginName(selectedOriginName: string) {
-    if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
-      this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
-        this.connectedOrigins = connectedOrigins;
-      });
-    }
   }
 }
