@@ -19,6 +19,7 @@ import { SingleJokeComponent } from './jokes-main-view/jokes-list/single-joke/si
 import {JokeBlockComponent} from "../blocks/joke-blocks/joke-block/joke-block.component";
 import { StructurePanelComponent } from './joke-creation/structure-panel/structure-panel.component';
 import { JokeBlocksEditionPanelComponent } from './joke-edition/joke-blocks-edition-panel/joke-blocks-edition-panel.component';
+import { SingleJokeDetailsComponent } from './jokes-main-view/jokes-list/single-joke/single-joke-details/single-joke-details.component';
 
 
 
@@ -35,7 +36,8 @@ import { JokeBlocksEditionPanelComponent } from './joke-edition/joke-blocks-edit
     SingleJokeComponent,
     JokeBlockComponent,
     StructurePanelComponent,
-    JokeBlocksEditionPanelComponent
+    JokeBlocksEditionPanelComponent,
+    SingleJokeDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -26,22 +26,8 @@
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeDetails()"> Details</button>
   <button class="btn btn-outline-danger mt-3" (click)="removeJoke(jokePresenter, $event)"> Delete</button>
   <div *ngIf="isDetailsButtonClicked" class="d-flex flex-column align-items-center p-4">
-    <ngb-pagination
-      [(page)]="currentStructureIndex"
-      [pageSize]="1"
-      [collectionSize]="structuresOfTheJoke?.length"
-      [maxSize]="5"
-      [boundaryLinks]="true"
-      (pageChange)="changeCurrentStructure($event)"
-      class="justify-content-center mr-4">
-    </ngb-pagination>
-    <h2> {{ structuresOfTheJoke[currentStructureIndex - 1]?.name }} </h2>
-    <div class="d-flex justify-content-center" *ngFor="let jokeBlock of jokeBlocks; let x = index">
-      <div *ngIf="jokeBlock?.structureBlock?.structure?.id === currentStructure?.id">
-        <app-joke-block
-          [jokeBlock]="jokeBlock">
-        </app-joke-block>
-      </div>
-    </div>
+    <app-single-joke-details
+      [jokePresenter]="jokePresenter">
+    </app-single-joke-details>
   </div>
 </div>

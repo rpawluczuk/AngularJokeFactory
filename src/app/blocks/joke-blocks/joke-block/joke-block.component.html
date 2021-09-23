@@ -1,10 +1,10 @@
 <div>
-  <div *ngIf="jokeBlock.structureBlock.position !== 0" class="d-flex flex-column justify-content-center">
+  <div *ngIf="jokeBlock?.position !== 0" class="d-flex flex-column justify-content-center">
     <fa-icon [icon]="faLongArrowAltDown" size="5x" class="d-flex justify-content-center"></fa-icon>
   </div>
   <div class="p-2 jokeBlock">
     <div class="d-flex flex-row justify-content-center">
-      <h3>{{jokeBlock?.structureBlock.title}}</h3>
+      <h3>{{jokeBlock?.title}}</h3>
     </div>
     <div class="d-flex flex-row mr-2">
       <div class="d-flex flex-column col-6">
@@ -15,7 +15,7 @@
       </div>
       <div class="d-flex flex-column justify-content-center ml-2">
         <pre
-          style="white-space: pre-wrap; font-size: larger; font-family: serif">{{jokeBlock?.structureBlock.description}}</pre>
+          style="white-space: pre-wrap; font-size: larger; font-family: serif">{{jokeBlock?.description}}</pre>
       </div>
     </div>
   </div>

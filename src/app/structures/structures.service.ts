@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Structure} from './models/structure';
-import {JokeBlock} from "../blocks/joke-blocks/models/joke-block";
+import {StructureItem} from "./models/StructureItem";
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,8 @@ export class StructuresService {
     return this.http.get<Structure>(`${this.apiUrl}/last`);
   }
 
-  getStructuresByJokeID(jokeId: number): Observable<Structure[]> {
-    return this.http.get<Structure[]>(`${this.apiUrl}`
+  getStructuresByJokeID(jokeId: number): Observable<StructureItem[]> {
+    return this.http.get<StructureItem[]>(`${this.apiUrl}`
       + `/by-joke-id/${jokeId}`);
   }
 

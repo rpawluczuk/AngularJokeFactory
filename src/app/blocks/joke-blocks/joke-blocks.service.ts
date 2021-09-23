@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokeBlock} from './models/joke-block';
 import {JokeBlocksWithStructureDto} from './models/joke-blocks-wtih-structure-dto';
+import {JokeBlockDto} from "./models/joke-block-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class JokeBlocksService {
     return this.http.post<JokeBlock>(this.apiUrl, data);
   }
 
-  getBlocksOfTheJoke(jokeId: number): Observable<JokeBlock[]> {
-    return this.http.get<JokeBlock[]>(`${this.apiUrl}`
+  getBlocksOfTheJoke(jokeId: number): Observable<JokeBlockDto[]> {
+    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
       + `/with-joke/${jokeId}`);
   }
 
