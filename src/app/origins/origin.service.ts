@@ -26,15 +26,11 @@ export class OriginService {
   }
 
   getOriginCreatorChildList(id: number): Observable<OriginCreatorChildDto[]> {
-    return this.http.get<OriginCreatorChildDto[]>(`${this.apiUrl}/origin-creator-children?origin-id=${id}`);
+    return this.http.get<OriginCreatorChildDto[]>(`${this.apiUrl}/origin-creator-children?parent-id=${id}`);
   }
 
-  getOrigin(id: number): Observable<Origin> {
-    return this.http.get<Origin>(`${this.apiUrl}/${id}`);
-  }
-
-  getOriginCreator(originName: string): Observable<OriginCreatorDto> {
-    return this.http.get<OriginCreatorDto>(`${this.apiUrl}?originCreatorName=${originName}`);
+  getOriginCreator(id: number): Observable<OriginCreatorDto> {
+    return this.http.get<OriginCreatorDto>(`${this.apiUrl}/${id}`);
   }
 
   addOrigin(data): Observable<OriginCreatorDto> {

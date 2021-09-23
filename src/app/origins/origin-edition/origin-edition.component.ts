@@ -22,11 +22,11 @@ export class OriginEditionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadOrigin(this.route.snapshot.data.origin.name);
+    this.loadOrigin(this.route.snapshot.data.origin.id);
   }
 
-  loadOrigin(originName: string) {
-    this.originService.getOriginCreator(originName).subscribe(originCreator => {
+  loadOrigin(originId: number) {
+    this.originService.getOriginCreator(originId).subscribe(originCreator => {
       this.originCreator = originCreator;
       this.originCreatorFamily.push(new OriginCreatorChildrenWithParentId(originCreator.children, originCreator.id));
     });
@@ -42,7 +42,7 @@ export class OriginEditionComponent implements OnInit {
 
   onSetAsMainRequest(originCreatorChild: OriginCreatorChildDto) {
     this.originCreatorFamily = [];
-    this.loadOrigin(originCreatorChild?.name);
+    this.loadOrigin(originCreatorChild?.id);
   }
 
   onshowChildrenOfChildRequest(originCreatorChild: OriginCreatorChildDto) {
