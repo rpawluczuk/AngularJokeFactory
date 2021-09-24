@@ -101,6 +101,7 @@ export class JokeCreationComponent implements OnInit {
   addJoke() {
     const jokeBlockWithStructureDtoList = this.structurePanelComponent.getJokeBlocksWithStructureDtoList();
     const joke: JokeCreator = this.jokeForm.value;
+    console.log(joke);
     joke.jokeBlocksWithStructureDtoList = jokeBlockWithStructureDtoList;
     this.jokesService.addJoke(joke).subscribe(() => {
         this.router.navigate(['/jokes']);
@@ -118,12 +119,4 @@ export class JokeCreationComponent implements OnInit {
     }
     return dropdownList;
   }
-
-  // setSelectedOriginName(selectedOriginName: string) {
-  //   if (selectedOriginName !== 'null' && selectedOriginName !== 'undefined') {
-  //     this.originService.getConnectedOrigins(selectedOriginName).subscribe(connectedOrigins => {
-  //       this.connectedOrigins = connectedOrigins;
-  //     });
-  //   }
-  // }
 }

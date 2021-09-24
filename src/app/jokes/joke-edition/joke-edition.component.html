@@ -1,4 +1,4 @@
-<p class="data-header">Edit {{ joke.title }}</p>
+<p class="data-header">Edit {{ jokeCreator?.title }}</p>
 <div class="data-container">
   <form [formGroup]="jokeForm">
     <div class="d-flex flex-row">
@@ -23,7 +23,7 @@
             class="row mb-2"
             [placeholder]="'custom placeholder'"
             [settings]="dropdownSettings"
-            [data]="getDropdownList(allStructures)"
+            [data]="getDropdownList(allStructureItemList)"
             formControlName="structures"
             (onSelect)="onStructureSelectOrDeselect($event)"
             (onDeSelect)="onStructureSelectOrDeselect($event)">
@@ -33,9 +33,9 @@
           <label>Author</label>
           <select class="form-control" formControlName="author" data-toggle="tooltip"
                   data-placement="right" title="Select Author Branch">
-            <option *ngIf="joke.author!==null"
-                    [ngValue]="joke.author"> {{joke.author.name + ' ' + joke.author.surname}} </option>
-            <option *ngIf="joke.author===null" [ngValue]="joke.author">--Select Author--</option>
+            <option *ngIf="jokeCreator.author!==null"
+                    [ngValue]="jokeCreator.author"> {{jokeCreator.author.name + ' ' + jokeCreator.author.surname}} </option>
+            <option *ngIf="jokeCreator.author===null" [ngValue]="jokeCreator.author">--Select Author--</option>
             <option *ngFor="let author of authors" [ngValue]="author">
               {{author.name + ' ' + author.surname}}
             </option>
@@ -45,9 +45,10 @@
           <label>Origin</label>
           <select class="form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
-            <option *ngIf="joke.origin.name!==null" [value]="joke.origin"> {{ joke.origin.name }} </option>
-            <option *ngIf="joke.origin.name===null" [value]="joke.origin">--Select Origin--</option>
-            <option *ngFor="let origin of originItemList" [value]="origin.name">
+            <option *ngIf="jokeCreator?.origin!==null"
+                    [ngValue]="jokeCreator?.origin"> {{ jokeCreator?.origin?.name }} </option>
+            <option *ngIf="jokeCreator?.origin===null" [ngValue]="jokeCreator?.origin">--Select Origin--</option>
+            <option *ngFor="let origin of originItemList" [ngValue]="origin">
               {{ origin.name }}
             </option>
           </select>
@@ -56,9 +57,12 @@
           <label>Ostensible Origin</label>
           <select class="form-control" formControlName="ostensibleOrigin" data-toggle="tooltip"
                   data-placement="right" title="Select Ostensible Origin Branch">
-            <option *ngIf="joke.ostensibleOrigin!==null" [value]="joke.ostensibleOrigin"> {{ joke.ostensibleOrigin.name }} </option>
-            <option *ngIf="joke.ostensibleOrigin===null" [value]="joke.ostensibleOrigin">--Select Ostensible Origin--</option>
-            <option *ngFor="let ostensibleOrigin of originItemList" [value]="ostensibleOrigin.name">
+            <option *ngIf="jokeCreator.ostensibleOrigin!==null" [ngValue]="jokeCreator?.ostensibleOrigin">
+              {{ jokeCreator?.ostensibleOrigin?.name }} </option>
+            <option *ngIf="jokeCreator.ostensibleOrigin===null" [ngValue]="jokeCreator?.ostensibleOrigin">--Select
+              Ostensible Origin--
+            </option>
+            <option *ngFor="let ostensibleOrigin of originItemList" [ngValue]="ostensibleOrigin.name">
               {{ ostensibleOrigin.name }}
             </option>
           </select>
@@ -67,9 +71,12 @@
           <label>Comedy Origin</label>
           <select class="form-control" formControlName="comedyOrigin" data-toggle="tooltip"
                   data-placement="right" title="Select Comedy Origin Branch">
-            <option *ngIf="joke.comedyOrigin!==null" [value]="joke.comedyOrigin"> {{ joke.comedyOrigin.name }} </option>
-            <option *ngIf="joke.comedyOrigin===null" [value]="joke.comedyOrigin">--Select Comedy Origin--</option>
-            <option *ngFor="let comedyOrigin of originItemList" [value]="comedyOrigin.name">
+            <option *ngIf="jokeCreator?.comedyOrigin!==null"
+                    [ngValue]="jokeCreator?.comedyOrigin"> {{ jokeCreator?.comedyOrigin?.name }} </option>
+            <option *ngIf="jokeCreator?.comedyOrigin===null" [ngValue]="jokeCreator?.comedyOrigin">--Select Comedy
+              Origin--
+            </option>
+            <option *ngFor="let comedyOrigin of originItemList" [ngValue]="comedyOrigin.name">
               {{ comedyOrigin.name }}
             </option>
           </select>
@@ -90,7 +97,7 @@
         <app-joke-blocks-edition-panel
           #jokeBlocksEditionPanelRef
           [jokeBlocksWithStructureDto]="jokeBlocksWithStructureDto"
-          [joke]="joke">
+          [jokeCreator]="jokeCreator">
         </app-joke-blocks-edition-panel>
       </div>
     </div>

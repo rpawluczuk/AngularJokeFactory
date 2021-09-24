@@ -1,14 +1,16 @@
 import {Author} from '../../authors/models/author';
-import {Origin} from '../../origins/models/origin';
 import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
+import {OriginItemDto} from '../../origins/models/originItemDto';
+import {StructureItemDto} from '../../structures/models/StructureItemDto';
 
-export interface JokeCreator {
+export class JokeCreator {
   id: number;
-  jokeBlocksWithStructureDtoList: JokeBlocksWithStructureDto[];
+  jokeBlocksWithStructureDtoList: JokeBlocksWithStructureDto[] = [];
+  structureItemList: StructureItemDto[];
   author: Author;
-  origin: Origin;
-  comedyOrigin: Origin;
-  ostensibleOrigin: Origin;
+  origin: OriginItemDto;
+  comedyOrigin: OriginItemDto;
+  ostensibleOrigin: OriginItemDto;
   title: string;
   content: string;
   lastUpdated: string;

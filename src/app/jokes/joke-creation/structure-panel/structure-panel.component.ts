@@ -28,12 +28,12 @@ export class StructurePanelComponent implements OnChanges {
       this.jokeBlocksWithStructureDto = changes.jokeBlocksWithStructureDto.currentValue;
       const countOfSelectedStructures = this.jokeBlocksWithStructureDtoList.length;
       if (countOfSelectedStructures === 0) {
-        this.nameOfCurrentStructure = this.jokeBlocksWithStructureDto?.structureName;
+        this.nameOfCurrentStructure = this.jokeBlocksWithStructureDto?.structureItemDto?.text;
       }
-      const selectedStructures = this.jokeBlocksWithStructureDtoList.map(jbs => jbs.structureName);
-      if (selectedStructures.includes(this.jokeBlocksWithStructureDto.structureName)) {
+      const selectedStructures = this.jokeBlocksWithStructureDtoList.map(jbs => jbs?.structureItemDto?.text);
+      if (selectedStructures.includes(this.jokeBlocksWithStructureDto?.structureItemDto?.text)) {
         this.jokeBlocksWithStructureDtoList = this.jokeBlocksWithStructureDtoList
-          .filter(jbs => jbs.structureName !== this.jokeBlocksWithStructureDto.structureName);
+          .filter(jbs => jbs?.structureItemDto?.text !== this.jokeBlocksWithStructureDto?.structureItemDto?.text);
       } else {
         this.jokeBlocksWithStructureDtoList.push(this.jokeBlocksWithStructureDto);
       }
@@ -43,7 +43,7 @@ export class StructurePanelComponent implements OnChanges {
   changeCurrentStructure(SelectedStructureIndex: number) {
     this.updateJokeBlockDtoListByFormValues();
     this.currentStructureIndex = SelectedStructureIndex;
-    this.nameOfCurrentStructure = this.jokeBlocksWithStructureDtoList[SelectedStructureIndex - 1]?.structureName;
+    this.nameOfCurrentStructure = this.jokeBlocksWithStructureDtoList[SelectedStructureIndex - 1]?.structureItemDto?.text;
   }
 
   getJokeBlocksWithStructureDtoList(): JokeBlocksWithStructureDto[] {
@@ -56,7 +56,7 @@ export class StructurePanelComponent implements OnChanges {
       const jokeBlockFromForm = child.saveJokeBlockValue();
 
       const indexOfJBSDtoList = this.jokeBlocksWithStructureDtoList
-        .map(jbs => jbs.structureName)
+        .map(jbs => jbs?.structureItemDto?.text)
         .indexOf(jokeBlockFromForm.structureName);
 
       const indexOfJBList = this.jokeBlocksWithStructureDtoList[indexOfJBSDtoList].jokeBlocksDto

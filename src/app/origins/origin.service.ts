@@ -3,9 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Origin} from './models/origin';
 import {OriginCreatorDto} from './models/originCreatorDto';
-import {OriginCreatorChildDto} from "./models/originCreatorChildDto";
-import {OriginPresenterDto} from "./models/originPresenterDto";
-import {OriginItemDto} from "./models/originItemDto";
+import {OriginCreatorChildDto} from './models/originCreatorChildDto';
+import {OriginPresenterDto} from './models/originPresenterDto';
+import {OriginItemDto} from './models/originItemDto';
 
 @Injectable({
   providedIn: 'root'

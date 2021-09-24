@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Structure} from './models/structure';
-import {StructureItem} from "./models/StructureItem";
+import {StructureItemDto} from './models/StructureItemDto';
+import {OriginItemDto} from "../origins/models/originItemDto";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class StructuresService {
     return this.http.get<Structure[]>(this.apiUrl);
   }
 
+  getStructureItemList(): Observable<StructureItemDto[]> {
+    return this.http.get<StructureItemDto[]>(`${this.apiUrl}/list-items`);
+  }
+
   getStructure(id: number): Observable<Structure> {
     return this.http.get<Structure>(`${this.apiUrl}/${id}`);
   }
@@ -26,8 +31,8 @@ export class StructuresService {
     return this.http.get<Structure>(`${this.apiUrl}/last`);
   }
 
-  getStructuresByJokeID(jokeId: number): Observable<StructureItem[]> {
-    return this.http.get<StructureItem[]>(`${this.apiUrl}`
+  getStructuresByJokeID(jokeId: number): Observable<StructureItemDto[]> {
+    return this.http.get<StructureItemDto[]>(`${this.apiUrl}`
       + `/by-joke-id/${jokeId}`);
   }
 

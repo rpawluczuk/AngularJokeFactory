@@ -3,9 +3,9 @@ import {Author} from '../../authors/models/author';
 import {Origin} from '../../origins/models/origin';
 import {JokeBlockDto} from '../../blocks/joke-blocks/models/joke-block-dto';
 
-export interface Joke {
+export class Joke {
   id: number;
-  structures: Structure[];
+  structures: Structure[] = [];
   jokeBlocks: JokeBlockDto[];
   author: Author;
   origin: Origin;

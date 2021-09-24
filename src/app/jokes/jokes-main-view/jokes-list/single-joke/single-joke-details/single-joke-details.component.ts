@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {StructuresService} from '../../../../../structures/structures.service';
 import {JokePresenterDto} from '../../../../models/jokePresenterDto';
 import {JokeBlocksService} from '../../../../../blocks/joke-blocks/joke-blocks.service';
-import {StructureItem} from '../../../../../structures/models/StructureItem';
+import {StructureItemDto} from '../../../../../structures/models/StructureItemDto';
 import {JokeBlockDto} from '../../../../../blocks/joke-blocks/models/joke-block-dto';
 
 @Component({
@@ -13,8 +13,8 @@ import {JokeBlockDto} from '../../../../../blocks/joke-blocks/models/joke-block-
 export class SingleJokeDetailsComponent implements OnInit {
   @Input() jokePresenter: JokePresenterDto;
 
-  structureItemList: StructureItem[] = [];
-  currentStructureItem: StructureItem;
+  structureItemList: StructureItemDto[] = [];
+  currentStructureItem: StructureItemDto;
   jokeBlocks: JokeBlockDto[] = [];
   currentStructureIndex = 1;
 
