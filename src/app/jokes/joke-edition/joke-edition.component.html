@@ -62,7 +62,7 @@
             <option *ngIf="jokeCreator.ostensibleOrigin===null" [ngValue]="jokeCreator?.ostensibleOrigin">--Select
               Ostensible Origin--
             </option>
-            <option *ngFor="let ostensibleOrigin of originItemList" [ngValue]="ostensibleOrigin.name">
+            <option *ngFor="let ostensibleOrigin of originItemList" [ngValue]="ostensibleOrigin">
               {{ ostensibleOrigin.name }}
             </option>
           </select>
@@ -76,7 +76,7 @@
             <option *ngIf="jokeCreator?.comedyOrigin===null" [ngValue]="jokeCreator?.comedyOrigin">--Select Comedy
               Origin--
             </option>
-            <option *ngFor="let comedyOrigin of originItemList" [ngValue]="comedyOrigin.name">
+            <option *ngFor="let comedyOrigin of originItemList" [ngValue]="comedyOrigin">
               {{ comedyOrigin.name }}
             </option>
           </select>

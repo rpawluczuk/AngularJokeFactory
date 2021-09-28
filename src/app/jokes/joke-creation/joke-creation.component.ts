@@ -101,8 +101,8 @@ export class JokeCreationComponent implements OnInit {
   addJoke() {
     const jokeBlockWithStructureDtoList = this.structurePanelComponent.getJokeBlocksWithStructureDtoList();
     const joke: JokeCreator = this.jokeForm.value;
-    console.log(joke);
     joke.jokeBlocksWithStructureDtoList = jokeBlockWithStructureDtoList;
+    console.log(joke);
     this.jokesService.addJoke(joke).subscribe(() => {
         this.router.navigate(['/jokes']);
     });

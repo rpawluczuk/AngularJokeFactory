@@ -33,6 +33,7 @@ export class OriginBlockCreatorComponent implements OnInit {
 
   onSave() {
     this.originCreator.name = this.originForm.controls['name'].value;
+    console.log(this.originCreator);
     this.originService.updateOrigin(this.originCreator).subscribe(() => {
       this.isOriginEditionDemanded.emit(false);
     });

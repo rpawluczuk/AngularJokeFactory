@@ -41,8 +41,8 @@ export class OriginService {
     return this.http.post<OriginCreatorChildDto>(`${this.apiUrl}/add-origin-child`, data);
   }
 
-  updateOrigin(originCreatorDto: OriginCreatorDto): Observable<OriginCreatorDto> {
-    return this.http.put<OriginCreatorDto>(this.apiUrl, originCreatorDto);
+  updateOrigin(data): Observable<OriginCreatorDto> {
+    return this.http.patch<OriginCreatorDto>(this.apiUrl, data);
   }
 
   removeOrigin(id: number): Observable<Origin> {
