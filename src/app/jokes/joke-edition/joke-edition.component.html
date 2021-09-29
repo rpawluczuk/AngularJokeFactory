@@ -21,10 +21,10 @@
           <label class="row">Structure</label>
           <ng-multiselect-dropdown
             class="row mb-2"
+            formControlName="structureItemList"
             [placeholder]="'custom placeholder'"
             [settings]="dropdownSettings"
             [data]="getDropdownList(allStructureItemList)"
-            formControlName="structures"
             (onSelect)="onStructureSelectOrDeselect($event)"
             (onDeSelect)="onStructureSelectOrDeselect($event)">
           </ng-multiselect-dropdown>
@@ -96,7 +96,7 @@
       <div class="col-6 p-4">
         <app-joke-blocks-edition-panel
           #jokeBlocksEditionPanelRef
-          [jokeBlocksWithStructureDto]="jokeBlocksWithStructureDto"
+          [structureItemDto]="structureItemDto"
           [jokeCreator]="jokeCreator">
         </app-joke-blocks-edition-panel>
       </div>

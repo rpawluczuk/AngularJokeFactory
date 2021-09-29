@@ -21,9 +21,10 @@
         <div>
           <label class="row">Structure</label>
           <ng-multiselect-dropdown class="row mb-2"
+                                   formControlName="structureItemList"
                                    [placeholder]="'custom placeholder'"
                                    [settings]="dropdownSettings"
-                                   [data]="getDropdownList(allStructures)"
+                                   [data]="getDropdownList(allStructureItemList)"
                                    (onSelect)="onStructureSelectOrDeselect($event)"
                                    (onDeSelect)="onStructureSelectOrDeselect($event)">
           </ng-multiselect-dropdown>
@@ -40,7 +41,7 @@
         </div>
         <div class="row form-group">
           <label>Origin</label>
-          <select class=" form-control" formControlName="origin" data-toggle="tooltip"
+          <select class="form-control" formControlName="origin" data-toggle="tooltip"
                   data-placement="right" title="Select Origin Branch">
             <option value="null">--Select Origin--</option>
             <option *ngFor="let origin of origins" [value]="origin.name">
@@ -82,7 +83,7 @@
       <div class="col-6 p-4">
         <app-structure-panel
           #structurePanelRef
-          [jokeBlocksWithStructureDto]="jokeBlocksWithStructureDto">
+          [structureItemDto]="structureItemDto">
         </app-structure-panel>
       </div>
     </div>

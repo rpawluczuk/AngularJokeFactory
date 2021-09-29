@@ -2,19 +2,17 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
 import {Author} from '../../authors/models/author';
-import {Structure} from '../../structures/models/structure';
 import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
-import {Origin} from '../../origins/models/origin';
 import {OriginService} from '../../origins/origin.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
-import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
 import {StructurePanelComponent} from './structure-panel/structure-panel.component';
 import {JokeCreator} from '../models/jokeCreator';
 import {OriginItemDto} from '../../origins/models/originItemDto';
+import {StructureItemDto} from '../../structures/models/StructureItemDto';
 
 @Component({
   selector: 'app-joke-creation',
@@ -28,10 +26,9 @@ export class JokeCreationComponent implements OnInit {
   jokes: Joke[];
   authors: Author[];
   origins: OriginItemDto[];
-  allStructures: Structure[] = [];
+  allStructureItemList: StructureItemDto[] = [];
   jokeForm: FormGroup;
-  jokeBlocksWithStructureDto: JokeBlocksWithStructureDto;
-  selectedOriginName: string;
+  structureItemDto: StructureItemDto;
 
   dropdownSettings = {};
 
@@ -48,7 +45,7 @@ export class JokeCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStructures();
-    this.loadAuthores();
+    this.loadAuthors();
     this.loadOrigins();
     this.jokeForm = this.buildJokeForm();
     this.dropdownSettings = {
@@ -62,12 +59,12 @@ export class JokeCreationComponent implements OnInit {
   }
 
   loadStructures(): void {
-    this.structuresService.getStructures().subscribe((structures) => {
-      this.allStructures = structures;
+    this.structuresService.getStructureItemList().subscribe((structures) => {
+      this.allStructureItemList = structures;
     });
   }
 
-  loadAuthores(): void {
+  loadAuthors(): void {
     this.authorsService.getAuthors().subscribe((authors) => {
       this.authors = authors;
     });
@@ -80,17 +77,15 @@ export class JokeCreationComponent implements OnInit {
   }
 
   onStructureSelectOrDeselect(selectedField: any) {
-    const selectedStructure = this.allStructures.find(s => s.id === selectedField.id);
-    this.jokeBlocksService.getJokeBlocksOfTheStructure(selectedStructure.id).subscribe(jokeBlocksWithStructureDto => {
-      this.jokeBlocksWithStructureDto = jokeBlocksWithStructureDto;
-    });
+    const structureItemDto = this.allStructureItemList.find(s => s.id === selectedField.id);
+    this.structureItemDto = new StructureItemDto(structureItemDto.id, structureItemDto.text);
   }
 
   buildJokeForm() {
     return this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.minLength(3)],
-      structures: [null],
+      structureItemList: [null],
       author: [null],
       origin: [null],
       ostensibleOrigin: [null],
@@ -99,11 +94,10 @@ export class JokeCreationComponent implements OnInit {
   }
 
   addJoke() {
-    const jokeBlockWithStructureDtoList = this.structurePanelComponent.getJokeBlocksWithStructureDtoList();
-    const joke: JokeCreator = this.jokeForm.value;
-    joke.jokeBlocksWithStructureDtoList = jokeBlockWithStructureDtoList;
-    console.log(joke);
-    this.jokesService.addJoke(joke).subscribe(() => {
+    const jokeBlockDtoList = this.structurePanelComponent.getJokeBlockDtoList();
+    const jokeCreator: JokeCreator = this.jokeForm.value;
+    jokeCreator.jokeBlockDtoList = jokeBlockDtoList;
+    this.jokesService.addJoke(jokeCreator).subscribe(() => {
         this.router.navigate(['/jokes']);
     });
   }
@@ -112,10 +106,10 @@ export class JokeCreationComponent implements OnInit {
     this.router.navigate(['/jokes']);
   }
 
-  getDropdownList(allStructures: Structure[]): Array<any> {
+  getDropdownList(allStructures: StructureItemDto[]): Array<any> {
     const dropdownList = [];
     for (const structure of allStructures) {
-      dropdownList.push({id: structure.id, text: structure.name});
+      dropdownList.push({id: structure.id, text: structure.text});
     }
     return dropdownList;
   }

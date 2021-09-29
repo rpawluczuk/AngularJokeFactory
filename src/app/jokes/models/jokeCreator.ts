@@ -1,11 +1,11 @@
 import {Author} from '../../authors/models/author';
-import {JokeBlocksWithStructureDto} from '../../blocks/joke-blocks/models/joke-blocks-wtih-structure-dto';
 import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/StructureItemDto';
+import {JokeBlockDto} from '../../blocks/joke-blocks/models/joke-block-dto';
 
 export class JokeCreator {
   id: number;
-  jokeBlocksWithStructureDtoList: JokeBlocksWithStructureDto[] = [];
+  jokeBlockDtoList: JokeBlockDto[] = [];
   structureItemList: StructureItemDto[];
   author: Author;
   origin: OriginItemDto;

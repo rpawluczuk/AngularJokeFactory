@@ -4,7 +4,7 @@ import {Joke} from './models/joke';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokePresenterDto} from './models/jokePresenterDto';
-import {JokeCreator} from "./models/jokeCreator";
+import {JokeCreator} from './models/jokeCreator';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,6 @@ export class JokesService {
 
   getJoke(id: number): Observable<Joke> {
     return this.http.get<Joke>(`${this.apiUrl}/${id}` );
-  }
-
-  getLastJoke(): Observable<Joke> {
-    return this.http.get<Joke>(`${this.apiUrl}/last` );
   }
 
   addJoke(data): Observable<Joke>{

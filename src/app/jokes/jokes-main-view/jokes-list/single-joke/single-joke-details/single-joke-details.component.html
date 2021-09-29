@@ -10,7 +10,7 @@
   </ngb-pagination>
   <h2> {{ structureItemList[currentStructureIndex - 1]?.text }} </h2>
   <div class="d-flex justify-content-center" *ngFor="let jokeBlock of jokeBlocks; let x = index">
-    <div *ngIf="jokeBlock?.structureName === currentStructureItem?.text">
+    <div *ngIf="jokeBlock?.structureId === currentStructureItem?.id">
       <app-joke-block
         [jokeBlock]="jokeBlock">
       </app-joke-block>

@@ -3,7 +3,8 @@ export class StructureItemDto {
   id: number;
   text: string;
 
-  constructor() {
-    this.text = '';
+  constructor(id: number, text: string) {
+    this.id = id;
+    this.text = text;
   }
 }

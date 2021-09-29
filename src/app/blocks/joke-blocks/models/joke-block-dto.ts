@@ -5,7 +5,7 @@ export class JokeBlockDto {
   title: string;
   description: string;
   position: number;
-  structureName: string;
+  structureId: number;
   structureBlockId: number;
 }
 

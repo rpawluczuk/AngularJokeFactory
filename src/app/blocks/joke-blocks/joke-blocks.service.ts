@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokeBlock} from './models/joke-block';
-import {JokeBlocksWithStructureDto} from './models/joke-blocks-wtih-structure-dto';
-import {JokeBlockDto} from "./models/joke-block-dto";
+import {JokeBlockDto} from './models/joke-block-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +26,13 @@ export class JokeBlocksService {
     return this.http.put<JokeBlock>(this.apiUrl, jokeBlock);
   }
 
-  getJokeBlocksOfTheStructure(structureId: number): Observable<JokeBlocksWithStructureDto> {
-    return this.http.get<JokeBlocksWithStructureDto>(`${this.apiUrl}`
+  getJokeBlocksOfTheStructure(structureId: number): Observable<JokeBlockDto[]> {
+    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
       + `?structureId=${structureId}`);
   }
 
-  getExisitngJokeBlocksOfTheStructure(jokeId: number): Observable<JokeBlocksWithStructureDto[]> {
-    return this.http.get<JokeBlocksWithStructureDto[]>(`${this.apiUrl}`
+  getExistingJokeBlocksOfTheJoke(jokeId: number): Observable<JokeBlockDto[]> {
+    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
       + `?jokeId=${jokeId}`);
   }
 }
