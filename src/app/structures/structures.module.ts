@@ -11,6 +11,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {StructureBlockCreatorComponent} from '../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
 import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
 import { StructureBlockComponent } from '../blocks/structure-blocks/structure-block/structure-block.component';
+import { SingleStructureDetailsComponent } from './structures-list/single-structure/single-structure-details/single-structure-details.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { StructureBlockComponent } from '../blocks/structure-blocks/structure-bl
         StructureCreationComponent,
         StructureBlockCreatorComponent,
         SingleStructureComponent,
-        StructureBlockComponent
+        StructureBlockComponent,
+        SingleStructureDetailsComponent
     ],
     imports: [
         CommonModule,

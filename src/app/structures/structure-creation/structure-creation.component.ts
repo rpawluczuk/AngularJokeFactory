@@ -4,9 +4,10 @@ import {StructuresService} from '../structures.service';
 import {Router} from '@angular/router';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
 import {StructureBlockCreatorComponent} from '../../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
-import {Structure} from '../models/structure';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
+import {StructureBlockCreatorDto} from '../../blocks/structure-blocks/models/structureBlockCreatorDto';
+import {StructureCreatorDto} from '../models/structureCreatorDto';
 
 @Component({
   selector: 'app-structure-creation',
@@ -16,7 +17,7 @@ import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 export class StructureCreationComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
   structureForm: FormGroup;
-  structureBlocks: StructureBlock[];
+  structureBlockCreatorDtoList: StructureBlockCreatorDto[];
   faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
@@ -27,8 +28,8 @@ export class StructureCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.structureForm = this.buildStructureForm();
-    this.structureBlocks = [
-      new StructureBlock(0)
+    this.structureBlockCreatorDtoList = [
+      new StructureBlockCreatorDto(0)
     ];
   }
 
@@ -40,29 +41,20 @@ export class StructureCreationComponent implements OnInit {
   }
 
   addStructure() {
-    const newStructure: Structure = this.structureForm.value;
-    this.structuresService.addStructure(newStructure).subscribe(() => {
-      this.addBlocks();
+    const structureCreatorDto: StructureCreatorDto = this.structureForm.value;
+    this.standardBlockComponents.forEach((child) => {
+      const standardBlock = child.saveStandardBlockValue();
+      this.structureBlockCreatorDtoList[standardBlock.position] = standardBlock;
+    });
+    structureCreatorDto.structureBlockCreatorDtoList = this.structureBlockCreatorDtoList;
+    this.structuresService.addStructure(structureCreatorDto).subscribe(() => {
+      this.router.navigate(['/structures']);
     });
   }
 
-  addBlocks() {
-    this.structuresService.getLastStructure().subscribe(structure => {
-      this.standardBlockComponents.forEach((child) => {
-          const standardBlock = child.saveStandardBlockValue();
-          this.structureBlocks[standardBlock.position] = standardBlock;
-      });
-      this.structureBlocks.forEach(block => block.structure = structure);
-      this.structureBlocks.forEach(block => {
-        this.blocksService.addBlock(block).subscribe(() => {
-          this.router.navigate(['/structures']);
-        });
-      });
-    });
-  }
-  onBlockDeleteRequest(blockToDelete: StructureBlock){
-    this.structureBlocks.splice(blockToDelete.position - 1, 2);
-    this.structureBlocks.forEach(block => {
+  onBlockDeleteRequest(blockToDelete: StructureBlockCreatorDto) {
+    this.structureBlockCreatorDtoList.splice(blockToDelete.position - 1, 2);
+    this.structureBlockCreatorDtoList.forEach(block => {
       if (block.position > blockToDelete.position) {
         block.position = block.position - 2;
       }
@@ -73,7 +65,7 @@ export class StructureCreationComponent implements OnInit {
     this.router.navigate(['/structures']);
   }
 
-  addStructureBlockComponent(){
-    this.structureBlocks.push(new StructureBlock(this.structureBlocks.length));
+  addStructureBlockComponent() {
+    this.structureBlockCreatorDtoList.push(new StructureBlock(this.structureBlockCreatorDtoList.length));
   }
 }

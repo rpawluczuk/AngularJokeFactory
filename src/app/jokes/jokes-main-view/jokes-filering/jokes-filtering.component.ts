@@ -6,6 +6,7 @@ import {Author} from '../../../authors/models/author';
 import {Origin} from '../../../origins/models/origin';
 import {Structure} from '../../../structures/models/structure';
 import {OriginPresenterDto} from "../../../origins/models/originPresenterDto";
+import {StructureItemDto} from "../../../structures/models/structureItemDto";
 
 @Component({
   selector: 'app-jokes-filtering',
@@ -17,7 +18,7 @@ export class JokesFilteringComponent implements OnInit {
 
   authors: Author[];
   origins: OriginPresenterDto[];
-  structures: Structure[] = [];
+  structureItemList: StructureItemDto[] = [];
 
   authorQuery: string;
   structureQuery: string;
@@ -38,8 +39,8 @@ export class JokesFilteringComponent implements OnInit {
   }
 
   loadStructures(): void {
-    this.structuresService.getStructures().subscribe((structures) => {
-      this.structures = structures;
+    this.structuresService.getStructureItemList().subscribe((structures) => {
+      this.structureItemList = structures;
     });
   }
 

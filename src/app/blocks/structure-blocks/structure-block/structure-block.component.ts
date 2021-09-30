@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
-import {StructureBlock} from '../models/structure-block';
+import {StructureBlockPresenterDto} from '../models/structureBlockPresenterDto';
 
 @Component({
   selector: 'app-standard-block',
@@ -8,8 +7,7 @@ import {StructureBlock} from '../models/structure-block';
   styleUrls: ['./structure-block.component.css']
 })
 export class StructureBlockComponent implements OnInit {
-  @Input() structureBlock: StructureBlock;
-  faLongArrowAltDown = faLongArrowAltDown;
+  @Input() structureBlock: StructureBlockPresenterDto;
 
   constructor() {
   }

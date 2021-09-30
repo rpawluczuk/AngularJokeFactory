@@ -12,7 +12,7 @@ import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructurePanelComponent} from './structure-panel/structure-panel.component';
 import {JokeCreator} from '../models/jokeCreator';
 import {OriginItemDto} from '../../origins/models/originItemDto';
-import {StructureItemDto} from '../../structures/models/StructureItemDto';
+import {StructureItemDto} from '../../structures/models/structureItemDto';
 
 @Component({
   selector: 'app-joke-creation',

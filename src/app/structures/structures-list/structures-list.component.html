@@ -1,10 +1,10 @@
 <div class="container">
     <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Structures</h1>
 
-    <div *ngIf="structures && structures.length > 0; else noStructures">
-        <div *ngFor="let structure of structures; let i = index">
+    <div *ngIf="structurePresenterList && structurePresenterList.length > 0; else noStructures">
+        <div *ngFor="let structure of structurePresenterList; let i = index">
             <app-single-structure
-                [structure]="structure"
+              [structurePresenter]="structure"
                 (removedStructure)="onRemovedStructure($event)">
             </app-single-structure>
         </div>

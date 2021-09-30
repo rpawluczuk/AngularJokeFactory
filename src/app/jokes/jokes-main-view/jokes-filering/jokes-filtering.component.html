@@ -22,8 +22,8 @@
         <select [ngModel]="structureFilter" (ngModelChange)="setStructureQuery($event)"
                 class="col-md-10" name="authorFilter">
           <option value="All">All</option>
-          <option *ngFor="let structure of structures" [ngValue]="structure.id">
-            {{structure.name}}
+          <option *ngFor="let structure of structureItemList" [ngValue]="structure.id">
+            {{structure.text}}
           </option>
         </select>
       </div>

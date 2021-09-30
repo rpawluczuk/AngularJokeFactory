@@ -1,6 +1,6 @@
 import {Author} from '../../authors/models/author';
 import {OriginItemDto} from '../../origins/models/originItemDto';
-import {StructureItemDto} from '../../structures/models/StructureItemDto';
+import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockDto} from '../../blocks/joke-blocks/models/joke-block-dto';
 
 export class JokeCreator {
@@ -13,6 +13,5 @@ export class JokeCreator {
   ostensibleOrigin: OriginItemDto;
   title: string;
   content: string;
-  lastUpdated: string;
   dateCreated: string;
 }

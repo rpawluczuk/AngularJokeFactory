@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Structure} from './models/structure';
-import {StructureItemDto} from './models/StructureItemDto';
-import {OriginItemDto} from "../origins/models/originItemDto";
+import {StructureItemDto} from './models/structureItemDto';
+import {StructurePresenterDto} from './models/structurePresenterDto';
+import {StructureCreatorDto} from "./models/structureCreatorDto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,16 @@ export class StructuresService {
   constructor(private http: HttpClient) {
   }
 
-  getStructures(): Observable<Structure[]> {
-    return this.http.get<Structure[]>(this.apiUrl);
+  getStructurePresenterList(): Observable<StructurePresenterDto[]> {
+    return this.http.get<StructurePresenterDto[]>(this.apiUrl);
   }
 
   getStructureItemList(): Observable<StructureItemDto[]> {
     return this.http.get<StructureItemDto[]>(`${this.apiUrl}/list-items`);
   }
 
-  getStructure(id: number): Observable<Structure> {
-    return this.http.get<Structure>(`${this.apiUrl}/${id}`);
+  getStructureCreatorDto(id: number): Observable<StructureCreatorDto> {
+    return this.http.get<StructureCreatorDto>(`${this.apiUrl}/${id}`);
   }
 
   getLastStructure(): Observable<Structure> {

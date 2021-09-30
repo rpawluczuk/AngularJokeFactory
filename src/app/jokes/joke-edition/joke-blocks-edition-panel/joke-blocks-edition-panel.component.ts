@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild
 import {JokeBlockCreatorComponent} from '../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlocksService} from '../../../blocks/joke-blocks/joke-blocks.service';
 import {JokeCreator} from '../../models/jokeCreator';
-import {StructureItemDto} from '../../../structures/models/StructureItemDto';
+import {StructureItemDto} from '../../../structures/models/structureItemDto';
 import {JokeBlockDto} from '../../../blocks/joke-blocks/models/joke-block-dto';
 
 @Component({
@@ -32,8 +32,6 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.loadJokeBlocks();
     this.structureItemDtoList = this.jokeCreator?.structureItemList;
-    console.log(this.jokeBlockDtoList);
-    console.log(this.structureItemDtoList);
   }
 
   loadJokeBlocks() {

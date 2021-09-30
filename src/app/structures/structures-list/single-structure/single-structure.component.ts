@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Structure} from '../../models/structure';
 import {Router} from '@angular/router';
-import {StructureBlocksService} from '../../../blocks/structure-blocks/structure-blocks.service';
+import {StructurePresenterDto} from '../../models/structurePresenterDto';
 
 @Component({
   selector: 'app-single-structure',
@@ -9,33 +8,25 @@ import {StructureBlocksService} from '../../../blocks/structure-blocks/structure
   styleUrls: ['./single-structure.component.css']
 })
 export class SingleStructureComponent implements OnInit {
-  @Input() structure: Structure;
+  @Input() structurePresenter: StructurePresenterDto;
   @Output() removedStructure: EventEmitter<number> = new EventEmitter<number>();
 
   isDetailsButtonClicked: boolean;
 
-  constructor(private router: Router,
-              private blocksService: StructureBlocksService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.loadBlocksOfTheStructure();
     this.isDetailsButtonClicked = false;
   }
 
-  loadBlocksOfTheStructure(): void {
-    this.blocksService.getBlocksOfTheStructure(this.structure.id).subscribe((blocks) => {
-      this.structure.blockScheme = blocks;
-    });
-  }
-
-  removeStructure(structure: Structure, event) {
+  removeStructure(structurePresenter: StructurePresenterDto, event) {
     event.stopPropagation();
-    this.removedStructure.emit(structure.id);
+    this.removedStructure.emit(structurePresenter.id);
   }
 
   goToStructureEdition() {
-    this.router.navigate(['/structures', this.structure.id]);
+    this.router.navigate(['/structures', this.structurePresenter.id]);
   }
 
   showStructureDetails() {

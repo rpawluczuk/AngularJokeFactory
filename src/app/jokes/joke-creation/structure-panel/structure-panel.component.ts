@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {JokeBlockCreatorComponent} from '../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlockDto} from '../../../blocks/joke-blocks/models/joke-block-dto';
-import {StructureItemDto} from '../../../structures/models/StructureItemDto';
+import {StructureItemDto} from '../../../structures/models/structureItemDto';
 import {JokeBlocksService} from '../../../blocks/joke-blocks/joke-blocks.service';
 
 @Component({

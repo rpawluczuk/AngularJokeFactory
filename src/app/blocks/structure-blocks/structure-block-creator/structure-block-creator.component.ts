@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faWindowClose, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
-import {StructureBlock} from '../models/structure-block';
+import {faLongArrowAltDown, faWindowClose} from '@fortawesome/free-solid-svg-icons';
+import {StructureBlockCreatorDto} from '../models/structureBlockCreatorDto';
 
 @Component({
   selector: 'app-standard-block-creator',
@@ -9,8 +9,8 @@ import {StructureBlock} from '../models/structure-block';
   styleUrls: ['./structure-block-creator.component.css']
 })
 export class StructureBlockCreatorComponent implements OnInit {
-  @Input() structureBlock: StructureBlock;
-  @Output() blockToDelete: EventEmitter<StructureBlock> = new EventEmitter<StructureBlock>();
+  @Input() structureBlockCreator: StructureBlockCreatorDto;
+  @Output() blockToDelete: EventEmitter<StructureBlockCreatorDto> = new EventEmitter<StructureBlockCreatorDto>();
 
   faWindowClose = faWindowClose;
   faLongArrowAltDown = faLongArrowAltDown;
@@ -25,18 +25,18 @@ export class StructureBlockCreatorComponent implements OnInit {
 
   private buildStandardBlockForm() {
     return this.formBuilder.group({
-      name: [this.structureBlock.title, Validators.required],
-      description: [this.structureBlock.description, Validators.required]
+      name: [this.structureBlockCreator.title, Validators.required],
+      description: [this.structureBlockCreator.description, Validators.required]
     });
   }
 
-  saveStandardBlockValue(): StructureBlock {
-    this.structureBlock.title = this.standardBlockForm.value.name;
-    this.structureBlock.description = this.standardBlockForm.value.description;
-    return this.structureBlock;
+  saveStandardBlockValue(): StructureBlockCreatorDto {
+    this.structureBlockCreator.title = this.standardBlockForm.value.name;
+    this.structureBlockCreator.description = this.standardBlockForm.value.description;
+    return this.structureBlockCreator;
   }
 
   deleteRequest() {
-    this.blockToDelete.emit(this.structureBlock);
+    this.blockToDelete.emit(this.structureBlockCreator);
   }
 }

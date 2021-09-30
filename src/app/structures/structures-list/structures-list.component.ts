@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
+import {StructurePresenterDto} from '../models/structurePresenterDto';
 
 @Component({
   selector: 'app-structures-list',
@@ -8,7 +8,7 @@ import {StructuresService} from '../structures.service';
   styleUrls: ['./structures-list.component.css']
 })
 export class StructuresListComponent implements OnInit {
-  structures: Structure[];
+  structurePresenterList: StructurePresenterDto[];
 
   constructor(private structuresService: StructuresService) { }
 
@@ -17,8 +17,8 @@ export class StructuresListComponent implements OnInit {
   }
 
   loadStructures(): void{
-    this.structuresService.getStructures().subscribe((structures) => {
-      this.structures = structures;
+    this.structuresService.getStructurePresenterList().subscribe((structurePresenterList) => {
+      this.structurePresenterList = structurePresenterList;
     });
   }
 

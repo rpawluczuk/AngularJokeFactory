@@ -29,10 +29,10 @@
       <!--    Right column-->
       <div class="col-6 p-4">
         <div class="container">
-          <div class="d-flex justify-content-center" *ngFor="let block of structureBlocks; let x = index">
+          <div class="d-flex justify-content-center" *ngFor="let structureBlockCreator of structureBlockCreatorDtoList; let x = index">
             <app-standard-block-creator
               #standardBlockRef
-              [structureBlock]="block"
+              [structureBlockCreator]="structureBlockCreator"
               (blockToDelete)="onBlockDeleteRequest($event)">
             </app-standard-block-creator>
           </div>

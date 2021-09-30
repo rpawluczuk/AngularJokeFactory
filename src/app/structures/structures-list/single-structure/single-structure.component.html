@@ -1,17 +1,15 @@
 <div class="card p-3 mb-4" style="background: #ceecfa">
   <div class="card-body">
-    <h2 class="card-title mb-4"> {{ structure?.name }} </h2>
-    <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structure?.description }}</pre>
-    <div class="text-muted"> Creation Date:: {{ structure?.dateCreated | date:'short' }} </div>
+    <h2 class="card-title mb-4"> {{ structurePresenter?.name }} </h2>
+    <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ structurePresenter?.description }}</pre>
+    <div class="text-muted"> Creation Date:: {{ structurePresenter?.dateCreated | date:'short' }} </div>
     <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToStructureEdition()"> Edit</button>
     <button class="btn btn-outline-primary mt-3 mr-3" (click)="showStructureDetails()"> Details</button>
-    <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structure, $event)"> Delete</button>
+    <button class="btn btn-outline-danger mt-3" (click)="removeStructure(structurePresenter, $event)"> Delete</button>
     <div *ngIf="isDetailsButtonClicked">
-      <div class="d-flex justify-content-center" *ngFor="let block of structure?.blockScheme; let x = index">
-        <app-standard-block
-          [structureBlock]="block">
-        </app-standard-block>
-      </div>
+        <app-single-structure-details
+          [structurePresenter]="structurePresenter">
+        </app-single-structure-details>
     </div>
   </div>
 </div>

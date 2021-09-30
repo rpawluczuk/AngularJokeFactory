@@ -7,6 +7,8 @@ import {StructureBlock} from '../../blocks/structure-blocks/models/structure-blo
 import {StructureBlockCreatorComponent} from '../../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
+import {StructureBlockCreatorDto} from '../../blocks/structure-blocks/models/structureBlockCreatorDto';
+import {StructureCreatorDto} from '../models/structureCreatorDto';
 
 @Component({
   selector: 'app-structure-details',
@@ -15,9 +17,9 @@ import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
 })
 export class StructureEditionComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
-  structure: Structure;
+  structureCreatorDto: StructureCreatorDto;
   structureForm: FormGroup;
-  blocksToUpdate: StructureBlock[] = [];
+  structureBlockCreatorDtoList: StructureBlockCreatorDto[] = [];
   faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
@@ -33,61 +35,50 @@ export class StructureEditionComponent implements OnInit {
   }
 
   loadStructure() {
-    this.structure = this.route.snapshot.data.structure;
+    this.structureCreatorDto = this.route.snapshot.data.structure;
     this.loadBlocksOfTheStructure();
   }
 
   loadBlocksOfTheStructure() {
-    this.blocksService.getBlocksOfTheStructure(this.structure?.id).subscribe((blocks) => {
+    this.blocksService.getBlocksOfTheStructure(this.structureCreatorDto?.id).subscribe((blocks) => {
       if (blocks.length === 0) {
-        this.blocksToUpdate = [
+        this.structureBlockCreatorDtoList = [
           new StructureBlock(0)
         ];
       } else {
-        this.blocksToUpdate = blocks;
+        this.structureBlockCreatorDtoList = blocks;
       }
     });
   }
 
   buildStructureForm() {
     return this.formBuilder.group({
-      name: [this.structure.name, Validators.required],
-      description: [this.structure.description, Validators.minLength(3)],
-      dateCreated: [this.structure.dateCreated]
+      id: [this.structureCreatorDto?.id],
+      name: [this.structureCreatorDto?.name, Validators.required],
+      description: [this.structureCreatorDto?.description, Validators.minLength(3)],
+      dateCreated: [this.structureCreatorDto?.dateCreated]
     });
   }
 
   updateStructure() {
-    this.structure.name = this.structureForm.controls.name.value;
-    this.structure.description = this.structureForm.controls.description.value;
-    this.structuresService.updateStructure(this.structure).subscribe(() => {
-      this.updateBlocks();
-    });
-  }
-
-  updateBlocks() {
+    const updatedStructure = this.structureForm.value;
     this.standardBlockComponents.forEach((child) => {
       const standardBlock = child.saveStandardBlockValue();
-      this.blocksToUpdate[standardBlock.position] = standardBlock;
+      this.structureBlockCreatorDtoList[standardBlock.position] = standardBlock;
     });
-    this.blocksToUpdate.forEach(block => block.structure = this.structure);
-    this.blocksService.updateBlock(this.blocksToUpdate).subscribe(() => {
+    updatedStructure.structureBlockCreatorDtoList = this.structureBlockCreatorDtoList;
+    this.structuresService.updateStructure(updatedStructure).subscribe(() => {
       this.router.navigate(['/structures']);
     });
   }
 
   onBlockDeleteRequest(blockToDelete: StructureBlock) {
-    console.log(blockToDelete);
-    console.log(this.blocksToUpdate);
-    this.blocksToUpdate.splice(blockToDelete.position, 1);
-    console.log(this.blocksToUpdate);
-    this.blocksToUpdate.forEach(block => {
-      console.log(block);
+    this.structureBlockCreatorDtoList.splice(blockToDelete.position, 1);
+    this.structureBlockCreatorDtoList.forEach(block => {
       if (block.position > blockToDelete.position) {
         block.position = block.position - 1;
       }
     });
-    console.log(this.blocksToUpdate);
   }
 
   onCancel() {
@@ -95,8 +86,8 @@ export class StructureEditionComponent implements OnInit {
   }
 
   addStructureBlockComponent() {
-    this.blocksToUpdate.push(
-      new StructureBlock(this.blocksToUpdate.length)
+    this.structureBlockCreatorDtoList.push(
+      new StructureBlock(this.structureBlockCreatorDtoList.length)
     );
   }
 }

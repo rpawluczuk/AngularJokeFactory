@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {StructuresService} from '../../../../../structures/structures.service';
 import {JokePresenterDto} from '../../../../models/jokePresenterDto';
 import {JokeBlocksService} from '../../../../../blocks/joke-blocks/joke-blocks.service';
-import {StructureItemDto} from '../../../../../structures/models/StructureItemDto';
+import {StructureItemDto} from '../../../../../structures/models/structureItemDto';
 import {JokeBlockDto} from '../../../../../blocks/joke-blocks/models/joke-block-dto';
 
 @Component({
