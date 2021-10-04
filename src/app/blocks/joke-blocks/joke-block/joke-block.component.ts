@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
-import {JokeBlockDto} from '../models/joke-block-dto';
+import {JokeBlockPresenterDto} from '../models/jokeBlockPresenterDto';
 
 @Component({
   selector: 'app-joke-block',
@@ -8,9 +7,7 @@ import {JokeBlockDto} from '../models/joke-block-dto';
   styleUrls: ['./joke-block.component.css']
 })
 export class JokeBlockComponent implements OnInit {
-  @Input() jokeBlock: JokeBlockDto;
-
-  faLongArrowAltDown = faLongArrowAltDown;
+  @Input() jokeBlockPresenter: JokeBlockPresenterDto;
 
   constructor() {
   }

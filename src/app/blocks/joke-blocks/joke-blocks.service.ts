@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {JokeBlock} from './models/joke-block';
-import {JokeBlockDto} from './models/joke-block-dto';
+import {JokeBlockCreatorDto} from './models/jokeBlockCreatorDto';
+import {JokeBlockPresenterDto} from './models/jokeBlockPresenterDto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +13,18 @@ export class JokeBlocksService {
 
   constructor(private http: HttpClient) { }
 
-  addJokeBlock(data): Observable<JokeBlock>{
-    return this.http.post<JokeBlock>(this.apiUrl, data);
+  getJokeBlockCreatorList(jokeId: number): Observable<JokeBlockCreatorDto[]> {
+    return this.http.get<JokeBlockCreatorDto[]>(`${this.apiUrl}`
+      + `/creator-list/${jokeId}`);
   }
 
-  getBlocksOfTheJoke(jokeId: number): Observable<JokeBlockDto[]> {
-    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
-      + `/with-joke/${jokeId}`);
+  getJokeBlockPresenterList(jokeId: number): Observable<JokeBlockPresenterDto[]> {
+    return this.http.get<JokeBlockPresenterDto[]>(`${this.apiUrl}`
+      + `/presenter-list/${jokeId}`);
   }
 
-  updateJokeBlock(jokeBlock: JokeBlock): Observable<JokeBlock> {
-    return this.http.put<JokeBlock>(this.apiUrl, jokeBlock);
-  }
-
-  getJokeBlocksOfTheStructure(structureId: number): Observable<JokeBlockDto[]> {
-    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
+  getJokeBlockCreatorListByStructure(structureId: number): Observable<JokeBlockCreatorDto[]> {
+    return this.http.get<JokeBlockCreatorDto[]>(`${this.apiUrl}`
       + `?structureId=${structureId}`);
-  }
-
-  getExistingJokeBlocksOfTheJoke(jokeId: number): Observable<JokeBlockDto[]> {
-    return this.http.get<JokeBlockDto[]>(`${this.apiUrl}`
-      + `?jokeId=${jokeId}`);
   }
 }

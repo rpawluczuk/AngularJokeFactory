@@ -3,7 +3,8 @@ import {StructuresService} from '../../../../../structures/structures.service';
 import {JokePresenterDto} from '../../../../models/jokePresenterDto';
 import {JokeBlocksService} from '../../../../../blocks/joke-blocks/joke-blocks.service';
 import {StructureItemDto} from '../../../../../structures/models/structureItemDto';
-import {JokeBlockDto} from '../../../../../blocks/joke-blocks/models/joke-block-dto';
+import {JokeBlockPresenterDto} from '../../../../../blocks/joke-blocks/models/jokeBlockPresenterDto';
+import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-single-joke-details',
@@ -13,9 +14,11 @@ import {JokeBlockDto} from '../../../../../blocks/joke-blocks/models/joke-block-
 export class SingleJokeDetailsComponent implements OnInit {
   @Input() jokePresenter: JokePresenterDto;
 
+  faLongArrowAltDown = faLongArrowAltDown;
+
   structureItemList: StructureItemDto[] = [];
   currentStructureItem: StructureItemDto;
-  jokeBlocks: JokeBlockDto[] = [];
+  jokeBlockPresenterList: JokeBlockPresenterDto[] = [];
   currentStructureIndex = 1;
 
   constructor(private structuresService: StructuresService,
@@ -37,8 +40,9 @@ export class SingleJokeDetailsComponent implements OnInit {
   }
 
   loadBlocksOfTheJoke(): void {
-    this.jokeBlocksService.getBlocksOfTheJoke(this.jokePresenter.id).subscribe((jokeBlocks) => {
-      this.jokeBlocks = jokeBlocks;
+    this.jokeBlocksService.getJokeBlockPresenterList(this.jokePresenter.id).subscribe((jokeBlocks) => {
+      console.log(jokeBlocks);
+      this.jokeBlockPresenterList = jokeBlocks;
     });
   }
 
