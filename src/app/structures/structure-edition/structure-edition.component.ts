@@ -17,9 +17,9 @@ import {StructureCreatorDto} from '../models/structureCreatorDto';
 })
 export class StructureEditionComponent implements OnInit {
   @ViewChildren('standardBlockRef') standardBlockComponents: QueryList<StructureBlockCreatorComponent>;
-  structureCreatorDto: StructureCreatorDto;
+  structureCreator: StructureCreatorDto;
   structureForm: FormGroup;
-  structureBlockCreatorDtoList: StructureBlockCreatorDto[] = [];
+  structureBlockCreatorList: StructureBlockCreatorDto[] = [];
   faArrowDown = faArrowDown;
 
   constructor(private structuresService: StructuresService,
@@ -35,28 +35,28 @@ export class StructureEditionComponent implements OnInit {
   }
 
   loadStructure() {
-    this.structureCreatorDto = this.route.snapshot.data.structure;
+    this.structureCreator = this.route.snapshot.data.structure;
     this.loadBlocksOfTheStructure();
   }
 
   loadBlocksOfTheStructure() {
-    this.blocksService.getBlocksOfTheStructure(this.structureCreatorDto?.id).subscribe((blocks) => {
+    this.blocksService.getBlocksOfTheStructure(this.structureCreator?.id).subscribe((blocks) => {
       if (blocks.length === 0) {
-        this.structureBlockCreatorDtoList = [
+        this.structureBlockCreatorList = [
           new StructureBlock(0)
         ];
       } else {
-        this.structureBlockCreatorDtoList = blocks;
+        this.structureBlockCreatorList = blocks;
       }
     });
   }
 
   buildStructureForm() {
     return this.formBuilder.group({
-      id: [this.structureCreatorDto?.id],
-      name: [this.structureCreatorDto?.name, Validators.required],
-      description: [this.structureCreatorDto?.description, Validators.minLength(3)],
-      dateCreated: [this.structureCreatorDto?.dateCreated]
+      id: [this.structureCreator?.id],
+      name: [this.structureCreator?.name, Validators.required],
+      description: [this.structureCreator?.description, Validators.minLength(3)],
+      dateCreated: [this.structureCreator?.dateCreated]
     });
   }
 
@@ -64,17 +64,17 @@ export class StructureEditionComponent implements OnInit {
     const updatedStructure = this.structureForm.value;
     this.standardBlockComponents.forEach((child) => {
       const standardBlock = child.saveStandardBlockValue();
-      this.structureBlockCreatorDtoList[standardBlock.position] = standardBlock;
+      this.structureBlockCreatorList[standardBlock.position] = standardBlock;
     });
-    updatedStructure.structureBlockCreatorDtoList = this.structureBlockCreatorDtoList;
+    updatedStructure.structureBlockCreatorDtoList = this.structureBlockCreatorList;
     this.structuresService.updateStructure(updatedStructure).subscribe(() => {
       this.router.navigate(['/structures']);
     });
   }
 
   onBlockDeleteRequest(blockToDelete: StructureBlock) {
-    this.structureBlockCreatorDtoList.splice(blockToDelete.position, 1);
-    this.structureBlockCreatorDtoList.forEach(block => {
+    this.structureBlockCreatorList.splice(blockToDelete.position, 1);
+    this.structureBlockCreatorList.forEach(block => {
       if (block.position > blockToDelete.position) {
         block.position = block.position - 1;
       }
@@ -86,8 +86,8 @@ export class StructureEditionComponent implements OnInit {
   }
 
   addStructureBlockComponent() {
-    this.structureBlockCreatorDtoList.push(
-      new StructureBlock(this.structureBlockCreatorDtoList.length)
+    this.structureBlockCreatorList.push(
+      new StructureBlock(this.structureBlockCreatorList.length)
     );
   }
 }

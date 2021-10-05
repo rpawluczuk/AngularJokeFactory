@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Author} from '../models/author';
 import {AuthorsService} from '../authors.service';
+import {AuthorCreatorDto} from '../models/authorCreatorDto';
 
 @Component({
   selector: 'app-author-details',
@@ -11,7 +11,7 @@ import {AuthorsService} from '../authors.service';
 })
 export class AuthorDetailsComponent implements OnInit {
 
-  author: Author;
+  authorCreator: AuthorCreatorDto;
   authorForm: FormGroup;
 
   constructor(private authorsService: AuthorsService,
@@ -26,24 +26,22 @@ export class AuthorDetailsComponent implements OnInit {
   }
 
   loadAuthor() {
-    this.author = this.route.snapshot.data.author;
-    console.log(this.author);
+    this.authorCreator = this.route.snapshot.data.author;
   }
 
   buildAuthorForm(){
     return this.formBuilder.group({
-      name: [this.author.name, Validators.required],
-      surname: [this.author.surname, Validators.required],
-      description: [this.author.description, Validators.minLength(3)],
-      dateCreated: [this.author.dateCreated]
+      name: [this.authorCreator.name, Validators.required],
+      surname: [this.authorCreator.surname, Validators.required],
+      description: [this.authorCreator.description, Validators.minLength(3)],
     });
   }
 
   updateAuthor(){
-    this.author.name = this.authorForm.controls['name'].value;
-    this.author.surname = this.authorForm.controls['surname'].value;
-    this.author.description = this.authorForm.controls['description'].value;
-    this.authorsService.updateAuthor(this.author).subscribe(() => {
+    this.authorCreator.name = this.authorForm.controls.name.value;
+    this.authorCreator.surname = this.authorForm.controls.surname.value;
+    this.authorCreator.description = this.authorForm.controls.description.value;
+    this.authorsService.updateAuthor(this.authorCreator).subscribe(() => {
       this.router.navigate(['/authors']);
     });
   }

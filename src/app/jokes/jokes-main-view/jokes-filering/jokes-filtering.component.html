@@ -12,8 +12,8 @@
         <select [ngModel]="authorFilter" (ngModelChange)="setAuthorQuery($event)"
                 class="col-md-10" name="authorFilter">
           <option value="All">All</option>
-          <option *ngFor="let author of authors" [ngValue]="author.id">
-            {{author.name + ' ' + author.surname}}
+          <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem.id">
+            {{authorItem.text}}
           </option>
         </select>
       </div>
@@ -22,8 +22,8 @@
         <select [ngModel]="structureFilter" (ngModelChange)="setStructureQuery($event)"
                 class="col-md-10" name="authorFilter">
           <option value="All">All</option>
-          <option *ngFor="let structure of structureItemList" [ngValue]="structure.id">
-            {{structure.text}}
+          <option *ngFor="let structureItem of structureItemList" [ngValue]="structureItem.id">
+            {{structureItem.text}}
           </option>
         </select>
       </div>

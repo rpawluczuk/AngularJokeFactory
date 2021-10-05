@@ -36,8 +36,8 @@
             <option *ngIf="jokeCreator.author!==null"
                     [ngValue]="jokeCreator.author"> {{jokeCreator.author.name + ' ' + jokeCreator.author.surname}} </option>
             <option *ngIf="jokeCreator.author===null" [ngValue]="jokeCreator.author">--Select Author--</option>
-            <option *ngFor="let author of authors" [ngValue]="author">
-              {{author.name + ' ' + author.surname}}
+            <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem">
+              {{authorItem.text}}
             </option>
           </select>
         </div>

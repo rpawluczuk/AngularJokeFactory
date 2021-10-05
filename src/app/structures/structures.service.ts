@@ -28,10 +28,6 @@ export class StructuresService {
     return this.http.get<StructureCreatorDto>(`${this.apiUrl}/${id}`);
   }
 
-  getLastStructure(): Observable<Structure> {
-    return this.http.get<Structure>(`${this.apiUrl}/last`);
-  }
-
   getStructuresByJokeID(jokeId: number): Observable<StructureItemDto[]> {
     return this.http.get<StructureItemDto[]>(`${this.apiUrl}`
       + `/by-joke-id/${jokeId}`);

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Author} from './models/author';
+import {AuthorPresenterDto} from './models/authorPresenterDto';
+import {AuthorCreatorDto} from "./models/authorCreatorDto";
+import {AuthorItemDto} from "./models/authorItemDto";
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +15,27 @@ export class AuthorsService {
 
   constructor(private  http: HttpClient) { }
 
-  getAuthors(): Observable<Author[]> {
-    return this.http.get<Author[]>(this.apiUrl);
+  getAuthorPresenterList(): Observable<AuthorPresenterDto[]> {
+    return this.http.get<AuthorPresenterDto[]>(this.apiUrl);
   }
 
-  getAuthor(id: number): Observable<Author> {
-    return this.http.get<Author>(`${this.apiUrl}/${id}` );
+  getAuthorItemList(): Observable<AuthorItemDto[]> {
+    return this.http.get<AuthorItemDto[]>(`${this.apiUrl}/list-items`);
   }
 
-  addAuthor(data): Observable<Author>{
-    return this.http.post<Author>(this.apiUrl, data);
+  getAuthorCreator(id: number): Observable<AuthorCreatorDto> {
+    return this.http.get<AuthorCreatorDto>(`${this.apiUrl}/${id}` );
   }
 
-  updateAuthor(author: Author): Observable<Author> {
-    console.log(author);
-    return this.http.put<Author>(this.apiUrl, author);
+  addAuthor(data): Observable<AuthorCreatorDto>{
+    return this.http.post<AuthorCreatorDto>(this.apiUrl, data);
   }
 
-  removeAuthor(id: number): Observable<Author> {
-    return this.http.delete<Author>(`${this.apiUrl}/${id}`);
+  updateAuthor(authorCreator: AuthorCreatorDto): Observable<AuthorCreatorDto> {
+    return this.http.put<AuthorCreatorDto>(this.apiUrl, authorCreator);
+  }
+
+  removeAuthor(id: number): Observable<AuthorPresenterDto> {
+    return this.http.delete<AuthorPresenterDto>(`${this.apiUrl}/${id}`);
   }
 }

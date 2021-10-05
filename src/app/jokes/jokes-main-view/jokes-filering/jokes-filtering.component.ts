@@ -2,11 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {StructuresService} from '../../../structures/structures.service';
 import {AuthorsService} from '../../../authors/authors.service';
 import {OriginService} from '../../../origins/origin.service';
-import {Author} from '../../../authors/models/author';
-import {Origin} from '../../../origins/models/origin';
-import {Structure} from '../../../structures/models/structure';
-import {OriginPresenterDto} from "../../../origins/models/originPresenterDto";
-import {StructureItemDto} from "../../../structures/models/structureItemDto";
+import {OriginPresenterDto} from '../../../origins/models/originPresenterDto';
+import {StructureItemDto} from '../../../structures/models/structureItemDto';
+import {AuthorItemDto} from '../../../authors/models/authorItemDto';
 
 @Component({
   selector: 'app-jokes-filtering',
@@ -16,7 +14,7 @@ import {StructureItemDto} from "../../../structures/models/structureItemDto";
 export class JokesFilteringComponent implements OnInit {
   @Output() finalQuery: EventEmitter<string> = new EventEmitter<string>();
 
-  authors: Author[];
+  authorItemList: AuthorItemDto[];
   origins: OriginPresenterDto[];
   structureItemList: StructureItemDto[] = [];
 
@@ -45,8 +43,8 @@ export class JokesFilteringComponent implements OnInit {
   }
 
   loadAuthors(): void {
-    this.authorsService.getAuthors().subscribe((authors) => {
-      this.authors = authors;
+    this.authorsService.getAuthorItemList().subscribe((authorItemList) => {
+      this.authorItemList = authorItemList;
     });
   }
 

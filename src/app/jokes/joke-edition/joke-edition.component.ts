@@ -3,7 +3,6 @@ import {JokesService} from '../jokes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../../structures/structures.service';
-import {Author} from '../../authors/models/author';
 import {AuthorsService} from '../../authors/authors.service';
 import {OriginService} from '../../origins/origin.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
@@ -13,6 +12,7 @@ import {JokeCreator} from '../models/jokeCreator';
 import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
+import {AuthorItemDto} from '../../authors/models/authorItemDto';
 
 @Component({
   selector: 'app-joke-details',
@@ -26,7 +26,7 @@ export class JokeEditionComponent implements OnInit {
   jokeCreator: JokeCreator;
   jokeForm: FormGroup;
   allStructureItemList: StructureItemDto[] = [];
-  authors: Author[];
+  authorItemList: AuthorItemDto[];
   originItemList: OriginItemDto[];
   jokeBlockDtoList: JokeBlockCreatorDto[] = [];
 
@@ -100,8 +100,8 @@ export class JokeEditionComponent implements OnInit {
   }
 
   loadAuthors(): void {
-    this.authorsService.getAuthors().subscribe((authors) => {
-      this.authors = authors;
+    this.authorsService.getAuthorItemList().subscribe((authorItemList) => {
+      this.authorItemList = authorItemList;
     });
   }
 

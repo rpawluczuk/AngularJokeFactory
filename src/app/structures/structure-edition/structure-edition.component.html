@@ -1,4 +1,4 @@
-<p class="data-header">Edit {{ structureCreatorDto?.name }}</p>
+<p class="data-header">Edit {{ structureCreator?.name }}</p>
 <div class="data-container">
   <form [formGroup]="structureForm">
     <div class="d-flex flex-row">
@@ -30,7 +30,7 @@
       <!--    Right column-->
       <div class="col-6 p-4">
         <div class="container">
-          <div class="d-flex justify-content-center" *ngFor="let block of structureBlockCreatorDtoList; let x = index">
+          <div class="d-flex justify-content-center" *ngFor="let block of structureBlockCreatorList; let x = index">
             <app-standard-block-creator
               #standardBlockRef
               [structureBlockCreator]="block"

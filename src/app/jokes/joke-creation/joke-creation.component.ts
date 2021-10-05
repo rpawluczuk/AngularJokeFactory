@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Joke} from '../models/joke';
-import {Author} from '../../authors/models/author';
 import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
@@ -13,6 +12,7 @@ import {StructurePanelComponent} from './structure-panel/structure-panel.compone
 import {JokeCreator} from '../models/jokeCreator';
 import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
+import {AuthorItemDto} from '../../authors/models/authorItemDto';
 
 @Component({
   selector: 'app-joke-creation',
@@ -24,7 +24,7 @@ export class JokeCreationComponent implements OnInit {
   structurePanelComponent: StructurePanelComponent;
 
   jokes: Joke[];
-  authors: Author[];
+  authorItemList: AuthorItemDto[];
   origins: OriginItemDto[];
   allStructureItemList: StructureItemDto[] = [];
   jokeForm: FormGroup;
@@ -65,8 +65,8 @@ export class JokeCreationComponent implements OnInit {
   }
 
   loadAuthors(): void {
-    this.authorsService.getAuthors().subscribe((authors) => {
-      this.authors = authors;
+    this.authorsService.getAuthorItemList().subscribe((authorItemList) => {
+      this.authorItemList = authorItemList;
     });
   }
 

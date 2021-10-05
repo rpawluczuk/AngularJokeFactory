@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Author} from './models/author';
 import {AuthorsService} from './authors.service';
+import {AuthorCreatorDto} from './models/authorCreatorDto';
 
 @Injectable()
-export class AuthorResolveService implements Resolve<Author>{
+export class AuthorResolveService implements Resolve<AuthorCreatorDto>{
 
   constructor(private authorsService: AuthorsService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.authorsService.getAuthor(route.params.id);
+    return this.authorsService.getAuthorCreator(route.params.id);
   }
 }

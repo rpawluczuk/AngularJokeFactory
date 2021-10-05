@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Author} from '../models/author';
+import {Component, OnInit} from '@angular/core';
 import {AuthorsService} from '../authors.service';
 import {Router} from '@angular/router';
+import {AuthorPresenterDto} from '../models/authorPresenterDto';
 
 @Component({
   selector: 'app-authors-list',
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./authors-list.component.css']
 })
 export class AuthorsListComponent implements OnInit {
-  authors: Author[];
+  authorPresenterList: AuthorPresenterDto[];
 
   constructor(private authorsService: AuthorsService,
               private router: Router) { }
@@ -19,19 +19,19 @@ export class AuthorsListComponent implements OnInit {
   }
 
   private loadAuthors() {
-    this.authorsService.getAuthors().subscribe((authors) => {
-      this.authors = authors;
+    this.authorsService.getAuthorPresenterList().subscribe((authorPresenterList) => {
+      this.authorPresenterList = authorPresenterList;
     });
   }
 
-  removeAuthor(author: Author, event){
+  removeAuthor(authorPresenter: AuthorPresenterDto, event){
     event.stopPropagation();
-    this.authorsService.removeAuthor(author.id).subscribe(() => {
+    this.authorsService.removeAuthor(authorPresenter.id).subscribe(() => {
       this.loadAuthors();
     });
   }
 
-  goToAuthorDetails(author: Author) {
-    this.router.navigate(['/authors', author.id]);
+  goToAuthorDetails(authorPresenter: AuthorPresenterDto) {
+    this.router.navigate(['/authors', authorPresenter.id]);
   }
 }

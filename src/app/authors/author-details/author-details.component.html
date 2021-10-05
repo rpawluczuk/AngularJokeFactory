@@ -1,11 +1,11 @@
 <app-header>
-  <p levels>authors / {{ author.name }}</p>
+  <p levels>authors / {{ authorCreator.name }}</p>
   <div content>
     <p>author details</p>
   </div>
 </app-header>
 
-<p class="data-header">Edit {{ author.name }}</p>
+<p class="data-header">Edit {{ authorCreator.name }}</p>
 <div class="data-container">
   <form [formGroup]="authorForm">
     <div class="row form-group">
