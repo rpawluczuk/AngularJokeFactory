@@ -9,9 +9,9 @@ export interface JokePresenterDto {
   structures: Structure[];
   jokeBlocks: JokeBlock[];
   author: string;
-  connectingOrigin: string;
-  comedyOrigin: string;
-  ostensibleOrigin: string;
+  connectingTopic: string;
+  comedyTopic: string;
+  ostensibleTopic: string;
   lastUpdated: string;
   dateCreated: string;
 }

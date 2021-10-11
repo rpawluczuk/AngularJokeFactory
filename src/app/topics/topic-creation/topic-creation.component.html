@@ -1,0 +1,42 @@
+<p class="data-header" xmlns="http://www.w3.org/1999/html">Add a new topic</p>
+<div class="data-container">
+  <form [formGroup]="topicForm">
+    <div class="row form-group">
+      <label>Name</label>
+      <input formControlName="name" type="text" class="form-control" placeholder="name">
+      <p *ngIf="!topicForm.get('name').valid && topicForm.get('name').dirty" class="error">This field is required!</p>
+    </div>
+    <div>
+      <label class="row">Connected topics</label>
+      <div formArrayName="children" *ngFor="let connectedTopic of topicForm.get('children')['controls']; let i = index" class="d-flex flex-row py-2">
+        <div *ngIf="i < children?.length - 1; else addConnectedTopicForm">
+          <fa-icon [icon]="faMinusCircle" (click)="removeChild(i)" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+        </div>
+        <div [formGroupName]="i">
+          <input formControlName="name" placeholder="connected topic name" type="text" list="topics" class="d-flex justify-content-center">
+        </div>
+        <datalist id="topics">
+          <option *ngFor="let topic of topicItemList" [ngValue]="topic">
+            {{ topic.name }}
+          </option>
+        </datalist>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button [disabled]="topicForm.invalid" (click)="saveTopic()" type="submit" class="btn btn-success float-right mx-2">
+          Add Topic</button>
+        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+        <button (click)="topicForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+      </div>
+    </div>
+  </form>
+
+  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
+  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
+</div>
+
+<ng-template #addConnectedTopicForm>
+  <fa-icon [icon]="faPlusCircle" (click)="addChild()" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
+</ng-template>

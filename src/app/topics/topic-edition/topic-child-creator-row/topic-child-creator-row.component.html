@@ -1,0 +1,22 @@
+<div class="d-flex flex-row flex-wrap">
+  <div *ngFor="let topicCreatorChild of topicCreatorChildrenWithParent?.topicCreatorChildren">
+    <app-connected-topic-block
+      [topicCreatorChild]="topicCreatorChild"
+      [chosenTopicCreatorChildId]="chosenTopicCreatorChildId"
+      (removeTopicRelationRequest)="onRemoveTopicRelationRequest($event)"
+      (setAsMainRequest)="onSetAsMainRequest($event)"
+      (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)">
+    </app-connected-topic-block>
+  </div>
+  <div *ngIf="!isChildTopicCreationDemanded; else childTopicBlockCreator"
+       class="topicBlock m-3 d-flex flex-column align-items-center justify-content-center">
+    <fa-icon [icon]="faPlus" size="4x" (click)="onAddChildTopicDemand()"></fa-icon>
+  </div>
+</div>
+
+<ng-template #childTopicBlockCreator>
+  <app-child-topic-block-creator
+    [parentId]="topicCreatorChildrenWithParent.parentId"
+    (isChildTopicCreationDemanded)="onChildTopicCreationRequest($event)">
+  </app-child-topic-block-creator>
+</ng-template>

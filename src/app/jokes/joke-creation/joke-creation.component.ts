@@ -5,12 +5,12 @@ import {JokesService} from '../jokes.service';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
 import {Router} from '@angular/router';
-import {OriginService} from '../../origins/origin.service';
+import {TopicService} from '../../topics/topic.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructurePanelComponent} from './structure-panel/structure-panel.component';
 import {JokeCreatorDto} from '../models/jokeCreatorDto';
-import {OriginItemDto} from '../../origins/models/originItemDto';
+import {TopicItemDto} from '../../topics/models/topicItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {AuthorItemDto} from '../../authors/models/authorItemDto';
 
@@ -25,7 +25,7 @@ export class JokeCreationComponent implements OnInit {
 
   jokes: Joke[];
   authorItemList: AuthorItemDto[];
-  origins: OriginItemDto[];
+  topicItemList: TopicItemDto[];
   allStructureItemList: StructureItemDto[] = [];
   jokeForm: FormGroup;
   structureItemDto: StructureItemDto;
@@ -36,7 +36,7 @@ export class JokeCreationComponent implements OnInit {
               private jokeBlocksService: JokeBlocksService,
               private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private originService: OriginService,
+              private topicService: TopicService,
               private blocksService: StructureBlocksService,
               private formBuilder: FormBuilder,
               private router: Router,
@@ -46,7 +46,7 @@ export class JokeCreationComponent implements OnInit {
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthors();
-    this.loadOrigins();
+    this.loadTopicItemList();
     this.jokeForm = this.buildJokeForm();
     this.dropdownSettings = {
       singleSelection: false,
@@ -70,9 +70,9 @@ export class JokeCreationComponent implements OnInit {
     });
   }
 
-  loadOrigins(): void {
-    this.originService.getOrigins().subscribe((origins) => {
-      this.origins = origins;
+  loadTopicItemList(): void {
+    this.topicService.getTopicItemList().subscribe((topicItemList) => {
+      this.topicItemList = topicItemList;
     });
   }
 
@@ -87,9 +87,9 @@ export class JokeCreationComponent implements OnInit {
       content: ['', Validators.minLength(3)],
       structureItemList: [null],
       author: [null],
-      origin: [null],
-      ostensibleOrigin: [null],
-      comedyOrigin: [null]
+      connectingTopic: [null],
+      ostensibleTopic: [null],
+      comedyTopic: [null]
     });
   }
 

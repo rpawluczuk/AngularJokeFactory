@@ -1,5 +1,5 @@
 import {Author} from '../../authors/models/author';
-import {OriginItemDto} from '../../origins/models/originItemDto';
+import {TopicItemDto} from '../../topics/models/topicItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 
@@ -8,9 +8,9 @@ export class JokeCreatorDto {
   jokeBlockCreatorDtoList: JokeBlockCreatorDto[] = [];
   structureItemList: StructureItemDto[];
   author: Author;
-  origin: OriginItemDto;
-  comedyOrigin: OriginItemDto;
-  ostensibleOrigin: OriginItemDto;
+  connectingTopic: TopicItemDto;
+  comedyTopic: TopicItemDto;
+  ostensibleTopic: TopicItemDto;
   title: string;
   content: string;
   dateCreated: string;

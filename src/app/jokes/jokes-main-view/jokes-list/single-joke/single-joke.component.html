@@ -16,15 +16,15 @@
           </span>
   </div>
   <div>
-    <span class="d-inline-block mr-1"> Origin:</span>
+    <span class="d-inline-block mr-1"> Connecting Topic:</span>
     <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
-          {{ jokePresenter?.connectingOrigin }} </span>
-    <span class="d-inline-block mr-1"> Comedy Origin:</span>
+          {{ jokePresenter?.connectingTopic }} </span>
+    <span class="d-inline-block mr-1"> Ostensible Topic:</span>
     <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
-          {{ jokePresenter?.comedyOrigin }} </span>
-    <span class="d-inline-block mr-1"> Ostensible Origin:</span>
+          {{ jokePresenter?.ostensibleTopic }} </span>
+    <span class="d-inline-block mr-1"> Comedy Topic:</span>
     <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
-          {{ jokePresenter?.ostensibleOrigin }} </span>
+          {{ jokePresenter?.comedyTopic }} </span>
   </div>
   <div class="text-muted"> Creation Date:: {{ jokePresenter?.dateCreated | date:'short' }} </div>
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition()">Edit</button>

@@ -1,0 +1,32 @@
+<p class="data-header">Edit {{ topicCreator?.name }}</p>
+<div class="container-fluid" style="width: 80%">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex flex-column align-items-center">
+      <!--    main-->
+      <div *ngIf="!isTopicEditionDemanded; else topicBlockCreator">
+        <app-topic-block
+          [topicCreator]="topicCreator"
+          (isTopicEditionDemanded)="onTopicEditionRequest($event)">
+        </app-topic-block>
+      </div>
+      <!--      children-->
+      <div *ngFor="let topicCreatorChildrenWithParent of topicCreatorRow; let index = index">
+        <hr>
+        <app-topic-child-creator-branch
+          [topicCreatorChildrenWithParent]="topicCreatorChildrenWithParent"
+          [index]="index"
+          (setAsMainRequest)="onSetAsMainRequest($event)"
+          (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)"
+          (handleBranchIndex)="onHandleBranchIndexRequest($event)">
+        </app-topic-child-creator-branch>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #topicBlockCreator>
+    <app-topic-block-creator
+      [topicCreator]="topicCreator"
+      (isTopicEditionDemanded)="onTopicEditionRequest($event)">
+    </app-topic-block-creator>
+  </ng-template>
+</div>

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {StructuresService} from '../../../structures/structures.service';
 import {AuthorsService} from '../../../authors/authors.service';
-import {OriginService} from '../../../origins/origin.service';
-import {OriginPresenterDto} from '../../../origins/models/originPresenterDto';
+import {TopicService} from '../../../topics/topic.service';
+import {TopicPresenterDto} from '../../../topics/models/topicPresenterDto';
 import {StructureItemDto} from '../../../structures/models/structureItemDto';
 import {AuthorItemDto} from '../../../authors/models/authorItemDto';
 
@@ -15,7 +15,7 @@ export class JokesFilteringComponent implements OnInit {
   @Output() finalQuery: EventEmitter<string> = new EventEmitter<string>();
 
   authorItemList: AuthorItemDto[];
-  origins: OriginPresenterDto[];
+  topicPresenterList: TopicPresenterDto[];
   structureItemList: StructureItemDto[] = [];
 
   authorQuery: string;
@@ -25,13 +25,13 @@ export class JokesFilteringComponent implements OnInit {
 
   constructor(private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private originService: OriginService) {
+              private topicService: TopicService) {
   }
 
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthors();
-    this.loadOrigins();
+    this.loadTopicPresenterList();
     this.authorQuery = '';
     this.structureQuery = '';
   }
@@ -48,9 +48,9 @@ export class JokesFilteringComponent implements OnInit {
     });
   }
 
-  loadOrigins(): void {
-    this.originService.getOrigins().subscribe((origins) => {
-      this.origins = origins;
+  loadTopicPresenterList(): void {
+    this.topicService.getTopicPresenterList().subscribe((topicPresenterList) => {
+      this.topicPresenterList = topicPresenterList;
     });
   }
 

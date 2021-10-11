@@ -15,9 +15,9 @@ import {AuthorsModule} from './authors/authors.module';
 import {AuthorsRoutingModule} from './authors/authors-routing.module';
 import {AuthorsService} from './authors/authors.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {OriginModule} from './origins/origin.module';
-import {OriginRoutingModule} from './origins/origin-routing.module';
-import {OriginService} from './origins/origin.service';
+import {TopicModule} from './topics/topic.module';
+import {TopicRoutingModule} from './topics/topic-routing.module';
+import {TopicService} from './topics/topic.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {PaginationService} from './utils/pagination.service';
 
@@ -36,8 +36,8 @@ import {PaginationService} from './utils/pagination.service';
         StructuresRoutingModule,
         AuthorsModule,
         AuthorsRoutingModule,
-        OriginModule,
-        OriginRoutingModule,
+        TopicModule,
+        TopicRoutingModule,
         NgbModule,
         FontAwesomeModule
     ],
@@ -45,7 +45,7 @@ import {PaginationService} from './utils/pagination.service';
         JokesService,
         StructuresService,
         AuthorsService,
-        OriginService,
+        TopicService,
         PaginationService
     ],
     bootstrap: [AppComponent]

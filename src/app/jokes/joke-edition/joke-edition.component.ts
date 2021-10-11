@@ -4,12 +4,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StructuresService} from '../../structures/structures.service';
 import {AuthorsService} from '../../authors/authors.service';
-import {OriginService} from '../../origins/origin.service';
+import {TopicService} from '../../topics/topic.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksEditionPanelComponent} from './joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {JokeCreatorDto} from '../models/jokeCreatorDto';
-import {OriginItemDto} from '../../origins/models/originItemDto';
+import {TopicItemDto} from '../../topics/models/topicItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 import {AuthorItemDto} from '../../authors/models/authorItemDto';
@@ -27,7 +27,7 @@ export class JokeEditionComponent implements OnInit {
   jokeForm: FormGroup;
   allStructureItemList: StructureItemDto[] = [];
   authorItemList: AuthorItemDto[];
-  originItemList: OriginItemDto[];
+  topicItemList: TopicItemDto[];
   jokeBlockDtoList: JokeBlockCreatorDto[] = [];
 
   structureItemDto: StructureItemDto;
@@ -39,7 +39,7 @@ export class JokeEditionComponent implements OnInit {
               private structuresService: StructuresService,
               private structureBlocksService: StructureBlocksService,
               private authorsService: AuthorsService,
-              private originService: OriginService,
+              private topicService: TopicService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -49,7 +49,7 @@ export class JokeEditionComponent implements OnInit {
     this.loadJoke();
     this.loadStructures();
     this.loadAuthors();
-    this.loadOrigins();
+    this.loadTopicItemList();
     this.jokeForm = this.buildJokeForm();
     this.dropdownSettings = {
       singleSelection: false,
@@ -76,9 +76,9 @@ export class JokeEditionComponent implements OnInit {
       content: [this.jokeCreator?.content, Validators.minLength(3)],
       structureItemList: [this.jokeCreator?.structureItemList],
       author: [this.jokeCreator?.author],
-      origin: [this.jokeCreator?.origin],
-      ostensibleOrigin: [this.jokeCreator?.ostensibleOrigin],
-      comedyOrigin: [this.jokeCreator?.comedyOrigin],
+      connectingTopic: [this.jokeCreator?.connectingTopic],
+      ostensibleTopic: [this.jokeCreator?.ostensibleTopic],
+      comedyTopic: [this.jokeCreator?.comedyTopic],
       dateCreated: [this.jokeCreator?.dateCreated]
     });
   }
@@ -105,9 +105,9 @@ export class JokeEditionComponent implements OnInit {
     });
   }
 
-  loadOrigins(): void {
-    this.originService.getOriginItemList().subscribe((originItem) => {
-      this.originItemList = originItem;
+  loadTopicItemList(): void {
+    this.topicService.getTopicItemList().subscribe((topicItem) => {
+      this.topicItemList = topicItem;
     });
   }
 

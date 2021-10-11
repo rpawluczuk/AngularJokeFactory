@@ -42,42 +42,42 @@
           </select>
         </div>
         <div class="row form-group">
-          <label>Origin</label>
-          <select class="form-control" formControlName="origin" data-toggle="tooltip"
-                  data-placement="right" title="Select Origin Branch">
-            <option *ngIf="jokeCreator?.origin!==null"
-                    [ngValue]="jokeCreator?.origin"> {{ jokeCreator?.origin?.name }} </option>
-            <option *ngIf="jokeCreator?.origin===null" [ngValue]="jokeCreator?.origin">--Select Origin--</option>
-            <option *ngFor="let origin of originItemList" [ngValue]="origin">
-              {{ origin.name }}
+          <label>Connecting Topic</label>
+          <select class="form-control" formControlName="connectingTopic" data-toggle="tooltip"
+                  data-placement="right" title="Select Connecting Topic Branch">
+            <option *ngIf="jokeCreator?.connectingTopic!==null"
+                    [ngValue]="jokeCreator?.connectingTopic"> {{ jokeCreator?.connectingTopic?.name }} </option>
+            <option *ngIf="jokeCreator?.connectingTopic===null" [ngValue]="jokeCreator?.connectingTopic">--Select Topic--</option>
+            <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
+              {{ connectingTopic.name }}
             </option>
           </select>
         </div>
         <div class="row form-group">
-          <label>Ostensible Origin</label>
-          <select class="form-control" formControlName="ostensibleOrigin" data-toggle="tooltip"
-                  data-placement="right" title="Select Ostensible Origin Branch">
-            <option *ngIf="jokeCreator.ostensibleOrigin!==null" [ngValue]="jokeCreator?.ostensibleOrigin">
-              {{ jokeCreator?.ostensibleOrigin?.name }} </option>
-            <option *ngIf="jokeCreator.ostensibleOrigin===null" [ngValue]="jokeCreator?.ostensibleOrigin">--Select
-              Ostensible Origin--
+          <label>Ostensible Topic</label>
+          <select class="form-control" formControlName="ostensibleTopic" data-toggle="tooltip"
+                  data-placement="right" title="Select Ostensible Topic Branch">
+            <option *ngIf="jokeCreator.ostensibleTopic!==null" [ngValue]="jokeCreator?.ostensibleTopic">
+              {{ jokeCreator?.ostensibleTopic?.name }} </option>
+            <option *ngIf="jokeCreator.ostensibleTopic===null" [ngValue]="jokeCreator?.ostensibleTopic">--Select
+              Ostensible Topic--
             </option>
-            <option *ngFor="let ostensibleOrigin of originItemList" [ngValue]="ostensibleOrigin">
-              {{ ostensibleOrigin.name }}
+            <option *ngFor="let ostensibleTopic of topicItemList" [ngValue]="ostensibleTopic">
+              {{ ostensibleTopic.name }}
             </option>
           </select>
         </div>
         <div class="row form-group">
-          <label>Comedy Origin</label>
-          <select class="form-control" formControlName="comedyOrigin" data-toggle="tooltip"
-                  data-placement="right" title="Select Comedy Origin Branch">
-            <option *ngIf="jokeCreator?.comedyOrigin!==null"
-                    [ngValue]="jokeCreator?.comedyOrigin"> {{ jokeCreator?.comedyOrigin?.name }} </option>
-            <option *ngIf="jokeCreator?.comedyOrigin===null" [ngValue]="jokeCreator?.comedyOrigin">--Select Comedy
-              Origin--
+          <label>Comedy Topic</label>
+          <select class="form-control" formControlName="comedyTopic" data-toggle="tooltip"
+                  data-placement="right" title="Select Comedy Topic Branch">
+            <option *ngIf="jokeCreator?.comedyTopic!==null"
+                    [ngValue]="jokeCreator?.comedyTopic"> {{ jokeCreator?.comedyTopic?.name }} </option>
+            <option *ngIf="jokeCreator?.comedyTopic===null" [ngValue]="jokeCreator?.comedyTopic">--Select Comedy
+              Topic--
             </option>
-            <option *ngFor="let comedyOrigin of originItemList" [ngValue]="comedyOrigin">
-              {{ comedyOrigin.name }}
+            <option *ngFor="let comedyTopic of topicItemList" [ngValue]="comedyTopic">
+              {{ comedyTopic.name }}
             </option>
           </select>
         </div>

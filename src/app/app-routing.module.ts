@@ -5,8 +5,8 @@ import {AuthorsListComponent} from './authors/authors-list/authors-list.componen
 import {JokeCreationComponent} from './jokes/joke-creation/joke-creation.component';
 import {StructureCreationComponent} from './structures/structure-creation/structure-creation.component';
 import {AuthorCreationComponent} from './authors/author-creation/author-creation.component';
-import {OriginListComponent} from './origins/origin-list/origin-list.component';
-import {OriginCreationComponent} from './origins/origin-creation/origin-creation.component';
+import {TopicListComponent} from './topics/topic-list/topic-list.component';
+import {TopicCreationComponent} from './topics/topic-creation/topic-creation.component';
 import {JokesMainViewComponent} from './jokes/jokes-main-view/jokes-main-view.component';
 
 const routes: Routes = [
@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'structure-creation', component: StructureCreationComponent },
   { path: 'authors', component: AuthorsListComponent },
   { path: 'author-creation', component: AuthorCreationComponent },
-  { path: 'origins', component: OriginListComponent },
-  { path: 'origin-creation', component: OriginCreationComponent }
+  { path: 'topics', component: TopicListComponent },
+  { path: 'topic-creation', component: TopicCreationComponent }
 ];
 
 @NgModule({
