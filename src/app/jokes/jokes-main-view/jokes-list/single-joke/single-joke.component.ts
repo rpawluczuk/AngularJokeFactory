@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {JokePresenterDto} from '../../../models/jokePresenterDto';
+import {JokesService} from "../../../jokes.service";
 
 @Component({
   selector: 'app-single-joke',
@@ -13,8 +14,10 @@ export class SingleJokeComponent implements OnInit {
 
 
   isDetailsButtonClicked: boolean;
+  isRateButtonClicked: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private jokesService: JokesService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +34,19 @@ export class SingleJokeComponent implements OnInit {
   }
 
   showJokeDetails() {
+    this.isRateButtonClicked = false;
     this.isDetailsButtonClicked = !this.isDetailsButtonClicked;
+  }
+
+  showJokeRate() {
+    this.isDetailsButtonClicked = false;
+    this.isRateButtonClicked = !this.isRateButtonClicked;
+  }
+
+  onChangeRateButtonStatusRequest(shouldBeClicked: boolean) {
+    this.jokesService.getJokePresenter(this.jokePresenter.id).subscribe(jokePresenter => {
+      this.jokePresenter = jokePresenter;
+    });
+    this.isRateButtonClicked = shouldBeClicked;
   }
 }

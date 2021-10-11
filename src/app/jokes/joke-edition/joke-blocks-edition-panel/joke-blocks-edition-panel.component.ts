@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {JokeBlockCreatorComponent} from '../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
 import {JokeBlocksService} from '../../../blocks/joke-blocks/joke-blocks.service';
-import {JokeCreator} from '../../models/jokeCreator';
+import {JokeCreatorDto} from '../../models/jokeCreatorDto';
 import {StructureItemDto} from '../../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ export class JokeBlocksEditionPanelComponent implements OnChanges, OnInit {
   structureItemDto: StructureItemDto;
 
   @Input()
-  jokeCreator: JokeCreator;
+  jokeCreator: JokeCreatorDto;
 
   @ViewChildren('jokeBlocksEditionRef')
   jokeBlockComponents: QueryList<JokeBlockCreatorComponent>;

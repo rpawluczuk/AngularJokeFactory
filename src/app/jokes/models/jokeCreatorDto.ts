@@ -3,7 +3,7 @@ import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 
-export class JokeCreator {
+export class JokeCreatorDto {
   id: number;
   jokeBlockCreatorDtoList: JokeBlockCreatorDto[] = [];
   structureItemList: StructureItemDto[];

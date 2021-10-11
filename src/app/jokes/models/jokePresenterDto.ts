@@ -5,6 +5,7 @@ export interface JokePresenterDto {
   id: number;
   title: string;
   content: string;
+  rate: number;
   structures: Structure[];
   jokeBlocks: JokeBlock[];
   author: string;

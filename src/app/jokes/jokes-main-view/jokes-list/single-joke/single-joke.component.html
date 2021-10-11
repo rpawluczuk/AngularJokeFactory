@@ -1,5 +1,10 @@
 <div class="card-body">
-  <h2 class="card-title mb-4"> {{ jokePresenter?.title }} </h2>
+  <div class="d-flex flex-row justify-content-between">
+    <h2 class="card-title mb-4"> {{ jokePresenter?.title }} </h2>
+    <app-single-joke-assaigned-rate
+      [rate]="jokePresenter?.rate">
+    </app-single-joke-assaigned-rate>
+  </div>
   <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ jokePresenter?.content }}</pre>
   <div> Author: {{ jokePresenter?.author }} </div>
   <div>
@@ -22,12 +27,19 @@
           {{ jokePresenter?.ostensibleOrigin }} </span>
   </div>
   <div class="text-muted"> Creation Date:: {{ jokePresenter?.dateCreated | date:'short' }} </div>
-  <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition()"> Edit</button>
-  <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeDetails()"> Details</button>
+  <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition()">Edit</button>
+  <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeDetails()">Details</button>
+  <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeRate()">Rate</button>
   <button class="btn btn-outline-danger mt-3" (click)="removeJoke(jokePresenter, $event)"> Delete</button>
   <div *ngIf="isDetailsButtonClicked" class="d-flex flex-column align-items-center p-4">
     <app-single-joke-details
       [jokePresenter]="jokePresenter">
     </app-single-joke-details>
+  </div>
+  <div *ngIf="isRateButtonClicked" class="d-flex flex-column align-items-center p-4">
+    <app-single-joke-rate
+      [jokeId]="jokePresenter?.id"
+      (changeRateButtonStatusRequest)="onChangeRateButtonStatusRequest($event)">
+    </app-single-joke-rate>
   </div>
 </div>

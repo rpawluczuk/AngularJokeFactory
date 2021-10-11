@@ -31,7 +31,7 @@ export class SingleJokeDetailsComponent implements OnInit {
   }
 
   loadStructuresOfTheJoke(){
-    this.structuresService.getStructuresByJokeID(this.jokePresenter.id).subscribe((structureItemList) => {
+    this.structuresService.getStructuresByJokeID(this.jokePresenter?.id).subscribe((structureItemList) => {
       this.structureItemList = structureItemList;
       if (structureItemList.length > 0){
         this.currentStructureItem = structureItemList[0];
@@ -40,8 +40,7 @@ export class SingleJokeDetailsComponent implements OnInit {
   }
 
   loadBlocksOfTheJoke(): void {
-    this.jokeBlocksService.getJokeBlockPresenterList(this.jokePresenter.id).subscribe((jokeBlocks) => {
-      console.log(jokeBlocks);
+    this.jokeBlocksService.getJokeBlockPresenterList(this.jokePresenter?.id).subscribe((jokeBlocks) => {
       this.jokeBlockPresenterList = jokeBlocks;
     });
   }

@@ -9,7 +9,7 @@ import {OriginService} from '../../origins/origin.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructurePanelComponent} from './structure-panel/structure-panel.component';
-import {JokeCreator} from '../models/jokeCreator';
+import {JokeCreatorDto} from '../models/jokeCreatorDto';
 import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {AuthorItemDto} from '../../authors/models/authorItemDto';
@@ -95,7 +95,7 @@ export class JokeCreationComponent implements OnInit {
 
   addJoke() {
     const jokeBlockCreatorList = this.structurePanelComponent.getJokeBlockCreatorList();
-    const jokeCreator: JokeCreator = this.jokeForm.value;
+    const jokeCreator: JokeCreatorDto = this.jokeForm.value;
     jokeCreator.jokeBlockCreatorDtoList = jokeBlockCreatorList;
     this.jokesService.addJoke(jokeCreator).subscribe(() => {
         this.router.navigate(['/jokes']);

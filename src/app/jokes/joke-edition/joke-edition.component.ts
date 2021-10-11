@@ -8,7 +8,7 @@ import {OriginService} from '../../origins/origin.service';
 import {JokeBlocksService} from '../../blocks/joke-blocks/joke-blocks.service';
 import {StructureBlocksService} from '../../blocks/structure-blocks/structure-blocks.service';
 import {JokeBlocksEditionPanelComponent} from './joke-blocks-edition-panel/joke-blocks-edition-panel.component';
-import {JokeCreator} from '../models/jokeCreator';
+import {JokeCreatorDto} from '../models/jokeCreatorDto';
 import {OriginItemDto} from '../../origins/models/originItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
@@ -23,7 +23,7 @@ export class JokeEditionComponent implements OnInit {
   @ViewChild('jokeBlocksEditionPanelRef')
   jokeBlocksEditionPanelComponent: JokeBlocksEditionPanelComponent;
 
-  jokeCreator: JokeCreator;
+  jokeCreator: JokeCreatorDto;
   jokeForm: FormGroup;
   allStructureItemList: StructureItemDto[] = [];
   authorItemList: AuthorItemDto[];
@@ -85,7 +85,7 @@ export class JokeEditionComponent implements OnInit {
 
   updateJoke() {
     const jokeBlockDtoList = this.jokeBlocksEditionPanelComponent.getJokeBlockDtoList();
-    const updatedJoke: JokeCreator = this.jokeForm.value;
+    const updatedJoke: JokeCreatorDto = this.jokeForm.value;
     updatedJoke.id = this.jokeCreator.id;
     updatedJoke.jokeBlockCreatorDtoList = jokeBlockDtoList ;
     this.jokesService.updateJoke(updatedJoke).subscribe(() => {

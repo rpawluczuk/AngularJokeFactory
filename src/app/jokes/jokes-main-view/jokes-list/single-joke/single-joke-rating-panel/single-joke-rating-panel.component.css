@@ -1,0 +1,27 @@
+.emoji {
+  color: darkgray;
+}
+
+.fa-meh-rolling-eyes:hover {
+  color: red;
+}
+
+.fa-meh:hover {
+  color: orange;
+}
+
+.fa-smile:hover {
+  color: yellow;
+}
+
+.fa-grin-beam:hover {
+  color: lightgreen;
+}
+
+.fa-grin-tears:hover {
+  color: limegreen;
+}
+
+.fa-grin-squint-tears:hover {
+  color: green;
+}

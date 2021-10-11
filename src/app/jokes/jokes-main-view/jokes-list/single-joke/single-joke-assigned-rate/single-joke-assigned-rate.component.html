@@ -1,0 +1,14 @@
+<fa-icon *ngIf="rate >= 1 && rate < 1.5" [icon]="faMehRollingEyes" size="4x" class="mx-3 fa-meh-rolling-eyes"
+         placement="bottom" ngbTooltip="Nobody was laughing, the audience was completely bored."></fa-icon>
+<fa-icon *ngIf="rate >= 1.5 && rate < 2.5" [icon]="faMeh" size="4x" class="mx-3 fa-meh"
+         placement="bottom" ngbTooltip="Only some of the viewers laughed, and it was a very calm reaction."></fa-icon>
+<fa-icon *ngIf="rate >= 2.5 && rate < 3.5" [icon]="faSmile" size="4x" class="mx-3 fa-smile"
+         placement="bottom" ngbTooltip="Half the audience laughed, but moderately."></fa-icon>
+<fa-icon *ngIf="rate >= 3.5 && rate < 4.5" [icon]="faGrinBeam" size="4x" class="mx-3 fa-grin-beam"
+         placement="bottom" ngbTooltip="Most of the audience laughed genuinely."></fa-icon>
+<fa-icon *ngIf="rate >= 4.5 && rate < 5.5" [icon]="faGrinTears" size="4x" class="mx-3 fa-grin-tears"
+         placement="bottom" ngbTooltip="The whole audience laughed for a long time, and there could be applause."></fa-icon>
+<fa-icon *ngIf="rate >= 5.5 && rate <= 6" [icon]="faGrinSquintTears" size="4x" class="mx-3 fa-grin-squint-tears"
+         placement="bottom" ngbTooltip="The whole audience couldn't stop laughing, they were completely destroyed in positive way."></fa-icon>
+<fa-icon *ngIf="rate === 7" [icon]="faTrashAlt" size="4x" class="mx-3"
+         placement="bottom" ngbTooltip="Really unfunny... Should be deleted or edited."></fa-icon>

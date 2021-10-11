@@ -34,8 +34,8 @@
           <select class="form-control" formControlName="author" data-toggle="tooltip"
                   data-placement="right" title="Select Author Branch">
             <option value="null">--Select Author--</option>
-            <option *ngFor="let author of authorItemList" [ngValue]="author">
-              {{author.name + ' ' + author.surname}}
+            <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem">
+              {{authorItem.text}}
             </option>
           </select>
         </div>

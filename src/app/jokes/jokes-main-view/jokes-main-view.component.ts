@@ -34,9 +34,11 @@ export class JokesMainViewComponent implements OnInit {
   }
 
   loadAllJokes(): void {
-    this.jokesService.getAllJokes()
-      .subscribe(jokePresenterList => {
+    console.log('hej');
+    this.jokesService.getAllJokes().subscribe(jokePresenterList => {
+        console.log('hej');
         this.jokePresenterList = jokePresenterList;
+        console.log(jokePresenterList);
         this.loadPagination();
       });
   }

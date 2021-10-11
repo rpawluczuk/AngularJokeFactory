@@ -1,0 +1,17 @@
+<div class="d-flex flex-column align-items-center">
+  <div class="d-flex flex-row mt-4">
+    <fa-icon [icon]="faMehRollingEyes" size="5x" class="mx-3 fa-meh-rolling-eyes emoji" (click)="sendRate(1)"
+             placement="bottom" ngbTooltip="Nobody was laughing, the audience was completely bored."></fa-icon>
+    <fa-icon [icon]="faMeh" size="5x" class="mx-3 fa-meh emoji" (click)="sendRate(2)"
+             placement="bottom" ngbTooltip="Only some of the viewers laughed, and it was a very calm reaction."></fa-icon>
+    <fa-icon [icon]="faSmile" size="5x" class="mx-3 fa-smile emoji" (click)="sendRate(3)"
+             placement="bottom" ngbTooltip="Half the audience laughed, but moderately."></fa-icon>
+    <fa-icon [icon]="faGrinBeam" size="5x" class="mx-3 fa-grin-beam emoji" (click)="sendRate(4)"
+             placement="bottom" ngbTooltip="Most of the audience laughed genuinely."></fa-icon>
+    <fa-icon [icon]="faGrinTears" size="5x" class="mx-3 fa-grin-tears emoji" (click)="sendRate(5)"
+             placement="bottom" ngbTooltip="The whole audience laughed for a long time, and there could be applause."></fa-icon>
+    <fa-icon [icon]="faGrinSquintTears" size="5x" class="mx-3 fa-grin-squint-tears emoji" (click)="sendRate(6)"
+             placement="bottom" ngbTooltip="The whole audience couldn't stop laughing, they were completely destroyed in positive way."></fa-icon>
+  </div>
+  <button class="btn btn-outline-dark mt-5" (click)="resetRate()">Reset Rate</button>
+</div>
