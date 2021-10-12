@@ -32,5 +32,12 @@
       <button class="small_button" [routerLink]="['/topics']" [routerLinkActive]="'active'">List</button>
       <button class="small_button" [routerLink]="['/topic-creation']" [routerLinkActive]="'active'">Create</button>
     </div>
+    <button class="navbar-toggler big_button" type="button" data-toggle="collapse" data-target="#sidebarCategorizations">
+      Categorizations
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarCategorizations">
+      <button class="small_button" [routerLink]="['/categorizations']" [routerLinkActive]="'active'">List</button>
+      <button class="small_button" [routerLink]="['/categorization-creation']" [routerLinkActive]="'active'">Create</button>
+    </div>
   </nav>
 </div>
