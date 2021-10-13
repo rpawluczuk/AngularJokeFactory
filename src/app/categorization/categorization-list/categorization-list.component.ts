@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CategorizationService} from '../categorization.service';
+import {CategorizationPresenterDto} from '../models/CategorizationPresenterDto';
 
 @Component({
   selector: 'app-categorization-list',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategorizationListComponent implements OnInit {
 
-  constructor() { }
+  categorizationPresenterList: CategorizationPresenterDto[];
+
+  constructor(private categorizationService: CategorizationService) { }
 
   ngOnInit(): void {
+    this.loadCategorizationPresenterList();
   }
 
+  private loadCategorizationPresenterList() {
+    this.categorizationService.getCategorizationPresenterList().subscribe(categorizationPresenterList => {
+      this.categorizationPresenterList = categorizationPresenterList;
+    });
+  }
+
+  onRemovedCategorization($event: number) {
+    
+  }
 }

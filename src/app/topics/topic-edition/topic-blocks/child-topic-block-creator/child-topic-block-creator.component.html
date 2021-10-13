@@ -4,7 +4,7 @@
     <input list="topics" formControlName="name" type="text" class="form-control" placeholder="topic child name">
     <datalist id="topics">
       <option *ngFor="let topicItem of topicItemList" [ngValue]="topicItem">
-        {{ topicItem.name }}
+        {{ topicItem.text }}
       </option>
     </datalist>
   </form>

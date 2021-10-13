@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {TopicItemDto} from '../../topics/models/topicItemDto';
+import {TopicService} from '../../topics/topic.service';
+import {CategorizationService} from '../categorization.service';
 
 @Component({
   selector: 'app-categorization-creation',
@@ -7,9 +12,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategorizationCreationComponent implements OnInit {
 
-  constructor() { }
+  topicItemList: TopicItemDto[];
+  categorizationForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private categorizationService: CategorizationService,
+              private topicService: TopicService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
+  ngOnInit(): void {
+    this.loadTopicItemList();
+    this.categorizationForm = this.buildCategorizationForm();
+  }
+
+  private buildCategorizationForm() {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+      baseCategory: [null],
+      questions: [null],
+      linkedCategory: [null]
+    });
+  }
+
+  private loadTopicItemList() {
+    this.topicService.getTopicItemList().subscribe((topicItemList) => {
+      this.topicItemList = topicItemList;
+      console.log(this.topicItemList);
+    });
+  }
+
+  addCategorization() {
+    console.log(this.categorizationForm.value);
+    this.categorizationService.addCategorization(this.categorizationForm.value).subscribe(() => {
+      this.router.navigate(['/categorizations']);
+    });
+  }
 }

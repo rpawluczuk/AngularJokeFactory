@@ -1,1 +1,18 @@
-<p>categorization-list works!</p>
+<div class="container">
+  <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Categorizations</h1>
+
+  <div *ngIf="categorizationPresenterList && categorizationPresenterList.length > 0; else noCategorizations">
+    <div *ngFor="let categorization of categorizationPresenterList; let i = index">
+      <app-single-categorization
+        [categorizationPresenter]="categorization"
+        (removedCategorization)="onRemovedCategorization($event)">
+      </app-single-categorization>
+    </div>
+  </div>
+
+  <ng-template #noCategorizations>
+    <div class="no-data">
+      <p>Currently no categorizations in database</p>
+    </div>
+  </ng-template>
+</div>

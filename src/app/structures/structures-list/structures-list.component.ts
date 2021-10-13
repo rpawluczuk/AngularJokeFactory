@@ -13,10 +13,10 @@ export class StructuresListComponent implements OnInit {
   constructor(private structuresService: StructuresService) { }
 
   ngOnInit(): void {
-    this.loadStructures();
+    this.loadStructurePresenterList();
   }
 
-  loadStructures(): void{
+  loadStructurePresenterList(): void{
     this.structuresService.getStructurePresenterList().subscribe((structurePresenterList) => {
       this.structurePresenterList = structurePresenterList;
     });
@@ -24,7 +24,7 @@ export class StructuresListComponent implements OnInit {
 
   onRemovedStructure(structureId: number) {
     this.structuresService.removeStructure(structureId).subscribe(() => {
-      this.loadStructures();
+      this.loadStructurePresenterList();
     });
   }
 }

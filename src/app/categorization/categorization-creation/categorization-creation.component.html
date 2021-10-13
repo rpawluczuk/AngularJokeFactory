@@ -1,1 +1,39 @@
-<p>categorization-creation works!</p>
+<div class="d-flex flex-column align-items-center">
+  <p class="data-header">Add a new categorization</p>
+  <div class="container">
+    <form [formGroup]="categorizationForm">
+      <div class="row form-group">
+        <label>Name</label>
+        <input formControlName="name" type="text" class="form-control" placeholder="name">
+        <p *ngIf="!categorizationForm.get('name').valid && categorizationForm.get('name').dirty" class="error">This field is
+          required!</p>
+      </div>
+      <div class="row form-group">
+        <label>Base Category</label>
+        <select class="form-control" formControlName="baseCategory">
+          <option value="null">--Select Base Category--</option>
+          <option *ngFor="let baseCategory of topicItemList" [ngValue]="baseCategory">
+            {{ baseCategory.text }}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group">
+        <label>Questions</label>
+        <textarea formControlName="questions" type="text" placeholder="questions" class="form-control"
+                  rows="6"></textarea>
+      </div>
+      <div class="row form-group">
+        <label>Linked Category</label>
+        <select class="form-control" formControlName="linkedCategory">
+          <option value="null">--Select Linked Category--</option>
+          <option *ngFor="let linkedCategory of topicItemList" [ngValue]="linkedCategory">
+            {{ linkedCategory.text }}
+          </option>
+        </select>
+      </div>
+      <button [disabled]="categorizationForm.invalid" (click)="addCategorization()" type="submit"
+              class="btn btn-success float-right mx-2">Add Categorization
+      </button>
+    </form>
+  </div>
+</div>

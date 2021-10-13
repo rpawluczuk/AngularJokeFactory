@@ -20,35 +20,39 @@ import {TopicRoutingModule} from './topics/topic-routing.module';
 import {TopicService} from './topics/topic.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {PaginationService} from './utils/pagination.service';
+import {CategorizationModule} from './categorization/categorization.module';
+import {CategorizationService} from './categorization/categorization.service';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        CoreModule,
-        JokesRoutingModule,
-        JokesModule,
-        StructuresModule,
-        StructuresRoutingModule,
-        AuthorsModule,
-        AuthorsRoutingModule,
-        TopicModule,
-        TopicRoutingModule,
-        NgbModule,
-        FontAwesomeModule
-    ],
-    providers: [
-        JokesService,
-        StructuresService,
-        AuthorsService,
-        TopicService,
-        PaginationService
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CoreModule,
+    CategorizationModule,
+    JokesRoutingModule,
+    JokesModule,
+    StructuresModule,
+    StructuresRoutingModule,
+    AuthorsModule,
+    AuthorsRoutingModule,
+    TopicModule,
+    TopicRoutingModule,
+    NgbModule,
+    FontAwesomeModule
+  ],
+  providers: [
+    CategorizationService,
+    JokesService,
+    StructuresService,
+    AuthorsService,
+    TopicService,
+    PaginationService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

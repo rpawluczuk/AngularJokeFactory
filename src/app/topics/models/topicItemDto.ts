@@ -1,9 +1,9 @@
 export class TopicItemDto {
 
   id: number;
-  name: string;
+  text: string;
 
   constructor() {
-    this.name = '';
+    this.text = '';
   }
 }

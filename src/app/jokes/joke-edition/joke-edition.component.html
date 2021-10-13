@@ -46,10 +46,10 @@
           <select class="form-control" formControlName="connectingTopic" data-toggle="tooltip"
                   data-placement="right" title="Select Connecting Topic Branch">
             <option *ngIf="jokeCreator?.connectingTopic!==null"
-                    [ngValue]="jokeCreator?.connectingTopic"> {{ jokeCreator?.connectingTopic?.name }} </option>
+                    [ngValue]="jokeCreator?.connectingTopic"> {{ jokeCreator?.connectingTopic?.text }} </option>
             <option *ngIf="jokeCreator?.connectingTopic===null" [ngValue]="jokeCreator?.connectingTopic">--Select Topic--</option>
             <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
-              {{ connectingTopic.name }}
+              {{ connectingTopic.text }}
             </option>
           </select>
         </div>
@@ -58,12 +58,12 @@
           <select class="form-control" formControlName="ostensibleTopic" data-toggle="tooltip"
                   data-placement="right" title="Select Ostensible Topic Branch">
             <option *ngIf="jokeCreator.ostensibleTopic!==null" [ngValue]="jokeCreator?.ostensibleTopic">
-              {{ jokeCreator?.ostensibleTopic?.name }} </option>
+              {{ jokeCreator?.ostensibleTopic?.text }} </option>
             <option *ngIf="jokeCreator.ostensibleTopic===null" [ngValue]="jokeCreator?.ostensibleTopic">--Select
               Ostensible Topic--
             </option>
             <option *ngFor="let ostensibleTopic of topicItemList" [ngValue]="ostensibleTopic">
-              {{ ostensibleTopic.name }}
+              {{ ostensibleTopic.text }}
             </option>
           </select>
         </div>
@@ -72,12 +72,12 @@
           <select class="form-control" formControlName="comedyTopic" data-toggle="tooltip"
                   data-placement="right" title="Select Comedy Topic Branch">
             <option *ngIf="jokeCreator?.comedyTopic!==null"
-                    [ngValue]="jokeCreator?.comedyTopic"> {{ jokeCreator?.comedyTopic?.name }} </option>
+                    [ngValue]="jokeCreator?.comedyTopic"> {{ jokeCreator?.comedyTopic?.text }} </option>
             <option *ngIf="jokeCreator?.comedyTopic===null" [ngValue]="jokeCreator?.comedyTopic">--Select Comedy
               Topic--
             </option>
             <option *ngFor="let comedyTopic of topicItemList" [ngValue]="comedyTopic">
-              {{ comedyTopic.name }}
+              {{ comedyTopic.text }}
             </option>
           </select>
         </div>

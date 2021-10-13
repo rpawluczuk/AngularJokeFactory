@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Author} from './models/author';
 import {AuthorPresenterDto} from './models/authorPresenterDto';
-import {AuthorCreatorDto} from "./models/authorCreatorDto";
-import {AuthorItemDto} from "./models/authorItemDto";
+import {AuthorCreatorDto} from './models/authorCreatorDto';
+import {AuthorItemDto} from './models/authorItemDto';
 
 @Injectable({
   providedIn: 'root'

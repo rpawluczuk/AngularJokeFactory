@@ -44,7 +44,7 @@ export class TopicCreationComponent implements OnInit {
   }
 
   loadTopics(): void {
-    this.topicService.getTopicPresenterList().subscribe(topics => this.topicItemList = topics);
+    this.topicService.getTopicItemList().subscribe(topicItemList => this.topicItemList = topicItemList);
   }
 
   onCancel() {
