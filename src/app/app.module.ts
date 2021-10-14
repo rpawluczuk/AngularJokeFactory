@@ -22,27 +22,29 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {PaginationService} from './utils/pagination.service';
 import {CategorizationModule} from './categorization/categorization.module';
 import {CategorizationService} from './categorization/categorization.service';
+import {CategorizationRoutingModule} from './categorization/categorization-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    CoreModule,
-    CategorizationModule,
-    JokesRoutingModule,
-    JokesModule,
-    StructuresModule,
-    StructuresRoutingModule,
     AuthorsModule,
     AuthorsRoutingModule,
-    TopicModule,
-    TopicRoutingModule,
+    BrowserModule,
+    CategorizationModule,
+    CategorizationRoutingModule,
+    CoreModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    JokesRoutingModule,
+    JokesModule,
     NgbModule,
-    FontAwesomeModule
+    StructuresModule,
+    StructuresRoutingModule,
+    TopicModule,
+    TopicRoutingModule
   ],
   providers: [
     CategorizationService,

@@ -23,7 +23,9 @@ export class CategorizationListComponent implements OnInit {
     });
   }
 
-  onRemovedCategorization($event: number) {
-    
+  onRemovedCategorization(categorizationId: number) {
+    this.categorizationService.removeCategorization(categorizationId).subscribe(() => {
+      this.loadCategorizationPresenterList();
+    });
   }
 }

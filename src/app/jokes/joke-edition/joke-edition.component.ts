@@ -68,6 +68,7 @@ export class JokeEditionComponent implements OnInit {
 
   loadJoke() {
     this.jokeCreator = this.route.snapshot.data.joke;
+    console.log(this.jokeCreator);
   }
 
   buildJokeForm() {

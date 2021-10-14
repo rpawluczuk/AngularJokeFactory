@@ -1,7 +1,6 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Structure} from '../models/structure';
 import {StructuresService} from '../structures.service';
 import {StructureBlock} from '../../blocks/structure-blocks/models/structure-block';
 import {StructureBlockCreatorComponent} from '../../blocks/structure-blocks/structure-block-creator/structure-block-creator.component';

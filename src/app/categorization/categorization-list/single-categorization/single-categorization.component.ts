@@ -16,12 +16,12 @@ export class SingleCategorizationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeStructure(categorizationPresenterDto: CategorizationPresenterDto, event) {
-    event.stopPropagation();
-    this.removedCategorization.emit(categorizationPresenterDto.id);
-  }
-
   goToCategorizationEdition() {
     this.router.navigate(['/categorizations', this.categorizationPresenter.id]);
+  }
+
+  removeCategorization(categorizationPresenter: CategorizationPresenterDto, event) {
+    event.stopPropagation();
+    this.removedCategorization.emit(categorizationPresenter.id);
   }
 }

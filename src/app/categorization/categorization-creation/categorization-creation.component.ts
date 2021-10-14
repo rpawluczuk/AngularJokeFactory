@@ -38,14 +38,16 @@ export class CategorizationCreationComponent implements OnInit {
   private loadTopicItemList() {
     this.topicService.getTopicItemList().subscribe((topicItemList) => {
       this.topicItemList = topicItemList;
-      console.log(this.topicItemList);
     });
   }
 
   addCategorization() {
-    console.log(this.categorizationForm.value);
     this.categorizationService.addCategorization(this.categorizationForm.value).subscribe(() => {
       this.router.navigate(['/categorizations']);
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['/categorizations']);
   }
 }

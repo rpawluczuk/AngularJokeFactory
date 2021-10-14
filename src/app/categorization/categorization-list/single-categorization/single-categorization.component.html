@@ -4,6 +4,10 @@
     <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">
       Base Category: {{ categorizationPresenter?.baseCategory }}</pre>
     <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">
+      Questions: {{ categorizationPresenter?.questions }}</pre>
+    <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">
       Linked Category: {{ categorizationPresenter?.linkedCategory }}</pre>
+    <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToCategorizationEdition()">Edit</button>
+    <button class="btn btn-outline-danger mt-3" (click)="removeCategorization(categorizationPresenter, $event)"> Delete</button>
   </div>
 </div>

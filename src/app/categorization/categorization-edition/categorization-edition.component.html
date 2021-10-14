@@ -1,5 +1,5 @@
 <div class="d-flex flex-column align-items-center">
-  <p class="data-header">Add a new categorization</p>
+  <p class="data-header">Edit Categorization</p>
   <div class="container">
     <form [formGroup]="categorizationForm">
       <div class="row form-group">
@@ -11,7 +11,10 @@
       <div class="row form-group">
         <label>Base Category</label>
         <select class="form-control" formControlName="baseCategory">
-          <option value="null">--Select Base Category--</option>
+          <option *ngIf="categorizationCreator?.baseCategory!==null"
+                  [ngValue]="categorizationCreator?.baseCategory"> {{ categorizationCreator?.baseCategory?.text }} </option>
+          <option *ngIf="categorizationCreator?.baseCategory===null"
+                  [ngValue]="categorizationCreator?.baseCategory">--Select Base Category--</option>
           <option *ngFor="let baseCategory of topicItemList" [ngValue]="baseCategory">
             {{ baseCategory.text }}
           </option>
@@ -25,14 +28,17 @@
       <div class="row form-group">
         <label>Linked Category</label>
         <select class="form-control" formControlName="linkedCategory">
-          <option value="null">--Select Linked Category--</option>
+          <option *ngIf="categorizationCreator?.linkedCategory!==null"
+                  [ngValue]="categorizationCreator?.linkedCategory"> {{ categorizationCreator?.linkedCategory?.text }} </option>
+          <option *ngIf="categorizationCreator?.linkedCategory===null"
+                  [ngValue]="categorizationCreator?.linkedCategory">--Select Linked Category--</option>
           <option *ngFor="let linkedCategory of topicItemList" [ngValue]="linkedCategory">
             {{ linkedCategory.text }}
           </option>
         </select>
       </div>
-      <button [disabled]="categorizationForm.invalid" (click)="addCategorization()" type="submit"
-              class="btn btn-success float-right mx-2">Add Categorization</button>
+      <button [disabled]="categorizationForm.invalid" (click)="editCategorization()" type="submit"
+              class="btn btn-success float-right mx-2">Update Categorization</button>
       <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
       <button (click)="categorizationForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
     </form>

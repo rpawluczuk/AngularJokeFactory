@@ -6,13 +6,16 @@ import {CategorizationListComponent} from './categorization-list/categorization-
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import { SingleCategorizationComponent } from './categorization-list/single-categorization/single-categorization.component';
+import { CategorizationEditionComponent } from './categorization-edition/categorization-edition.component';
+import {CategorizationResolveService} from "./categorization-resolve.service";
 
 
 @NgModule({
   declarations: [
     CategorizationCreationComponent,
     CategorizationListComponent,
-    SingleCategorizationComponent],
+    SingleCategorizationComponent,
+    CategorizationEditionComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,6 +24,9 @@ import { SingleCategorizationComponent } from './categorization-list/single-cate
   exports: [
     CategorizationCreationComponent,
     CategorizationListComponent
+  ],
+  providers: [
+    CategorizationResolveService
   ]
 })
 export class CategorizationModule {
