@@ -17,11 +17,13 @@ import {JokeBlockCreatorComponent} from '../blocks/joke-blocks/joke-block-creato
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SingleJokeComponent} from './jokes-main-view/jokes-list/single-joke/single-joke.component';
 import {JokeBlockComponent} from '../blocks/joke-blocks/joke-block/joke-block.component';
-import {StructurePanelComponent} from './joke-creation/structure-panel/structure-panel.component';
+import {StructurePanelComponent} from './joke-creation/creation-by-factory/structure-panel/structure-panel.component';
 import {JokeBlocksEditionPanelComponent} from './joke-edition/joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {SingleJokeDetailsComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-details/single-joke-details.component';
 import {SingleJokeRatingPanelComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-rating-panel/single-joke-rating-panel.component';
 import { SingleJokeAssignedRateComponent } from './jokes-main-view/jokes-list/single-joke/single-joke-assigned-rate/single-joke-assigned-rate.component';
+import { CreationByFactoryComponent } from './joke-creation/creation-by-factory/creation-by-factory.component';
+import { FastCreationComponent } from './joke-creation/fast-creation/fast-creation.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { SingleJokeAssignedRateComponent } from './jokes-main-view/jokes-list/si
     JokeBlocksEditionPanelComponent,
     SingleJokeDetailsComponent,
     SingleJokeRatingPanelComponent,
-    SingleJokeAssignedRateComponent
+    SingleJokeAssignedRateComponent,
+    CreationByFactoryComponent,
+    FastCreationComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
-import {JokeBlockCreatorComponent} from '../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
-import {JokeBlockCreatorDto} from '../../../blocks/joke-blocks/models/jokeBlockCreatorDto';
-import {StructureItemDto} from '../../../structures/models/structureItemDto';
-import {JokeBlocksService} from '../../../blocks/joke-blocks/joke-blocks.service';
+import {JokeBlockCreatorComponent} from '../../../../blocks/joke-blocks/joke-block-creator/joke-block-creator.component';
+import {JokeBlockCreatorDto} from '../../../../blocks/joke-blocks/models/jokeBlockCreatorDto';
+import {StructureItemDto} from '../../../../structures/models/structureItemDto';
+import {JokeBlocksService} from '../../../../blocks/joke-blocks/joke-blocks.service';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({

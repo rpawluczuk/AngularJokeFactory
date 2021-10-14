@@ -1,0 +1,36 @@
+<form [formGroup]="jokeForm" class="mt-4">
+  <div class="d-flex flex-column align-items-center">
+    <div class="row col-8 form-group">
+      <label>Title</label>
+      <input formControlName="title" type="text" class="form-control" placeholder="title">
+      <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">
+        This field is required!</p>
+    </div>
+    <div class="row col-8 form-group">
+      <label>Content</label>
+      <textarea formControlName="content" type="text" placeholder="content" class="form-control"
+                rows="6"></textarea>
+      <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
+        This field must contain more than 3 characters!</p>
+    </div>
+    <div class="row col-8 form-group">
+      <label>Author</label>
+      <select class="form-control" formControlName="author" data-toggle="tooltip"
+              data-placement="right" title="Select Author Branch">
+        <option value="null">--Select Author--</option>
+        <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem">
+          {{authorItem.text}}
+        </option>
+      </select>
+    </div>
+    <div class="row col-8">
+      <div class="col-sm-12">
+        <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"
+                class="btn btn-success float-right mx-2">Add Joke
+        </button>
+        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+        <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+      </div>
+    </div>
+  </div>
+</form>
