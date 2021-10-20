@@ -1,12 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StructuresService} from '../../../../../structures/structures.service';
 import {JokePresenterDto} from '../../../../models/jokePresenterDto';
-import {JokeBlocksService} from '../../../../../blocks/joke-blocks/joke-blocks.service';
-import {StructureItemDto} from '../../../../../structures/models/structureItemDto';
-import {JokeBlockPresenterDto} from '../../../../../blocks/joke-blocks/models/jokeBlockPresenterDto';
-import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 import {TopicGroupService} from '../../../../../topic-group/topic-group.service';
 import {TopicGroupPresenterDto} from '../../../../../topic-group/models/TopicGroupPresenterDto';
+import {faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-single-joke-details',
@@ -16,50 +12,28 @@ import {TopicGroupPresenterDto} from '../../../../../topic-group/models/TopicGro
 export class SingleJokeDetailsComponent implements OnInit {
   @Input() jokePresenter: JokePresenterDto;
 
-  faLongArrowAltDown = faLongArrowAltDown;
-
   topicGroupPresenterList: TopicGroupPresenterDto[];
+  selectedTopicGroupPresenter: TopicGroupPresenterDto;
+  faLongArrowAltRight = faLongArrowAltRight;
 
-  structureItemList: StructureItemDto[] = [];
-  currentStructureItem: StructureItemDto;
-  jokeBlockPresenterList: JokeBlockPresenterDto[] = [];
-  currentStructureIndex = 1;
-
-  constructor(private structuresService: StructuresService,
-              private jokeBlocksService: JokeBlocksService,
-              private topicGroupService: TopicGroupService) {
+  constructor(private topicGroupService: TopicGroupService) {
   }
 
   ngOnInit(): void {
     this.loadTopicGroups();
-    this.loadBlocksOfTheJoke();
-    this.loadStructuresOfTheJoke();
-  }
-
-  loadStructuresOfTheJoke(){
-    this.structuresService.getStructuresByJokeID(this.jokePresenter?.id).subscribe((structureItemList) => {
-      this.structureItemList = structureItemList;
-      if (structureItemList.length > 0){
-        this.currentStructureItem = structureItemList[0];
-      }
-    });
-  }
-
-  loadBlocksOfTheJoke(): void {
-    this.jokeBlocksService.getJokeBlockPresenterList(this.jokePresenter?.id).subscribe((jokeBlocks) => {
-      this.jokeBlockPresenterList = jokeBlocks;
-    });
   }
 
   loadTopicGroups(): void {
     this.topicGroupService.getTopicGroupPresenterList(this.jokePresenter?.id).subscribe(topicGroupPresenterList => {
       this.topicGroupPresenterList = topicGroupPresenterList;
-      console.log(this.topicGroupPresenterList);
     });
   }
 
-  changeCurrentStructure(SelectedStructureIndex: number) {
-    this.currentStructureIndex = SelectedStructureIndex;
-    this.currentStructureItem = this.structureItemList[SelectedStructureIndex - 1];
+  onTopicGroupClick(topicGroupPresenter: TopicGroupPresenterDto) {
+    if (this.selectedTopicGroupPresenter === topicGroupPresenter) {
+      this.selectedTopicGroupPresenter = null;
+    } else {
+      this.selectedTopicGroupPresenter = topicGroupPresenter;
+    }
   }
 }

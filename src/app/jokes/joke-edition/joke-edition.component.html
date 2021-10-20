@@ -1,6 +1,10 @@
 <p class="data-header">Edit {{ jokeCreator?.title }}</p>
 <div class="data-container">
   <form [formGroup]="jokeForm">
+    <app-topic-group-edition
+      #topicGroupEditionRef
+      [jokeCreator]="jokeCreator">
+    </app-topic-group-edition>
     <div class="d-flex flex-row">
       <!--    Left column-->
       <div class="d-flex flex-column col-6 p-4">
@@ -47,7 +51,9 @@
                   data-placement="right" title="Select Connecting Topic Branch">
             <option *ngIf="jokeCreator?.connectingTopic!==null"
                     [ngValue]="jokeCreator?.connectingTopic"> {{ jokeCreator?.connectingTopic?.text }} </option>
-            <option *ngIf="jokeCreator?.connectingTopic===null" [ngValue]="jokeCreator?.connectingTopic">--Select Topic--</option>
+            <option *ngIf="jokeCreator?.connectingTopic===null" [ngValue]="jokeCreator?.connectingTopic">--Select
+              Topic--
+            </option>
             <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
               {{ connectingTopic.text }}
             </option>

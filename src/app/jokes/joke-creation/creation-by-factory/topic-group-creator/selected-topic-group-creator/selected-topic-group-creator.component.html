@@ -1,0 +1,29 @@
+<div class="d-flex flex-row align-items-center justify-content-center">
+  <app-topic-group-block-creator
+    [categoryName]="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory?.name"
+    [topicName]="selectedTopicGroupCreator?.connectingTopicItem?.text"
+    [blockName]="'Connecting Topic'">
+  </app-topic-group-block-creator>
+  <fa-icon [icon]="faLongArrowAltRight" size="5x" class="m-3"></fa-icon>
+  <div class="d-flex flex-column align-items-center">
+    <label class="my-2"><strong>Questions</strong></label>
+    <pre style="white-space: pre-line" class="questionSection d-flex align-items-center p-2">
+          {{selectedTopicGroupCreator?.categorizationCreator?.questions}}</pre>
+  </div>
+  <div class="d-flex flex-column justify-content-between">
+    <fa-icon [icon]="faLongArrowAltRight" size="5x" class="fa-rotate-315 m-3"></fa-icon>
+    <fa-icon [icon]="faLongArrowAltRight" size="5x" class="fa-rotate-45 m-3"></fa-icon>
+  </div>
+  <div class="d-flex flex-column justify-content-between">
+    <app-topic-group-block-creator
+      [categoryName]="selectedTopicGroupCreator?.categorizationCreator?.ostensibleCategory?.name"
+      [topicName]="selectedTopicGroupCreator?.ostensibleTopicItem?.text"
+      [blockName]="'Ostensible Topic'">
+    </app-topic-group-block-creator>
+    <app-topic-group-block-creator
+      [categoryName]="selectedTopicGroupCreator?.categorizationCreator?.comedyCategory?.name"
+      [topicName]="selectedTopicGroupCreator?.comedyTopicItem?.text"
+      [blockName]="'Comedy Topic'">
+    </app-topic-group-block-creator>
+  </div>
+</div>

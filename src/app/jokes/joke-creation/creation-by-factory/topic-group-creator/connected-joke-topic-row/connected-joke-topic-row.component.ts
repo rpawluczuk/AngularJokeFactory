@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TopicCreatorChildrenWithParentId} from '../../../topics/models/topicCreatorChildrenWithParentId';
-import {TopicCreatorChildDto} from '../../../topics/models/topicCreatorChildDto';
+import {TopicCreatorChildrenWithParentId} from '../../../../../topics/models/topicCreatorChildrenWithParentId';
+import {TopicCreatorChildDto} from '../../../../../topics/models/topicCreatorChildDto';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
-import {TopicService} from "../../../topics/topic.service";
+import {TopicService} from "../../../../../topics/topic.service";
 
 @Component({
   selector: 'app-connected-joke-topic-row',

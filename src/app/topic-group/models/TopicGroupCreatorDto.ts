@@ -4,12 +4,12 @@ import {CategorizationCreatorDto} from '../../categorization/models/Categorizati
 export class TopicGroupCreatorDto {
 
   id: number;
-  categorization: CategorizationCreatorDto;
-  connectingTopic: TopicItemDto;
-  comedyTopic: TopicItemDto;
-  ostensibleTopic: TopicItemDto;
+  categorizationCreator: CategorizationCreatorDto;
+  connectingTopicItem: TopicItemDto;
+  comedyTopicItem: TopicItemDto;
+  ostensibleTopicItem: TopicItemDto;
 
   constructor(categorizationCreator: CategorizationCreatorDto) {
-    this.categorization = categorizationCreator;
+    this.categorizationCreator = categorizationCreator;
   }
 }

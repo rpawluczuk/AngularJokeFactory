@@ -1,0 +1,45 @@
+<div class="d-flex flex-column align-items-center">
+  <div class="col-8 mt-4">
+    <label class="row">Categorization</label>
+    <ng-multiselect-dropdown class="row mb-2"
+                             [placeholder]="'custom placeholder'"
+                             [settings]="dropdownSettings"
+                             [data]="getDropdownList(categorizationItemList)"
+                             (onSelect)="onCategorizationSelect($event)"
+                             (onDeSelect)="onCategorizationDeselect($event)">
+    </ng-multiselect-dropdown>
+  </div>
+
+  <!--  list of topic groups-->
+  <div *ngFor="let topicGroupCreator of topicGroupCreatorList; let i = index" class="card col-7">
+    <div class="card-body" (click)="onTopicGroupClick(topicGroupCreator)">
+      <h5 class="card-title"> {{ topicGroupCreator?.categorizationCreator?.name }} </h5>
+      <div *ngIf="topicGroupCreator?.categorizationCreator?.id === selectedTopicGroupCreator?.categorizationCreator?.id">
+        <app-selected-topic-group-creator
+          [selectedTopicGroupCreator]="selectedTopicGroupCreator">
+        </app-selected-topic-group-creator>
+      </div>
+    </div>
+  </div>
+
+  <!--  topic selection panel-->
+  <!--    main-->
+  <div *ngIf="selectedTopicGroupCreator !== undefined">
+    <app-connecting-category-block
+      [topicCreator]="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory">
+    </app-connecting-category-block>
+  </div>
+  <!--      children-->
+  <div *ngFor="let topicCreatorChildrenWithParent of topicCreatorRow; let index = index">
+    <hr>
+    <app-connected-joke-topic-row
+      [topicCreatorChildrenWithParent]="topicCreatorChildrenWithParent"
+      [parentIndex]="index"
+      (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
+      (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)"
+      (setAsConnectingTopicRequest)="onSetAsConnectingTopicRequest($event)"
+      (setAsOstensibleTopicRequest)="onSetAsOstensibleTopicRequest($event)"
+      (setAsComedyTopicRequest)="onSetAsComedyTopicRequest($event)">
+    </app-connected-joke-topic-row>
+  </div>
+</div>

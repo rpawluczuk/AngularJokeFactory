@@ -13,7 +13,7 @@ import {TopicService} from '../../../topics/topic.service';
 import {StructureBlocksService} from '../../../blocks/structure-blocks/structure-blocks.service';
 import {Router} from '@angular/router';
 import {JokeCreatorDto} from '../../models/jokeCreatorDto';
-import {TopicGroupCreatorComponent} from '../../../topic-group/topic-group-creator/topic-group-creator.component';
+import {TopicGroupCreatorComponent} from './topic-group-creator/topic-group-creator.component';
 
 @Component({
   selector: 'app-creation-by-factory',
@@ -102,7 +102,6 @@ export class CreationByFactoryComponent implements OnInit {
     const jokeCreator: JokeCreatorDto = this.jokeForm.value;
     jokeCreator.topicGroupCreatorList = this.topicGroupCreatorComponent.getTopicGroupList();
     jokeCreator.jokeBlockCreatorDtoList = jokeBlockCreatorList;
-    console.log(jokeCreator);
     this.jokesService.addJoke(jokeCreator).subscribe(() => {
       this.router.navigate(['/jokes']);
     });

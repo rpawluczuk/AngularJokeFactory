@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CategorizationItemDto} from '../../categorization/models/CategorizationItemDto';
-import {CategorizationService} from '../../categorization/categorization.service';
-import {TopicGroupCreatorDto} from '../models/TopicGroupCreatorDto';
-import {TopicCreatorChildrenWithParentId} from '../../topics/models/topicCreatorChildrenWithParentId';
-import {TopicCreatorChildDto} from '../../topics/models/topicCreatorChildDto';
-import {TopicService} from '../../topics/topic.service';
-import {TopicItemDto} from '../../topics/models/topicItemDto';
-import {faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons';
+import {CategorizationItemDto} from '../../../../categorization/models/CategorizationItemDto';
+import {CategorizationService} from '../../../../categorization/categorization.service';
+import {TopicGroupCreatorDto} from '../../../../topic-group/models/TopicGroupCreatorDto';
+import {TopicCreatorChildrenWithParentId} from '../../../../topics/models/topicCreatorChildrenWithParentId';
+import {TopicCreatorChildDto} from '../../../../topics/models/topicCreatorChildDto';
+import {TopicService} from '../../../../topics/topic.service';
+import {TopicItemDto} from '../../../../topics/models/topicItemDto';
+
 
 @Component({
   selector: 'app-topic-group-creator',
@@ -21,7 +21,6 @@ export class TopicGroupCreatorComponent implements OnInit {
 
   topicCreatorRow: TopicCreatorChildrenWithParentId[] = [];
 
-  faLongArrowAltRight = faLongArrowAltRight;
   dropdownSettings = {};
 
   constructor(private categorizationService: CategorizationService,
@@ -61,13 +60,13 @@ export class TopicGroupCreatorComponent implements OnInit {
   }
 
   onCategorizationDeselect(selectedField: any) {
-    this.topicGroupCreatorList = this.topicGroupCreatorList.filter(tgc => tgc?.categorization?.id !== selectedField.id);
+    this.topicGroupCreatorList = this.topicGroupCreatorList.filter(tgc => tgc?.categorizationCreator?.id !== selectedField.id);
   }
 
 
   onTopicGroupClick(topicGroupCreator: TopicGroupCreatorDto) {
     this.selectedTopicGroupCreator = topicGroupCreator;
-    const topicCreator = topicGroupCreator?.categorization?.connectingCategory;
+    const topicCreator = topicGroupCreator?.categorizationCreator?.connectingCategory;
     this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreator.children, topicCreator.id));
   }
 
@@ -87,21 +86,21 @@ export class TopicGroupCreatorComponent implements OnInit {
     const connectingTopic = new TopicItemDto();
     connectingTopic.id = topicCreatorChildDto.id;
     connectingTopic.text = topicCreatorChildDto.name;
-    this.selectedTopicGroupCreator.connectingTopic = connectingTopic;
+    this.selectedTopicGroupCreator.connectingTopicItem = connectingTopic;
   }
 
   onSetAsOstensibleTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
     const ostensibleTopic = new TopicItemDto();
     ostensibleTopic.id = topicCreatorChildDto.id;
     ostensibleTopic.text = topicCreatorChildDto.name;
-    this.selectedTopicGroupCreator.ostensibleTopic = ostensibleTopic;
+    this.selectedTopicGroupCreator.ostensibleTopicItem = ostensibleTopic;
   }
 
   onSetAsComedyTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
     const comedyTopic = new TopicItemDto();
     comedyTopic.id = topicCreatorChildDto.id;
     comedyTopic.text = topicCreatorChildDto.name;
-    this.selectedTopicGroupCreator.comedyTopic = comedyTopic;
+    this.selectedTopicGroupCreator.comedyTopicItem = comedyTopic;
   }
 
   getTopicGroupList(): TopicGroupCreatorDto[] {

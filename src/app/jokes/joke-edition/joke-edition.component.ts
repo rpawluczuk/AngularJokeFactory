@@ -13,6 +13,7 @@ import {TopicItemDto} from '../../topics/models/topicItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 import {AuthorItemDto} from '../../authors/models/authorItemDto';
+import {TopicGroupEditionComponent} from './topic-group-edition/topic-group-edition.component';
 
 @Component({
   selector: 'app-joke-details',
@@ -20,8 +21,12 @@ import {AuthorItemDto} from '../../authors/models/authorItemDto';
   styleUrls: ['./joke-edition.component.css']
 })
 export class JokeEditionComponent implements OnInit {
+
   @ViewChild('jokeBlocksEditionPanelRef')
   jokeBlocksEditionPanelComponent: JokeBlocksEditionPanelComponent;
+
+  @ViewChild('topicGroupEditionRef')
+  topicGroupEditionComponent: TopicGroupEditionComponent;
 
   jokeCreator: JokeCreatorDto;
   jokeForm: FormGroup;
@@ -86,10 +91,11 @@ export class JokeEditionComponent implements OnInit {
 
   updateJoke() {
     const jokeBlockDtoList = this.jokeBlocksEditionPanelComponent.getJokeBlockDtoList();
-    const updatedJoke: JokeCreatorDto = this.jokeForm.value;
-    updatedJoke.id = this.jokeCreator.id;
-    updatedJoke.jokeBlockCreatorDtoList = jokeBlockDtoList ;
-    this.jokesService.updateJoke(updatedJoke).subscribe(() => {
+    const jokeCreator: JokeCreatorDto = this.jokeForm.value;
+    jokeCreator.topicGroupCreatorList = this.topicGroupEditionComponent.getTopicGroupList();
+    jokeCreator.id = this.jokeCreator.id;
+    jokeCreator.jokeBlockCreatorDtoList = jokeBlockDtoList ;
+    this.jokesService.updateJoke(jokeCreator).subscribe(() => {
       this.router.navigate(['/jokes']);
     });
   }

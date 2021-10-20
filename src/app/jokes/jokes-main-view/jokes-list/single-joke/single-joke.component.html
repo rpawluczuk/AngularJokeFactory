@@ -33,7 +33,8 @@
   <button class="btn btn-outline-danger mt-3" (click)="removeJoke(jokePresenter, $event)"> Delete</button>
   <div *ngIf="isDetailsButtonClicked" class="d-flex flex-column align-items-center p-4">
     <app-single-joke-details
-      [jokePresenter]="jokePresenter">
+      [jokePresenter]="jokePresenter"
+      class="col-11">
     </app-single-joke-details>
   </div>
   <div *ngIf="isRateButtonClicked" class="d-flex flex-column align-items-center p-4">

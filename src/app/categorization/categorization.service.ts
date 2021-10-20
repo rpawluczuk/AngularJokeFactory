@@ -22,6 +22,10 @@ export class CategorizationService {
     return this.http.get<CategorizationItemDto[]>(`${this.apiUrl}/item-list`);
   }
 
+  getSelectedCategorizationItemList(jokeId: number) {
+    return this.http.get<CategorizationItemDto[]>(`${this.apiUrl}/item-list/${jokeId}`);
+  }
+
   getCategorizationCreator(id: number): Observable<CategorizationCreatorDto> {
     return this.http.get<CategorizationCreatorDto>(`${this.apiUrl}/${id}`);
   }
