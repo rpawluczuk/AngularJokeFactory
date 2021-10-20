@@ -51,7 +51,7 @@ export class TopicEditionComponent implements OnInit {
     });
   }
 
-  onHandleBranchIndexRequest(branchIndex: number) {
+  onRemoveSomeRowsRequest(branchIndex: number) {
     if (branchIndex + 1 < this.topicCreatorRow.length) {
       this.topicCreatorRow.splice(branchIndex + 1);
     }

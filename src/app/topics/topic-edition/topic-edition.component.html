@@ -12,13 +12,13 @@
       <!--      children-->
       <div *ngFor="let topicCreatorChildrenWithParent of topicCreatorRow; let index = index">
         <hr>
-        <app-topic-child-creator-branch
+        <app-topic-child-creator-row
           [topicCreatorChildrenWithParent]="topicCreatorChildrenWithParent"
-          [index]="index"
+          [parentIndex]="index"
           (setAsMainRequest)="onSetAsMainRequest($event)"
           (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)"
-          (handleBranchIndex)="onHandleBranchIndexRequest($event)">
-        </app-topic-child-creator-branch>
+          (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)">
+        </app-topic-child-creator-row>
       </div>
     </div>
   </div>

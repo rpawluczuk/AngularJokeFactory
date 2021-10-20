@@ -2,7 +2,8 @@ export class CategorizationPresenterDto {
 
   id: number;
   name: string;
-  baseCategory: string;
+  connectingCategory: string;
   questions: string;
-  linkedCategory: string;
+  ostensibleCategory: string;
+  comedyCategory: string;
 }

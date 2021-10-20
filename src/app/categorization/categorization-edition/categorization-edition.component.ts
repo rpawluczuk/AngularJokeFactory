@@ -33,9 +33,10 @@ export class CategorizationEditionComponent implements OnInit {
     return this.formBuilder.group({
       id: [this.categorizationCreator?.id],
       name: [this.categorizationCreator?.name, Validators.required],
-      baseCategory: [this.categorizationCreator?.baseCategory],
+      connectingCategory: [this.categorizationCreator?.connectingCategory],
       questions: [this.categorizationCreator?.questions],
-      linkedCategory: [this.categorizationCreator?.linkedCategory]
+      ostensibleCategory: [this.categorizationCreator?.ostensibleCategory],
+      comedyCategory: [this.categorizationCreator?.comedyCategory]
     });
   }
 

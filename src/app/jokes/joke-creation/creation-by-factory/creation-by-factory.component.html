@@ -1,93 +1,95 @@
-<div class="data-container">
-  <form [formGroup]="jokeForm">
-    <div class="d-flex flex-row">
-      <!--    Left column-->
-      <div class="d-flex flex-column col-6 p-4">
-        <div class="row form-group">
-          <label>Title</label>
-          <input formControlName="title" type="text" class="form-control" placeholder="title">
-          <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is
-            required!</p>
-        </div>
-        <div class="row form-group">
-          <label>Content</label>
-          <textarea formControlName="content" type="text" placeholder="content" class="form-control"
-                    rows="6"></textarea>
-          <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
-            This field must contain more than 3 characters!</p>
-        </div>
-        <div>
-          <label class="row">Structure</label>
-          <ng-multiselect-dropdown class="row mb-2"
-                                   formControlName="structureItemList"
-                                   [placeholder]="'custom placeholder'"
-                                   [settings]="dropdownSettings"
-                                   [data]="getDropdownList(structureItemList)"
-                                   (onSelect)="onStructureSelectOrDeselect($event)"
-                                   (onDeSelect)="onStructureSelectOrDeselect($event)">
-          </ng-multiselect-dropdown>
-        </div>
-        <div class="row form-group">
-          <label>Author</label>
-          <select class="form-control" formControlName="author" data-toggle="tooltip"
-                  data-placement="right" title="Select Author Branch">
-            <option value="null">--Select Author--</option>
-            <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem">
-              {{authorItem.text}}
-            </option>
-          </select>
-        </div>
-        <div class="row form-group">
-          <label>Connecting Topic</label>
-          <select class="form-control" formControlName="connectingTopic" data-toggle="tooltip"
-                  data-placement="right" title="Select Topic Branch">
-            <option value="null">--Select Topic--</option>
-            <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
-              {{ connectingTopic.text }}
-            </option>
-          </select>
-        </div>
-        <div class="row form-group">
-          <label>Ostensible Topic</label>
-          <select class="form-control" formControlName="ostensibleTopic" data-toggle="tooltip"
-                  data-placement="right" title="Select Ostensible Topic Branch">
-            <option value="null">--Select Ostensible Topic--</option>
-            <option *ngFor="let ostensibleTopic of topicItemList" [ngValue]="ostensibleTopic">
-              {{ ostensibleTopic.text }}
-            </option>
-          </select>
-        </div>
-        <div class="row form-group">
-          <label>Comedy Topic</label>
-          <select class="form-control" formControlName="comedyTopic" data-toggle="tooltip"
-                  data-placement="right" title="Select Comedy Topic Branch">
-            <option value="null">--Select Comedy Topic--</option>
-            <option *ngFor="let comedyTopic of topicItemList" [ngValue]="comedyTopic">
-              {{ comedyTopic.text }}
-            </option>
-          </select>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"
-                    class="btn btn-success float-right mx-2">Add Joke
-            </button>
-            <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
-            <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
-          </div>
-        </div>
+<form [formGroup]="jokeForm" class="ml-4">
+  <!--    Upper part-->
+  <app-topic-group-creator
+    #topicGroupCreatorRef>
+  </app-topic-group-creator>
+  <div class="d-flex flex-row">
+    <!--    Left column-->
+    <div class="d-flex flex-column col-6 p-4">
+      <div class="row form-group">
+        <label>Title</label>
+        <input formControlName="title" type="text" class="form-control" placeholder="title">
+        <p *ngIf="!jokeForm.get('title').valid && jokeForm.get('title').dirty" class="error">This field is
+          required!</p>
       </div>
-      <!--    Right column-->
-      <div class="col-6 p-4">
-        <app-structure-panel
-          #structurePanelRef
-          [structureItem]="structureItemDto">
-        </app-structure-panel>
+      <div class="row form-group">
+        <label>Content</label>
+        <textarea formControlName="content" type="text" placeholder="content" class="form-control"
+                  rows="6"></textarea>
+        <p *ngIf="!jokeForm.get('content').valid && jokeForm.get('content').dirty" class="error">
+          This field must contain more than 3 characters!</p>
+      </div>
+      <div>
+        <label class="row">Structure</label>
+        <ng-multiselect-dropdown class="row mb-2"
+                                 formControlName="structureItemList"
+                                 [placeholder]="'custom placeholder'"
+                                 [settings]="dropdownSettings"
+                                 [data]="getDropdownList(structureItemList)"
+                                 (onSelect)="onStructureSelectOrDeselect($event)"
+                                 (onDeSelect)="onStructureSelectOrDeselect($event)">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="row form-group">
+        <label>Author</label>
+        <select class="form-control" formControlName="author" data-toggle="tooltip"
+                data-placement="right" title="Select Author Branch">
+          <option value="null">--Select Author--</option>
+          <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem">
+            {{authorItem.text}}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group">
+        <label>Connecting Topic</label>
+        <select class="form-control" formControlName="connectingTopic" data-toggle="tooltip"
+                data-placement="right" title="Select Topic Branch">
+          <option value="null">--Select Topic--</option>
+          <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
+            {{ connectingTopic.text }}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group">
+        <label>Ostensible Topic</label>
+        <select class="form-control" formControlName="ostensibleTopic" data-toggle="tooltip"
+                data-placement="right" title="Select Ostensible Topic Branch">
+          <option value="null">--Select Ostensible Topic--</option>
+          <option *ngFor="let ostensibleTopic of topicItemList" [ngValue]="ostensibleTopic">
+            {{ ostensibleTopic.text }}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group">
+        <label>Comedy Topic</label>
+        <select class="form-control" formControlName="comedyTopic" data-toggle="tooltip"
+                data-placement="right" title="Select Comedy Topic Branch">
+          <option value="null">--Select Comedy Topic--</option>
+          <option *ngFor="let comedyTopic of topicItemList" [ngValue]="comedyTopic">
+            {{ comedyTopic.text }}
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"
+                  class="btn btn-success float-right mx-2">Add Joke
+          </button>
+          <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
+          <button (click)="jokeForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
+        </div>
       </div>
     </div>
-  </form>
+    <!--    Right column-->
+    <div class="col-6 p-4">
+      <app-structure-panel
+        #structurePanelRef
+        [structureItem]="structureItem">
+      </app-structure-panel>
+    </div>
+  </div>
+</form>
 
-  <!--  <pre> {{ jokeForm.value | json }} </pre>-->
-  <!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
-  <!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->
-</div>
+<!--  <pre> {{ jokeForm.value | json }} </pre>-->
+<!--  <pre> walidacja title: {{ jokeForm.get('title').valid | json }} </pre>-->
+<!--  <pre> walidacja contentu: {{ jokeForm.get('content').valid | json }} </pre>-->

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {JokePresenterDto} from '../../../models/jokePresenterDto';
-import {JokesService} from "../../../jokes.service";
+import {JokesService} from '../../../jokes.service';
 
 @Component({
   selector: 'app-single-joke',

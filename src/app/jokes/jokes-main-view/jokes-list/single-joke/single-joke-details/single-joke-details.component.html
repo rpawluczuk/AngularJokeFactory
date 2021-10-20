@@ -1,4 +1,9 @@
 <div class="d-flex flex-column align-items-center">
+  <div *ngFor="let topicGroupPresenter of topicGroupPresenterList; let i = index" class="card">
+    <div class="card-body">
+      <h5 class="card-title"> {{ topicGroupPresenter?.categorizationPresenter?.name }} </h5>
+    </div>
+  </div>
   <ngb-pagination
     [(page)]="currentStructureIndex"
     [pageSize]="1"

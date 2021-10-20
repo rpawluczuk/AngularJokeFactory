@@ -34,10 +34,13 @@ import { TopicChildCreatorRowComponent } from './topic-edition/topic-child-creat
         ReactiveFormsModule,
         FontAwesomeModule,
     ],
-  exports: [
-    TopicCreationComponent,
-    TopicListComponent
-  ],
+    exports: [
+        TopicCreationComponent,
+        TopicListComponent,
+        TopicBlockComponent,
+        TopicChildCreatorRowComponent,
+        ChildTopicBlockCreatorComponent
+    ],
   providers: [
     TopicResolveService
   ]

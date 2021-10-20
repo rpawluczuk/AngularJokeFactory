@@ -5,16 +5,26 @@ import {TopicCreatorChildrenWithParentId} from '../../models/topicCreatorChildre
 import {TopicService} from '../../topic.service';
 
 @Component({
-  selector: 'app-topic-child-creator-branch',
+  selector: 'app-topic-child-creator-row',
   templateUrl: './topic-child-creator-row.component.html',
   styleUrls: ['./topic-child-creator-row.component.css']
 })
 export class TopicChildCreatorRowComponent implements OnInit {
-  @Input() topicCreatorChildrenWithParent: TopicCreatorChildrenWithParentId;
-  @Input() index: number;
-  @Output() setAsMainRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
-  @Output() showChildrenOfChildRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
-  @Output() handleBranchIndex: EventEmitter<number> = new EventEmitter<number>();
+
+  @Input()
+  topicCreatorChildrenWithParent: TopicCreatorChildrenWithParentId;
+
+  @Input()
+  parentIndex: number;
+
+  @Output()
+  setAsMainRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
+
+  @Output()
+  showChildrenOfChildRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
+
+  @Output()
+  removeSomeRowsRequest: EventEmitter<number> = new EventEmitter<number>();
 
   isChildTopicCreationDemanded = false;
   chosenTopicCreatorChildId: number;
@@ -28,7 +38,7 @@ export class TopicChildCreatorRowComponent implements OnInit {
 
   onRemoveTopicRelationRequest(topicCreatorChild: TopicCreatorChildDto) {
     this.topicService.removeTopicRelation(topicCreatorChild.parentId, topicCreatorChild?.id).subscribe(() => {
-      this.reloadTopicCreatorChildren();
+      this.reloadChildrenOfTopicCreator();
     });
   }
 
@@ -38,20 +48,20 @@ export class TopicChildCreatorRowComponent implements OnInit {
 
   onshowChildrenOfChildRequest(topicCreatorChildDto: TopicCreatorChildDto) {
     this.chosenTopicCreatorChildId = topicCreatorChildDto.id;
-    this.handleBranchIndex.emit(this.index);
+    this.removeSomeRowsRequest.emit(this.parentIndex);
     this.showChildrenOfChildRequest.emit(topicCreatorChildDto);
   }
 
-  onAddChildTopicDemand() {
+  onShowTopicCreationFormRequest() {
     this.isChildTopicCreationDemanded = true;
   }
 
   onChildTopicCreationRequest(isChildTopicCreationDemanded: boolean) {
     this.isChildTopicCreationDemanded = isChildTopicCreationDemanded;
-    this.reloadTopicCreatorChildren();
+    this.reloadChildrenOfTopicCreator();
   }
 
-  reloadTopicCreatorChildren(){
+  reloadChildrenOfTopicCreator() {
     this.topicService.getTopicCreatorChildList(this.topicCreatorChildrenWithParent.parentId).subscribe(topicCreatorChildren => {
       this.topicCreatorChildrenWithParent.topicCreatorChildren = topicCreatorChildren;
     });

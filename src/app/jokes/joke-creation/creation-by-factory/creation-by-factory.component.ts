@@ -13,6 +13,7 @@ import {TopicService} from '../../../topics/topic.service';
 import {StructureBlocksService} from '../../../blocks/structure-blocks/structure-blocks.service';
 import {Router} from '@angular/router';
 import {JokeCreatorDto} from '../../models/jokeCreatorDto';
+import {TopicGroupCreatorComponent} from '../../../topic-group/topic-group-creator/topic-group-creator.component';
 
 @Component({
   selector: 'app-creation-by-factory',
@@ -24,12 +25,15 @@ export class CreationByFactoryComponent implements OnInit {
   @ViewChild('structurePanelRef')
   structurePanelComponent: StructurePanelComponent;
 
+  @ViewChild('topicGroupCreatorRef')
+  topicGroupCreatorComponent: TopicGroupCreatorComponent;
+
   jokes: Joke[];
   authorItemList: AuthorItemDto[];
   topicItemList: TopicItemDto[];
   structureItemList: StructureItemDto[] = [];
   jokeForm: FormGroup;
-  structureItemDto: StructureItemDto;
+  structureItem: StructureItemDto;
 
   dropdownSettings = {};
 
@@ -44,8 +48,8 @@ export class CreationByFactoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadStructures();
-    this.loadAuthors();
+    this.loadStructureItemList();
+    this.loadAuthorItemList();
     this.loadTopicItemList();
     this.jokeForm = this.buildJokeForm();
     this.dropdownSettings = {
@@ -58,13 +62,13 @@ export class CreationByFactoryComponent implements OnInit {
     };
   }
 
-  loadStructures(): void {
+  loadStructureItemList(): void {
     this.structuresService.getStructureItemList().subscribe((structures) => {
       this.structureItemList = structures;
     });
   }
 
-  loadAuthors(): void {
+  loadAuthorItemList(): void {
     this.authorsService.getAuthorItemList().subscribe((authorItemList) => {
       this.authorItemList = authorItemList;
     });
@@ -77,8 +81,8 @@ export class CreationByFactoryComponent implements OnInit {
   }
 
   onStructureSelectOrDeselect(selectedField: any) {
-    const structureItemDto = this.structureItemList.find(s => s.id === selectedField.id);
-    this.structureItemDto = new StructureItemDto(structureItemDto.id, structureItemDto.text);
+    const structureItem = this.structureItemList.find(s => s.id === selectedField.id);
+    this.structureItem = new StructureItemDto(structureItem.id, structureItem.text);
   }
 
   buildJokeForm() {
@@ -96,7 +100,9 @@ export class CreationByFactoryComponent implements OnInit {
   addJoke() {
     const jokeBlockCreatorList = this.structurePanelComponent.getJokeBlockCreatorList();
     const jokeCreator: JokeCreatorDto = this.jokeForm.value;
+    jokeCreator.topicGroupCreatorList = this.topicGroupCreatorComponent.getTopicGroupList();
     jokeCreator.jokeBlockCreatorDtoList = jokeBlockCreatorList;
+    console.log(jokeCreator);
     this.jokesService.addJoke(jokeCreator).subscribe(() => {
       this.router.navigate(['/jokes']);
     });
@@ -106,10 +112,10 @@ export class CreationByFactoryComponent implements OnInit {
     this.router.navigate(['/jokes']);
   }
 
-  getDropdownList(allStructures: StructureItemDto[]): Array<any> {
+  getDropdownList(structureItemList: StructureItemDto[]): Array<any> {
     const dropdownList = [];
-    for (const structure of allStructures) {
-      dropdownList.push({id: structure.id, text: structure.text});
+    for (const structureItem of structureItemList) {
+      dropdownList.push({id: structureItem.id, text: structureItem.text});
     }
     return dropdownList;
   }

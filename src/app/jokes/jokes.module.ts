@@ -21,9 +21,10 @@ import {StructurePanelComponent} from './joke-creation/creation-by-factory/struc
 import {JokeBlocksEditionPanelComponent} from './joke-edition/joke-blocks-edition-panel/joke-blocks-edition-panel.component';
 import {SingleJokeDetailsComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-details/single-joke-details.component';
 import {SingleJokeRatingPanelComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-rating-panel/single-joke-rating-panel.component';
-import { SingleJokeAssignedRateComponent } from './jokes-main-view/jokes-list/single-joke/single-joke-assigned-rate/single-joke-assigned-rate.component';
-import { CreationByFactoryComponent } from './joke-creation/creation-by-factory/creation-by-factory.component';
-import { FastCreationComponent } from './joke-creation/fast-creation/fast-creation.component';
+import {SingleJokeAssignedRateComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-assigned-rate/single-joke-assigned-rate.component';
+import {CreationByFactoryComponent} from './joke-creation/creation-by-factory/creation-by-factory.component';
+import {FastCreationComponent} from './joke-creation/fast-creation/fast-creation.component';
+import {TopicGroupModule} from '../topic-group/topic-group.module';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { FastCreationComponent } from './joke-creation/fast-creation/fast-creati
     NgbModule,
     StructuresModule,
     FontAwesomeModule,
+    TopicGroupModule
   ],
   exports: [
     JokeCreationComponent,

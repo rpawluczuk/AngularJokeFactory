@@ -1,15 +1,16 @@
 <div class="d-flex flex-row flex-wrap">
   <div *ngFor="let topicCreatorChild of topicCreatorChildrenWithParent?.topicCreatorChildren">
-    <app-connected-topic-block
+    <app-connected-joke-topic-block
       [topicCreatorChild]="topicCreatorChild"
       [chosenTopicCreatorChildId]="chosenTopicCreatorChildId"
-      (removeTopicRelationRequest)="onRemoveTopicRelationRequest($event)"
-      (setAsMainRequest)="onSetAsMainRequest($event)"
-      (showChildrenOfChildRequest)="onshowChildrenOfChildRequest($event)">
-    </app-connected-topic-block>
+      (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
+      (setAsConnectingTopicRequest)="onSetAsConnectingTopicRequest($event)"
+      (setAsOstensibleTopicRequest)="onSetAsOstensibleTopicRequest($event)"
+      (setAsComedyTopicRequest)="onSetAsComedyTopicRequest($event)">
+    </app-connected-joke-topic-block>
   </div>
   <div *ngIf="!isChildTopicCreationDemanded; else childTopicBlockCreator"
-       class="topicBlock m-3 d-flex flex-column align-items-center justify-content-center">
+       class="jokeTopicBlock m-3 d-flex flex-column align-items-center justify-content-center">
     <fa-icon [icon]="faPlus" size="4x" (click)="onShowTopicCreationFormRequest()"></fa-icon>
   </div>
 </div>

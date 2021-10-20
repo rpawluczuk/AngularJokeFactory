@@ -1,0 +1,15 @@
+.categorySection{
+  width: 180px;
+  height: 180px;
+  background: blanchedalmond;
+  border-style: dashed;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.topicSection{
+  width: 140px;
+  height: 110px;
+  background: #d4ffc0;
+  border-style: solid;
+}

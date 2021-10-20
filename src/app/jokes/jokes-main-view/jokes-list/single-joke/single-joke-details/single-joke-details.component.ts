@@ -5,6 +5,8 @@ import {JokeBlocksService} from '../../../../../blocks/joke-blocks/joke-blocks.s
 import {StructureItemDto} from '../../../../../structures/models/structureItemDto';
 import {JokeBlockPresenterDto} from '../../../../../blocks/joke-blocks/models/jokeBlockPresenterDto';
 import {faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
+import {TopicGroupService} from '../../../../../topic-group/topic-group.service';
+import {TopicGroupPresenterDto} from '../../../../../topic-group/models/TopicGroupPresenterDto';
 
 @Component({
   selector: 'app-single-joke-details',
@@ -16,16 +18,20 @@ export class SingleJokeDetailsComponent implements OnInit {
 
   faLongArrowAltDown = faLongArrowAltDown;
 
+  topicGroupPresenterList: TopicGroupPresenterDto[];
+
   structureItemList: StructureItemDto[] = [];
   currentStructureItem: StructureItemDto;
   jokeBlockPresenterList: JokeBlockPresenterDto[] = [];
   currentStructureIndex = 1;
 
   constructor(private structuresService: StructuresService,
-              private jokeBlocksService: JokeBlocksService) {
+              private jokeBlocksService: JokeBlocksService,
+              private topicGroupService: TopicGroupService) {
   }
 
   ngOnInit(): void {
+    this.loadTopicGroups();
     this.loadBlocksOfTheJoke();
     this.loadStructuresOfTheJoke();
   }
@@ -42,6 +48,13 @@ export class SingleJokeDetailsComponent implements OnInit {
   loadBlocksOfTheJoke(): void {
     this.jokeBlocksService.getJokeBlockPresenterList(this.jokePresenter?.id).subscribe((jokeBlocks) => {
       this.jokeBlockPresenterList = jokeBlocks;
+    });
+  }
+
+  loadTopicGroups(): void {
+    this.topicGroupService.getTopicGroupPresenterList(this.jokePresenter?.id).subscribe(topicGroupPresenterList => {
+      this.topicGroupPresenterList = topicGroupPresenterList;
+      console.log(this.topicGroupPresenterList);
     });
   }
 

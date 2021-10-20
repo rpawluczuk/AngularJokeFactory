@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {faWindowClose, faCrosshairs, faAngleDoubleDown, faGripHorizontal} from '@fortawesome/free-solid-svg-icons';
+import {faWindowClose, faSortAmountUpAlt, faGripHorizontal} from '@fortawesome/free-solid-svg-icons';
 import {TopicCreatorChildDto} from '../../../models/topicCreatorChildDto';
 
 
@@ -16,7 +16,7 @@ export class ConnectedTopicBlockComponent implements OnInit {
   @Output() showChildrenOfChildRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
 
   faWindowClose = faWindowClose;
-  faCrosshairs = faCrosshairs;
+  faSortAmountUpAlt = faSortAmountUpAlt;
   faGripHorizontal = faGripHorizontal;
 
   constructor() {

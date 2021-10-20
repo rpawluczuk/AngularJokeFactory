@@ -1,10 +1,11 @@
-import {TopicItemDto} from '../../topics/models/topicItemDto';
+import {TopicCreatorDto} from '../../topics/models/topicCreatorDto';
 
 export class CategorizationCreatorDto {
 
   id: number;
   name: string;
-  baseCategory: TopicItemDto;
+  connectingCategory: TopicCreatorDto;
   questions: string;
-  linkedCategory: TopicItemDto;
+  ostensibleCategory: TopicCreatorDto;
+  comedyCategory: TopicCreatorDto;
 }

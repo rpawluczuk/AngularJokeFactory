@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {CategorizationCreatorDto} from './models/CategorizationCreatorDto';
 import {HttpClient} from '@angular/common/http';
 import {CategorizationPresenterDto} from './models/CategorizationPresenterDto';
+import {CategorizationItemDto} from './models/CategorizationItemDto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class CategorizationService {
 
   getCategorizationPresenterList(): Observable<CategorizationPresenterDto[]> {
     return this.http.get<CategorizationPresenterDto[]>(`${this.apiUrl}/presenter-list`);
+  }
+
+  getCategorizationItemList() {
+    return this.http.get<CategorizationItemDto[]>(`${this.apiUrl}/item-list`);
   }
 
   getCategorizationCreator(id: number): Observable<CategorizationCreatorDto> {
