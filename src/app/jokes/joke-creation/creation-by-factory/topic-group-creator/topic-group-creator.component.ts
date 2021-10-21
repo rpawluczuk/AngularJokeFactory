@@ -65,8 +65,13 @@ export class TopicGroupCreatorComponent implements OnInit {
 
 
   onTopicGroupClick(topicGroupCreator: TopicGroupCreatorDto) {
-    this.selectedTopicGroupCreator = topicGroupCreator;
+    if (topicGroupCreator !== this.selectedTopicGroupCreator) {
+      this.selectedTopicGroupCreator = topicGroupCreator;
+    } else {
+      this.selectedTopicGroupCreator = null;
+    }
     const topicCreator = topicGroupCreator?.categorizationCreator?.connectingCategory;
+    this.topicCreatorRow = [];
     this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreator.children, topicCreator.id));
   }
 

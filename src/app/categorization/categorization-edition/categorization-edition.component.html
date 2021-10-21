@@ -12,7 +12,7 @@
         <label>Connecting Category</label>
         <select class="form-control" formControlName="connectingCategory">
           <option *ngIf="categorizationCreator?.connectingCategory!==null"
-                  [ngValue]="categorizationCreator?.connectingCategory"> {{ categorizationCreator?.connectingCategory?.text }} </option>
+                  [ngValue]="categorizationCreator?.connectingCategory"> {{ categorizationCreator?.connectingCategory?.name }} </option>
           <option *ngIf="categorizationCreator?.connectingCategory===null"
                   [ngValue]="categorizationCreator?.connectingCategory">--Select Connecting Category--</option>
           <option *ngFor="let connectingCategory of topicItemList" [ngValue]="connectingCategory">
@@ -29,7 +29,7 @@
         <label>Ostensible Category</label>
         <select class="form-control" formControlName="ostensibleCategory">
           <option *ngIf="categorizationCreator?.ostensibleCategory!==null"
-                  [ngValue]="categorizationCreator?.ostensibleCategory"> {{ categorizationCreator?.ostensibleCategory?.text }} </option>
+                  [ngValue]="categorizationCreator?.ostensibleCategory"> {{ categorizationCreator?.ostensibleCategory?.name }} </option>
           <option *ngIf="categorizationCreator?.ostensibleCategory===null"
                   [ngValue]="categorizationCreator?.ostensibleCategory">--Select Ostensible Category--</option>
           <option *ngFor="let ostensibleCategory of topicItemList" [ngValue]="ostensibleCategory">
@@ -41,7 +41,7 @@
         <label>Comedy Category</label>
         <select class="form-control" formControlName="comedyCategory">
           <option *ngIf="categorizationCreator?.comedyCategory!==null"
-                  [ngValue]="categorizationCreator?.comedyCategory"> {{ categorizationCreator?.comedyCategory?.text }} </option>
+                  [ngValue]="categorizationCreator?.comedyCategory"> {{ categorizationCreator?.comedyCategory?.name }} </option>
           <option *ngIf="categorizationCreator?.comedyCategory===null"
                   [ngValue]="categorizationCreator?.comedyCategory">--Select Comedy Category--</option>
           <option *ngFor="let comedyCategory of topicItemList" [ngValue]="comedyCategory">

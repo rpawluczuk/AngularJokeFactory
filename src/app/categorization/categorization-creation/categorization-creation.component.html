@@ -9,11 +9,11 @@
           required!</p>
       </div>
       <div class="row form-group">
-        <label>Base Category</label>
-        <select class="form-control" formControlName="baseCategory">
-          <option value="null">--Select Base Category--</option>
-          <option *ngFor="let baseCategory of topicItemList" [ngValue]="baseCategory">
-            {{ baseCategory.text }}
+        <label>Connecting Category</label>
+        <select class="form-control" formControlName="connectingCategory">
+          <option value="null">--Select Connecting Category--</option>
+          <option *ngFor="let connectingCategory of topicItemList" [ngValue]="connectingCategory">
+            {{ connectingCategory.text }}
           </option>
         </select>
       </div>
@@ -23,11 +23,20 @@
                   rows="6"></textarea>
       </div>
       <div class="row form-group">
-        <label>Linked Category</label>
-        <select class="form-control" formControlName="linkedCategory">
-          <option value="null">--Select Linked Category--</option>
-          <option *ngFor="let linkedCategory of topicItemList" [ngValue]="linkedCategory">
-            {{ linkedCategory.text }}
+        <label>Ostensible Category</label>
+        <select class="form-control" formControlName="ostensibleCategory">
+          <option value="null">--Select Ostensible Category--</option>
+          <option *ngFor="let ostensibleCategory of topicItemList" [ngValue]="ostensibleCategory">
+            {{ ostensibleCategory.text }}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group">
+        <label>Comedy Category</label>
+        <select class="form-control" formControlName="comedyCategory">
+          <option value="null">--Select Comedy Category--</option>
+          <option *ngFor="let comedyCategory of topicItemList" [ngValue]="comedyCategory">
+            {{ comedyCategory.text }}
           </option>
         </select>
       </div>

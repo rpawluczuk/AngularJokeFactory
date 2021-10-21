@@ -21,6 +21,7 @@ export class SingleJokeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.jokePresenter);
     this.isDetailsButtonClicked = false;
   }
 

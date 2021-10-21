@@ -6,7 +6,8 @@ export interface JokePresenterDto {
   title: string;
   content: string;
   rate: number;
-  structures: Structure[];
+  structurePresenterList: Structure[];
+  categorizationList: string[];
   jokeBlocks: JokeBlock[];
   author: string;
   connectingTopic: string;

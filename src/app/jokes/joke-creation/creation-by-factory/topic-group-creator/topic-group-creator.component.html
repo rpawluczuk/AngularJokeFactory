@@ -24,7 +24,7 @@
 
   <!--  topic selection panel-->
   <!--    main-->
-  <div *ngIf="selectedTopicGroupCreator !== undefined">
+  <div *ngIf="selectedTopicGroupCreator !== undefined && selectedTopicGroupCreator !== null">
     <app-connecting-category-block
       [topicCreator]="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory">
     </app-connecting-category-block>

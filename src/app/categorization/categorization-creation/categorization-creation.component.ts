@@ -29,9 +29,10 @@ export class CategorizationCreationComponent implements OnInit {
   private buildCategorizationForm() {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      baseCategory: [null],
+      connectingCategory: [null],
       questions: [null],
-      linkedCategory: [null]
+      ostensibleCategory: [null],
+      comedyCategory: [null]
     });
   }
 

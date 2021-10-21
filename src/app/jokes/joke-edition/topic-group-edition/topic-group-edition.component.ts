@@ -21,7 +21,7 @@ export class TopicGroupEditionComponent implements OnInit {
   categorizationItemList: CategorizationItemDto[] = [];
   selectedCategorizationItemList: CategorizationItemDto[] = [];
   topicGroupCreatorList: TopicGroupCreatorDto[] = [];
-  selectedTopicGroupCreator: TopicGroupCreatorDto = null;
+  selectedTopicGroupCreator: TopicGroupCreatorDto;
   topicCreatorRow: TopicCreatorChildrenWithParentId[] = [];
 
   dropdownSettings = {};
@@ -84,10 +84,14 @@ export class TopicGroupEditionComponent implements OnInit {
   }
 
   onTopicGroupClick(topicGroupCreator: TopicGroupCreatorDto) {
-    this.selectedTopicGroupCreator = topicGroupCreator;
-    const topicCreator = topicGroupCreator?.categorizationCreator?.connectingCategory;
-    this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreator?.children, topicCreator?.id));
-    console.log(this.topicCreatorRow);
+    this.topicCreatorRow = [];
+    if (topicGroupCreator !== this.selectedTopicGroupCreator) {
+      this.selectedTopicGroupCreator = topicGroupCreator;
+      const topicCreator = topicGroupCreator?.categorizationCreator?.connectingCategory;
+      this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreator?.children, topicCreator?.id));
+    } else {
+      this.selectedTopicGroupCreator = null;
+    }
   }
 
   onShowChildrenOfChildRequest(topicCreatorChild: TopicCreatorChildDto) {

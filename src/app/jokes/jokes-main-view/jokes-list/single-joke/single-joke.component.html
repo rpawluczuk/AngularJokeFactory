@@ -11,7 +11,7 @@
     <span class="d-inline-block mr-1"> Structures:</span>
     <span class="d-inline-block mr-1 badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top"
           title="{{structure?.description}}"
-          *ngFor="let structure of jokePresenter.structures">
+          *ngFor="let structure of jokePresenter.structurePresenterList">
           {{ structure?.name }}
           </span>
   </div>
@@ -26,7 +26,15 @@
     <span class="d-inline-block mr-4 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top">
           {{ jokePresenter?.comedyTopic }} </span>
   </div>
-  <div class="text-muted"> Creation Date:: {{ jokePresenter?.dateCreated | date:'short' }} </div>
+  <div>
+    <span class="d-inline-block mr-1"> Categorizations:</span>
+    <span class="d-inline-block mr-1 badge badge-success badge-pill" data-toggle="tooltip" data-placement="top"
+          title="{{categorization}}"
+          *ngFor="let categorization of jokePresenter.categorizationList">
+          {{ categorization }}
+          </span>
+  </div>
+  <div class="text-muted"> Creation Date: {{ jokePresenter?.dateCreated | date:'short' }} </div>
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="goToJokeEdition()">Edit</button>
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeDetails()">Details</button>
   <button class="btn btn-outline-primary mt-3 mr-3" (click)="showJokeRate()">Rate</button>
