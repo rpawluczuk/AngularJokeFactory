@@ -54,7 +54,6 @@ export class CategorizationEditionComponent implements OnInit {
 
   private loadCategorizationCreator() {
     this.categorizationCreator = this.route.snapshot.data.categorization;
-    console.log(this.route.snapshot.data.categorization);
   }
 
   onCancel() {

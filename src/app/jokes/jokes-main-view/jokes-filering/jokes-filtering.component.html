@@ -8,9 +8,9 @@
   <div class="collapse" id="collapseFilters">
     <div class="card card-body mt-3">
       <div class="row form-group justify-content-center">
-        <label class="col-md-2 col-form-label">Filter By Author:</label>
+        <label class="col-md-3 col-form-label">Filter By Author:</label>
         <select [ngModel]="authorFilter" (ngModelChange)="setAuthorQuery($event)"
-                class="col-md-10" name="authorFilter">
+                class="col-md-9" name="authorFilter">
           <option value="All">All</option>
           <option *ngFor="let authorItem of authorItemList" [ngValue]="authorItem.id">
             {{authorItem.text}}
@@ -18,12 +18,22 @@
         </select>
       </div>
       <div class="row form-group justify-content-center">
-        <label class="col-md-2 col-form-label">Filter By Structure:</label>
+        <label class="col-md-3 col-form-label">Filter By Structure:</label>
         <select [ngModel]="structureFilter" (ngModelChange)="setStructureQuery($event)"
-                class="col-md-10" name="authorFilter">
+                class="col-md-9" name="structureFilter">
           <option value="All">All</option>
           <option *ngFor="let structureItem of structureItemList" [ngValue]="structureItem.id">
             {{structureItem.text}}
+          </option>
+        </select>
+      </div>
+      <div class="row form-group justify-content-center">
+        <label class="col-md-3 col-form-label">Filter By Categorization:</label>
+        <select [ngModel]="categorizationFilter" (ngModelChange)="setCategorizationQuery($event)"
+                class="col-md-9" name="categorizationFilter">
+          <option value="All">All</option>
+          <option *ngFor="let categorizationItem of categorizationItemList" [ngValue]="categorizationItem.id">
+            {{categorizationItem.text}}
           </option>
         </select>
       </div>

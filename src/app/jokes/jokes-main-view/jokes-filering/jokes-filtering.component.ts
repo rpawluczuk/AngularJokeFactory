@@ -1,10 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {StructuresService} from '../../../structures/structures.service';
 import {AuthorsService} from '../../../authors/authors.service';
-import {TopicService} from '../../../topics/topic.service';
-import {TopicPresenterDto} from '../../../topics/models/topicPresenterDto';
 import {StructureItemDto} from '../../../structures/models/structureItemDto';
 import {AuthorItemDto} from '../../../authors/models/authorItemDto';
+import {CategorizationService} from '../../../categorization/categorization.service';
+import {CategorizationItemDto} from '../../../categorization/models/CategorizationItemDto';
 
 @Component({
   selector: 'app-jokes-filtering',
@@ -15,25 +15,28 @@ export class JokesFilteringComponent implements OnInit {
   @Output() finalQuery: EventEmitter<string> = new EventEmitter<string>();
 
   authorItemList: AuthorItemDto[];
-  topicPresenterList: TopicPresenterDto[];
   structureItemList: StructureItemDto[] = [];
+  categorizationItemList: CategorizationItemDto[] = [];
 
   authorQuery: string;
   structureQuery: string;
+  categorizationQuery: string;
   authorFilter;
   structureFilter;
+  categorizationFilter;
 
   constructor(private structuresService: StructuresService,
               private authorsService: AuthorsService,
-              private topicService: TopicService) {
+              private categorizationService: CategorizationService) {
   }
 
   ngOnInit(): void {
     this.loadStructures();
     this.loadAuthors();
-    this.loadTopicPresenterList();
+    this.loadCategorizationItemList();
     this.authorQuery = '';
     this.structureQuery = '';
+    this.categorizationQuery = '';
   }
 
   loadStructures(): void {
@@ -48,9 +51,9 @@ export class JokesFilteringComponent implements OnInit {
     });
   }
 
-  loadTopicPresenterList(): void {
-    this.topicService.getTopicPresenterList().subscribe((topicPresenterList) => {
-      this.topicPresenterList = topicPresenterList;
+  private loadCategorizationItemList() {
+    this.categorizationService.getCategorizationItemList().subscribe((categorizationItemList) => {
+      this.categorizationItemList = categorizationItemList;
     });
   }
 
@@ -72,7 +75,16 @@ export class JokesFilteringComponent implements OnInit {
     this.createQuery();
   }
 
+  setCategorizationQuery(categorizationFilter) {
+    if (categorizationFilter === 'All') {
+      this.categorizationQuery = '';
+    } else {
+      this.categorizationQuery = `&categorization=${categorizationFilter}`;
+    }
+    this.createQuery();
+  }
+
   createQuery() {
-    this.finalQuery.emit(this.authorQuery + this.structureQuery);
+    this.finalQuery.emit(this.authorQuery + this.structureQuery + this.categorizationQuery);
   }
 }

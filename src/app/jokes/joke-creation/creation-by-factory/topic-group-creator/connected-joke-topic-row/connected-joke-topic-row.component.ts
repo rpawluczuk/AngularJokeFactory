@@ -52,6 +52,12 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
     this.isChildTopicCreationDemanded = true;
   }
 
+  onRemoveTopicRelationRequest(topicCreatorChild: TopicCreatorChildDto) {
+    this.topicService.removeTopicRelation(topicCreatorChild.parentId, topicCreatorChild?.id).subscribe(() => {
+      this.reloadChildrenOfTopicCreator();
+    });
+  }
+
   onChildTopicCreationRequest(isChildTopicCreationDemanded: boolean) {
     this.isChildTopicCreationDemanded = isChildTopicCreationDemanded;
     this.reloadChildrenOfTopicCreator();

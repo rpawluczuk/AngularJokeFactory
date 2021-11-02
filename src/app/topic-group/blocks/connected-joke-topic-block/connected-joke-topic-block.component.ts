@@ -11,6 +11,7 @@ export class ConnectedJokeTopicBlockComponent implements OnInit {
   @Input() topicCreatorChild: TopicCreatorChildDto;
   @Input() chosenTopicCreatorChildId: number;
   @Output() showChildrenOfChildRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
+  @Output() removeTopicRelationRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
   @Output() setAsConnectingTopicRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
   @Output() setAsOstensibleTopicRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
   @Output() setAsComedyTopicRequest: EventEmitter<TopicCreatorChildDto> = new EventEmitter<TopicCreatorChildDto>();
@@ -29,7 +30,7 @@ export class ConnectedJokeTopicBlockComponent implements OnInit {
   }
 
   deleteConnectionRequest() {
-
+    this.removeTopicRelationRequest.emit(this.topicCreatorChild);
   }
 
   onSetAsConnectingTopicRequest() {

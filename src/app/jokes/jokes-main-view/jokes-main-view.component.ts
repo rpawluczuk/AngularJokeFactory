@@ -44,6 +44,7 @@ export class JokesMainViewComponent implements OnInit {
     if (this.query.length === 0) {
       this.loadAllJokes();
     } else {
+      console.log(this.query);
       this.jokesService.getFilteredJokes(`${this.query}`)
         .subscribe(jokePresenterList => {
           this.jokePresenterList = jokePresenterList;
