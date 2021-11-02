@@ -79,7 +79,7 @@ export class JokesFilteringComponent implements OnInit {
     if (categorizationFilter === 'All') {
       this.categorizationQuery = '';
     } else {
-      this.categorizationQuery = `&categorization=${categorizationFilter}`;
+      this.categorizationQuery = `&topicGroups.categorization=${categorizationFilter}`;
     }
     this.createQuery();
   }

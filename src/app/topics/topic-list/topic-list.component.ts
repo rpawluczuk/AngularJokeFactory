@@ -36,4 +36,10 @@ export class TopicListComponent implements OnInit {
   goToTopicEdition(topicPresenter: TopicPresenterDto) {
     this.router.navigate(['/topics', topicPresenter.id]);
   }
+
+  onSearchRequest(name: string) {
+    this.topicService.getTopicPresenterListByName(name).subscribe(topicPresenterList => {
+      this.topicPresenterList = topicPresenterList;
+    });
+  }
 }

@@ -1,0 +1,8 @@
+<nav class="navbar navbar-light bg-light mt-3 d-flex flex-row justify-content-center form-inline">
+  <input #searchInput type="text" placeholder="Search for topics ..."
+         class="form-control mr-sm-2 col-8"
+         (keyup.enter)="doSearch(searchInput.value)">
+  <button type="submit" (click)="doSearch(searchInput.value)" class="btn btn-outline-info my-2 my-sm-0">
+    Search
+  </button>
+</nav>

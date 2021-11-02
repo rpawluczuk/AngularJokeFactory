@@ -1,4 +1,7 @@
 <div class="container">
+  <app-topic-search
+  (searchRequest)="onSearchRequest($event)">
+  </app-topic-search>
   <div *ngIf="topicPresenterList && topicPresenterList.length > 0; else noTopics" class="mt-5">
     <div *ngFor="let topicPresenter of topicPresenterList; let i = index" class="card">
       <div class="card-body">

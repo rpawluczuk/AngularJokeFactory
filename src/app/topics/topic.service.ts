@@ -21,6 +21,10 @@ export class TopicService {
     return this.http.get<TopicPresenterDto[]>(this.apiUrl);
   }
 
+  getTopicPresenterListByName(name: string): Observable<TopicPresenterDto[]> {
+    return this.http.get<TopicPresenterDto[]>(`${this.apiUrl}/by-name?name=${name}`);
+  }
+
   getTopicItemList(): Observable<TopicItemDto[]> {
     return this.http.get<TopicItemDto[]>(`${this.apiUrl}/list-items`);
   }
