@@ -7,7 +7,7 @@ import {TopicPagination} from './topicPagination';
   styleUrls: ['./topic-pagination.component.css']
 })
 export class TopicPaginationComponent implements OnInit {
-  @Input() pagination: TopicPagination;
+  @Input() topicPagination: TopicPagination;
   @Output() changedPagination: EventEmitter<TopicPagination> = new EventEmitter<TopicPagination>();
 
   previousPage: any;
@@ -20,16 +20,16 @@ export class TopicPaginationComponent implements OnInit {
 
   loadPage(page: number) {
     if (page !== this.previousPage) {
-      this.previousPage = this.pagination.currentPage;
-      this.pagination.currentPage = page;
-      this.pagination.currentPage -= 1;   // difference between backend and fronted
-      this.changedPagination.emit(this.pagination);
+      this.previousPage = this.topicPagination.currentPage;
+      this.topicPagination.currentPage = page;
+      this.topicPagination.currentPage -= 1;   // difference between backend and fronted
+      this.changedPagination.emit(this.topicPagination);
     }
   }
 
   updatePageSize(pageSize: number) {
-    this.pagination.pageSize = pageSize;
-    this.pagination.currentPage = 0;
-    this.changedPagination.emit(this.pagination);
+    this.topicPagination.pageSize = pageSize;
+    this.topicPagination.currentPage = 0;
+    this.changedPagination.emit(this.topicPagination);
   }
 }

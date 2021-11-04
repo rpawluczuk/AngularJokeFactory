@@ -8,6 +8,10 @@ import {RouterModule} from '@angular/router';
 import { SingleCategorizationComponent } from './categorization-list/single-categorization/single-categorization.component';
 import { CategorizationEditionComponent } from './categorization-edition/categorization-edition.component';
 import {CategorizationResolveService} from "./categorization-resolve.service";
+import { CategorizationPaginationComponent } from './categorization-list/categorization-pagination/categorization-pagination.component';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { CategorizationSearchComponent } from './categorization-list/categorization-search/categorization-search.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -15,12 +19,16 @@ import {CategorizationResolveService} from "./categorization-resolve.service";
     CategorizationCreationComponent,
     CategorizationListComponent,
     SingleCategorizationComponent,
-    CategorizationEditionComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
+    CategorizationEditionComponent,
+    CategorizationPaginationComponent,
+    CategorizationSearchComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        NgbPaginationModule,
+        FontAwesomeModule
+    ],
   exports: [
     CategorizationCreationComponent,
     CategorizationListComponent

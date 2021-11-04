@@ -1,7 +1,9 @@
 <div class="container">
   <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Categorizations</h1>
-
-  <div *ngIf="categorizationPresenterList && categorizationPresenterList.length > 0; else noCategorizations">
+  <app-categorization-search
+    (searchRequest)="onSearchRequest($event)">
+  </app-categorization-search>
+  <div *ngIf="categorizationPresenterList && categorizationPresenterList.length > 0; else noCategorizations" class="my-5">
     <div *ngFor="let categorization of categorizationPresenterList; let i = index">
       <app-single-categorization
         [categorizationPresenter]="categorization"
@@ -9,6 +11,11 @@
       </app-single-categorization>
     </div>
   </div>
+
+  <app-categorization-pagination
+    [categorizationPagination]="categorizationPagination"
+    (changedPagination)="onUpdatePaginationRequest($event)">
+  </app-categorization-pagination>
 
   <ng-template #noCategorizations>
     <div class="no-data">

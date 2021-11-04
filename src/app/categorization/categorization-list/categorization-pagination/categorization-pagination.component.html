@@ -1,8 +1,8 @@
-<div *ngIf="topicPagination" class="d-flex justify-content-center mb-5">
+<div *ngIf="categorizationPagination" class="d-flex justify-content-center mb-5">
   <ngb-pagination
-    [(page)]="topicPagination.currentPage"
-    [pageSize]="topicPagination.pageSize"
-    [collectionSize]="topicPagination.totalItems"
+    [(page)]="categorizationPagination.currentPage"
+    [pageSize]="categorizationPagination.pageSize"
+    [collectionSize]="categorizationPagination.totalItems"
     [maxSize]="5"
     [boundaryLinks]="true"
     (pageChange)="loadPage($event)"
@@ -12,10 +12,10 @@
     <span class="ml-4 col col-form-label">Page Size</span>
     <div class="col">
       <select (change)="updatePageSize($event.target.value)" class="form-control">
-        <option selected="true">10</option>
+        <option selected="true">5</option>
+        <option>10</option>
         <option>20</option>
         <option>50</option>
-        <option>100</option>
       </select>
     </div>
   </div>
