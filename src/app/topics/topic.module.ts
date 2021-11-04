@@ -14,6 +14,8 @@ import { ConnectedTopicBlockComponent } from './topic-edition/topic-blocks/conne
 import { ChildTopicBlockCreatorComponent } from './topic-edition/topic-blocks/child-topic-block-creator/child-topic-block-creator.component';
 import { TopicChildCreatorRowComponent } from './topic-edition/topic-child-creator-row/topic-child-creator-row.component';
 import { TopicSearchComponent } from './topic-list/topic-search/topic-search.component';
+import { TopicPaginationComponent } from './topic-list/topic-pagination/topic-pagination.component';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -28,6 +30,7 @@ import { TopicSearchComponent } from './topic-list/topic-search/topic-search.com
     ChildTopicBlockCreatorComponent,
     TopicChildCreatorRowComponent,
     TopicSearchComponent,
+    TopicPaginationComponent,
   ],
     imports: [
         CommonModule,
@@ -35,6 +38,7 @@ import { TopicSearchComponent } from './topic-list/topic-search/topic-search.com
         RouterModule,
         ReactiveFormsModule,
         FontAwesomeModule,
+        NgbPaginationModule,
     ],
     exports: [
         TopicCreationComponent,

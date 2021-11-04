@@ -1,8 +1,8 @@
 <div class="container">
   <app-topic-search
-  (searchRequest)="onSearchRequest($event)">
+    (searchRequest)="onSearchRequest($event)">
   </app-topic-search>
-  <div *ngIf="topicPresenterList && topicPresenterList.length > 0; else noTopics" class="mt-5">
+  <div *ngIf="topicPresenterList && topicPresenterList.length > 0; else noTopics" class="my-5">
     <div *ngFor="let topicPresenter of topicPresenterList; let i = index" class="card">
       <div class="card-body">
         <div class="d-flex flex-row">
@@ -30,6 +30,10 @@
       </div>
     </div>
   </div>
+  <app-topic-pagination
+    [pagination]="topicPagination"
+    (changedPagination)="onUpdatePaginationRequest($event)">
+  </app-topic-pagination>
   <ng-template #noTopics>
     <div class="no-Topics">
       <p>Currently no topics in database</p>

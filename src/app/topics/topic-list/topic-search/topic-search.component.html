@@ -1,8 +1,17 @@
-<nav class="navbar navbar-light bg-light mt-3 d-flex flex-row justify-content-center form-inline">
-  <input #searchInput type="text" placeholder="Search for topics ..."
-         class="form-control mr-sm-2 col-8"
-         (keyup.enter)="doSearch(searchInput.value)">
-  <button type="submit" (click)="doSearch(searchInput.value)" class="btn btn-outline-info my-2 my-sm-0">
-    Search
-  </button>
-</nav>
+<div class="bg-light my-3 d-flex flex-column">
+  <nav class="navbar navbar-light d-flex flex-row justify-content-center">
+    <input #searchInput type="text" placeholder="Search for topics ..."
+           class="form-control mr-sm-2 col-8"
+           (keyup.enter)="doSearch(searchInput.value)">
+    <button type="submit" (click)="doSearch(searchInput.value)" class="btn btn-outline-info my-2 my-sm-0">
+      Search
+    </button>
+  </nav>
+  <div *ngIf="searchingPhrase.length>0" class="d-flex flex-row justify-content-center my-3">
+    <h5 class="align-items-center">
+      Search results for topics containing "{{searchingPhrase}}"
+    </h5>
+    <fa-icon class="align-items-center ml-2 closeSearching" [icon]="faWindowClose" (click)="turnOffSearchRequest()" size="2x">
+    </fa-icon>
+  </div>
+</div>

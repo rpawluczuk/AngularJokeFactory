@@ -1,4 +1,4 @@
-export class Pagination {
+export class TopicPagination {
   totalItems: number;
   totalPages: number;
   currentPage: number;

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {faWindowClose} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-topic-search',
@@ -7,16 +8,28 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class TopicSearchComponent implements OnInit {
 
+  faWindowClose = faWindowClose;
+
   @Output()
   searchRequest: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  searchingPhrase: string;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
-  doSearch(value: string) {
-    this.searchRequest.emit(value);
+  ngOnInit(): void {
+    this.searchingPhrase = '';
+  }
+
+  doSearch(searchingPhrase: string) {
+    this.searchingPhrase = searchingPhrase;
+    this.searchRequest.emit(this.searchingPhrase);
+  }
+
+  turnOffSearchRequest() {
+    this.searchingPhrase = '';
+    this.searchRequest.emit(this.searchingPhrase);
   }
 }
 

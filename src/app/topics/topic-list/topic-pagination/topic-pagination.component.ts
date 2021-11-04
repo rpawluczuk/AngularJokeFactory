@@ -1,21 +1,22 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {JokePagination} from './jokePagination';
+import {TopicPagination} from './topicPagination';
 
 @Component({
-  selector: 'app-jokes-pagination',
-  templateUrl: './jokes-pagination.component.html',
-  styleUrls: ['./jokes-pagination.component.css']
+  selector: 'app-topic-pagination',
+  templateUrl: './topic-pagination.component.html',
+  styleUrls: ['./topic-pagination.component.css']
 })
-export class JokesPaginationComponent implements OnInit {
-  @Input() pagination: JokePagination;
-  @Output() changedPagination: EventEmitter<JokePagination> = new EventEmitter<JokePagination>();
+export class TopicPaginationComponent implements OnInit {
+  @Input() pagination: TopicPagination;
+  @Output() changedPagination: EventEmitter<TopicPagination> = new EventEmitter<TopicPagination>();
 
   previousPage: any;
 
   constructor() {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   loadPage(page: number) {
     if (page !== this.previousPage) {

@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JokePresenterDto} from './models/jokePresenterDto';
 import {JokeCreatorDto} from './models/jokeCreatorDto';
+import {JokePagination} from "./jokes-main-view/jokes-pagination/jokePagination";
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +34,20 @@ export class JokesService {
     return this.http.get<JokePresenterDto>(`${this.apiUrl}/presenter/${id}` );
   }
 
+  getPagination(): Observable<JokePagination> {
+    return this.http.get<JokePagination>(`${this.apiUrl}/pagination`);
+  }
+
   addJoke(data): Observable<Joke>{
     return this.http.post<Joke>(this.apiUrl, data);
   }
 
   updateJoke(data: any): Observable<JokeCreatorDto> {
     return this.http.put<JokeCreatorDto>(`${this.apiUrl}`, data);
+  }
+
+  updatePagination(jokePagination: JokePagination): Observable<JokePagination> {
+    return this.http.put<JokePagination>(`${this.apiUrl}/pagination`, jokePagination);
   }
 
   removeJoke(id: number): Observable<Joke> {

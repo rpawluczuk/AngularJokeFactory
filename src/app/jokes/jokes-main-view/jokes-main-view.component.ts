@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JokesService} from '../jokes.service';
-import {Pagination} from '../../utils/pagination';
-import {PaginationService} from '../../utils/pagination.service';
+import {JokePagination} from './jokes-pagination/jokePagination';
 import {JokePresenterDto} from '../models/jokePresenterDto';
 
 @Component({
@@ -11,13 +10,12 @@ import {JokePresenterDto} from '../models/jokePresenterDto';
 })
 export class JokesMainViewComponent implements OnInit {
 
-  pagination: Pagination = new Pagination();
+  pagination: JokePagination = new JokePagination();
   query: string;
 
   jokePresenterList: JokePresenterDto[];
 
-  constructor(private jokesService: JokesService,
-              private paginationService: PaginationService) {
+  constructor(private jokesService: JokesService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +24,7 @@ export class JokesMainViewComponent implements OnInit {
   }
 
   loadPagination(): void {
-    this.paginationService.getPagination()
+    this.jokesService.getPagination()
       .subscribe(pagination => {
         this.pagination = pagination;
         this.pagination.currentPage += 1;   // difference between backend and fronted
@@ -54,7 +52,7 @@ export class JokesMainViewComponent implements OnInit {
   }
 
   updatePagination() {
-    this.paginationService.updatePagination(this.pagination)
+    this.jokesService.updatePagination(this.pagination)
       .subscribe(() => this.loadJokes());
   }
 
@@ -75,7 +73,7 @@ export class JokesMainViewComponent implements OnInit {
     });
   }
 
-  onUpdatePaginationRequest(pagination: Pagination) {
+  onUpdatePaginationRequest(pagination: JokePagination) {
     this.pagination = pagination;
     this.updatePagination();
   }

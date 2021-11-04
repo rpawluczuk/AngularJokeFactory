@@ -19,7 +19,6 @@ import {TopicModule} from './topics/topic.module';
 import {TopicRoutingModule} from './topics/topic-routing.module';
 import {TopicService} from './topics/topic.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {PaginationService} from './utils/pagination.service';
 import {CategorizationModule} from './categorization/categorization.module';
 import {CategorizationService} from './categorization/categorization.service';
 import {CategorizationRoutingModule} from './categorization/categorization-routing.module';
@@ -51,8 +50,7 @@ import {CategorizationRoutingModule} from './categorization/categorization-routi
     JokesService,
     StructuresService,
     AuthorsService,
-    TopicService,
-    PaginationService
+    TopicService
   ],
   bootstrap: [AppComponent]
 })

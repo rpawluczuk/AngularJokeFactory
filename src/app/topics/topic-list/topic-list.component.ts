@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Topic} from '../models/topic';
+import {Component, OnInit} from '@angular/core';
 import {TopicService} from '../topic.service';
 import {Router} from '@angular/router';
 import {TopicPresenterDto} from '../models/topicPresenterDto';
+import {TopicPagination} from './topic-pagination/topicPagination';
 
 @Component({
   selector: 'app-topic-list',
@@ -11,22 +11,48 @@ import {TopicPresenterDto} from '../models/topicPresenterDto';
 })
 export class TopicListComponent implements OnInit {
 
+  topicPagination: TopicPagination = new TopicPagination();
+
   topicPresenterList: TopicPresenterDto[];
+  searchingPhrase: string;
 
   constructor(private topicService: TopicService,
-              private  router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
+    this.searchingPhrase = '';
     this.loadTopicPresenterList();
   }
 
   private loadTopicPresenterList() {
-    this.topicService.getTopicPresenterList().subscribe(topicPresenterList => {
-      this.topicPresenterList = topicPresenterList;
-    });
+    if (this.searchingPhrase.length === 0){
+      this.topicService.getTopicPresenterList().subscribe(topicPresenterList => {
+        this.topicPresenterList = topicPresenterList;
+        this.loadPagination();
+      });
+    } else {
+      this.topicService.getTopicPresenterListByName(this.searchingPhrase).subscribe(topicPresenterList => {
+        this.topicPresenterList = topicPresenterList;
+        this.loadPagination();
+      });
+    }
   }
 
-  removeTopic(topicPresenter: TopicPresenterDto, event){
+  loadPagination(): void {
+    this.topicService.getTopicPagination()
+      .subscribe(pagination => {
+        this.topicPagination = pagination;
+        this.topicPagination.currentPage += 1;   // difference between backend and fronted
+      });
+  }
+
+  updatePagination() {
+    this.topicService.updateTopicPagination(this.topicPagination)
+      .subscribe(() => this.loadTopicPresenterList());
+  }
+
+  removeTopic(topicPresenter: TopicPresenterDto, event) {
     event.stopPropagation();
     this.topicService.removeTopic(topicPresenter.id).subscribe(() => {
       this.loadTopicPresenterList();
@@ -37,9 +63,13 @@ export class TopicListComponent implements OnInit {
     this.router.navigate(['/topics', topicPresenter.id]);
   }
 
-  onSearchRequest(name: string) {
-    this.topicService.getTopicPresenterListByName(name).subscribe(topicPresenterList => {
-      this.topicPresenterList = topicPresenterList;
-    });
+  onSearchRequest(searchingPhrase: string) {
+    this.searchingPhrase = searchingPhrase;
+    this.loadTopicPresenterList();
+  }
+
+  onUpdatePaginationRequest(topicPagination: TopicPagination) {
+    this.topicPagination = topicPagination;
+    this.updatePagination();
   }
 }
