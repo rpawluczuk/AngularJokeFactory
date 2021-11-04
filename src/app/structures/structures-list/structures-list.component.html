@@ -1,18 +1,24 @@
 <div class="container">
-    <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Structures</h1>
-
-    <div *ngIf="structurePresenterList && structurePresenterList.length > 0; else noStructures">
-        <div *ngFor="let structure of structurePresenterList; let i = index">
-            <app-single-structure
-              [structurePresenter]="structure"
-                (removedStructure)="onRemovedStructure($event)">
-            </app-single-structure>
-        </div>
+  <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Structures</h1>
+  <app-structure-search
+    (searchRequest)="onSearchRequest($event)">
+  </app-structure-search>
+  <div *ngIf="structurePresenterList && structurePresenterList.length > 0; else noStructures">
+    <div *ngFor="let structure of structurePresenterList; let i = index">
+      <app-single-structure
+        [structurePresenter]="structure"
+        (removedStructure)="onRemovedStructure($event)">
+      </app-single-structure>
     </div>
+  </div>
+  <app-structure-pagination
+    [structurePagination]="structurePagination"
+    (changedPagination)="onUpdatePaginationRequest($event)">
+  </app-structure-pagination>
 
-    <ng-template #noStructures>
-        <div class="no-data">
-            <p>Currently no structures in database</p>
-        </div>
-    </ng-template>
+  <ng-template #noStructures>
+    <div class="no-data">
+      <p>Currently no structures in database</p>
+    </div>
+  </ng-template>
 </div>

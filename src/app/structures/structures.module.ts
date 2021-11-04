@@ -12,6 +12,9 @@ import {StructureBlockCreatorComponent} from '../blocks/structure-blocks/structu
 import { SingleStructureComponent } from './structures-list/single-structure/single-structure.component';
 import { StructureBlockComponent } from '../blocks/structure-blocks/structure-block/structure-block.component';
 import { SingleStructureDetailsComponent } from './structures-list/single-structure/single-structure-details/single-structure-details.component';
+import { StructureSearchComponent } from './structures-list/structure-search/structure-search.component';
+import { StructurePaginationComponent } from './structures-list/structure-pagination/structure-pagination.component';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -22,14 +25,17 @@ import { SingleStructureDetailsComponent } from './structures-list/single-struct
         StructureBlockCreatorComponent,
         SingleStructureComponent,
         StructureBlockComponent,
-        SingleStructureDetailsComponent
+        SingleStructureDetailsComponent,
+        StructureSearchComponent,
+        StructurePaginationComponent
     ],
     imports: [
         CommonModule,
         SharedModule,
         RouterModule,
         ReactiveFormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        NgbPaginationModule
     ],
   exports: [
     StructureCreationComponent,

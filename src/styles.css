@@ -33,3 +33,7 @@
 .cs-table{
   background: white;
 }
+
+.closeSearching:hover {
+  color: crimson;
+}

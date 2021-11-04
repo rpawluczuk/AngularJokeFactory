@@ -7,8 +7,12 @@ import {TopicPagination} from './topicPagination';
   styleUrls: ['./topic-pagination.component.css']
 })
 export class TopicPaginationComponent implements OnInit {
-  @Input() topicPagination: TopicPagination;
-  @Output() changedPagination: EventEmitter<TopicPagination> = new EventEmitter<TopicPagination>();
+
+  @Input()
+  topicPagination: TopicPagination;
+
+  @Output()
+  changedPagination: EventEmitter<TopicPagination> = new EventEmitter<TopicPagination>();
 
   previousPage: any;
 

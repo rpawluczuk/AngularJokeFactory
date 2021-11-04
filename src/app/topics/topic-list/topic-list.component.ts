@@ -12,7 +12,6 @@ import {TopicPagination} from './topic-pagination/topicPagination';
 export class TopicListComponent implements OnInit {
 
   topicPagination: TopicPagination = new TopicPagination();
-
   topicPresenterList: TopicPresenterDto[];
   searchingPhrase: string;
 
