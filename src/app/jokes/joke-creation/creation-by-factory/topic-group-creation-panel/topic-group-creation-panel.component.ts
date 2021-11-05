@@ -2,24 +2,23 @@ import {Component, OnInit} from '@angular/core';
 import {CategorizationItemDto} from '../../../../categorization/models/CategorizationItemDto';
 import {CategorizationService} from '../../../../categorization/categorization.service';
 import {TopicGroupCreatorDto} from '../../../../topic-group/models/TopicGroupCreatorDto';
-import {TopicCreatorChildrenWithParentId} from '../../../../topics/models/topicCreatorChildrenWithParentId';
 import {TopicCreatorChildDto} from '../../../../topics/models/topicCreatorChildDto';
 import {TopicService} from '../../../../topics/topic.service';
 import {TopicItemDto} from '../../../../topics/models/topicItemDto';
-
+import {TopicCreatorChildRowAndPageDto} from '../../../../topics/models/topicCreatorChildRowAndPageDto';
 
 @Component({
   selector: 'app-topic-group-creator',
-  templateUrl: './topic-group-creator.component.html',
-  styleUrls: ['./topic-group-creator.component.css']
+  templateUrl: './topic-group-creation-panel.component.html',
+  styleUrls: ['./topic-group-creation-panel.component.css']
 })
-export class TopicGroupCreatorComponent implements OnInit {
+export class TopicGroupCreationPanelComponent implements OnInit {
 
   categorizationItemList: CategorizationItemDto[] = [];
   topicGroupCreatorList: TopicGroupCreatorDto[] = [];
   selectedTopicGroupCreator: TopicGroupCreatorDto;
 
-  topicCreatorRow: TopicCreatorChildrenWithParentId[] = [];
+  topicCreatorChildRowAndPageList: TopicCreatorChildRowAndPageDto[] = [];
 
   dropdownSettings = {};
 
@@ -70,20 +69,24 @@ export class TopicGroupCreatorComponent implements OnInit {
     } else {
       this.selectedTopicGroupCreator = null;
     }
-    const topicCreator = topicGroupCreator?.categorizationCreator?.connectingCategory;
-    this.topicCreatorRow = [];
-    this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreator.children, topicCreator.id));
+    const connectingCategory = topicGroupCreator?.categorizationCreator?.connectingCategory;
+    this.topicCreatorChildRowAndPageList = [];
+    this.topicService.getTopicCreatorChildRowAndPage(connectingCategory.id, 0, 20)
+      .subscribe(topicCreatorChildRowAndPage => {
+        this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
+      });
   }
 
   onShowChildrenOfChildRequest(topicCreatorChild: TopicCreatorChildDto) {
-    this.topicService.getTopicCreatorChildList(topicCreatorChild.id).subscribe(topicCreatorChildren => {
-      this.topicCreatorRow.push(new TopicCreatorChildrenWithParentId(topicCreatorChildren, topicCreatorChild.id));
-    });
+    this.topicService.getTopicCreatorChildRowAndPage(topicCreatorChild.id, 0, 20)
+      .subscribe(topicCreatorChildRowAndPage => {
+        this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
+      });
   }
 
   onRemoveSomeRowsRequest(branchIndex: number) {
-    if (branchIndex + 1 < this.topicCreatorRow.length) {
-      this.topicCreatorRow.splice(branchIndex + 1);
+    if (branchIndex + 1 < this.topicCreatorChildRowAndPageList.length) {
+      this.topicCreatorChildRowAndPageList.splice(branchIndex + 1);
     }
   }
 

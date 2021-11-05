@@ -1,0 +1,8 @@
+<div class="card p-3 mb-4" style="background: #ceecfa">
+  <div class="card-body">
+    <h2 class="card-title mb-4"> {{ authorPresenter?.name }} {{authorPresenter?.surname}} </h2>
+    <pre style="white-space: pre-wrap; font-size: larger; font-family: serif">{{ authorPresenter?.description }}</pre>
+    <div class="text-muted"> Creation Date:: {{ authorPresenter?.dateCreated | date:'short' }} </div>
+    <button class="btn btn-outline-danger mt-3" (click)="removeAuthor(authorPresenter, $event)"> Delete</button>
+  </div>
+</div>

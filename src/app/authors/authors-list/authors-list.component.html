@@ -1,36 +1,16 @@
-<app-header>
-  <p levels>Authors</p>
-  <div content>
-    <p>List of Authors</p>
-  </div>
-</app-header>
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <table *ngIf="authorPresenterList && authorPresenterList.length > 0; else noAuthors" class="table table-striped">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Description</th>
-          <th>Creation Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let author of authorPresenterList; let i = index" class="row-structure" (click)="goToAuthorDetails(author)">
-          <td> {{ author?.name }} </td>
-          <td> {{ author?.surname }} </td>
-          <td> {{ author?.description }} </td>
-          <td>{{ author?.dateCreated | date:'short'}} </td>
-          <td (click)="removeAuthor(author, $event)"> ( X ) </td>
-        </tr>
-        </tbody>
-      </table>
-      <ng-template #noAuthors>
-        <div class="no-Authors">
-          <p>Currently no authors in database</p>
-        </div>
-      </ng-template>
+  <h1 class="text-center display-2 text-dark font-weight-bolder m-5">List of Authors</h1>
+  <div *ngIf="authorPresenterList && authorPresenterList.length > 0; else noAuthors" class="table table-striped">
+    <div *ngFor="let authorPresenter of authorPresenterList; let i = index">
+      <app-single-author
+        [authorPresenter]="authorPresenter"
+        (removedAuthor)="onRemovedAuthor($event)">
+      </app-single-author>
     </div>
   </div>
+  <ng-template #noAuthors>
+    <div class="no-Authors">
+      <p>Currently no authors in database</p>
+    </div>
+  </ng-template>
 </div>

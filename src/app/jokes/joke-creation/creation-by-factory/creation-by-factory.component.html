@@ -40,36 +40,6 @@
           </option>
         </select>
       </div>
-      <div class="row form-group">
-        <label>Connecting Topic</label>
-        <select class="form-control" formControlName="connectingTopic" data-toggle="tooltip"
-                data-placement="right" title="Select Topic Branch">
-          <option value="null">--Select Topic--</option>
-          <option *ngFor="let connectingTopic of topicItemList" [ngValue]="connectingTopic">
-            {{ connectingTopic.text }}
-          </option>
-        </select>
-      </div>
-      <div class="row form-group">
-        <label>Ostensible Topic</label>
-        <select class="form-control" formControlName="ostensibleTopic" data-toggle="tooltip"
-                data-placement="right" title="Select Ostensible Topic Branch">
-          <option value="null">--Select Ostensible Topic--</option>
-          <option *ngFor="let ostensibleTopic of topicItemList" [ngValue]="ostensibleTopic">
-            {{ ostensibleTopic.text }}
-          </option>
-        </select>
-      </div>
-      <div class="row form-group">
-        <label>Comedy Topic</label>
-        <select class="form-control" formControlName="comedyTopic" data-toggle="tooltip"
-                data-placement="right" title="Select Comedy Topic Branch">
-          <option value="null">--Select Comedy Topic--</option>
-          <option *ngFor="let comedyTopic of topicItemList" [ngValue]="comedyTopic">
-            {{ comedyTopic.text }}
-          </option>
-        </select>
-      </div>
       <div class="row">
         <div class="col-sm-12">
           <button [disabled]="jokeForm.invalid" (click)="addJoke()" type="submit"

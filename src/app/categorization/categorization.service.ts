@@ -4,7 +4,7 @@ import {CategorizationCreatorDto} from './models/CategorizationCreatorDto';
 import {HttpClient} from '@angular/common/http';
 import {CategorizationPresenterDto} from './models/CategorizationPresenterDto';
 import {CategorizationItemDto} from './models/CategorizationItemDto';
-import {TopicPagination} from "../topics/topic-list/topic-pagination/topicPagination";
+import {TopicPaginationDto} from "../topics/models/topicPaginationDto";
 import {CategorizationPagination} from "./categorization-list/categorization-pagination/categorizationPagination";
 import {TopicPresenterDto} from "../topics/models/topicPresenterDto";
 

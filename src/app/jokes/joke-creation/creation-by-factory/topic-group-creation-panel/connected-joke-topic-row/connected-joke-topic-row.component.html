@@ -1,5 +1,5 @@
 <div class="d-flex flex-row flex-wrap">
-  <div *ngFor="let topicCreatorChild of topicCreatorChildrenWithParent?.topicCreatorChildren">
+  <div *ngFor="let topicCreatorChild of topicCreatorChildRowAndPage?.topicCreatorChildList">
     <app-connected-joke-topic-block
       [topicCreatorChild]="topicCreatorChild"
       [chosenTopicCreatorChildId]="chosenTopicCreatorChildId"
@@ -15,10 +15,14 @@
     <fa-icon [icon]="faPlus" size="4x" (click)="onShowTopicCreationFormRequest()"></fa-icon>
   </div>
 </div>
+<app-joke-topic-pagination
+  [topicPagination]="topicPagination"
+  (changedPagination)="onUpdatePaginationRequest($event)">
+</app-joke-topic-pagination>
 
 <ng-template #childTopicBlockCreator>
   <app-child-topic-block-creator
-    [parentId]="topicCreatorChildrenWithParent.parentId"
+    [parentId]="topicCreatorChildRowAndPage.parentId"
     (isChildTopicCreationDemanded)="onChildTopicCreationRequest($event)">
   </app-child-topic-block-creator>
 </ng-template>

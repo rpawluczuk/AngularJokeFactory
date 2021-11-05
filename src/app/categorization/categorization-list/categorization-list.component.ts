@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CategorizationService} from '../categorization.service';
 import {CategorizationPresenterDto} from '../models/CategorizationPresenterDto';
 import {CategorizationPagination} from './categorization-pagination/categorizationPagination';
-import {TopicPagination} from "../../topics/topic-list/topic-pagination/topicPagination";
+import {TopicPaginationDto} from "../../topics/models/topicPaginationDto";
 
 @Component({
   selector: 'app-categorization-list',

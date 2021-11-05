@@ -30,10 +30,10 @@
     </app-connecting-category-block>
   </div>
   <!--      children-->
-  <div *ngFor="let topicCreatorChildrenWithParent of topicCreatorRow; let index = index">
+  <div *ngFor="let topicCreatorChildRowAndPage of topicCreatorChildRowAndPageList; let index = index">
     <hr>
     <app-connected-joke-topic-row
-      [topicCreatorChildrenWithParent]="topicCreatorChildrenWithParent"
+      [topicCreatorChildRowAndPage]="topicCreatorChildRowAndPage"
       [parentIndex]="index"
       (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
       (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)"

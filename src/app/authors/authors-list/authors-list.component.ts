@@ -15,19 +15,18 @@ export class AuthorsListComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.loadAuthors();
+    this.loadAuthorPresenterList();
   }
 
-  private loadAuthors() {
+  private loadAuthorPresenterList() {
     this.authorsService.getAuthorPresenterList().subscribe((authorPresenterList) => {
       this.authorPresenterList = authorPresenterList;
     });
   }
 
-  removeAuthor(authorPresenter: AuthorPresenterDto, event){
-    event.stopPropagation();
-    this.authorsService.removeAuthor(authorPresenter.id).subscribe(() => {
-      this.loadAuthors();
+  onRemovedAuthor(authorId: number){
+    this.authorsService.removeAuthor(authorId).subscribe(() => {
+      this.loadAuthorPresenterList();
     });
   }
 

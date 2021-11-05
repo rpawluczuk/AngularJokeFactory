@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TopicPaginationDto} from '../../models/topicPaginationDto';
+import {TopicPaginationDto} from '../../../../../../topics/models/topicPaginationDto';
 
 @Component({
-  selector: 'app-topic-pagination',
-  templateUrl: './topic-pagination.component.html',
-  styleUrls: ['./topic-pagination.component.css']
+  selector: 'app-joke-topic-pagination',
+  templateUrl: './joke-topic-pagination.component.html',
+  styleUrls: ['./joke-topic-pagination.component.css']
 })
-export class TopicPaginationComponent implements OnInit {
+export class JokeTopicPaginationComponent implements OnInit {
 
   @Input()
   topicPagination: TopicPaginationDto;
@@ -16,8 +16,7 @@ export class TopicPaginationComponent implements OnInit {
 
   previousPage: any;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

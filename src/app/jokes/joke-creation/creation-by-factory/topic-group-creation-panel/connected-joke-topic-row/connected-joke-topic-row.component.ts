@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TopicCreatorChildrenWithParentId} from '../../../../../topics/models/topicCreatorChildrenWithParentId';
 import {TopicCreatorChildDto} from '../../../../../topics/models/topicCreatorChildDto';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
-import {TopicService} from "../../../../../topics/topic.service";
+import {TopicService} from '../../../../../topics/topic.service';
+import {TopicPaginationDto} from '../../../../../topics/models/topicPaginationDto';
+import {TopicCreatorChildRowAndPageDto} from '../../../../../topics/models/topicCreatorChildRowAndPageDto';
 
 @Component({
   selector: 'app-connected-joke-topic-row',
@@ -12,7 +13,7 @@ import {TopicService} from "../../../../../topics/topic.service";
 export class ConnectedJokeTopicRowComponent implements OnInit {
 
   @Input()
-  topicCreatorChildrenWithParent: TopicCreatorChildrenWithParentId;
+  topicCreatorChildRowAndPage: TopicCreatorChildRowAndPageDto;
 
   @Input()
   parentIndex: number;
@@ -35,11 +36,15 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
   isChildTopicCreationDemanded = false;
   chosenTopicCreatorChildId: number;
   faPlus = faPlus;
+  topicPagination: TopicPaginationDto;
 
   constructor(private topicService: TopicService) {
   }
 
   ngOnInit(): void {
+    this.topicPagination = new TopicPaginationDto();
+    this.topicPagination.totalPages = this.topicCreatorChildRowAndPage.totalPages;
+    this.topicPagination.totalItems = this.topicCreatorChildRowAndPage.totalItems;
   }
 
   onShowChildrenOfChildRequest(topicCreatorChildDto: TopicCreatorChildDto) {
@@ -64,9 +69,21 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
   }
 
   reloadChildrenOfTopicCreator() {
-    this.topicService.getTopicCreatorChildList(this.topicCreatorChildrenWithParent.parentId).subscribe(topicCreatorChildren => {
-      this.topicCreatorChildrenWithParent.topicCreatorChildren = topicCreatorChildren;
+    this.topicService.getTopicCreatorChildList(this.topicCreatorChildRowAndPage.parentId).subscribe(topicCreatorChildren => {
+      this.topicCreatorChildRowAndPage.topicCreatorChildList = topicCreatorChildren;
     });
+  }
+
+  loadTopicCreatorChildRowAndPage(): void {
+    this.topicService.getTopicCreatorChildRowAndPage(this.topicCreatorChildRowAndPage.parentId,
+      this.topicPagination.currentPage, this.topicPagination.pageSize)
+      .subscribe(topicCreatorChildRowAndPage => {
+        console.log(this.topicPagination);
+        this.topicCreatorChildRowAndPage = topicCreatorChildRowAndPage;
+        this.topicPagination.totalPages = topicCreatorChildRowAndPage.totalPages;
+        this.topicPagination.totalItems = topicCreatorChildRowAndPage.totalItems;
+        this.topicPagination.currentPage += 1;   // difference between backend and fronted
+      });
   }
 
   onSetAsConnectingTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
@@ -79,5 +96,10 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
 
   onSetAsComedyTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
     this.setAsComedyTopicRequest.emit(topicCreatorChildDto);
+  }
+
+  onUpdatePaginationRequest(topicPagination: TopicPaginationDto) {
+    this.topicPagination = topicPagination;
+    this.loadTopicCreatorChildRowAndPage();
   }
 }

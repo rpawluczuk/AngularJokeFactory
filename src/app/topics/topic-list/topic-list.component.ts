@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TopicService} from '../topic.service';
 import {Router} from '@angular/router';
 import {TopicPresenterDto} from '../models/topicPresenterDto';
-import {TopicPagination} from './topic-pagination/topicPagination';
+import {TopicPaginationDto} from '../models/topicPaginationDto';
 
 @Component({
   selector: 'app-topic-list',
@@ -11,7 +11,7 @@ import {TopicPagination} from './topic-pagination/topicPagination';
 })
 export class TopicListComponent implements OnInit {
 
-  topicPagination: TopicPagination = new TopicPagination();
+  topicPagination: TopicPaginationDto = new TopicPaginationDto();
   topicPresenterList: TopicPresenterDto[];
   searchingPhrase: string;
 
@@ -67,7 +67,7 @@ export class TopicListComponent implements OnInit {
     this.loadTopicPresenterList();
   }
 
-  onUpdatePaginationRequest(topicPagination: TopicPagination) {
+  onUpdatePaginationRequest(topicPagination: TopicPaginationDto) {
     this.topicPagination = topicPagination;
     this.updatePagination();
   }

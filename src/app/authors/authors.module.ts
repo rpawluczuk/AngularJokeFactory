@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthorResolveService} from './author-resolve.service';
 import { AuthorCreationComponent } from './author-creation/author-creation.component';
+import { SingleAuthorComponent } from './authors-list/single-author/single-author.component';
 
 
 
@@ -14,7 +15,8 @@ import { AuthorCreationComponent } from './author-creation/author-creation.compo
   declarations: [
     AuthorDetailsComponent,
     AuthorsListComponent,
-    AuthorCreationComponent
+    AuthorCreationComponent,
+    SingleAuthorComponent
   ],
   imports: [
     CommonModule,

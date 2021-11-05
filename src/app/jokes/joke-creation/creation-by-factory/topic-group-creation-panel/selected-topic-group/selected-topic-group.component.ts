@@ -4,10 +4,10 @@ import {faLongArrowAltRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-selected-topic-group-creator',
-  templateUrl: './selected-topic-group-creator.component.html',
-  styleUrls: ['./selected-topic-group-creator.component.css']
+  templateUrl: './selected-topic-group.component.html',
+  styleUrls: ['./selected-topic-group.css']
 })
-export class SelectedTopicGroupCreatorComponent implements OnInit {
+export class SelectedTopicGroupComponent implements OnInit {
 
   @Input()
   selectedTopicGroupCreator: TopicGroupCreatorDto;

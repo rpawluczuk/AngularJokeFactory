@@ -13,7 +13,7 @@ import {TopicService} from '../../../topics/topic.service';
 import {StructureBlocksService} from '../../../blocks/structure-blocks/structure-blocks.service';
 import {Router} from '@angular/router';
 import {JokeCreatorDto} from '../../models/jokeCreatorDto';
-import {TopicGroupCreatorComponent} from './topic-group-creator/topic-group-creator.component';
+import {TopicGroupCreationPanelComponent} from './topic-group-creation-panel/topic-group-creation-panel.component';
 
 @Component({
   selector: 'app-creation-by-factory',
@@ -26,7 +26,7 @@ export class CreationByFactoryComponent implements OnInit {
   structurePanelComponent: StructurePanelComponent;
 
   @ViewChild('topicGroupCreatorRef')
-  topicGroupCreatorComponent: TopicGroupCreatorComponent;
+  topicGroupCreatorComponent: TopicGroupCreationPanelComponent;
 
   jokes: Joke[];
   authorItemList: AuthorItemDto[];
@@ -90,10 +90,7 @@ export class CreationByFactoryComponent implements OnInit {
       title: ['', Validators.required],
       content: ['', Validators.minLength(3)],
       structureItemList: [null],
-      author: [null],
-      connectingTopic: [null],
-      ostensibleTopic: [null],
-      comedyTopic: [null]
+      author: [null]
     });
   }
 

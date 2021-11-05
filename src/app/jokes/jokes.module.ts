@@ -25,12 +25,13 @@ import {SingleJokeAssignedRateComponent} from './jokes-main-view/jokes-list/sing
 import {CreationByFactoryComponent} from './joke-creation/creation-by-factory/creation-by-factory.component';
 import {FastCreationComponent} from './joke-creation/fast-creation/fast-creation.component';
 import {JokeBlockViewComponent} from './jokes-main-view/jokes-list/single-joke/single-joke-details/joke-block-view/joke-block-view.component';
-import {SelectedTopicGroupCreatorComponent} from './joke-creation/creation-by-factory/topic-group-creator/selected-topic-group-creator/selected-topic-group-creator.component';
+import {SelectedTopicGroupComponent} from './joke-creation/creation-by-factory/topic-group-creation-panel/selected-topic-group/selected-topic-group.component';
 import {TopicGroupModule} from "../topic-group/topic-group.module";
-import {TopicGroupCreatorComponent} from "./joke-creation/creation-by-factory/topic-group-creator/topic-group-creator.component";
-import {ConnectedJokeTopicRowComponent} from "./joke-creation/creation-by-factory/topic-group-creator/connected-joke-topic-row/connected-joke-topic-row.component";
+import {TopicGroupCreationPanelComponent} from "./joke-creation/creation-by-factory/topic-group-creation-panel/topic-group-creation-panel.component";
+import {ConnectedJokeTopicRowComponent} from "./joke-creation/creation-by-factory/topic-group-creation-panel/connected-joke-topic-row/connected-joke-topic-row.component";
 import {TopicModule} from "../topics/topic.module";
 import { TopicGroupEditionComponent } from './joke-edition/topic-group-edition/topic-group-edition.component';
+import { JokeTopicPaginationComponent } from './joke-creation/creation-by-factory/topic-group-creation-panel/connected-joke-topic-row/joke-topic-pagination/joke-topic-pagination.component';
 
 
 @NgModule({
@@ -52,10 +53,11 @@ import { TopicGroupEditionComponent } from './joke-edition/topic-group-edition/t
     CreationByFactoryComponent,
     FastCreationComponent,
     JokeBlockViewComponent,
-    SelectedTopicGroupCreatorComponent,
-    TopicGroupCreatorComponent,
+    SelectedTopicGroupComponent,
+    TopicGroupCreationPanelComponent,
     ConnectedJokeTopicRowComponent,
-    TopicGroupEditionComponent
+    TopicGroupEditionComponent,
+    JokeTopicPaginationComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +76,7 @@ import { TopicGroupEditionComponent } from './joke-edition/topic-group-edition/t
     JokeCreationComponent,
     JokesListComponent,
     JokesMainViewComponent,
-    SelectedTopicGroupCreatorComponent,
+    SelectedTopicGroupComponent,
   ],
   providers: [
     JokeResolveService

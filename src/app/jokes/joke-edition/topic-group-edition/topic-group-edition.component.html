@@ -34,7 +34,7 @@
   <div *ngFor="let topicCreatorChildrenWithParent of topicCreatorRow; let index = index">
     <hr>
     <app-connected-joke-topic-row
-      [topicCreatorChildrenWithParent]="topicCreatorChildrenWithParent"
+      [topicCreatorChildRowAndPage]="topicCreatorChildrenWithParent"
       [parentIndex]="index"
       (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
       (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)"

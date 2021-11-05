@@ -6,8 +6,8 @@ import {TopicCreatorDto} from './models/topicCreatorDto';
 import {TopicCreatorChildDto} from './models/topicCreatorChildDto';
 import {TopicPresenterDto} from './models/topicPresenterDto';
 import {TopicItemDto} from './models/topicItemDto';
-import {TopicPagination} from "./topic-list/topic-pagination/topicPagination";
-import {JokePagination} from "../jokes/jokes-main-view/jokes-pagination/jokePagination";
+import {TopicPaginationDto} from './models/topicPaginationDto';
+import {TopicCreatorChildRowAndPageDto} from './models/topicCreatorChildRowAndPageDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +35,16 @@ export class TopicService {
     return this.http.get<TopicCreatorChildDto[]>(`${this.apiUrl}/topic-creator-children?parent-id=${id}`);
   }
 
+  getTopicCreatorChildRowAndPage(parentId: number, currentPage: number, pageSize: number): Observable<TopicCreatorChildRowAndPageDto> {
+    return this.http.get<TopicCreatorChildRowAndPageDto>(`${this.apiUrl}/topic-creator-child-row?parent-id=${parentId}&current-page=${currentPage}&page-size=${pageSize}`);
+  }
+
   getTopicCreator(id: number): Observable<TopicCreatorDto> {
     return this.http.get<TopicCreatorDto>(`${this.apiUrl}/${id}`);
   }
 
-  getTopicPagination(): Observable<TopicPagination> {
-    return this.http.get<TopicPagination>(`${this.apiUrl}/pagination`);
+  getTopicPagination(): Observable<TopicPaginationDto> {
+    return this.http.get<TopicPaginationDto>(`${this.apiUrl}/pagination`);
   }
 
   addTopic(data): Observable<TopicCreatorDto> {
@@ -55,8 +59,8 @@ export class TopicService {
     return this.http.patch<TopicCreatorDto>(this.apiUrl, data);
   }
 
-  updateTopicPagination(topicPagination: TopicPagination): Observable<TopicPagination> {
-    return this.http.put<TopicPagination>(`${this.apiUrl}/pagination`, topicPagination);
+  updateTopicPagination(topicPagination: TopicPaginationDto): Observable<TopicPaginationDto> {
+    return this.http.put<TopicPaginationDto>(`${this.apiUrl}/pagination`, topicPagination);
   }
 
   removeTopic(id: number): Observable<Topic> {

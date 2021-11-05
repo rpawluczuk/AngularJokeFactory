@@ -8,8 +8,12 @@ import {StructurePresenterDto} from '../../models/structurePresenterDto';
   styleUrls: ['./single-structure.component.css']
 })
 export class SingleStructureComponent implements OnInit {
-  @Input() structurePresenter: StructurePresenterDto;
-  @Output() removedStructure: EventEmitter<number> = new EventEmitter<number>();
+
+  @Input()
+  structurePresenter: StructurePresenterDto;
+
+  @Output()
+  removedStructure: EventEmitter<number> = new EventEmitter<number>();
 
   isDetailsButtonClicked: boolean;
 
