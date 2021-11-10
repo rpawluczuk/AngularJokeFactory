@@ -23,25 +23,7 @@
     </div>
   </div>
 
-  <!--  topic selection panel-->
-  <!--    main-->
-  <div *ngIf="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory !== null">
-    <app-connecting-category-block
-      [topicCreator]="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory">
-    </app-connecting-category-block>
-  </div>
-
-  <!--      children-->
-  <div *ngFor="let topicCreatorChildRowAndPage of topicCreatorChildRowAndPageList; let index = index">
-    <hr>
-    <app-connected-joke-topic-row
-      [topicCreatorChildRowAndPage]="topicCreatorChildRowAndPage"
-      [parentIndex]="index"
-      (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
-      (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)"
-      (setAsConnectingTopicRequest)="onSetAsConnectingTopicRequest($event)"
-      (setAsOstensibleTopicRequest)="onSetAsOstensibleTopicRequest($event)"
-      (setAsComedyTopicRequest)="onSetAsComedyTopicRequest($event)">
-    </app-connected-joke-topic-row>
-  </div>
+  <app-topic-selection-panel
+    [topicGroupCreator]="selectedTopicGroupCreator">
+  </app-topic-selection-panel>
 </div>

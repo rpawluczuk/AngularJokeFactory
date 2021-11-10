@@ -32,6 +32,7 @@ import {ConnectedJokeTopicRowComponent} from "./joke-creation/creation-by-factor
 import {TopicModule} from "../topics/topic.module";
 import { TopicGroupEditionComponent } from './joke-edition/topic-group-edition/topic-group-edition.component';
 import { JokeTopicPaginationComponent } from './joke-creation/creation-by-factory/topic-group-creation-panel/connected-joke-topic-row/joke-topic-pagination/joke-topic-pagination.component';
+import { TopicSelectionPanelComponent } from './joke-creation/creation-by-factory/topic-group-creation-panel/topic-selection-panel/topic-selection-panel.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { JokeTopicPaginationComponent } from './joke-creation/creation-by-factor
     TopicGroupCreationPanelComponent,
     ConnectedJokeTopicRowComponent,
     TopicGroupEditionComponent,
-    JokeTopicPaginationComponent
+    JokeTopicPaginationComponent,
+    TopicSelectionPanelComponent
   ],
   imports: [
     CommonModule,
