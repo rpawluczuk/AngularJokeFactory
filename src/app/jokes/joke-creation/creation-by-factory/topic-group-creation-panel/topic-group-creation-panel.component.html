@@ -14,7 +14,8 @@
   <div *ngFor="let topicGroupCreator of topicGroupCreatorList; let i = index" class="card col-7">
     <div class="card-body" (click)="onTopicGroupClick(topicGroupCreator)">
       <h5 class="card-title"> {{ topicGroupCreator?.categorizationCreator?.name }} </h5>
-      <div *ngIf="topicGroupCreator?.categorizationCreator?.id === selectedTopicGroupCreator?.categorizationCreator?.id">
+      <div
+        *ngIf="topicGroupCreator?.categorizationCreator?.id === selectedTopicGroupCreator?.categorizationCreator?.id">
         <app-selected-topic-group-creator
           [selectedTopicGroupCreator]="selectedTopicGroupCreator">
         </app-selected-topic-group-creator>
@@ -24,11 +25,12 @@
 
   <!--  topic selection panel-->
   <!--    main-->
-  <div *ngIf="selectedTopicGroupCreator !== undefined && selectedTopicGroupCreator !== null">
+  <div *ngIf="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory !== null">
     <app-connecting-category-block
       [topicCreator]="selectedTopicGroupCreator?.categorizationCreator?.connectingCategory">
     </app-connecting-category-block>
   </div>
+
   <!--      children-->
   <div *ngFor="let topicCreatorChildRowAndPage of topicCreatorChildRowAndPageList; let index = index">
     <hr>

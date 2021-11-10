@@ -75,15 +75,24 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
   }
 
   loadTopicCreatorChildRowAndPage(): void {
-    this.topicService.getTopicCreatorChildRowAndPage(this.topicCreatorChildRowAndPage.parentId,
-      this.topicPagination.currentPage, this.topicPagination.pageSize)
-      .subscribe(topicCreatorChildRowAndPage => {
-        console.log(this.topicPagination);
+    if (this.topicCreatorChildRowAndPage?.parentId !== null) {
+      this.topicService.getTopicCreatorChildRowAndPage(this.topicCreatorChildRowAndPage.parentId,
+        this.topicPagination.currentPage, this.topicPagination.pageSize)
+        .subscribe(topicCreatorChildRowAndPage => {
+          this.topicCreatorChildRowAndPage = topicCreatorChildRowAndPage;
+          this.topicPagination.totalPages = topicCreatorChildRowAndPage.totalPages;
+          this.topicPagination.totalItems = topicCreatorChildRowAndPage.totalItems;
+          this.topicPagination.currentPage += 1;   // difference between backend and fronted
+        });
+    } else {
+      this.topicService.getTopicCreatorChildRowAndPageWithoutParent(this.topicPagination.currentPage,
+        this.topicPagination.pageSize).subscribe(topicCreatorChildRowAndPage => {
         this.topicCreatorChildRowAndPage = topicCreatorChildRowAndPage;
         this.topicPagination.totalPages = topicCreatorChildRowAndPage.totalPages;
         this.topicPagination.totalItems = topicCreatorChildRowAndPage.totalItems;
         this.topicPagination.currentPage += 1;   // difference between backend and fronted
       });
+    }
   }
 
   onSetAsConnectingTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {

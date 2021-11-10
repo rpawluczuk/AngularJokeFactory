@@ -39,6 +39,10 @@ export class TopicService {
     return this.http.get<TopicCreatorChildRowAndPageDto>(`${this.apiUrl}/topic-creator-child-row?parent-id=${parentId}&current-page=${currentPage}&page-size=${pageSize}`);
   }
 
+  getTopicCreatorChildRowAndPageWithoutParent(currentPage: number, pageSize: number): Observable<TopicCreatorChildRowAndPageDto> {
+    return this.http.get<TopicCreatorChildRowAndPageDto>(`${this.apiUrl}/topic-creator-child-row-without-parent?current-page=${currentPage}&page-size=${pageSize}`);
+  }
+
   getTopicCreator(id: number): Observable<TopicCreatorDto> {
     return this.http.get<TopicCreatorDto>(`${this.apiUrl}/${id}`);
   }

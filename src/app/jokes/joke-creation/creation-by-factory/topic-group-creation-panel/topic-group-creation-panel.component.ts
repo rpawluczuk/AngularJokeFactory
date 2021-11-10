@@ -71,10 +71,18 @@ export class TopicGroupCreationPanelComponent implements OnInit {
     }
     const connectingCategory = topicGroupCreator?.categorizationCreator?.connectingCategory;
     this.topicCreatorChildRowAndPageList = [];
-    this.topicService.getTopicCreatorChildRowAndPage(connectingCategory.id, 0, 20)
-      .subscribe(topicCreatorChildRowAndPage => {
-        this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
-      });
+    if (connectingCategory !== null) {
+      this.topicService.getTopicCreatorChildRowAndPage(connectingCategory.id, 0, 20)
+        .subscribe(topicCreatorChildRowAndPage => {
+          this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
+        });
+    } else {
+      this.topicService.getTopicCreatorChildRowAndPageWithoutParent(0, 20)
+        .subscribe(topicCreatorChildRowAndPage => {
+          this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
+          console.log(this.selectedTopicGroupCreator);
+        });
+    }
   }
 
   onShowChildrenOfChildRequest(topicCreatorChild: TopicCreatorChildDto) {
