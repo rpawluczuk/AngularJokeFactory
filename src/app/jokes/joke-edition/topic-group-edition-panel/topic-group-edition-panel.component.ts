@@ -10,10 +10,10 @@ import {TopicItemDto} from '../../../topics/models/topicItemDto';
 
 @Component({
   selector: 'app-topic-group-edition',
-  templateUrl: './topic-group-edition.component.html',
-  styleUrls: ['./topic-group-edition.component.css']
+  templateUrl: './topic-group-edition-panel.component.html',
+  styleUrls: ['./topic-group-edition-panel.component.css']
 })
-export class TopicGroupEditionComponent implements OnInit {
+export class TopicGroupEditionPanelComponent implements OnInit {
 
   @Input()
   jokeCreator: JokeCreatorDto;

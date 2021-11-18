@@ -1,9 +1,11 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {TopicCreatorChildRowAndPageDto} from '../../../../../topics/models/topicCreatorChildRowAndPageDto';
+import {TopicCreatorChildRowResponseDto} from '../../../../../topics/models/topicCreatorChildRowResponseDto';
 import {TopicGroupCreatorDto} from '../../../../../topic-group/models/TopicGroupCreatorDto';
 import {TopicService} from '../../../../../topics/topic.service';
 import {TopicCreatorChildDto} from '../../../../../topics/models/topicCreatorChildDto';
 import {TopicItemDto} from '../../../../../topics/models/topicItemDto';
+import {TopicCreatorChildRowRequestDto} from '../../../../../topics/models/topicCreatorChildRowRequestDto';
+import {TopicPaginationDto} from '../../../../../topics/models/topicPaginationDto';
 
 @Component({
   selector: 'app-topic-selection-panel',
@@ -15,7 +17,7 @@ export class TopicSelectionPanelComponent implements OnChanges {
   @Input()
   topicGroupCreator: TopicGroupCreatorDto;
 
-  topicCreatorChildRowAndPageList: TopicCreatorChildRowAndPageDto[] = [];
+  topicCreatorChildRowAndPageList: TopicCreatorChildRowResponseDto[] = [];
 
   constructor(private topicService: TopicService) {
   }
@@ -25,12 +27,14 @@ export class TopicSelectionPanelComponent implements OnChanges {
       const connectingCategory = this.topicGroupCreator?.categorizationCreator?.connectingCategory;
       this.topicCreatorChildRowAndPageList = [];
       if (connectingCategory !== null) {
-        this.topicService.getTopicCreatorChildRowAndPage(connectingCategory.id, 0, 20)
+        const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(connectingCategory.id, new TopicPaginationDto());
+        this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
           .subscribe(topicCreatorChildRowAndPage => {
             this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
           });
       } else {
-        this.topicService.getTopicCreatorChildRowAndPageWithoutParent(0, 20)
+        const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(null, new TopicPaginationDto());
+        this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
           .subscribe(topicCreatorChildRowAndPage => {
             this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
           });
@@ -39,7 +43,8 @@ export class TopicSelectionPanelComponent implements OnChanges {
   }
 
   onShowChildrenOfChildRequest(topicCreatorChild: TopicCreatorChildDto) {
-    this.topicService.getTopicCreatorChildRowAndPage(topicCreatorChild.id, 0, 20)
+    const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(topicCreatorChild.id, new TopicPaginationDto());
+    this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
       .subscribe(topicCreatorChildRowAndPage => {
         this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
       });

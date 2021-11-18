@@ -13,7 +13,7 @@ import {TopicItemDto} from '../../topics/models/topicItemDto';
 import {StructureItemDto} from '../../structures/models/structureItemDto';
 import {JokeBlockCreatorDto} from '../../blocks/joke-blocks/models/jokeBlockCreatorDto';
 import {AuthorItemDto} from '../../authors/models/authorItemDto';
-import {TopicGroupEditionComponent} from './topic-group-edition/topic-group-edition.component';
+import {TopicGroupEditionPanelComponent} from './topic-group-edition-panel/topic-group-edition-panel.component';
 
 @Component({
   selector: 'app-joke-details',
@@ -26,7 +26,7 @@ export class JokeEditionComponent implements OnInit {
   jokeBlocksEditionPanelComponent: JokeBlocksEditionPanelComponent;
 
   @ViewChild('topicGroupEditionRef')
-  topicGroupEditionComponent: TopicGroupEditionComponent;
+  topicGroupEditionComponent: TopicGroupEditionPanelComponent;
 
   jokeCreator: JokeCreatorDto;
   jokeForm: FormGroup;

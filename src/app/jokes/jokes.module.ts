@@ -30,7 +30,7 @@ import {TopicGroupModule} from "../topic-group/topic-group.module";
 import {TopicGroupCreationPanelComponent} from "./joke-creation/creation-by-factory/topic-group-creation-panel/topic-group-creation-panel.component";
 import {ConnectedJokeTopicRowComponent} from "./joke-creation/creation-by-factory/topic-group-creation-panel/connected-joke-topic-row/connected-joke-topic-row.component";
 import {TopicModule} from "../topics/topic.module";
-import { TopicGroupEditionComponent } from './joke-edition/topic-group-edition/topic-group-edition.component';
+import { TopicGroupEditionPanelComponent } from './joke-edition/topic-group-edition-panel/topic-group-edition-panel.component';
 import { JokeTopicPaginationComponent } from './joke-creation/creation-by-factory/topic-group-creation-panel/connected-joke-topic-row/joke-topic-pagination/joke-topic-pagination.component';
 import { TopicSelectionPanelComponent } from './joke-creation/creation-by-factory/topic-group-creation-panel/topic-selection-panel/topic-selection-panel.component';
 
@@ -57,7 +57,7 @@ import { TopicSelectionPanelComponent } from './joke-creation/creation-by-factor
     SelectedTopicGroupComponent,
     TopicGroupCreationPanelComponent,
     ConnectedJokeTopicRowComponent,
-    TopicGroupEditionComponent,
+    TopicGroupEditionPanelComponent,
     JokeTopicPaginationComponent,
     TopicSelectionPanelComponent
   ],
