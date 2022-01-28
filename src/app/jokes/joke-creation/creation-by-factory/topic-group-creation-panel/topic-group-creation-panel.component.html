@@ -1,29 +1,16 @@
 <div class="d-flex flex-column align-items-center">
   <div class="col-8 mt-4">
     <label class="row">Categorization</label>
-    <ng-multiselect-dropdown class="row mb-2"
-                             [placeholder]="'custom placeholder'"
-                             [settings]="dropdownSettings"
-                             [data]="getDropdownList(categorizationItemList)"
-                             (onSelect)="onCategorizationSelect($event)"
-                             (onDeSelect)="onCategorizationDeselect($event)">
-    </ng-multiselect-dropdown>
-  </div>
-
-  <!--  list of topic groups-->
-  <div *ngFor="let topicGroupCreator of topicGroupCreatorList; let i = index" class="card col-7">
-    <div class="card-body" (click)="onTopicGroupClick(topicGroupCreator)">
-      <h5 class="card-title"> {{ topicGroupCreator?.categorizationCreator?.name }} </h5>
-      <div
-        *ngIf="topicGroupCreator?.categorizationCreator?.id === selectedTopicGroupCreator?.categorizationCreator?.id">
-        <app-selected-topic-group-creator
-          [selectedTopicGroupCreator]="selectedTopicGroupCreator">
-        </app-selected-topic-group-creator>
-      </div>
-    </div>
+    <select class="form-control" data-placement="right" title="Select Category"
+            (change)="onCategorySelect($event.target.value)">
+      <option [value]=0>All</option>
+      <option *ngFor="let category of categoryList" [value]="category.id">
+        {{category.text}}
+      </option>
+    </select>
   </div>
 
   <app-topic-selection-panel
-    [topicGroupCreator]="selectedTopicGroupCreator">
+    [topicCreator]="selectedCategory">
   </app-topic-selection-panel>
 </div>

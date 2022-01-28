@@ -5,8 +5,7 @@ import {Structure} from './models/structure';
 import {StructureItemDto} from './models/structureItemDto';
 import {StructurePresenterDto} from './models/structurePresenterDto';
 import {StructureCreatorDto} from './models/structureCreatorDto';
-import {StructurePagination} from "./structures-list/structure-pagination/structurePagination";
-import {TopicPaginationDto} from "../topics/models/topicPaginationDto";
+import {StructurePagination} from './structures-list/structure-pagination/structurePagination';
 
 @Injectable({
   providedIn: 'root'

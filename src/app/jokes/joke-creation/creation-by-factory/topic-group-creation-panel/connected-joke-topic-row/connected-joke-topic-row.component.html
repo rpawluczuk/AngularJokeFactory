@@ -7,6 +7,7 @@
 
 <div class="d-flex flex-row flex-wrap">
   <div *ngFor="let topicCreatorChild of topicCreatorChildRowAndPage?.topicCreatorChildList">
+    <div>{{topicCreatorChild?.categories}}</div>
     <app-connected-joke-topic-block
       [topicCreatorChild]="topicCreatorChild"
       [chosenTopicCreatorChildId]="chosenTopicCreatorChildId"

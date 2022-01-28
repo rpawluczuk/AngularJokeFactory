@@ -9,6 +9,8 @@ import {TopicItemDto} from './models/topicItemDto';
 import {TopicPaginationDto} from './models/topicPaginationDto';
 import {TopicCreatorChildRowResponseDto} from './models/topicCreatorChildRowResponseDto';
 import {TopicCreatorChildRowRequestDto} from './models/topicCreatorChildRowRequestDto';
+import {RandomTopicIdResponseDto} from "./models/randomTopicIdResponseDto";
+import {RandomTopicIdRequestDto} from "./models/randomTopicIdRequestDto";
 
 @Injectable({
   providedIn: 'root'
@@ -32,22 +34,30 @@ export class TopicService {
     return this.http.get<TopicItemDto[]>(`${this.apiUrl}/list-items`);
   }
 
+  getCategoryList(): Observable<TopicItemDto[]> {
+    return this.http.get<TopicItemDto[]>(`${this.apiUrl}/category-list`);
+  }
+
   getTopicCreatorChildList(id: number): Observable<TopicCreatorChildDto[]> {
     return this.http.get<TopicCreatorChildDto[]>(`${this.apiUrl}/topic-creator-children?parent-id=${id}`);
   }
 
   getTopicCreatorChildPage(request: TopicCreatorChildRowRequestDto): Observable<TopicCreatorChildRowResponseDto> {
     const params = new HttpParams().set('topicCreatorChildRowRequestDto', JSON.stringify(request));
-    console.log(JSON.stringify(request));
     return this.http.get<TopicCreatorChildRowResponseDto>(`${this.apiUrl}/topic-creator-child-row`, {params});
+  }
+
+  getAllTopicCreatorPage(): Observable<TopicCreatorChildRowResponseDto> {
+    return this.http.get<TopicCreatorChildRowResponseDto>(`${this.apiUrl}/all-topic-creator-page`);
   }
 
   getTopicCreator(id: number): Observable<TopicCreatorDto> {
     return this.http.get<TopicCreatorDto>(`${this.apiUrl}/${id}`);
   }
 
-  getRandomTopic(parentId: number): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/random?parent-id=${parentId}`);
+  getRandomTopic(request: RandomTopicIdRequestDto): Observable<RandomTopicIdResponseDto> {
+    const params = new HttpParams().set('randomTopicIdRequestDto', JSON.stringify(request));
+    return this.http.get<RandomTopicIdResponseDto>(`${this.apiUrl}/random`, {params});
   }
 
   getTopicPagination(): Observable<TopicPaginationDto> {
@@ -76,5 +86,9 @@ export class TopicService {
 
   removeTopicRelation(topicParentId: number, topicChildId: number): Observable<Topic> {
     return this.http.delete<Topic>(`${this.apiUrl}/remove-relation?topic-parent-id=${topicParentId}&topic-child-id=${topicChildId}`);
+  }
+
+  changeCategoryStatus(data): Observable<TopicPresenterDto> {
+    return this.http.patch<TopicPresenterDto>(`${this.apiUrl}/changeCategoryStatus`, data);
   }
 }

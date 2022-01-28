@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CategorizationItemDto} from '../../../../categorization/models/CategorizationItemDto';
-import {CategorizationService} from '../../../../categorization/categorization.service';
 import {TopicGroupCreatorDto} from '../../../../topic-group/models/TopicGroupCreatorDto';
+import {TopicItemDto} from '../../../../topics/models/topicItemDto';
+import {TopicService} from '../../../../topics/topic.service';
+import {TopicCreatorDto} from '../../../../topics/models/topicCreatorDto';
 
 @Component({
   selector: 'app-topic-group-creator',
@@ -11,16 +13,17 @@ import {TopicGroupCreatorDto} from '../../../../topic-group/models/TopicGroupCre
 export class TopicGroupCreationPanelComponent implements OnInit {
 
   categorizationItemList: CategorizationItemDto[] = [];
+  categoryList: TopicItemDto[] = [];
   topicGroupCreatorList: TopicGroupCreatorDto[] = [];
-  selectedTopicGroupCreator: TopicGroupCreatorDto;
+  selectedCategory: TopicCreatorDto;
 
   dropdownSettings = {};
 
-  constructor(private categorizationService: CategorizationService) {
+  constructor(private topicService: TopicService) {
   }
 
   ngOnInit(): void {
-    this.loadCategorizationItemList();
+    this.loadCategoryList();
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -31,37 +34,20 @@ export class TopicGroupCreationPanelComponent implements OnInit {
     };
   }
 
-  private loadCategorizationItemList(): void {
-    this.categorizationService.getCategorizationItemList().subscribe((categorizationItemList) => {
-      this.categorizationItemList = categorizationItemList;
+  loadCategoryList(): void {
+    this.topicService.getCategoryList().subscribe((categoryList) => {
+      this.categoryList = categoryList;
     });
   }
 
-  getDropdownList(categorizationItemList: CategorizationItemDto[]): Array<any> {
-    const dropdownList = [];
-    for (const categorizationItem of categorizationItemList) {
-      dropdownList.push({id: categorizationItem.id, text: categorizationItem.text});
-    }
-    return dropdownList;
-  }
-
-  onCategorizationSelect(selectedField: any) {
-    this.categorizationService.getCategorizationCreator(selectedField.id).subscribe(categorizationCreator => {
-      this.topicGroupCreatorList.push(new TopicGroupCreatorDto(categorizationCreator));
+  onCategorySelect(selectedCategory: number) {
+    this.topicService.getTopicCreator(selectedCategory).subscribe(topicCreator => {
+      this.selectedCategory = topicCreator;
     });
   }
 
   onCategorizationDeselect(selectedField: any) {
     this.topicGroupCreatorList = this.topicGroupCreatorList.filter(tgc => tgc?.categorizationCreator?.id !== selectedField.id);
-  }
-
-
-  onTopicGroupClick(topicGroupCreator: TopicGroupCreatorDto) {
-    if (topicGroupCreator !== this.selectedTopicGroupCreator) {
-      this.selectedTopicGroupCreator = topicGroupCreator;
-    } else {
-      this.selectedTopicGroupCreator = null;
-    }
   }
 
   getTopicGroupList(): TopicGroupCreatorDto[] {

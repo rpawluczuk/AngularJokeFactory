@@ -1,9 +1,4 @@
 <div class="d-flex flex-column align-items-center">
-  <div *ngIf="topicGroupCreator?.categorizationCreator?.connectingCategory !== null">
-    <app-connecting-category-block
-      [topicCreator]="topicGroupCreator?.categorizationCreator?.connectingCategory">
-    </app-connecting-category-block>
-  </div>
 
   <!--      children-->
   <div *ngFor="let topicCreatorChildRowAndPage of topicCreatorChildRowAndPageList; let index = index">
@@ -12,10 +7,7 @@
       [topicCreatorChildRowAndPage]="topicCreatorChildRowAndPage"
       [parentIndex]="index"
       (showChildrenOfChildRequest)="onShowChildrenOfChildRequest($event)"
-      (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)"
-      (setAsConnectingTopicRequest)="onSetAsConnectingTopicRequest($event)"
-      (setAsOstensibleTopicRequest)="onSetAsOstensibleTopicRequest($event)"
-      (setAsComedyTopicRequest)="onSetAsComedyTopicRequest($event)">
+      (removeSomeRowsRequest)="onRemoveSomeRowsRequest($event)">
     </app-connected-joke-topic-row>
   </div>
 </div>

@@ -5,6 +5,7 @@ import {TopicService} from '../../../../../topics/topic.service';
 import {TopicPaginationDto} from '../../../../../topics/models/topicPaginationDto';
 import {TopicCreatorChildRowResponseDto} from '../../../../../topics/models/topicCreatorChildRowResponseDto';
 import {TopicCreatorChildRowRequestDto} from '../../../../../topics/models/topicCreatorChildRowRequestDto';
+import {RandomTopicIdRequestDto} from '../../../../../topics/models/randomTopicIdRequestDto';
 
 @Component({
   selector: 'app-connected-joke-topic-row',
@@ -88,10 +89,10 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
       const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(null, this.topicPagination);
       this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
         .subscribe(topicCreatorChildRowAndPage => {
-        this.topicCreatorChildRowAndPage = topicCreatorChildRowAndPage;
-        this.topicPagination = topicCreatorChildRowAndPage.topicPagination;
-        this.topicPagination.currentPage += 1;   // difference between backend and fronted
-      });
+          this.topicCreatorChildRowAndPage = topicCreatorChildRowAndPage;
+          this.topicPagination = topicCreatorChildRowAndPage.topicPagination;
+          this.topicPagination.currentPage += 1;   // difference between backend and fronted
+        });
     }
   }
 
@@ -113,8 +114,12 @@ export class ConnectedJokeTopicRowComponent implements OnInit {
   }
 
   onRandomRequest() {
-    this.topicService.getRandomTopic(this.topicCreatorChildRowAndPage?.parentId).subscribe(topicId => {
-      this.chosenTopicCreatorChildId = topicId;
+    const randomTopicIdRequest = new RandomTopicIdRequestDto(this.topicCreatorChildRowAndPage?.parentId,
+      this.topicPagination.pageSize, this.topicPagination.totalPages);
+    this.topicService.getRandomTopic(randomTopicIdRequest).subscribe(randomTopicIdResponse => {
+      this.topicPagination.currentPage = randomTopicIdResponse.randomPage;
+      this.chosenTopicCreatorChildId = randomTopicIdResponse.randomTopicId;
+      this.topicCreatorChildRowAndPage.topicCreatorChildList = randomTopicIdResponse.topicCreatorChildList;
     });
   }
 }

@@ -5,30 +5,10 @@
   </app-topic-search>
   <div *ngIf="topicPresenterList && topicPresenterList.length > 0; else noTopics" class="my-5">
     <div *ngFor="let topicPresenter of topicPresenterList; let i = index" class="card">
-      <div class="card-body">
-        <div class="d-flex flex-row">
-          <div class="col-10">
-            <div class="card-title mb-2">
-              <div class="d-flex flex-row">
-                <h5 class="mr-4"> {{ topicPresenter?.name }} </h5>
-                <div class="text-muted"> {{ topicPresenter?.dateCreated | date:'short'}} </div>
-              </div>
-            </div>
-            <div>
-              <span class="d-inline-block mr-1"> Connected Topics:</span>
-              <span class="d-inline-block mr-1 badge badge-primary"
-                    title="{{connectedTopicName}}"
-                    *ngFor="let connectedTopicName of topicPresenter?.children">
-                    {{ connectedTopicName }}
-              </span>
-            </div>
-          </div>
-          <div>
-            <button class="btn btn-outline-primary mr-3" (click)="goToTopicEdition(topicPresenter)">Edit</button>
-            <button class="btn btn-outline-danger" (click)="removeTopic(topicPresenter, $event)">Delete</button>
-          </div>
-        </div>
-      </div>
+      <app-single-topic
+        [topicPresenter]="topicPresenter"
+        (loadTopicPresenterList)="loadTopicPresenterList()">
+      </app-single-topic>
     </div>
   </div>
   <app-topic-pagination

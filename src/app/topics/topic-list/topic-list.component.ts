@@ -15,8 +15,7 @@ export class TopicListComponent implements OnInit {
   topicPresenterList: TopicPresenterDto[];
   searchingPhrase: string;
 
-  constructor(private topicService: TopicService,
-              private router: Router) {
+  constructor(private topicService: TopicService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +23,7 @@ export class TopicListComponent implements OnInit {
     this.loadTopicPresenterList();
   }
 
-  private loadTopicPresenterList() {
+  loadTopicPresenterList() {
     if (this.searchingPhrase.length === 0){
       this.topicService.getTopicPresenterList().subscribe(topicPresenterList => {
         this.topicPresenterList = topicPresenterList;
@@ -49,17 +48,6 @@ export class TopicListComponent implements OnInit {
   updatePagination() {
     this.topicService.updateTopicPagination(this.topicPagination)
       .subscribe(() => this.loadTopicPresenterList());
-  }
-
-  removeTopic(topicPresenter: TopicPresenterDto, event) {
-    event.stopPropagation();
-    this.topicService.removeTopic(topicPresenter.id).subscribe(() => {
-      this.loadTopicPresenterList();
-    });
-  }
-
-  goToTopicEdition(topicPresenter: TopicPresenterDto) {
-    this.router.navigate(['/topics', topicPresenter.id]);
   }
 
   onSearchRequest(searchingPhrase: string) {

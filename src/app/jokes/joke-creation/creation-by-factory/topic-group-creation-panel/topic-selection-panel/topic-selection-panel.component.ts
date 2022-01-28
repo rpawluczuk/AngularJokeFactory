@@ -1,11 +1,10 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {TopicCreatorChildRowResponseDto} from '../../../../../topics/models/topicCreatorChildRowResponseDto';
-import {TopicGroupCreatorDto} from '../../../../../topic-group/models/TopicGroupCreatorDto';
 import {TopicService} from '../../../../../topics/topic.service';
 import {TopicCreatorChildDto} from '../../../../../topics/models/topicCreatorChildDto';
-import {TopicItemDto} from '../../../../../topics/models/topicItemDto';
 import {TopicCreatorChildRowRequestDto} from '../../../../../topics/models/topicCreatorChildRowRequestDto';
 import {TopicPaginationDto} from '../../../../../topics/models/topicPaginationDto';
+import {TopicCreatorDto} from '../../../../../topics/models/topicCreatorDto';
 
 @Component({
   selector: 'app-topic-selection-panel',
@@ -15,7 +14,7 @@ import {TopicPaginationDto} from '../../../../../topics/models/topicPaginationDt
 export class TopicSelectionPanelComponent implements OnChanges {
 
   @Input()
-  topicGroupCreator: TopicGroupCreatorDto;
+  topicCreator: TopicCreatorDto;
 
   topicCreatorChildRowAndPageList: TopicCreatorChildRowResponseDto[] = [];
 
@@ -23,23 +22,18 @@ export class TopicSelectionPanelComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.topicGroupCreator?.currentValue) {
-      const connectingCategory = this.topicGroupCreator?.categorizationCreator?.connectingCategory;
-      this.topicCreatorChildRowAndPageList = [];
-      if (connectingCategory !== null) {
-        const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(connectingCategory.id, new TopicPaginationDto());
-        this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
-          .subscribe(topicCreatorChildRowAndPage => {
-            this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
-          });
-      } else {
-        const topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(null, new TopicPaginationDto());
-        this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
-          .subscribe(topicCreatorChildRowAndPage => {
-            this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
-          });
-      }
+    this.topicCreatorChildRowAndPageList = [];
+    let topicCreatorChildRowRequest: TopicCreatorChildRowRequestDto;
+    if (changes.topicCreator?.currentValue) {
+      const category = this.topicCreator;
+      topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(category.id, new TopicPaginationDto());
+    } else {
+      topicCreatorChildRowRequest = new TopicCreatorChildRowRequestDto(null, new TopicPaginationDto());
     }
+    this.topicService.getTopicCreatorChildPage(topicCreatorChildRowRequest)
+      .subscribe(topicCreatorChildRowAndPage => {
+        this.topicCreatorChildRowAndPageList.push(topicCreatorChildRowAndPage);
+      });
   }
 
   onShowChildrenOfChildRequest(topicCreatorChild: TopicCreatorChildDto) {
@@ -56,24 +50,24 @@ export class TopicSelectionPanelComponent implements OnChanges {
     }
   }
 
-  onSetAsConnectingTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
-    const connectingTopic = new TopicItemDto();
-    connectingTopic.id = topicCreatorChildDto.id;
-    connectingTopic.text = topicCreatorChildDto.name;
-    this.topicGroupCreator.connectingTopicItem = connectingTopic;
-  }
+  // onSetAsConnectingTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
+  //   const connectingTopic = new TopicItemDto();
+  //   connectingTopic.id = topicCreatorChildDto.id;
+  //   connectingTopic.text = topicCreatorChildDto.name;
+  //   this.topicGroupCreator.connectingTopicItem = connectingTopic;
+  // }
 
-  onSetAsOstensibleTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
-    const ostensibleTopic = new TopicItemDto();
-    ostensibleTopic.id = topicCreatorChildDto.id;
-    ostensibleTopic.text = topicCreatorChildDto.name;
-    this.topicGroupCreator.ostensibleTopicItem = ostensibleTopic;
-  }
-
-  onSetAsComedyTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
-    const comedyTopic = new TopicItemDto();
-    comedyTopic.id = topicCreatorChildDto.id;
-    comedyTopic.text = topicCreatorChildDto.name;
-    this.topicGroupCreator.comedyTopicItem = comedyTopic;
-  }
+  // onSetAsOstensibleTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
+  //   const ostensibleTopic = new TopicItemDto();
+  //   ostensibleTopic.id = topicCreatorChildDto.id;
+  //   ostensibleTopic.text = topicCreatorChildDto.name;
+  //   this.topicGroupCreator.ostensibleTopicItem = ostensibleTopic;
+  // }
+  //
+  // onSetAsComedyTopicRequest(topicCreatorChildDto: TopicCreatorChildDto) {
+  //   const comedyTopic = new TopicItemDto();
+  //   comedyTopic.id = topicCreatorChildDto.id;
+  //   comedyTopic.text = topicCreatorChildDto.name;
+  //   this.topicGroupCreator.comedyTopicItem = comedyTopic;
+  // }
 }

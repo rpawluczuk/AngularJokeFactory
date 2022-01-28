@@ -4,6 +4,7 @@ export class TopicPresenterDto {
   name: string;
   children: string[];
   dateCreated: string;
+  category: boolean;
 
   constructor() {
     this.name = '';

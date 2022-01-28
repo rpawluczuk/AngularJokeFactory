@@ -16,6 +16,7 @@ import { TopicChildCreatorRowComponent } from './topic-edition/topic-child-creat
 import { TopicSearchComponent } from './topic-list/topic-search/topic-search.component';
 import { TopicPaginationComponent } from './topic-list/topic-pagination/topic-pagination.component';
 import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { SingleTopicComponent } from './topic-list/single-topic/single-topic.component';
 
 
 
@@ -31,6 +32,7 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     TopicChildCreatorRowComponent,
     TopicSearchComponent,
     TopicPaginationComponent,
+    SingleTopicComponent,
   ],
     imports: [
         CommonModule,
