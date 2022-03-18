@@ -13,7 +13,7 @@
               title="{{connectedTopicName}}"
               *ngFor="let connectedTopicName of topicPresenter?.children">
                     {{ connectedTopicName }}
-              </span>
+        </span>
       </div>
     </div>
     <div>
@@ -27,7 +27,12 @@
     <hr>
     <div class="d-flex flex-row">
       <div class="col-9">
-        Questions:
+        <span class="d-inline-block mr-1"> Questions: </span>
+        <span class="d-inline-block mr-1 badge badge-success"
+              title="{{question}}"
+              *ngFor="let question of topicPresenter?.questions">
+                    {{ question }}
+        </span>
       </div>
       <div>
         <button class="btn btn-outline-primary" (click)="goToQuestionManagement(topicPresenter)">Manage questions</button>

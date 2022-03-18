@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faPlusCircle, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {faMinusCircle, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {QuestionListDto} from '../models/questionListDto';
 import {QuestionService} from './question.service';
 import {QuestionDto} from "../models/questionDto";
@@ -26,25 +26,31 @@ export class QuestionManagementComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.data;
     this.questionForm = this.buildQuestionForm();
-    console.log(id);
+    this.questionService.getQuestionByCategoryId(this.route.snapshot.params.id).subscribe(questionList => {
+      questionList.forEach(question => this.addQuestion(question));
+      this.addQuestion(new QuestionDto());
+    });
   }
 
   private buildQuestionForm() {
     return this.formBuilder.group({
-      questions: this.formBuilder.array([this.createEmptyQuestion()])
+      questions: this.formBuilder.array([])
     });
   }
 
-  addQuestion() {
+  addQuestion(question?: QuestionDto) {
+    if (question === undefined){
+      question = new QuestionDto();
+    }
+    console.log(question);
     this.questions = this.questionForm.get('questions') as FormArray;
-    this.questions.push(this.createEmptyQuestion());
+    this.questions.push(this.createQuestion(question));
   }
 
-  createEmptyQuestion(): FormGroup {
+  createQuestion(questionDto: QuestionDto): FormGroup {
     return this.formBuilder.group({
-      text: ''
+      text: questionDto.text
     });
   }
 
