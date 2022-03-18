@@ -12,7 +12,7 @@ import {JokePagination} from "./jokes-main-view/jokes-pagination/jokePagination"
 })
 export class JokesService {
 
-  private apiUrl = 'http://localhost:8080/api/jokes';
+  private apiUrl = 'http://localhost:8081/api/jokes';
 
   constructor(private http: HttpClient) {
   }

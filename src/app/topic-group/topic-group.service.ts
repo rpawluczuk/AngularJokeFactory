@@ -9,7 +9,7 @@ import {TopicGroupCreatorDto} from './models/TopicGroupCreatorDto';
 })
 export class TopicGroupService {
 
-  private apiUrl = 'http://localhost:8080/api/topic-group';
+  private apiUrl = 'http://localhost:8081/api/topic-group';
 
   constructor(private http: HttpClient) { }
 

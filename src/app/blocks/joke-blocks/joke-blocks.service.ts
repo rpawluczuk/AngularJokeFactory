@@ -9,7 +9,7 @@ import {JokeBlockPresenterDto} from './models/jokeBlockPresenterDto';
 })
 export class JokeBlocksService {
 
-  private apiUrl = 'http://localhost:8080/api/joke-blocks';
+  private apiUrl = 'http://localhost:8081/api/joke-blocks';
 
   constructor(private http: HttpClient) { }
 

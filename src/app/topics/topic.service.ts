@@ -9,15 +9,15 @@ import {TopicItemDto} from './models/topicItemDto';
 import {TopicPaginationDto} from './models/topicPaginationDto';
 import {TopicCreatorChildRowResponseDto} from './models/topicCreatorChildRowResponseDto';
 import {TopicCreatorChildRowRequestDto} from './models/topicCreatorChildRowRequestDto';
-import {RandomTopicIdResponseDto} from "./models/randomTopicIdResponseDto";
-import {RandomTopicIdRequestDto} from "./models/randomTopicIdRequestDto";
+import {RandomTopicIdResponseDto} from './models/randomTopicIdResponseDto';
+import {RandomTopicIdRequestDto} from './models/randomTopicIdRequestDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TopicService {
 
-  private apiUrl = 'http://localhost:8080/api/topics';
+  private apiUrl = 'http://localhost:8081/api/topics';
 
   constructor(private http: HttpClient) {
   }

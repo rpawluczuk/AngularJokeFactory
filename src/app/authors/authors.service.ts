@@ -10,7 +10,7 @@ import {AuthorItemDto} from './models/authorItemDto';
 })
 export class AuthorsService {
 
-  private apiUrl = 'http://localhost:8080/api/authors';
+  private apiUrl = 'http://localhost:8081/api/authors';
 
   constructor(private  http: HttpClient) { }
 

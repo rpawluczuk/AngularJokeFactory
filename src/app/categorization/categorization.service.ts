@@ -13,7 +13,7 @@ import {TopicPresenterDto} from "../topics/models/topicPresenterDto";
 })
 export class CategorizationService {
 
-  private apiUrl = 'http://localhost:8080/api/categorizations';
+  private apiUrl = 'http://localhost:8081/api/categorizations';
 
   constructor(private  http: HttpClient) { }
 

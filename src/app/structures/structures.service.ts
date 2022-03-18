@@ -12,7 +12,7 @@ import {StructurePagination} from './structures-list/structure-pagination/struct
 })
 export class StructuresService {
 
-  private apiUrl = 'http://localhost:8080/api/structures';
+  private apiUrl = 'http://localhost:8081/api/structures';
 
   constructor(private http: HttpClient) {
   }

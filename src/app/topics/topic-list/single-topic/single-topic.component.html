@@ -8,7 +8,7 @@
         </div>
       </div>
       <div>
-        <span class="d-inline-block mr-1"> Connected Topics:</span>
+        <span class="d-inline-block mr-1"> Connected Topics: </span>
         <span class="d-inline-block mr-1 badge badge-primary"
               title="{{connectedTopicName}}"
               *ngFor="let connectedTopicName of topicPresenter?.children">
@@ -21,6 +21,17 @@
               (click)="changeCategoryStatus()">Category</button>
       <button class="btn btn-outline-primary mr-3" (click)="goToTopicEdition(topicPresenter)">Edit</button>
       <button class="btn btn-outline-danger" (click)="removeTopic(topicPresenter, $event)">Delete</button>
+    </div>
+  </div>
+  <div *ngIf="topicPresenter?.category === true">
+    <hr>
+    <div class="d-flex flex-row">
+      <div class="col-9">
+        Questions:
+      </div>
+      <div>
+        <button class="btn btn-outline-primary" (click)="goToQuestionManagement(topicPresenter)">Manage questions</button>
+      </div>
     </div>
   </div>
 </div>

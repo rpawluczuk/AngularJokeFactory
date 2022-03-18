@@ -15,8 +15,9 @@ import { ChildTopicBlockCreatorComponent } from './topic-edition/topic-blocks/ch
 import { TopicChildCreatorRowComponent } from './topic-edition/topic-child-creator-row/topic-child-creator-row.component';
 import { TopicSearchComponent } from './topic-list/topic-search/topic-search.component';
 import { TopicPaginationComponent } from './topic-list/topic-pagination/topic-pagination.component';
-import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { SingleTopicComponent } from './topic-list/single-topic/single-topic.component';
+import { QuestionManagementComponent } from './question-management/question-management.component';
 
 
 
@@ -33,6 +34,7 @@ import { SingleTopicComponent } from './topic-list/single-topic/single-topic.com
     TopicSearchComponent,
     TopicPaginationComponent,
     SingleTopicComponent,
+    QuestionManagementComponent,
   ],
     imports: [
         CommonModule,

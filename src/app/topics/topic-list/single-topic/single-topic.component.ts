@@ -17,7 +17,8 @@ export class SingleTopicComponent implements OnInit {
   loadTopicPresenterList: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private router: Router,
-              private topicService: TopicService) { }
+              private topicService: TopicService) {
+  }
 
   ngOnInit(): void {
     console.log(this?.topicPresenter);
@@ -32,6 +33,10 @@ export class SingleTopicComponent implements OnInit {
 
   goToTopicEdition(topicPresenter: TopicPresenterDto) {
     this.router.navigate(['/topics', topicPresenter.id]);
+  }
+
+  goToQuestionManagement(topicPresenter: TopicPresenterDto) {
+    this.router.navigate(['/topics', topicPresenter.id, 'questions']);
   }
 
   changeCategoryStatus() {

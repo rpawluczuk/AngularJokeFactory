@@ -8,8 +8,8 @@ import {AuthorCreationComponent} from './authors/author-creation/author-creation
 import {TopicListComponent} from './topics/topic-list/topic-list.component';
 import {TopicCreationComponent} from './topics/topic-creation/topic-creation.component';
 import {JokesMainViewComponent} from './jokes/jokes-main-view/jokes-main-view.component';
-import {CategorizationCreationComponent} from "./categorization/categorization-creation/categorization-creation.component";
-import {CategorizationListComponent} from "./categorization/categorization-list/categorization-list.component";
+import {CategorizationCreationComponent} from './categorization/categorization-creation/categorization-creation.component';
+import {CategorizationListComponent} from './categorization/categorization-list/categorization-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'jokes' },

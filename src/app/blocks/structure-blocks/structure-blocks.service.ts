@@ -9,7 +9,7 @@ import {StructureBlockCreatorDto} from './models/structureBlockCreatorDto';
 })
 export class StructureBlocksService {
 
-  private apiUrl = 'http://localhost:8080/api/structure-blocks';
+  private apiUrl = 'http://localhost:8081/api/structure-blocks';
 
   constructor(private http: HttpClient) {
   }
