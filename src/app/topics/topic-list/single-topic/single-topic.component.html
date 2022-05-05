@@ -18,14 +18,15 @@
     </div>
     <div>
       <button [ngClass]="topicPresenter?.category === true ? 'btn-primary' : 'btn-outline-primary'" class="btn mr-3"
-              (click)="changeCategoryStatus()">Category</button>
+              (click)="changeCategoryStatus()">Category
+      </button>
       <button class="btn btn-outline-primary mr-3" (click)="goToTopicEdition(topicPresenter)">Edit</button>
       <button class="btn btn-outline-danger" (click)="removeTopic(topicPresenter, $event)">Delete</button>
     </div>
   </div>
   <div *ngIf="topicPresenter?.category === true">
     <hr>
-    <div class="d-flex flex-row">
+    <div *ngIf="isQuestionManagementButtonClicked === false" class="d-flex flex-row">
       <div class="col-9">
         <span class="d-inline-block mr-1"> Questions: </span>
         <span class="d-inline-block mr-1 badge badge-success"
@@ -37,6 +38,28 @@
       <div>
         <button class="btn btn-outline-primary" (click)="goToQuestionManagement(topicPresenter)">Manage questions</button>
       </div>
+    </div>
+
+    <div *ngIf="isQuestionManagementButtonClicked === true" class="d-flex flex-row">
+      <div class="col-9">
+        <span class="d-inline-block mr-1"> Questions: </span>
+        <span class="d-inline-block mr-1 badge badge-success"
+              title="{{question}}"
+              *ngFor="let question of topicPresenter?.questions">
+                    {{ question }}
+        </span>
+      </div>
+      <form [formGroup]="questionForm">
+        <div class="input-group mb-3">
+          <input formControlName="question" type="text" class="form-control" placeholder="New question">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" [disabled]="questionForm.invalid"
+                    (click)="addQuestion()" type="submit">Add
+            </button>
+          </div>
+        </div>
+      </form>
+
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 export class QuestionDto {
 
   id: number;
-  text: string;
+  question: string;
 }

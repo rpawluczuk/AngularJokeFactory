@@ -18,6 +18,7 @@ import { TopicPaginationComponent } from './topic-list/topic-pagination/topic-pa
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { SingleTopicComponent } from './topic-list/single-topic/single-topic.component';
 import { QuestionManagementComponent } from './question-management/question-management.component';
+import { SingleQuestionComponent } from './question-management/single-question/single-question.component';
 
 
 
@@ -35,6 +36,7 @@ import { QuestionManagementComponent } from './question-management/question-mana
     TopicPaginationComponent,
     SingleTopicComponent,
     QuestionManagementComponent,
+    SingleQuestionComponent,
   ],
     imports: [
         CommonModule,

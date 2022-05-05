@@ -1,28 +1,16 @@
-<p class="data-header">questions about the category topic: </p>
-<div class="data-container">
-  <form [formGroup]="questionForm">
-    <div formArrayName="questions" *ngFor="let qf of questionForm.get('questions')['controls']; let i = index" class="d-flex flex-row py-2">
-      <div *ngIf="i < questions?.length - 1; else addQuestionForm">
-        <fa-icon [icon]="faMinusCircle" (click)="removeQuestion(i)" size="2x"
-                 class="d-flex justify-content-center mx-3"></fa-icon>
-      </div>
-      <div [formGroupName]="i">
-        <input formControlName="text" placeholder="question" type="text" class="d-flex justify-content-center">
-      </div>
+<p class="data-header"> </p>
+<div class="container">
+  <h1 class="text-center text-dark font-weight-bolder m-5">Questions about the category topic:</h1>
+  <div *ngIf="questionList && questionList.length > 0; else noQuestions" class="table table-striped">
+    <div *ngFor="let question of questionList; let i = index">
+      <app-single-question
+        [question]="question">
+      </app-single-question>
     </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button [disabled]="questionForm.invalid" (click)="onSave()" type="submit"
-                class="btn btn-success float-right mx-2">
-          Add Topic
-        </button>
-        <button (click)="onCancel()" class="btn btn-primary float-right mx-2">Cancel</button>
-        <button (click)="questionForm.reset()" type="submit" class="btn btn-primary float-right mx-2">Reset</button>
-      </div>
+  </div>
+  <ng-template #noQuestions>
+    <div class="no-Authors">
+      <p>Currently no questions in database</p>
     </div>
-  </form>
+  </ng-template>
 </div>
-
-<ng-template #addQuestionForm>
-  <fa-icon [icon]="faPlusCircle" (click)="addQuestion()" size="2x" class="d-flex justify-content-center mx-3"></fa-icon>
-</ng-template>

@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TopicPresenterDto} from '../../models/topicPresenterDto';
 import {Router} from '@angular/router';
 import {TopicService} from '../../topic.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {QuestionService} from '../../question-management/question.service';
+import {QuestionCreatorDto} from '../../models/questionCreatorDto';
 
 @Component({
   selector: 'app-single-topic',
@@ -16,12 +19,23 @@ export class SingleTopicComponent implements OnInit {
   @Output()
   loadTopicPresenterList: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  questionForm: FormGroup;
+  isQuestionManagementButtonClicked = false;
+
   constructor(private router: Router,
-              private topicService: TopicService) {
+              private formBuilder: FormBuilder,
+              private topicService: TopicService,
+              private questionService: QuestionService) {
   }
 
   ngOnInit(): void {
-    console.log(this?.topicPresenter);
+    this.questionForm = this.buildQuestionForm();
+  }
+
+  private buildQuestionForm() {
+    return this.formBuilder.group({
+      question: ['', Validators.required],
+    });
   }
 
   removeTopic(topicPresenter: TopicPresenterDto, event) {
@@ -36,7 +50,16 @@ export class SingleTopicComponent implements OnInit {
   }
 
   goToQuestionManagement(topicPresenter: TopicPresenterDto) {
-    this.router.navigate(['/topics', topicPresenter.id, 'questions']);
+    this.isQuestionManagementButtonClicked = true;
+  }
+
+  addQuestion(){
+    const questionCreatorDto = new QuestionCreatorDto(this.questionForm.controls.question.value, this.topicPresenter.id);
+    this.questionService.addQuestion(questionCreatorDto).subscribe(() => {
+      this.questionService.getQuestionByCategoryId(this.topicPresenter.id).subscribe( questionList => {
+        this.topicPresenter.questions = questionList.map(questionDto => questionDto.question);
+      });
+    });
   }
 
   changeCategoryStatus() {

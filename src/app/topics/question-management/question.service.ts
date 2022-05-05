@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {QuestionListDto} from '../models/questionListDto';
 import {QuestionDto} from '../models/questionDto';
+import {QuestionCreatorDto} from '../models/questionCreatorDto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,9 @@ export class QuestionService {
   constructor(private http: HttpClient) {
   }
 
-  addQuestion(data): Observable<QuestionListDto> {
-    return this.http.post<QuestionListDto>(this.apiUrl, data);
+  addQuestion(data): Observable<QuestionCreatorDto> {
+    console.log(data);
+    return this.http.post<QuestionCreatorDto>(this.apiUrl, data);
   }
 
   getQuestionByCategoryId(categoryId: number): Observable<QuestionDto[]> {
