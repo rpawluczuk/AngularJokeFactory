@@ -45,9 +45,16 @@
         <span class="d-inline-block mr-1"> Questions: </span>
         <span class="d-inline-block mr-1 badge badge-success"
               title="{{question}}"
+              (click)="open(content)"
               *ngFor="let question of topicPresenter?.questions">
                     {{ question }}
         </span>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+        </ng-template>
       </div>
       <form [formGroup]="questionForm">
         <div class="input-group mb-3">

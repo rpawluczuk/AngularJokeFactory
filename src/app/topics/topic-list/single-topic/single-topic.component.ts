@@ -5,6 +5,7 @@ import {TopicService} from '../../topic.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuestionService} from '../../question-management/question.service';
 import {QuestionCreatorDto} from '../../models/questionCreatorDto';
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-single-topic',
@@ -21,11 +22,13 @@ export class SingleTopicComponent implements OnInit {
 
   questionForm: FormGroup;
   isQuestionManagementButtonClicked = false;
+  closeResult = '';
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private topicService: TopicService,
-              private questionService: QuestionService) {
+              private questionService: QuestionService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -66,5 +69,23 @@ export class SingleTopicComponent implements OnInit {
     this.topicService.changeCategoryStatus(this.topicPresenter.id).subscribe(() => {
       this.topicPresenter.category = !this.topicPresenter.category;
     });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
